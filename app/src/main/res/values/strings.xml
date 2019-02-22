@@ -16,4 +16,5 @@
     <string name="LoginButton">Login</string>
     <string name="FORGOTPASS">Forgot Password?</string>
     <string name="SignUpButton">Signup</string>
+    <string name="LOgintv">Login In to your Account</string>
 </resources>
