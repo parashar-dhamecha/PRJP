@@ -17,4 +17,9 @@
     <string name="FORGOTPASS">Forgot Password?</string>
     <string name="SignUpButton">Signup</string>
     <string name="LOgintv">Login In to your Account</string>
+    <string name="Register">Register</string>
+    <string name="get_started">Get Started</string>
+    <string name="AlreadyRegister">Already Registered?</string>
+
+
 </resources>
