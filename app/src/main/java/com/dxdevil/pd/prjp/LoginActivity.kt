@@ -12,7 +12,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         Login_Button.setOnClickListener {
-            startActivity(Intent(this, Registration::class.java))
+            startActivity(Intent(applicationContext, Registration::class.java))
         }
 
     }
