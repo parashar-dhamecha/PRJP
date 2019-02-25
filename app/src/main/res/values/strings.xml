@@ -12,9 +12,10 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="username">UserName or Email</string>
-    <string name="pass">Password</string>
+    <string name="pass">Password</string>>
     <string name="LoginButton">Login</string>
     <string name="FORGOTPASS">Forgot Password?</string>
     <string name="SignUpButton">Signup</string>
     <string name="LOgintv">Login In to your Account</string>
+    <string name="action_settings">Action Settings</string>
 </resources>
