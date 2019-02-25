@@ -21,5 +21,14 @@
     <string name="get_started">Get Started</string>
     <string name="AlreadyRegister">Already Registered?</string>
 
+    <!--Reg Page Hints-->
+    <string name="fname">First Name</string>
+    <string name="lname">Last Name</string>
+    <string name="email">E-Mail</string>
+    <string name="phone">Phone Number</string>
+    <string name="passwd">Password</string>
+    <string name="cpasswd">Confirm Password</string>
+
+
 
 </resources>

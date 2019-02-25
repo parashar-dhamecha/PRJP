@@ -14,7 +14,8 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/editText"
-            android:hint="First Name" android:layout_marginTop="88dp" app:layout_constraintTop_toTopOf="parent"
+android:autofillHints="@string/fname"
+            android:hint="@string/fname" android:layout_marginTop="88dp" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="16dp" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/editText3" android:layout_marginBottom="8dp"/>
     <EditText
@@ -25,7 +26,9 @@
             android:id="@+id/editText2" android:layout_marginTop="84dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toEndOf="@+id/editText"
             android:layout_marginStart="20dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/editText3" android:hint="Last Name"/>
+            app:layout_constraintBottom_toTopOf="@+id/editText3" android:hint="@string/lname"
+    android:autofillHints="@string/lname"
+    />
     <EditText
             android:layout_width="379dp"
             android:layout_height="wrap_content"
@@ -34,7 +37,10 @@
             android:id="@+id/editText3" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" android:layout_marginTop="152dp" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.363" android:hint="E-Mail"/>
+            app:layout_constraintHorizontal_bias="0.363"
+            android:hint="@string/email"
+        android:autofillHints="@string/email"
+    />
     <TextView
             android:text="@string/Register"
             android:layout_width="wrap_content"
@@ -53,7 +59,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editText3" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.461"
-            android:hint="Phone No."/>
+            android:hint="@string/phone" android:autofillHints="@string/phone"/>
     <EditText
             android:layout_width="384dp"
             android:layout_height="wrap_content"
@@ -62,7 +68,9 @@
             android:id="@+id/editText5" android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/editText4" android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:hint="Enter Passsword"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/passwd"
+            android:autofillHints="@string/passwd"/>
     <EditText
             android:layout_width="382dp"
             android:layout_height="wrap_content"
@@ -71,7 +79,8 @@
             android:id="@+id/editText6" android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@+id/editText5" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:hint="Confirm Password"/>
+            app:layout_constraintStart_toStartOf="parent" android:hint="@string/cpasswd"
+    android:autofillHints="@string/cpasswd"/>
     <Button
             android:text="@string/get_started"
             android:layout_width="163dp"
