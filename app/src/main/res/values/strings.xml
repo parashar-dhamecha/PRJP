@@ -17,6 +17,11 @@
     <string name="FORGOTPASS">Forgot Password?</string>
     <string name="SignUpButton">Signup</string>
     <string name="LOgintv">Login In to your Account</string>
+    <string name="forgot">Forgot Password?</string>
+    <string name="Email">Email</string>
+    <string name="reset">Reset Password</string>
+    <string name="enter_email">Enter your email address and we will send you a password reset link.</string>
+
     <string name="Register">Register</string>
     <string name="get_started">Get Started</string>
     <string name="AlreadyRegister">Already Registered?</string>
