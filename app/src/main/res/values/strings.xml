@@ -23,4 +23,12 @@
     <string name="reset">Reset Password</string>
     <string name="enter_email">Enter your email address and we will send you a password reset link.</string>
 
+    <string name="awatingsign">AwatingSign</string>
+    <string name="awatingothers">Awating Others</string>
+    <string name="completed">Completed</string>
+    <string name="signingdue">Signing Due Soon</string>
+    <string name="awsdata">2</string>
+    <string name="addsign">Add Signature</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="edit_your_signature">Edit Your Signature</string>
 </resources>
