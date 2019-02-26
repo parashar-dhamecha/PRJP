@@ -5,4 +5,9 @@
     <color name="colorAccent">#0C0F24</color>
     <color name="textcolor">#0D412C</color>
     <color name="signupcolor">#2F63C1</color>
+    <color name="textcolor2">#19001F</color>
+    <color name="cardbg">#4D9E53</color>
+    <color name="digitbg">#AED581</color>
+    <color name="textcolor3">#FAF9F9</color>
+    <color name="textcolor4">#E2BCE2E2</color>
 </resources>

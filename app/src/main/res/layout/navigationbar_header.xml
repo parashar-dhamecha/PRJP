@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_marginTop="@dimen/dp10"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/digitbg"
+>
+    <androidx.appcompat.widget.AppCompatImageView android:layout_width="@dimen/dp100"
+                                                        android:layout_height="@dimen/dp100"
+                                                        android:layout_margin="@dimen/dp10"
+                                                        android:background="@drawable/ic_launcher_foreground"
+                                                        android:id="@+id/imageview_header"/>
+    <TextView android:layout_width="@dimen/dp100"
+              android:text="@string/headername"
+              android:layout_height="wrap_content"
+              android:id="@+id/header_nametv"
+              android:textColor="@color/textcolor"
+              android:layout_marginBottom="@dimen/dp10"
+              android:layout_marginStart="@dimen/dp20"
+              android:layout_marginEnd="@dimen/dp10"
+    />
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/header_emailtv"
+              android:layout_marginTop="@dimen/dp10"
+              android:layout_marginLeft="@dimen/dp20"
+              android:layout_marginBottom="@dimen/dp10"
+              android:layout_marginRight="@dimen/dp20"
+              android:textColor="@color/textcolor"
+              android:text="@string/emailheader"
+           />
+
+</LinearLayout>
