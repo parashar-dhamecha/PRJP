@@ -23,8 +23,10 @@
     <string name="forgot">Forgot Password?</string>
     <string name="Email">Email</string>
     <string name="reset">Reset Password</string>
+    <string name="img_description">logo_of_cygnature</string>
     <string name="enter_email">Enter your email address and we will send you a password reset link.</string>
-
+    <string name="splash_image">cygnature</string>
+    <string name="hint">enter email</string>
     <string name="awatingsign">AwatingSign</string>
     <string name="awatingothers">Awating Others</string>
     <string name="completed">Completed</string>
@@ -41,4 +43,8 @@
     <string name="logout">Logout</string>
     <string name="headername">Rishabh Mistry</string>
     <string name="emailheader">rishabh9099@gmail.com</string>
+    <string name="OTP">Enter OTP</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="confirm_password">Confirm Password</string>
+
 </resources>
