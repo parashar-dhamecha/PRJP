@@ -26,93 +26,30 @@
         android:layout_height="match_parent"
         tools:context=".Dashboard">
 
+
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:orientation="horizontal"
-                  android:layout_margin="@dimen/dp10"
-                  app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                  android:id="@+id/linearLayout" app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-                  app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                  android:layout_marginTop="@dimen/dp50" app:layout_constraintHorizontal_bias="1.0">
-        <androidx.cardview.widget.CardView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-        >
-            <RelativeLayout android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/cardbg"
-                            android:layout_margin="@dimen/dp10">
-                <TextView android:layout_width="@dimen/dp80"
-                          android:layout_height="@dimen/dp80"
-                          android:layout_marginRight="@dimen/dp50"
-                          android:layout_marginLeft="@dimen/dp50"
-                          android:layout_marginTop="@dimen/dp10"
-                          android:id="@+id/cardTextView"
-                          android:textSize="@dimen/sp50"
-                          android:text="@string/awsdata"
-                          android:textAlignment="center"
-                          android:textColor="@color/textcolor3"
-                />
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_below="@+id/cardTextView"
-                          android:layout_centerHorizontal="true"
-                          android:text="@string/completed"
-                          android:layout_marginStart="@dimen/dp5"
-                          android:textColor="@color/textcolor"
-                          android:layout_marginTop="@dimen/dp5"
-                          android:textSize="@dimen/sp20"
-                          android:layout_marginEnd="@dimen/dp5" android:layout_marginBottom="@dimen/dp5"
-                          android:id="@+id/AwatingSign"/>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content">
-            <RelativeLayout android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/cardbg"
-                            android:layout_margin="@dimen/dp10">
-                <TextView android:layout_width="@dimen/dp80"
-                          android:layout_height="@dimen/dp80"
-                          android:layout_marginRight="@dimen/dp50"
-                          android:layout_marginLeft="@dimen/dp50"
-                          android:layout_marginTop="@dimen/dp10"
-                          android:id="@+id/cardTextView2"
-                          android:textSize="@dimen/sp50"
-                          android:text="@string/awsdata"
-                          android:textAlignment="center"
-                          android:textColor="@color/textcolor3"
-                />
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_below="@+id/cardTextView2"
-                          android:layout_centerHorizontal="true"
-                          android:text="@string/signingdue"
-                          android:layout_marginStart="@dimen/dp5"
-                          android:textColor="@color/textcolor"
-                          android:layout_marginTop="@dimen/dp5"
-                          android:textSize="@dimen/sp20"
-                          android:layout_marginEnd="@dimen/dp5" android:layout_marginBottom="@dimen/dp5"
-                          android:id="@+id/AwatingSign2"/>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:orientation="horizontal"
-                  android:layout_margin="@dimen/dp10"
-                  android:layout_marginStart="@dimen/dp50"
+                  android:layout_marginLeft="@dimen/dp10"
+                  android:layout_marginBottom="@dimen/dp10"
                   android:layout_marginTop="8dp"
+                  android:layout_marginRight="@dimen/dp15"
                   app:layout_constraintTop_toTopOf="parent"
                   app:layout_constraintStart_toStartOf="parent"
                   android:id="@+id/linearLayout2"
     >
         <androidx.cardview.widget.CardView
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content">
-            <RelativeLayout android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+        android:layout_marginLeft="@dimen/dp15"
+                app:cardElevation="@dimen/dp5">
+            <RelativeLayout android:layout_width="160dp"
+                            android:layout_height="@dimen/dp130"
                             android:background="@color/cardbg"
-                            android:layout_margin="@dimen/dp10">
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:layout_marginLeft="@dimen/dp5"
+            >
                 <TextView android:layout_width="@dimen/dp80"
                           android:layout_height="@dimen/dp80"
                           android:layout_marginRight="@dimen/dp50"
@@ -140,11 +77,14 @@
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content">
-            <RelativeLayout android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                app:cardElevation="@dimen/dp5">
+            <RelativeLayout android:layout_width="160dp"
+                            android:layout_height="@dimen/dp130"
                             android:background="@color/cardbg"
-                            android:layout_margin="@dimen/dp10">
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:layout_marginTop="@dimen/dp10">
                 <TextView android:layout_width="@dimen/dp80"
                           android:layout_height="@dimen/dp80"
                           android:layout_marginRight="@dimen/dp50"
@@ -160,13 +100,99 @@
                           android:layout_height="wrap_content"
                           android:layout_below="@+id/cardTextView22"
                           android:layout_centerHorizontal="true"
-                          android:text="@string/awatingothers"
+                          android:text="@string/signingdue"
+                          android:layout_marginStart="@dimen/dp5"
+                          android:textColor="@color/textcolor"
+                          android:layout_marginTop="@dimen/dp5"
+                          android:layout_marginRight="@dimen/dp5"
+                          android:layout_marginLeft="@dimen/dp5"
+                          android:textSize="@dimen/sp20"
+                          android:layout_marginEnd="@dimen/dp5" android:layout_marginBottom="@dimen/dp5"
+                          android:id="@+id/AwatingSign222"/>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="@dimen/dp0"
+                  android:layout_marginBottom="@dimen/dp0"
+                  android:layout_marginRight="@dimen/dp15"
+                  android:layout_marginLeft="@dimen/dp10"
+                  app:layout_constraintStart_toStartOf="parent"
+                  android:id="@+id/linearLayout" app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="1.0">
+        <androidx.cardview.widget.CardView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/dp15"
+                app:cardElevation="@dimen/dp5"
+        >
+            <RelativeLayout android:layout_width="160dp"
+                            android:layout_height="@dimen/dp130"
+                            android:background="@color/cardbg"
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:layout_marginLeft="@dimen/dp5">
+                <TextView android:layout_width="@dimen/dp80"
+                          android:layout_height="@dimen/dp80"
+                          android:layout_marginRight="@dimen/dp50"
+                          android:layout_marginLeft="@dimen/dp50"
+                          android:layout_marginTop="@dimen/dp10"
+                          android:id="@+id/cardTextView"
+                          android:textSize="@dimen/sp50"
+                          android:text="@string/awsdata"
+                          android:textAlignment="center"
+                          android:textColor="@color/textcolor3"
+                />
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_below="@+id/cardTextView"
+                          android:layout_centerHorizontal="true"
+                          android:text="@string/completed"
+                          android:layout_marginStart="@dimen/dp5"
+                          android:layout_marginLeft="@dimen/dp5"
+                          android:layout_marginRight="@dimen/dp5"
+                          android:textColor="@color/textcolor"
+                          android:layout_marginTop="@dimen/dp5"
+                          android:textSize="@dimen/sp20"
+                          android:layout_marginEnd="@dimen/dp5" android:layout_marginBottom="@dimen/dp5"
+                          android:id="@+id/AwatingSign"/>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                app:cardElevation="@dimen/dp5">
+            <RelativeLayout android:layout_width="160dp"
+                            android:layout_height="@dimen/dp130"
+                            android:background="@color/cardbg"
+                            android:layout_margin="@dimen/dp10"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:layout_marginRight="@dimen/dp10">
+                <TextView android:layout_width="@dimen/dp80"
+                          android:layout_height="@dimen/dp80"
+                          android:layout_marginRight="@dimen/dp50"
+                          android:layout_marginLeft="@dimen/dp50"
+                          android:layout_marginTop="@dimen/dp10"
+                          android:id="@+id/cardTextView2"
+                          android:textSize="@dimen/sp50"
+                          android:text="@string/awsdata"
+                          android:textAlignment="center"
+                          android:textColor="@color/textcolor3"
+                />
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_below="@+id/cardTextView2"
+                          android:layout_centerHorizontal="true"
+                          android:text="@string/signingdue"
                           android:layout_marginStart="@dimen/dp5"
                           android:textColor="@color/textcolor"
                           android:layout_marginTop="@dimen/dp5"
                           android:textSize="@dimen/sp20"
                           android:layout_marginEnd="@dimen/dp5" android:layout_marginBottom="@dimen/dp5"
-                          android:id="@+id/AwatingSign22"/>
+                          android:id="@+id/AwatingSign2"/>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
