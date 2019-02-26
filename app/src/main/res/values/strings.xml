@@ -46,5 +46,7 @@
     <string name="OTP">Enter OTP</string>
     <string name="enter_password">Enter Password</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="drawsig">Draw Signature</string>
+    <string name="takepic">Take Photo</string>
 
 </resources>
