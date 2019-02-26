@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout android:layout_height="match_parent"
+                                           xmlns:android="http://schemas.android.com/apk/res/android"
+                                           android:layout_width="match_parent"
+                                           xmlns:app="http://schemas.android.com/apk/res-auto"
+                                           android:fitsSystemWindows="true"
+                                           android:id="@+id/drawerlayoutid">
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                 android:id="@+id/Frame_content"/>
+
+
+    <com.google.android.material.navigation.NavigationView android:layout_width="wrap_content"
+                                                           android:layout_height="match_parent"
+                                                           android:layout_gravity="start"
+                                                           android:id="@+id/navid"
+                                                           app:headerLayout="@layout/navigationbar_header"
+                                                           android:fitsSystemWindows="true" app:menu="@menu/nav_menu"
+    />
+
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -141,7 +160,7 @@
                           android:layout_height="wrap_content"
                           android:layout_below="@+id/cardTextView22"
                           android:layout_centerHorizontal="true"
-                          android:text="@string/signingdue"
+                          android:text="@string/awatingothers"
                           android:layout_marginStart="@dimen/dp5"
                           android:textColor="@color/textcolor"
                           android:layout_marginTop="@dimen/dp5"
@@ -193,5 +212,6 @@
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
 
 
