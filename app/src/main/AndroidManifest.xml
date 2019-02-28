@@ -28,6 +28,17 @@
             <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
             <!-- </intent-filter> -->
         </activity>
+
+        <activity android:name=".Contacts" >
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN"/>-->
+            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".Registration"></activity>
+     </application>
         <activity android:name=".Dashboard">
 
         </activity>
