@@ -11,16 +11,17 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-
+        <activity android:name=".ProfileActivity">
+        </activity>
         <activity
                 android:name=".MainActivity"
                 tools:ignore="ExtraText">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".LoginActivity">
 
             <!-- <intent-filter> -->
@@ -28,24 +29,14 @@
             <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
             <!-- </intent-filter> -->
         </activity>
+        <activity android:name=".Contacts">
 
-        <activity android:name=".Contacts" >
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN"/>-->
-            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
         </activity>
-
-        <activity android:name=".ForgotPasswordActivity"></activity>
-        <activity android:name=".Registration"></activity>
-     </application>
-        <activity android:name=".Dashboard">
-
-        </activity>
-        <activity android:name=".ForgotPasswordActivity">
-
-        </activity>
-<activity android:name=".DocumentActivity"></activity>
+        <activity android:name=".DocumentActivity"/>
     </application>
 
 </manifest>
