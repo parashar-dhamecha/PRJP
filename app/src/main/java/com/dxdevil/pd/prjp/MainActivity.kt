@@ -18,27 +18,6 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-       /*  val background = object : Thread() {
-            override fun run() {
-                try {
-                    // Thread will sleep for 5 seconds
-                    Thread.sleep((5 * 1000).toLong())
-
-                    // After 5 seconds redirect to another intent
-                    val i = Intent(baseContext, MainActivity::class.java)
-                    startActivity(i)
-                    //Remove activity
-                    finish()
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-
-            }
-        }
-        // start thread
-        background.start()
-    }
-    }*/
 
 
 
