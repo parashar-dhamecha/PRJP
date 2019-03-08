@@ -60,6 +60,7 @@
     <string name="passwd">Password</string>
     <string name="cpasswd">Confirm Password</string>
     <string name="aw_sign">Awaiting My Sign</string>
+    <string name="contact_name">Name</string>
 
     <!-- Profile Page Strings-->
     <string name="Username">Robert Downey</string>
