@@ -67,17 +67,26 @@
     <string name="useremail">robertdownyjr89@gmail.com</string>
     <string name="Info">Info</string>
     <string name="mail_image">Mail Image</string>
-    <string name="profession">Proffession</string>
+    <string name="profession">Profession</string>
     <string name="profession_value">Android Developer</string>
     <string name="Company">Company</string>
     <string name="Company_value">Cygnet</string>
     <string name="Phone">Phone</string>
     <string name="Phone_value">9865457825</string>
 
-
-
-
-
+    <!-- Edit Profile Page Strings-->
+    <string name="Image_des">User_image</string>
+    <string name="First_Name">First Name</string>
+    <string name="Last_Name">Last Name</string>
+    <string name="Email_Address">Email Address</string>
+    <string name="Mobile_No">Mobile No*</string>
+    <string name="Job_Title">Job Title</string>
+    <string name="Organization">Organization</string>
+    <string name="Date_Of_Birth">Date Of Birth</string>
+    <string name="Gender">Gender</string>
+    <string name="Description">Description</string>
+    <string name="Male">Male</string>
+    <string name="Female">Female</string>
 
 
 </resources>
