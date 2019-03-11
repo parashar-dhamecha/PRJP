@@ -76,6 +76,14 @@
     <string name="Phone_value">9865457825</string>
 
 
+    <string-array name="names">
+        <item>pooja</item>
+        <item>juhi</item>
+        <item>dhruv</item>
+        <item>yogita</item>
+    </string-array>
+
+
 
 
 

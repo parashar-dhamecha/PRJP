@@ -31,6 +31,9 @@ class Dashboard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+
+
+
         val fab: View = findViewById(R.id.fab)
 
         drawerLayout = findViewById(R.id.drawerlayoutid)
@@ -44,8 +47,11 @@ class Dashboard : AppCompatActivity() {
                 .show()
 
 
+
+
             }
         }
+
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if(ntoggle.onOptionsItemSelected(item))

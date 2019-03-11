@@ -7,17 +7,15 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 
- class ContactsAdapter( private val context: Context, private val Con: ArrayList<Int> ): RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
 
-     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+class ContactsAdapter(private val context: Context, private val Con: ArrayList<ContactModel>) :
+    RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.contactsadapter, parent, false)
-public class ContactsAdapter<Context>(private val list: ArrayList<ModelClass>,
-                               private val context:Context) : RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.contactsadapter, parent, false)
-
-
         return ViewHolder(view)
     }
 
@@ -26,27 +24,20 @@ public class ContactsAdapter<Context>(private val list: ArrayList<ModelClass>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.pro.setImageResource(Con[position])
-        holder.name.setText(Con[position])
-//       holder.del.setButton(Con[position].getImage_drawables())
+        holder.pro.setImageResource(Con[position].photo)
+        holder.name.text = Con[position].name
 
 
+
+        }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var name: TextView = itemView.findViewById(R.id.name) as TextView
+        var pro: ImageView = itemView.findViewById(R.id.pro) as ImageView
+        var del: Button= itemView.findViewById(R.id.del) as Button
 
-            var name: TextView
-            var pro: ImageView
-  //          var del: Button
-
-            init {
-
-                name = itemView.findViewById(R.id.name) as TextView
-                pro = itemView.findViewById(R.id.pro) as ImageView
-    //            del = itemView.findViewById(R.id.del) as Button
-
-            }
-        }
-    }
+       }
+}
 
 
 
