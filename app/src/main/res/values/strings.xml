@@ -74,6 +74,18 @@
     <string name="Phone">Phone</string>
     <string name="Phone_value">9865457825</string>
 
+
+    <string-array name="names">
+        <item>pooja</item>
+        <item>juhi</item>
+        <item>dhruv</item>
+        <item>yogita</item>
+    </string-array>
+
+
+
+
+
     <!-- Edit Profile Page Strings-->
     <string name="Image_des">User_image</string>
     <string name="First_Name">First Name</string>
