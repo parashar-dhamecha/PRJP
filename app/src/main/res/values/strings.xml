@@ -20,7 +20,7 @@
     <string name="SignUpButton">Signup</string>
     <string name="LOgintv">Login In to your Account</string>
     <string name="action_settings">Action Settings</string>
-    <string name="forgot">Forgot Password?</string>
+    <string name="forgot">Forgot Password</string>
     <string name="Email">Enter email</string>
     <string name="reset">Reset Password</string>
     <string name="img_description">logo_of_cygnature</string>
@@ -74,17 +74,14 @@
     <string name="Phone">Phone</string>
     <string name="Phone_value">9865457825</string>
 
-
+    <!-- contacts strings-->
+    <string name="contact_name">Juhi</string>
     <string-array name="names">
         <item>pooja</item>
         <item>juhi</item>
         <item>dhruv</item>
         <item>yogita</item>
     </string-array>
-
-
-
-
 
     <!-- Edit Profile Page Strings-->
     <string name="Image_des">User_image</string>
@@ -99,6 +96,7 @@
     <string name="Description">Description</string>
     <string name="Male">Male</string>
     <string name="Female">Female</string>
+    <string name="password">Password</string>
 
 
 </resources>

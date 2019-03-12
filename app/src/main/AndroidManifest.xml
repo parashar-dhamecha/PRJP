@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.dxdevil.pd.prjp">
 
-
-
-      <application
+    <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -14,49 +11,39 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-            <activity android:name=".EditProfile">
+        <activity android:name=".Settings">
 
-            </activity>
-
-        <activity android:name=".ProfileActivity">
         </activity>
-
-
-        <activity
-                android:name=".MainActivity"
-                tools:ignore="ExtraText">
+        <activity android:name=".EditProfile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ProfileActivity">
 
+        </activity>
+        <activity
+                android:name=".MainActivity"
+                tools:ignore="ExtraText">
+
+
+        </activity>
         <activity android:name=".LoginActivity">
-
         </activity>
-
-
-          <activity android:name=".Contacts">
-          </activity>
+        <activity android:name=".Contacts">
+        </activity>
         <activity android:name=".ForgotPasswordActivity">
-
         </activity>
-
         <activity android:name=".Registration">
-
         </activity>
-
         <activity android:name=".Dashboard">
         </activity>
-
-
-
-
-        <activity android:name=".DocumentActivity" tools:ignore="WrongManifestParent">
+        <activity
+                android:name=".DocumentActivity"
+                tools:ignore="WrongManifestParent">
         </activity>
+    </application>
 
-
-      </application>
-    </manifest>
-
+</manifest>
