@@ -103,6 +103,11 @@
     <string name="Change_Password">Change Password</string>
     <string name="Logout">Logout</string>
 
+    <!-- Change Password Page Strings-->
+    <string name="Current">Current Password</string>
+    <string name="Confirm">Confirm Password</string>
+    <string name="New_password">New Password</string>
+
 
 
 </resources>
