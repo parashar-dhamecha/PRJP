@@ -98,5 +98,11 @@
     <string name="Female">Female</string>
     <string name="password">Password</string>
 
+    <!-- Settings Page Strings-->
+    <string name="My_account">My Account</string>
+    <string name="Change_Password">Change Password</string>
+    <string name="Logout">Logout</string>
+
+
 
 </resources>
