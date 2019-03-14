@@ -11,8 +11,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".AddContact">
-        </activity>
+
         <activity android:name=".ChangePassword">
         </activity>
         <activity android:name=".Settings">
