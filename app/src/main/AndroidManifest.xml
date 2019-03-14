@@ -16,10 +16,17 @@
         </activity>
         <activity android:name=".Settings">
 
+
         </activity>
         <activity android:name=".EditProfile">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".ProfileActivity">
+
         </activity>
         <activity
                 android:name=".MainActivity"
@@ -31,13 +38,10 @@
         </activity>
         <activity android:name=".ForgotPasswordActivity">
 
+
         </activity>
         <activity android:name=".ResetPasswordActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".Registration">
         </activity>
