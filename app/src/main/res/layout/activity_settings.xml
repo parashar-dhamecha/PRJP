@@ -11,9 +11,9 @@
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
-            android:id="@+id/cardView2"
+            android:id="@+id/My_Account"
             android:layout_marginTop="24dp" android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/cardView">
+            app:layout_constraintBottom_toTopOf="@+id/Change_Password">
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -50,12 +50,12 @@
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:id="@+id/cardView"
+            android:id="@+id/Change_Password"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintHorizontal_bias="1.0" android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/cardView3"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/cardView2">
+            app:layout_constraintBottom_toTopOf="@+id/Logout"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/My_Account">
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:id="@+id/relativeLayout">
@@ -97,8 +97,8 @@
             android:layout_height="60dp"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/cardView3"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/cardView"
+            android:id="@+id/Logout"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/Change_Password"
             android:layout_marginBottom="391dp" app:layout_constraintBottom_toBottomOf="parent">
         <RelativeLayout
                 android:layout_width="match_parent"

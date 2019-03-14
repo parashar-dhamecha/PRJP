@@ -12,11 +12,7 @@
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".ChangePassword">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".Settings">
 
@@ -34,6 +30,14 @@
         <activity android:name=".Contacts">
         </activity>
         <activity android:name=".ForgotPasswordActivity">
+
+        </activity>
+        <activity android:name=".ResetPasswordActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".Registration">
         </activity>
