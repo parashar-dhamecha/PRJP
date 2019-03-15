@@ -12,6 +12,9 @@
             app:layout_constraintHorizontal_bias="0.0"
             android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
             android:id="@+id/My_Account"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:focusable="true"
+            android:clickable="true"
             android:layout_marginTop="24dp" android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toTopOf="@+id/Change_Password">
         <RelativeLayout
@@ -27,9 +30,9 @@
                     android:layout_alignParentBottom="true" android:layout_marginBottom="18dp"
                     android:layout_toEndOf="@+id/imageView15" android:layout_marginStart="23dp"
                     android:layout_marginTop="18dp" android:layout_alignParentTop="true" android:textSize="18sp"
-                    android:textStyle="bold"
                     android:layout_toStartOf="@+id/imageView18" android:layout_marginEnd="17dp"
-                    android:textAlignment="viewStart"/>
+                    android:textAlignment="viewStart" android:textColor="@color/design_default_color_on_secondary"
+            />
             <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp" app:srcCompat="@drawable/right" android:id="@+id/imageView18"
@@ -55,6 +58,9 @@
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintHorizontal_bias="1.0" android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toTopOf="@+id/Logout"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:focusable="true"
+            android:clickable="true"
             android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/My_Account">
         <RelativeLayout
                 android:layout_width="match_parent"
@@ -63,14 +69,14 @@
             <TextView
                     android:text="@string/Change_Password"
                     android:layout_width="263dp"
-                    android:textStyle="bold"
                     android:textSize="18sp"
                     android:layout_centerVertical="true"
                     android:layout_height="22dp" android:id="@+id/textView21"
                     android:layout_marginTop="18dp" android:layout_alignParentTop="true"
                     android:layout_toStartOf="@+id/imageView17" android:layout_marginEnd="13dp"
                     android:layout_alignParentBottom="true" android:layout_marginBottom="18dp"
-                    android:layout_toEndOf="@+id/imageView13" android:layout_marginStart="23dp"/>
+                    android:layout_toEndOf="@+id/imageView13" android:layout_marginStart="23dp"
+                    android:textColor="@color/design_default_color_on_secondary"/>
             <ImageView
                     android:layout_width="30dp"
                     tools:ignore="ContentDescription"
@@ -98,6 +104,9 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/Logout"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:focusable="true"
+            android:clickable="true"
             android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/Change_Password"
             android:layout_marginBottom="391dp" app:layout_constraintBottom_toBottomOf="parent">
         <RelativeLayout
@@ -120,7 +129,8 @@
                     android:layout_toEndOf="@+id/imageView14"
                     android:layout_marginStart="23dp" android:layout_toStartOf="@+id/imageView19"
                     android:layout_marginEnd="21dp" android:layout_marginTop="18dp"
-                    android:layout_alignParentTop="true" android:textSize="18sp" android:textStyle="bold"/>
+                    android:layout_alignParentTop="true" android:textSize="18sp"
+                    android:textColor="@color/design_default_color_on_secondary"/>
             <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp" app:srcCompat="@drawable/logout" tools:layout_editor_absoluteY="490dp"

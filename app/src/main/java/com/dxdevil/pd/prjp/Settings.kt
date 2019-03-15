@@ -16,6 +16,10 @@ class Settings : AppCompatActivity() {
         Change_Password.setOnClickListener{
             startActivity(Intent(applicationContext, ChangePassword::class.java))
         }
+        My_Account.setOnClickListener{
+            startActivity(Intent(applicationContext,ProfileActivity::class.java))
+        }
+
 
     }
 
