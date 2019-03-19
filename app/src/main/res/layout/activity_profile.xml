@@ -26,6 +26,9 @@
 
     </RelativeLayout>
 
+    <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageView2"

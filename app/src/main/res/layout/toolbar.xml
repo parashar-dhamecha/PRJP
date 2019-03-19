@@ -6,4 +6,5 @@
         android:id="@+id/toolbar"
         android:theme="@style/CustomToolbarStyle">
 
+
 </androidx.appcompat.widget.Toolbar>
