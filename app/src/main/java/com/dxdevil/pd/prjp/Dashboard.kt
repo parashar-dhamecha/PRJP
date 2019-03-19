@@ -14,12 +14,10 @@ import android.widget.*
 
 
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.marginLeft
 
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_change_password.*
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.signpopup.*
 import kotlinx.android.synthetic.main.signpopup.view.*
@@ -34,43 +32,17 @@ class Dashboard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-        setSupportActionBar(toolbar as Toolbar?)
-
-        // Now get the support action bar
-        val actionBar = supportActionBar
-
-        // Set toolbar title/app title
-        actionBar!!.title = "Dashaboard"
-
-        // Set action bar/toolbar sub title
-        actionBar.subtitle = "App subtitle"
-
-        // Set action bar elevation
-        actionBar.elevation = 4.0F
-
-        // Display the app icon in action bar/toolbar
-        actionBar.setDisplayShowHomeEnabled(true)
-        actionBar.setLogo(R.mipmap.ic_launcher)
-        actionBar.setDisplayUseLogoEnabled(true)
-
-        val fab: View = findViewById(R.id.fab)
-
         drawerLayout = findViewById(R.id.drawerlayoutid)
         ntoggle= ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
         drawerLayout.addDrawerListener(ntoggle)
         ntoggle.syncState()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        fab.setOnClickListener { view ->
+        uploadcv.setOnClickListener { view ->
             Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
                 .show()
-
-
-
-
             }
         }
-
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if(ntoggle.onOptionsItemSelected(item))
@@ -115,6 +87,14 @@ class Dashboard : AppCompatActivity() {
         val draw = view.findViewById<Button>(R.id.draw_signature)
         draw.setOnClickListener{
             startActivity(Intent(getApplicationContext(),DrawSignature::class.java))
+        }
+        val pic = view.findViewById<Button>(R.id.photobutton)
+        pic.setOnClickListener {
+            this.startActivity(Intent(applicationContext,PhotoActivity::class.java))
+        }
+        val type = view.findViewById<Button>(R.id.typebutton)
+        type.setOnClickListener {
+            this.startActivity(Intent(applicationContext, Type::class.java))
         }
         var vg:ViewGroup =findViewById(R.id.linearLayout)
 

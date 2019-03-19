@@ -10,38 +10,46 @@
             android:layout_width="195dp"
             android:layout_height="37dp"
             android:ems="10"
-            android:hint="Search"
+            android:hint="@string/Search"
+            android:padding="@dimen/dp10"
             android:drawableLeft="@drawable/searchicon"
             android:id="@+id/editText4"
-            android:inputType="text"
-            tools:layout_editor_absoluteY="40dp" tools:layout_editor_absoluteX="16dp"/>
+            android:inputType="text" android:layout_marginTop="40dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/adduser" app:layout_constraintHorizontal_bias="0.0"/>
     <Button
-            android:layout_width="40dp"
-            android:layout_height="34dp"
-            android:background="@drawable/addusers"
-            android:id="@+id/button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_person_add_black_24dp"
+            android:id="@+id/adduser"
             android:layout_marginTop="40dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toStartOf="@+id/button2"
+            android:layout_marginLeft="@dimen/dp10"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toStartOf="@+id/grp"
             android:layout_marginEnd="16dp"/>
     <Button
-            android:layout_width="40dp"
-            android:layout_height="34dp"
-            android:background="@drawable/group"
-            android:id="@+id/button2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_group_add_black_24dp"
+            android:id="@+id/grp"
             android:layout_marginTop="40dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toStartOf="@+id/button5"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toStartOf="@+id/bulkimport"
             android:layout_marginEnd="16dp"/>
     <Button
-            android:layout_width="40dp"
-            android:layout_height="34dp"
-            android:background="@drawable/files"
-            android:id="@+id/button5"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_folder_black_24dp"
+            android:id="@+id/bulkimport"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp" android:layout_marginTop="40dp" app:layout_constraintTop_toTopOf="parent"/>
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/r1"
-            android:layout_width="395dp"
-            android:layout_height="510dp" tools:ignore="MissingConstraints" tools:layout_editor_absoluteY="96dp"
-            tools:layout_editor_absoluteX="0dp"/>
+            android:layout_width="390dp"
+            android:layout_height="476dp"
+            android:scrollbars="vertical" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText4" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintVertical_bias="1.0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

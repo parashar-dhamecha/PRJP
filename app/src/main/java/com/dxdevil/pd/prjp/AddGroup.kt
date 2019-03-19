@@ -3,15 +3,10 @@ package com.dxdevil.pd.prjp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class ProfileActivity : AppCompatActivity() {
+class AddGroup : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
+        setContentView(R.layout.activity_add_group)
     }
 }
