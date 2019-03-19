@@ -9,7 +9,6 @@
 
     <uses-feature android:name="android.hardware.camera2"/>
 
-
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -20,6 +19,8 @@
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".Type">
         </activity>
+
+        <activity android:name=".PhotoActivity">
         <activity android:name=".PhotoActivity"/>
         <activity android:name=".Settings">
         </activity>
@@ -27,6 +28,9 @@
         </activity>
         <activity android:name=".EditProfile">
         </activity>
+        <activity
+                android:name=".MainActivity"
+                tools:ignore="ExtraText">
          <activity
                 android:name=".Contacts"
                 android:launchMode="singleTop"
@@ -41,12 +45,16 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity android:name=".ChangePassword">
 
         </activity>
-        <activity
-                android:name=".MainActivity"
-                tools:ignore="ExtraText">
+
+        <activity android:name=".EditProfile">
         </activity>
+
+
         <activity android:name=".LoginActivity">
 
             <!-- <intent-filter> -->
@@ -69,8 +77,14 @@
                 android:name=".PhotoActivity"
                 tools:ignore="DuplicateActivity"/>
 
+        <activity android:name=".Contacts">
+        </activity>
+
+
         <activity android:name=".ResetPasswordActivity">
         </activity>
+        </activity>
+
         <activity
                 android:name=".DocumentActivity"
                 tools:ignore="WrongManifestParent">

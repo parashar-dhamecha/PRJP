@@ -10,4 +10,9 @@ class AddContact : AppCompatActivity() {
         setContentView(R.layout.activity_add_contact)
 
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 }
