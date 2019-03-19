@@ -123,8 +123,9 @@
     <string name="New_password">New Password</string>
 
     <!-- Add contact Strings-->
-    <string name="Name">Name</string>
+
     <string name="Job_title">Job Title</string>
     <string name="Job_Description">Job Description</string>
+    <string name="Name">Name</string>
 
 </resources>
