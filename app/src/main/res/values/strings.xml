@@ -20,7 +20,7 @@
     <string name="SignUpButton">Signup</string>
     <string name="LOgintv">Login In to your Account</string>
     <string name="action_settings">Action Settings</string>
-    <string name="forgot">Forgot Password?</string>
+    <string name="forgot">Forgot Password</string>
     <string name="Email">Enter email</string>
     <string name="reset">Reset Password</string>
     <string name="img_description">logo_of_cygnature</string>
@@ -48,7 +48,6 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="drawsig">Draw Signature</string>
     <string name="takepic">Take Photo</string>
-
     <string name="Register">Register</string>
     <string name="get_started">Get Started</string>
     <string name="AlreadyRegister">Already Registered?</string>
@@ -60,7 +59,6 @@
     <string name="phone">Phone Number</string>
     <string name="passwd">Password</string>
     <string name="cpasswd">Confirm Password</string>
-
     <string name="aw_sign">Awaiting My Sign</string>
     <string name="button_clear">clear</string>
     <string name="savebutton">Save</string>
@@ -70,5 +68,56 @@
     <string name="signature">Signature</string>
     <string name="upload">Upload Document</string>
 
+    <!-- Profile Page Strings-->
+    <string name="Username">Robert Downey</string>
+    <string name="Signature">Signature</string>
+    <string name="useremail">robertdownyjr89@gmail.com</string>
+    <string name="Info">Info</string>
+    <string name="mail_image">Mail Image</string>
+    <string name="profession">Profession</string>
+    <string name="profession_value">Android Developer</string>
+    <string name="Company">Company</string>
+    <string name="Company_value">Cygnet</string>
+    <string name="Phone">Phone</string>
+    <string name="Phone_value">9865457825</string>
+
+    <!-- contacts strings-->
+    <string name="contact_name">Juhi</string>
+    <string-array name="names">
+        <item>pooja</item>
+        <item>juhi</item>
+        <item>dhruv</item>
+        <item>yogita</item>
+    </string-array>
+
+    <!-- Edit Profile Page Strings-->
+    <string name="Image_des">User_image</string>
+    <string name="First_Name">First Name</string>
+    <string name="Last_Name">Last Name</string>
+    <string name="Email_Address">Email Address</string>
+    <string name="Mobile_No">Mobile No*</string>
+    <string name="Job_Title">Job Title</string>
+    <string name="Organization">Organization</string>
+    <string name="Date_Of_Birth">Date Of Birth</string>
+    <string name="Gender">Gender</string>
+    <string name="Description">Description</string>
+    <string name="Male">Male</string>
+    <string name="Female">Female</string>
+    <string name="password">Password</string>
+
+    <!-- Settings Page Strings-->
+    <string name="My_account">My Account</string>
+    <string name="Change_Password">Change Password</string>
+    <string name="Logout">Logout</string>
+
+    <!-- Change Password Page Strings-->
+    <string name="Current">Current Password</string>
+    <string name="Confirm">Confirm Password</string>
+    <string name="New_password">New Password</string>
+
+    <!-- Add contact Strings-->
+    <string name="Name">Name</string>
+    <string name="Job_title">Job Title</string>
+    <string name="Job_Description">Job Description</string>
 
 </resources>
