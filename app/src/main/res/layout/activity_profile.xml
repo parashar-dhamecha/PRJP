@@ -26,9 +26,6 @@
 
     </RelativeLayout>
 
-    <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageView2"
@@ -45,7 +42,7 @@
 
     <TextView
             android:id="@+id/textView8"
-            android:layout_width="347dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/Username"
             android:textAlignment="center"
