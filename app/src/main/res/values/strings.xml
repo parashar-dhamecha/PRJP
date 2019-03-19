@@ -69,6 +69,7 @@
     <string name="upload">Upload Document</string>
 
     <!-- Profile Page Strings-->
+    <string name="prf_title">Profile</string>
     <string name="Username">Robert Downey</string>
     <string name="Signature">Signature</string>
     <string name="useremail">robertdownyjr89@gmail.com</string>
@@ -99,7 +100,7 @@
     <string name="CreateContact">Create Contact</string>
 
     <!-- Edit Profile Page Strings-->
-    <string name="prf_title">Profile</string>
+    <string name="edit_title">Edit Profile</string>
     <string name="Image_des">User_image</string>
     <string name="First_Name">First Name</string>
     <string name="Last_Name">Last Name</string>
