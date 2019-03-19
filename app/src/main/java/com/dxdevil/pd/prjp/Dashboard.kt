@@ -14,10 +14,12 @@ import android.widget.*
 
 
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.marginLeft
 
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_change_password.*
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.signpopup.*
 import kotlinx.android.synthetic.main.signpopup.view.*
@@ -32,7 +34,24 @@ class Dashboard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
+        setSupportActionBar(toolbar as Toolbar?)
 
+        // Now get the support action bar
+        val actionBar = supportActionBar
+
+        // Set toolbar title/app title
+        actionBar!!.title = "Dashaboard"
+
+        // Set action bar/toolbar sub title
+        actionBar.subtitle = "App subtitle"
+
+        // Set action bar elevation
+        actionBar.elevation = 4.0F
+
+        // Display the app icon in action bar/toolbar
+        actionBar.setDisplayShowHomeEnabled(true)
+        actionBar.setLogo(R.mipmap.ic_launcher)
+        actionBar.setDisplayUseLogoEnabled(true)
 
         val fab: View = findViewById(R.id.fab)
 
