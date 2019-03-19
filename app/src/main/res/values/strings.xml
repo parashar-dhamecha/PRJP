@@ -75,11 +75,11 @@
     <string name="useremail">robertdownyjr89@gmail.com</string>
     <string name="Info">Info</string>
     <string name="mail_image">Mail Image</string>
-    <string name="profession">Profession</string>
+    <string name="profession">Profession:</string>
     <string name="profession_value">Android Developer</string>
-    <string name="Company">Company</string>
+    <string name="Company">Company:</string>
     <string name="Company_value">Cygnet</string>
-    <string name="Phone">Phone</string>
+    <string name="Phone">Phone:</string>
     <string name="Phone_value">9865457825</string>
 
     <!-- contacts strings-->
