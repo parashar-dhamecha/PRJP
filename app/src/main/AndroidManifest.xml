@@ -23,25 +23,14 @@
         </activity>
         <activity
                 android:name=".MainActivity"
-                tools:ignore="ExtraText">
+                tools:ignore="ExtraText"/>
 
         <activity android:name=".ChangePassword">
         </activity>
-        <activity android:name=".Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-
-        </activity>
         <activity android:name=".EditProfile">
         </activity>
-        <activity android:name=".ProfileActivity">
-        </activity>
-        <activity
-                android:name=".MainActivity"
-                tools:ignore="ExtraText">
-        </activity>
+
+
         <activity android:name=".LoginActivity">
 
             <!-- <intent-filter> -->
@@ -64,16 +53,10 @@
                 tools:ignore="DuplicateActivity"/>
         <activity android:name=".Contacts">
         </activity>
-        <activity android:name=".ForgotPasswordActivity">0
 
-        </activity>
         <activity android:name=".ResetPasswordActivity">
         </activity>
-        <activity android:name=".Registration">
 
-        </activity>
-        <activity android:name=".Dashboard">
-        </activity>
         <activity
                 android:name=".DocumentActivity"
                 tools:ignore="WrongManifestParent">
