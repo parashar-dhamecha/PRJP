@@ -53,6 +53,18 @@ android:layout_margin="@dimen/dp50"
             android:layout_height="wrap_content"
             android:text="@string/takepic"
             android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp20"
+    />
+    <Button
+            android:height="@dimen/dp60"
+            android:width="@dimen/dp150"
+            android:id="@+id/typebutton"
+            android:background="@color/textcolor4"
+            android:textColor="@color/textcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/type"
+            android:layout_gravity="center"
             android:layout_marginBottom="@dimen/dp30"
     />
 </LinearLayout>
