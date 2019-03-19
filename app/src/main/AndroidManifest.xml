@@ -19,16 +19,22 @@
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".Type">
         </activity>
-        <activity android:name=".PhotoActivity">
+        <activity android:name=".PhotoActivity"/>
+
+
+        <activity android:name=".EditProfile">
         </activity>
+
         <activity
-                android:name=".MainActivity"
+                android:name=".Contacts"
+                android:launchMode="singleTop"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustPan"
                 tools:ignore="ExtraText"/>
 
         <activity android:name=".ChangePassword">
         </activity>
-        <activity android:name=".EditProfile">
-        </activity>
+
 
 
         <activity android:name=".LoginActivity">
@@ -51,8 +57,8 @@
         <activity
                 android:name=".PhotoActivity"
                 tools:ignore="DuplicateActivity"/>
-        <activity android:name=".Contacts">
-        </activity>
+
+
 
         <activity android:name=".ResetPasswordActivity">
         </activity>

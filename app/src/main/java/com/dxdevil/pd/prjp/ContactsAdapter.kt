@@ -26,6 +26,14 @@ class ContactsAdapter(private val context: Context, private val Con: ArrayList<C
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.pro.setImageResource(Con[position].photo)
         holder.name.text = Con[position].name
+        holder.del.setOnClickListener{
+
+            Con.removeAt(position)
+            notifyItemRemoved(position)
+
+
+
+        }
 
 
     }
