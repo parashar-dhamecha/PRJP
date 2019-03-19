@@ -91,7 +91,7 @@
     </string-array>
 
     <!-- Contacts-->
-    <string name="Name">Name</string>
+
     <string name="MobileNo">Mobile No</string>
     <string name="JobTitle">JobTitle</string>
     <string name="JobDescription">Job Description</string>
