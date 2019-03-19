@@ -3,6 +3,12 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.dxdevil.pd.prjp">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="CODE_WRITE_EXTERNAL_STORAGE_PERMISSION"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-feature android:name="android.hardware.camera2"/>
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -11,16 +17,19 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-
+        <activity android:name=".Type">
+        </activity>
+        <activity android:name=".PhotoActivity">
+        </activity>
         <activity
                 android:name=".MainActivity"
                 tools:ignore="ExtraText">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".LoginActivity">
 
             <!-- <intent-filter> -->
@@ -28,24 +37,19 @@
             <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
             <!-- </intent-filter> -->
         </activity>
-
-        <activity android:name=".Contacts" >
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN"/>-->
-            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
-        </activity>
-
-        <activity android:name=".ForgotPasswordActivity"></activity>
-        <activity android:name=".Registration"></activity>
-     </application>
-        <activity android:name=".Dashboard">
-
-        </activity>
-        <activity android:name=".ForgotPasswordActivity">
-
-        </activity>
-<activity android:name=".DocumentActivity"></activity>
+        <activity android:name=".Dashboard"/> <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN"/> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+        <!-- </intent-filter> -->
+        <activity
+                android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+                android:theme="@style/Base.Theme.AppCompat"/>
+        <activity android:name=".ForgotPasswordActivity"/>
+        <activity android:name=".Registration"/>
+        <activity android:name=".DrawSignature"/>
+        <activity
+                android:name=".PhotoActivity"
+                tools:ignore="DuplicateActivity"/>
     </application>
 
 </manifest>

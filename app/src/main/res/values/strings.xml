@@ -32,7 +32,7 @@
     <string name="completed">Completed</string>
     <string name="signingdue">Due Soon</string>
     <string name="awsdata">2</string>
-    <string name="addsign">Add Signature</string>
+    <string name="addsign">Edit/Add Signature</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="edit_your_signature">Edit Your Signature</string>
     <string name="dashboard">Dashboard</string>
@@ -62,6 +62,13 @@
     <string name="cpasswd">Confirm Password</string>
 
     <string name="aw_sign">Awaiting My Sign</string>
+    <string name="button_clear">clear</string>
+    <string name="savebutton">Save</string>
+    <string name="choose">Select Photo</string>
+    <string name="type">Type</string>
+    <string name="name">Name</string>
+    <string name="signature">Signature</string>
+    <string name="upload">Upload Document</string>
 
 
 </resources>

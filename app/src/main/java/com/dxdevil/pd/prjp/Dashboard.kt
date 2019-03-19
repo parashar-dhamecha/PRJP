@@ -31,19 +31,16 @@ class Dashboard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
-        val fab: View = findViewById(R.id.fab)
 
         drawerLayout = findViewById(R.id.drawerlayoutid)
         ntoggle= ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
         drawerLayout.addDrawerListener(ntoggle)
         ntoggle.syncState()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        fab.setOnClickListener { view ->
+        uploadcv.setOnClickListener { view ->
             Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
                 .show()
-
-
             }
         }
 
@@ -90,6 +87,14 @@ class Dashboard : AppCompatActivity() {
         val draw = view.findViewById<Button>(R.id.draw_signature)
         draw.setOnClickListener{
             startActivity(Intent(getApplicationContext(),DrawSignature::class.java))
+        }
+        val pic = view.findViewById<Button>(R.id.photobutton)
+        pic.setOnClickListener {
+            this.startActivity(Intent(applicationContext,PhotoActivity::class.java))
+        }
+        val type = view.findViewById<Button>(R.id.typebutton)
+        type.setOnClickListener {
+            this.startActivity(Intent(applicationContext, Type::class.java))
         }
         var vg:ViewGroup =findViewById(R.id.linearLayout)
 

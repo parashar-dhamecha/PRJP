@@ -29,4 +29,7 @@
     <dimen name="dp150">150dp</dimen>
     <dimen name="dp130">130dp</dimen>
     <dimen name="dp250">250dp</dimen>
+    <dimen name="dp200">200dp</dimen>
+    <dimen name="sp34">34sp</dimen>
+    <dimen name="sp40">40sp</dimen>
 </resources>
