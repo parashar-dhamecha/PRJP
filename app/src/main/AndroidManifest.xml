@@ -21,31 +21,31 @@
         <activity
                 android:name=".MainActivity"
                 tools:ignore="ExtraText">
-
         </activity>
         <activity android:name=".LoginActivity">
-        </activity>
-        <activity android:name=".Dashboard">
-        </activity>
-        <activity
-                android:name=".ProfileActivity"
-                android:label="@string/prf_title">
-        </activity>
-        <activity
-                android:name=".EditProfile"
-                android:label="@string/edit_title"
-                android:parentActivityName=".ProfileActivity">
-        </activity>
-
-        <activity android:name=".Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".Dashboard">
+        </activity>
+        <activity
+                android:name=".ProfileActivity"
+                android:label="@string/prf_title"
+        android:parentActivityName=".Settings">
+        </activity>
+        <activity
+                android:name=".EditProfile"
+                android:label="@string/edit_title"
+                android:parentActivityName=".ProfileActivity">
+        </activity>
+        <activity android:name=".Settings">
 
-        <activity android:name=".ChangePassword">
+        </activity>
+        <activity android:name=".ChangePassword"
+        android:parentActivityName=".Settings">
         </activity>
         <activity android:name=".ForgotPasswordActivity"/>
         <activity android:name=".Registration"/>

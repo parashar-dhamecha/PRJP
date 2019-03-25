@@ -13,6 +13,17 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="MyEditText" parent="Theme.AppCompat.Light" >
+        <item name="colorControlNormal">@color/edittext</item>
+        <item name="colorControlActivated">@color/edittext</item>
+    </style>
+
+    <style name="MyHintText" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/textcolor</item>
+
+    </style>
+
     
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
