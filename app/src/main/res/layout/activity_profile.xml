@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         tools:context=".ProfileActivity">
 
+
     <View
             android:id="@+id/view"
             android:layout_width="411dp"
@@ -21,18 +22,15 @@
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:background="#28B463"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" tools:layout_editor_absoluteX="0dp"
-            android:id="@+id/relativeLayout2">
+            tools:layout_editor_absoluteX="0dp"
+            android:id="@+id/relativeLayout2" app:layout_constraintTop_toTopOf="parent">
 
     </RelativeLayout>
-
-    <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageView2"
             android:background="@drawable/profile_bg"
+            android:src="@drawable/robert"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"

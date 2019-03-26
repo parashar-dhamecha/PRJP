@@ -25,25 +25,40 @@
         </activity>
         <activity android:name=".PhotoActivity">
         </activity>
+
         <activity
                 android:name=".MainActivity"
                 tools:ignore="ExtraText">
+        </activity>
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".ChangePassword">
         </activity>
-        <activity android:name=".EditProfile">
+        <activity
+                android:name=".ProfileActivity"
+                android:label="@string/prf_title"
+        android:parentActivityName=".Settings">
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity
+                android:name=".EditProfile"
+                android:label="@string/edit_title"
+                android:parentActivityName=".ProfileActivity">
+        </activity>
+        <activity android:name=".Settings">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN"/> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name=".ChangePassword"
+        android:parentActivityName=".Settings">
+        </activity>
+        <activity android:name=".ForgotPasswordActivity"/>
+        <activity android:name=".Registration"/>
+        <activity android:name=".PhotoActivity">
+        </activity>
+        <activity android:name=".Type">
         </activity>
         <activity android:name=".Dashboard"/> <!-- <intent-filter> -->
         <!-- <action android:name="android.intent.action.MAIN"/> -->
