@@ -11,6 +11,8 @@
     <TextView
             android:text="TextView"
             android:layout_width="145dp"
-            android:layout_height="29dp" tools:layout_editor_absoluteY="26dp"
-            tools:layout_editor_absoluteX="36dp" android:id="@+id/textView6"/>
+            android:layout_height="29dp"
+            android:id="@+id/textView6" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
