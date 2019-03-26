@@ -23,19 +23,18 @@
                 tools:ignore="ExtraText">
         </activity>
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".Dashboard">
         </activity>
+
         <activity
                 android:name=".ProfileActivity"
                 android:label="@string/prf_title"
         android:parentActivityName=".Settings">
+
         </activity>
+
         <activity
                 android:name=".EditProfile"
                 android:label="@string/edit_title"
@@ -48,7 +47,12 @@
         android:parentActivityName=".Settings">
         </activity>
         <activity android:name=".ForgotPasswordActivity"/>
-        <activity android:name=".Registration"/>
+        <activity android:name=".Registration">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".PhotoActivity">
         </activity>
         <activity android:name=".Type">
