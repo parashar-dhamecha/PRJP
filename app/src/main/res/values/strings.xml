@@ -135,5 +135,9 @@
     <string name="Job_title">Job Title</string>
     <string name="Job_Description">Job Description</string>
     <string name="Name">Name</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+    <string name="todo">TODO</string>
+    <string name="anoteButton">Annote</string>
 
 </resources>

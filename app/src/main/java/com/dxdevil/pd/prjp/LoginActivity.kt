@@ -24,6 +24,19 @@ class LoginActivity : AppCompatActivity() {
 
         Login_Button.setOnClickListener {
             startActivity(Intent(applicationContext, Dashboard::class.java))
+        Login_Button?.setOnClickListener {
+           var call :Call<LoginModel> = RetrofitClient.getInstance().api.login(Login(UsernameEmail.text.toString(),edPassword.text.toString()))
+            call.enqueue(object : Callback<LoginModel> {
+                override fun onFailure(call: Call<LoginModel>, t: Throwable) {
+                    Toast.makeText(this@LoginActivity,"faliure",Toast.LENGTH_LONG).show()
+                }
+
+                override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
+
+                    Toast.makeText(this@LoginActivity,"success",Toast.LENGTH_LONG).show()
+                }
+
+            })
         }
 
     }

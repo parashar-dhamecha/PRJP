@@ -69,6 +69,7 @@ class Type : AppCompatActivity(), View.OnClickListener {
         }catch (e:Exception){
             Log.d("1","exception $e")
         }
+
     }
     override fun onClick(v: View?) {
         try {
@@ -78,36 +79,52 @@ class Type : AppCompatActivity(), View.OnClickListener {
                 finalsigntv.text = edfonts.text.toString()
                 tf = Typeface.createFromAsset(assets, "fonts/1.ttf")
                 finalsigntv.typeface = tf
+                finalsigntv.buildDrawingCache()
+                tvimageview.setImageBitmap(finalsigntv.getDrawingCache())
+
             }
             R.id.scrolltv2 -> {
                 finalsigntv.text = edfonts.text.toString()
                 tf = Typeface.createFromAsset(assets, "fonts/2.ttf")
                 finalsigntv.typeface = tf
+                finalsigntv.buildDrawingCache()
+                tvimageview.setImageBitmap(finalsigntv.getDrawingCache())
             }
             R.id.scrolltv3 -> {
                 finalsigntv.setText(edfonts.text.toString())
                 tf = Typeface.createFromAsset(assets, "fonts/3.ttf")
                 finalsigntv.typeface = tf
+                finalsigntv.buildDrawingCache()
+                tvimageview.setImageBitmap(finalsigntv.getDrawingCache())
             }
             R.id.scrolltv4 -> {
                 finalsigntv.setText(edfonts.text.toString())
                 tf = Typeface.createFromAsset(assets, "fonts/4.ttf")
                 finalsigntv.typeface = tf
+                finalsigntv.buildDrawingCache()
+                tvimageview.setImageBitmap(finalsigntv.getDrawingCache())
             }
             R.id.scrolltv5 -> {
                 finalsigntv.setText(edfonts.text.toString())
                 tf = Typeface.createFromAsset(assets, "fonts/5.ttf")
                 finalsigntv.typeface = tf
+                finalsigntv.buildDrawingCache()
+                tvimageview.setImageBitmap(finalsigntv.getDrawingCache())
             }
             R.id.scrolltv6 -> {
                 finalsigntv.setText(edfonts.text.toString())
                 tf = Typeface.createFromAsset(assets, "fonts/6.ttf")
                 finalsigntv.typeface = tf
+                finalsigntv.buildDrawingCache()
+                tvimageview.setImageBitmap(finalsigntv.getDrawingCache())
             }
             R.id.scrolltv7 -> {
                 finalsigntv.setText(edfonts.text.toString())
                 tf = Typeface.createFromAsset(assets, "fonts/7.ttf")
                 finalsigntv.typeface = tf
+                finalsigntv.buildDrawingCache()
+                tvimageview.setImageBitmap(finalsigntv.getDrawingCache())
+
             }
         }
     }catch (e:Exception) {

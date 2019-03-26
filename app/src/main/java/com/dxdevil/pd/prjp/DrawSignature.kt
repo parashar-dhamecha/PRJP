@@ -43,7 +43,7 @@ class DrawSignature : AppCompatActivity() {
 
 
 
-                var filePath: String = Environment.getExternalStorageDirectory().toString()
+                        var filePath: String = Environment.getExternalStorageDirectory().toString()
 
                 filePath += "/sign.png"
                 Log.d("d", filePath)
