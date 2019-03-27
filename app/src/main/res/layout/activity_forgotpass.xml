@@ -47,7 +47,7 @@
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="32dp"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout11" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="24dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="24dp" tools:ignore="UnusedAttribute"/>
+            android:layout_marginEnd="24dp" tools:ignore="UnusedAttribute" android:textColor="@color/textcolor"/>
 
     <TextView
             android:text="@string/forgot"

@@ -51,15 +51,15 @@
     <string name="takepic">Take Photo</string>
     <string name="Register">Register</string>
     <string name="get_started">Get Started</string>
-    <string name="AlreadyRegister">Already Registered?</string>
+    <string name="AlreadyRegister">Already Registered? Log In</string>
 
     <!--Reg Page Hints-->
-    <string name="fname">First Name</string>
-    <string name="lname">Last Name</string>
-    <string name="email">E-Mail</string>
-    <string name="phone">Phone Number</string>
-    <string name="passwd">Password</string>
-    <string name="cpasswd">Confirm Password</string>
+    <string name="fname">First Name*</string>
+    <string name="lname">Last Name*</string>
+    <string name="EmailId">Email Id*</string>
+    <string name="phone">Mobile No*</string>
+    <string name="passwd">Password*</string>
+    <string name="cpasswd">Confirm Password*</string>
     <string name="aw_sign">Awaiting My Sign</string>
     <string name="button_clear">clear</string>
     <string name="savebutton">Save</string>
@@ -68,6 +68,7 @@
     <string name="name">Name</string>
     <string name="signature">Signature</string>
     <string name="upload">Upload Document</string>
+
 
     <!-- Profile Page Strings-->
     <string name="prf_title">Profile</string>

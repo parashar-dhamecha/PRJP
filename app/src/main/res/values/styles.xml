@@ -21,6 +21,7 @@
 
     <style name="MyHintText" parent="TextAppearance.AppCompat.Small">
         <item name="android:textColor">@color/textcolor</item>
+        <item name="android:textSize">@dimen/dp10</item>
 
     </style>
 
