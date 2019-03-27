@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="CODE_WRITE_EXTERNAL_STORAGE_PERMISSION"/>
     <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <uses-feature android:name="android.hardware.camera2"/>
 
@@ -23,9 +23,6 @@
         </activity>
         <activity android:name=".Type">
         </activity>
-        <activity android:name=".PhotoActivity">
-        </activity>
-
         <activity
                 android:name=".MainActivity"
                 tools:ignore="ExtraText">
@@ -36,8 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ChangePassword">
-        </activity>
+
         <activity
                 android:name=".ProfileActivity"
                 android:label="@string/prf_title"
@@ -58,8 +54,7 @@
         <activity android:name=".Registration"/>
         <activity android:name=".PhotoActivity">
         </activity>
-        <activity android:name=".Type">
-        </activity>
+
         <activity android:name=".Dashboard"/> <!-- <intent-filter> -->
         <!-- <action android:name="android.intent.action.MAIN"/> -->
         <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
@@ -67,8 +62,7 @@
         <activity
                 android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
                 android:theme="@style/Base.Theme.AppCompat"/>
-        <activity android:name=".ForgotPasswordActivity"/>
-        <activity android:name=".Registration"/>
+
         <activity android:name=".DrawSignature"/>
         <activity
                 android:name=".PhotoActivity"
