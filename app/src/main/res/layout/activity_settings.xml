@@ -27,7 +27,6 @@
             <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/right"
                     android:id="@+id/right3"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="24dp"
@@ -52,7 +51,6 @@
             <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/logout"
                     android:id="@+id/imageView12"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="14dp"
@@ -81,7 +79,6 @@
             <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/right"
                     android:id="@+id/right2"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="24dp"
@@ -107,7 +104,6 @@
             <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/keyy"
                     android:id="@+id/img_key"
                     android:layout_marginTop="15dp"
                     android:layout_alignParentTop="true"
@@ -139,7 +135,6 @@
             <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/right"
                     android:id="@+id/right1"
                     android:layout_marginTop="12dp"
                     android:layout_alignParentTop="true"
@@ -164,7 +159,6 @@
             <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/profile"
                     android:id="@+id/imgprf"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="24dp"
