@@ -5,6 +5,8 @@ data class ContactModel(var name:String, var photo: Int, var isSelected: Boolean
 
 
 
+
+
 //class ContactModel(var name : String?, var image: Int){
 
 //private var name: String = null

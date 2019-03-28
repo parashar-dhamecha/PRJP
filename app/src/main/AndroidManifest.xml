@@ -17,74 +17,46 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".GroupActivity">
+        </activity>
         <activity android:name=".Type">
         </activity>
-
-        <activity android:name=".PhotoActivity">
         <activity android:name=".PhotoActivity"/>
-        <activity android:name=".Settings">
-        </activity>
         <activity android:name=".AddContact">
         </activity>
         <activity android:name=".EditProfile">
         </activity>
         <activity
-                android:name=".MainActivity"
+                android:name=".AddGroup"
                 tools:ignore="ExtraText">
-         <activity
+        </activity>
+        <activity
                 android:name=".Contacts"
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustPan"
-                tools:ignore="ExtraText"/>
-
-        <activity android:name=".ChangePassword">
-        </activity>
-        <activity android:name=".AddGroup">
+                tools:ignore="ExtraText">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".ChangePassword">
-
         </activity>
-
-        <activity android:name=".EditProfile">
+        <activity android:name=".MainActivity">
         </activity>
-
-
         <activity android:name=".LoginActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN"/> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".ForgotPasswordActivity"/>
-        <activity android:name=".Dashboard"/> <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MAIN"/> -->
-        <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-        <!-- </intent-filter> -->
+        <activity android:name=".Dashboard"/>
         <activity
                 android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
                 android:theme="@style/Base.Theme.AppCompat"/>
-
         <activity android:name=".Registration"/>
         <activity android:name=".DrawSignature"/>
-        <activity
-                android:name=".PhotoActivity"
-                tools:ignore="DuplicateActivity"/>
-
-        <activity android:name=".Contacts">
-        </activity>
-
-
         <activity android:name=".ResetPasswordActivity">
         </activity>
-        </activity>
-
         <activity
                 android:name=".DocumentActivity"
                 tools:ignore="WrongManifestParent">

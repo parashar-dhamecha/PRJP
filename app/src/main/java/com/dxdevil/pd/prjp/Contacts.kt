@@ -22,6 +22,12 @@ class Contacts : AppCompatActivity() {
             startActivity(intent)
         }
 
+        grp.setOnClickListener{
+
+            val intent=Intent(this,AddGroup::class.java)
+            startActivity(intent)
+        }
+
         setRecyclerView()
 
 
