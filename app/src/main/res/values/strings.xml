@@ -104,6 +104,7 @@
     <string name="Search">Search</string>
     <string name="CreateContact">Create Contact</string>
 
+    <string name="CreateGroup">Create Group</string>
     <!-- Edit Profile Page Strings-->
     <string name="edit_title">Edit Profile</string>
     <string name="Image_des">User_image</string>
@@ -129,6 +130,7 @@
     <string name="Current">Current Password</string>
     <string name="Confirm">Confirm Password</string>
     <string name="New_password">New Password</string>
+
 
     <!-- Add contact Strings-->
 
