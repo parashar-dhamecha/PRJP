@@ -55,6 +55,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha02'
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
     implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation('com.alimuzaffar.lib:pinentryedittext:2.0.6') {
+        // Exclude is only needed if you already have
+        // androidx.appcompat as a dependency in your app.
+        exclude group: 'androidx.appcompat', module: 'appcompat'
+    }
     implementation 'com.android.support:design:28.0.0'
 //    compile 'com.android.support:appcompat-v7:28.0.0'
     // androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'

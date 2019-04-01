@@ -139,5 +139,6 @@
     <string name="navigation_drawer_close">close</string>
     <string name="todo">TODO</string>
     <string name="anoteButton">Annote</string>
+    <string name="otp">Verify OTP</string>
 
 </resources>
