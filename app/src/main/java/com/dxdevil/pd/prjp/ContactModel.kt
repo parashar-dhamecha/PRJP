@@ -1,7 +1,11 @@
 package com.dxdevil.pd.prjp
 
 
-data class ContactModel(var name:String, var photo: Int)
+data class ContactModel(var name:String, var photo: Int, var isSelected: Boolean = false)
+
+
+
+
 
 //class ContactModel(var name : String?, var image: Int){
 

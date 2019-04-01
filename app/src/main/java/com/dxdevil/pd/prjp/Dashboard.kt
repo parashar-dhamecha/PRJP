@@ -1,109 +1,103 @@
 package com.dxdevil.pd.prjp
 
-
 import android.content.Context
 import android.content.Intent
-
-import android.os.Build
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.Slide
-
+import android.util.Log
 import android.view.*
-import android.widget.*
-
-
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.marginLeft
-
 import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.snackbar.Snackbar
+import com.dxdevil.pd.prjp.Model.Response.DashboardResponse
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.signpopup.*
-import kotlinx.android.synthetic.main.signpopup.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.lang.Exception
 
 
 class Dashboard : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var ntoggle : ActionBarDrawerToggle
-
-
+    private lateinit var ntoggle: ActionBarDrawerToggle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
-
         drawerLayout = findViewById(R.id.drawerlayoutid)
-        ntoggle= ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
+        ntoggle= ActionBarDrawerToggle(this,drawerLayout,R.string.navigation_drawer_open,R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(ntoggle)
         ntoggle.syncState()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-//         uploadcv.setOnClickListener { view ->
-//            Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null)
-//                .show()
-//            }
+        //Api calling
+        var preference = getSharedPreferences("Token", Context.MODE_PRIVATE) as SharedPreferences
+        var dapi = RetrofitClient.getInstance().api as Api
+        var call= dapi.getDashboard(preference.getString("Token","")!!.toString()) as Call<DashboardResponse>
+        call?.enqueue(object : Callback<DashboardResponse>{
+
+            override fun onFailure(call: Call<DashboardResponse>, t: Throwable) {
+                Toast.makeText(this@Dashboard,"Check your connection",Toast.LENGTH_LONG)
+            }
+
+            override fun onResponse(call: Call<DashboardResponse>, response: Response<DashboardResponse>) {
+                if(response.isSuccessful){
+                var ob = response.body()
+                    awatingsigntv?.text =ob!!.data[0]!!.awaitingMySign.toString()
+                    awatingotherstv?.text = ob!!.data[0]!!.awaitingOthers.toString()
+                    completedtv?.text = ob!!.data[0]!!.completed.toString()
+                    duesoontv?.text = ob!!.data[0]!!.expireSoon.toString()
+                    Toast.makeText(this@Dashboard,"Success",Toast.LENGTH_LONG).show()
+                }
+                else{
+                    Toast.makeText(this@Dashboard,"error",Toast.LENGTH_LONG).show()
+                }
+            }
+        })
+
+
+
+        uploadcv.setOnClickListener { view ->
+           startActivity(Intent(applicationContext,SetAnnotation::class.java))
         }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if(ntoggle.onOptionsItemSelected(item))
-            return true
-        return super.onOptionsItemSelected(item)
-    }
-    fun showdiag(view:View) {
-        val inflater:LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-
-        // Inflate a custom view using layout inflater
-        var view = inflater.inflate(R.layout.signpopup,null)
-        // Initialize a new instance of popup window
-        val popupWindow = PopupWindow(
-            view, // Custom view to show in popup window
-            LinearLayout.LayoutParams.MATCH_PARENT, // Width of popup window
-            LinearLayout.LayoutParams.WRAP_CONTENT // Window height
-        )
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            popupWindow.elevation = 10.0F
+        draw_signature?.setOnClickListener {
+            Toast.makeText(applicationContext, "hello", Toast.LENGTH_LONG)
+            startActivity(Intent(applicationContext, DrawSignature::class.java))
+        }
+        photobutton?.setOnClickListener {
+            startActivity(Intent(applicationContext, PhotoActivity::class.java))
+        }
+        typebutton?.setOnClickListener {
+            startActivity(Intent(applicationContext, Type::class.java))
         }
 
+        addsign.setOnClickListener {
+            try {
+                var ft = supportFragmentManager.beginTransaction()
+                val cf: ChooseDF = ChooseDF()
+                cf.show(ft, "dialog")
 
-        // If API level 23 or higher then execute the code
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-
-            // Create a new slide animation for popup window enter transition
-            val slideIn = Slide()
-            slideIn.slideEdge = Gravity.TOP
-            popupWindow.enterTransition = slideIn
-
-            // Slide animation for popup window exit transition
-            val slideOut = Slide()
-            slideOut.slideEdge = Gravity.RIGHT
-            popupWindow.exitTransition = slideOut
-
+            } catch (e: Exception) {
+                Log.d("1", "exception $e")
+            }
         }
-        val tv = view.findViewById<TextView>(R.id.close_tvid)
-        tv.setOnClickListener {
-            popupWindow.dismiss()
-
-        }
-        val draw = view.findViewById<Button>(R.id.draw_signature)
-        draw.setOnClickListener{
-            startActivity(Intent(getApplicationContext(),DrawSignature::class.java))
-        }
-        val pic = view.findViewById<Button>(R.id.photobutton)
-        pic.setOnClickListener {
-            this.startActivity(Intent(applicationContext,PhotoActivity::class.java))
-        }
-        val type = view.findViewById<Button>(R.id.typebutton)
-        type.setOnClickListener {
-            this.startActivity(Intent(applicationContext, Type::class.java))
-        }
-        var vg:ViewGroup =findViewById(R.id.linearLayout)
-
-        popupWindow.showAtLocation(vg,Gravity.CENTER,0,0)
-        popupWindow.isFocusable
 
     }
+
+
+
+        override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+            if(ntoggle.onOptionsItemSelected(item))
+                return true
+            return super.onOptionsItemSelected(item)
+        }
 }
+
+
+
+
+
 
 
 
