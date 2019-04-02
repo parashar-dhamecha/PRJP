@@ -6,39 +6,24 @@ import com.google.gson.annotations.SerializedName;
 
 public class SignUp {
 
-     public SignUp
-             (String FirstName,
-              String LastName,
-              String Email,
-              String Password,
-              String Confirm,
-              String JobTitle,
-              String CompanyName,
-               int CountryId,
-              String MobileNo,
-              String Latitude,
-              String Longitude,
-              String useragent,
-              String Timezone,
-              String TimeZoneOffset)
+    public SignUp(String fn,
+                  String ln,
+                  String em,String Pass,String Cpass,String jt,String cn,String cid,String phno,String lat ,String lon,String agent,String tofset)
+    {
+        firstName=fn;
+        lastName=ln;
+        email=em;
+        password=Pass;
+        confirmPassword=Cpass;
+        jobTitle=jt;
+        countryId=cid;
+        phoneNumber =phno;
+        userLatitude=lat;
+        userLongitude=lon;
+        userAgent=agent;
+        userTimeZoneOffSet=tofset;
+    }
 
-     {
-         this.firstName = FirstName;
-         this.lastName= LastName;
-         this.email = Email;
-         this.phoneNumber = MobileNo;
-         this.password = Password;
-         this.confirmPassword =Confirm;
-         this.jobTitle=JobTitle;
-         this.companyName = CompanyName;
-         this.countryId = CountryId;
-         this.userLatitude =Latitude;
-         this.userLongitude =Longitude;
-         this.userTimeZone =Timezone;
-         this.userAgent = useragent;
-         this.userTimeZoneOffSet=TimeZoneOffset;
-
-     }
     @SerializedName("firstName")
     @Expose
     private String firstName;
@@ -62,7 +47,7 @@ public class SignUp {
     private String companyName;
     @SerializedName("countryId")
     @Expose
-    private Integer countryId;
+    private String countryId;
     @SerializedName("phoneNumber")
     @Expose
     private String phoneNumber;
@@ -75,9 +60,6 @@ public class SignUp {
     @SerializedName("userAgent")
     @Expose
     private String userAgent;
-    @SerializedName("userTimeZone")
-    @Expose
-    private String userTimeZone;
     @SerializedName("userTimeZoneOffSet")
     @Expose
     private String userTimeZoneOffSet;
@@ -138,11 +120,11 @@ public class SignUp {
         this.companyName = companyName;
     }
 
-    public Integer getCountryId() {
+    public String getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(Integer countryId) {
+    public void setCountryId(String countryId) {
         this.countryId = countryId;
     }
 
@@ -176,14 +158,6 @@ public class SignUp {
 
     public void setUserAgent(String userAgent) {
         this.userAgent = userAgent;
-    }
-
-    public String getUserTimeZone() {
-        return userTimeZone;
-    }
-
-    public void setUserTimeZone(String userTimeZone) {
-        this.userTimeZone = userTimeZone;
     }
 
     public String getUserTimeZoneOffSet() {

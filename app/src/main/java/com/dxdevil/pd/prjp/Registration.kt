@@ -1,17 +1,12 @@
 package com.dxdevil.pd.prjp
+
 import android.annotation.SuppressLint
-import android.location.Location
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dxdevil.pd.prjp.Model.Request.SignUp
-import com.dxdevil.pd.prjp.Model.Response.SignUpModel
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import com.google.android.material.textfield.TextInputEditText
+import com.dxdevil.pd.prjp.Model.Response.SignUpMode
 import kotlinx.android.synthetic.main.activity_registration.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,148 +24,72 @@ class Registration : AppCompatActivity() {
 
     @SuppressLint("MissingPermission")
 
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    //private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    @SuppressLint("MissingPermission")
+    //@SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
-//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-//        fusedLocationClient.lastLocation
-//            .addOnSuccessListener { location : Location? ->
-//                // Got last known location. In some rare situations this can be null.
-//               latitude=location?.latitude.toString()
-//                longitude=location?.longitude.toString()
-
-//        Toast.makeText(this,fusedLocationClient.lastLocation.l,Toast.LENGTH_SHORT).show()
 
 
-        var etFirstName = findViewById<TextInputEditText>(R.id.etFirstName)
-        var etLastName = findViewById<TextInputEditText>(R.id.etLastName)
-        var etEmail = findViewById<TextInputEditText>(R.id.etEmail)
-        var etMobileNo = findViewById<TextInputEditText>(R.id.etMobileNo)
-        var etPassword = findViewById<TextInputEditText>(R.id.etPassword)
-        var etConfirmPassword = findViewById<TextInputEditText>(R.id.etConfirmPassword)
-        var btregister = findViewById<Button>(R.id.btregister)
-        var loginlink = findViewById<TextView>(R.id.loginlink)
-
-        var Fname = etFirstName!!.text.toString()
-        var Lname = etLastName!!.text.toString()
-        var email = etEmail!!.text.toString()
-        var MobileNo = etMobileNo!!.text.toString()
-        var Pass = etPassword!!.text.toString()
-        var ConfirmPass = etConfirmPassword!!.text.toString()
-
-
-
-        fun validation(): Boolean {
-
-            var valid = false
-
-
-            val fname =etFirstName.text.toString()
-            val lname = etLastName.text.toString()
-            val em = etEmail.text.toString()
-            val mobileNo = etMobileNo.text.toString()
-            val password = etPassword.text.toString()
-            val confirmPassword = etConfirmPassword.text.toString()
-
-            var flagFirst = false
-            var flagLast = false
-            var flagEmail = false
-            var flagMobile = false
-            var flagPassword = false
-            var flagConfirm = false
-
-
-            if (fname.isEmpty() || !Nameregex.matches(fname)) {
-                etFirstName.error = "Enter a valid First Name"
-            } else {
-                flagFirst = true
-            }
-
-
-            if (lname.isEmpty() || !Nameregex.matches(lname)) {
-                etLastName.error = "Enter a valid Last name"
-            } else {
-                flagLast = true
-            }
-
-            if (mobileNo.isEmpty() || mobileNo.length > 15 || !Numberregex.matches(mobileNo)) {
-                etMobileNo.error = "Enter a valid MobileNo"
-            } else {
-                flagMobile = true
-            }
-
-            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(em).matches()) {
-                etEmail.error = "Enter a valid Email Address"
-                valid = false
-            } else {
-                flagEmail = true
-            }
-
-            if (password.isEmpty() || password.length < 8 || !Passwordregex.matches(password)) {
-
-                etPassword.error = "Enter a valid Password"
-            } else {
-                flagPassword = true
-            }
-
-            if (confirmPassword.isEmpty() || confirmPassword.length < 8 || confirmPassword != password) {
-                etConfirmPassword.error = "Password Do not match"
-            } else {
-                etConfirmPassword.error=null
-                flagConfirm = true
-            }
-
-            if (flagFirst && flagLast && flagEmail && flagPassword && flagConfirm && flagMobile) {
-                valid = true
-            }
-            return valid
-
+        loginlink!!.setOnClickListener{
+            startActivity(Intent(this@Registration, LoginActivity::class.java))
         }
-        btregister.setOnClickListener {
+
+
+        btregister!!.setOnClickListener {
+
+
+            var fname=etFirstName!!.text.toString()
+            var lname=etLastName!!.text.toString()
+            var email= etEmail!!.text.toString()
+            var pass =etPassword!!.text.toString()
+            var confirmPass =etConfirmPassword!!.text.toString()
+            var jt = etJobTitle!!.text.toString()
+            var cn =etCompanyName!!.text.toString()
+            var cID = etCountryId!!.text.toString()
+            var mo =etMobileNo!!.text.toString()
 
             if(validation()) {
-                var api = RetrofitClient.getInstance()!!.api as Api
-               val call =api!!.registerethod(
-                   SignUp( Fname,
-                        Lname,
+                val api = RetrofitClient.getInstance()!!.api as Api
+                val call =api.register(
+                   SignUp( fname,
+                        lname,
                         email,
-                        Pass,
-                        ConfirmPass,
-                        "Android",
-                        "Cygnet",
-                        91,
-                       MobileNo,
-                      null,
-                       null,
-                        null,
-                        null,
-                        null)
-                   ) as Call<SignUpModel>
+                        pass,
+                        confirmPass,
+                       jt,
+                        cn,
+                        cID,
+                        mo,
+                       "4.092356",
+                       "-56.062161","Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0 Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0",
+                       "+05:30")
+                   ) as Call<SignUpMode>
 
-                call!!.enqueue(object : Callback<SignUpModel> {
-                    override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
+                call.enqueue(object : Callback<SignUpMode> {
+
+                    override fun onResponse(call: Call<SignUpMode>, response: Response<SignUpMode>) {
 
                         try {
+
+                            //Log.e("error",response.body()!!.message.toString())
                             if (response.isSuccessful) {
-                                Log.d("1","error")
-                               var  s = response?.body()
-                                Log.d("2","error")
-                                Toast.makeText(this@Registration, s!!.message, Toast.LENGTH_SHORT).show()
+
+                                Toast.makeText(this@Registration, response.body()?.message, Toast.LENGTH_SHORT).show()
+
                             } else {
-                                Toast.makeText(this@Registration,response!!.body()!!.message, Toast.LENGTH_SHORT).show()
+                               Toast.makeText(this@Registration,"error", Toast.LENGTH_SHORT).show()
                             }
 
                         }catch (e:IOException){
-                            e.printStackTrace()
+                            Toast.makeText(applicationContext,"error",Toast.LENGTH_SHORT).show()
+                           // e.printStackTrace()
                         }
 
                     }
-
-                    override fun onFailure(call: Call<SignUpModel>, t: Throwable)
+                    override fun onFailure(call: Call<SignUpMode>, t: Throwable)
                     {
 
                         Toast.makeText(this@Registration,t.message, Toast.LENGTH_LONG).show()
@@ -179,6 +98,98 @@ class Registration : AppCompatActivity() {
 
             }
         }
+    }
+
+   private fun validation(): Boolean {
+
+        var valid = false
+
+
+        val fname =etFirstName!!.text.toString()
+        val lname = etLastName!!.text.toString()
+        val em = etEmail!!.text.toString()
+        val password = etPassword!!.text.toString()
+        val confirmPassword = etConfirmPassword!!.text.toString()
+        val jt =etJobTitle.text.toString()
+        val cn =etCompanyName!!.text.toString()
+        val cID = etCountryId!!.text.toString()
+        val mo =etMobileNo!!.text.toString()
+
+        var flagFirst = false
+        var flagLast = false
+        var flagEmail = false
+        var flagPassword = false
+        var flagConfirm = false
+        var flagjt=false
+        var flagcn =false
+        var flagCID=false
+        var flagMobile = false
+
+
+        if (fname.isEmpty() || !Nameregex.matches(fname)) {
+            etFirstName!!.error = "Enter a valid First Name"
+        } else {
+            flagFirst = true
+        }
+
+       if (lname.isEmpty() || !Nameregex.matches(lname)) {
+            etLastName!!.error = "Enter a valid Last name"
+        } else {
+            flagLast = true
+        }
+
+       if (!android.util.Patterns.EMAIL_ADDRESS.matcher(em).matches()) {
+            etEmail!!.error = "Enter a valid Email Address"
+            valid = false
+        } else {
+            flagEmail = true
+        }
+
+        if (password.isEmpty() || password.length < 8 || !Passwordregex.matches(password)) {
+
+            etPassword!!.error = "Enter a valid Password"
+        } else {
+            flagPassword = true
+        }
+
+        if (confirmPassword.isEmpty() || confirmPassword.length < 8 || confirmPassword != password) {
+            etConfirmPassword!!.error = "Password Do not match"
+        } else {
+            etConfirmPassword!!.error=null
+            flagConfirm = true
+        }
+
+       if (jt.isEmpty() ||!Nameregex.matches(jt)) {
+
+           etJobTitle!!.error = "Enter a valid job title"
+       } else {
+           flagjt = true
+       }
+
+       if (cn.isEmpty() ||!Nameregex.matches(cn)) {
+
+           etCompanyName!!.error = "Enter a valid company name"
+       } else {
+           flagcn= true
+       }
+
+       if (cID.isEmpty() ||!Numberregex.matches(cID)||cID.length>3) {
+
+           etCountryId!!.error = "Enter a valid company name"
+       } else {
+           flagCID= true
+       }
+
+       if (mo.isEmpty() || mo.length > 15 || !Numberregex.matches(mo)) {
+           etMobileNo!!.error = "Enter a valid MobileNo"
+       } else {
+           flagMobile = true
+       }
+
+        if(flagFirst && flagLast && flagEmail && flagPassword && flagConfirm && flagjt && flagcn && flagCID &&  flagMobile) {
+            valid = true
+        }
+        return valid
     }
 
 }

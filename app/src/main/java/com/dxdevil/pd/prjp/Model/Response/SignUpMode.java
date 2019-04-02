@@ -1,11 +1,10 @@
-
 package com.dxdevil.pd.prjp.Model.Response;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SignUpModel {
+public class SignUpMode {
 
     @SerializedName("message")
     @Expose

@@ -28,12 +28,10 @@
         <activity
                 android:name=".MainActivity"
                 tools:ignore="ExtraText">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
         </activity>
         <activity android:name=".LoginActivity">
+
 
         </activity>
         <activity
@@ -53,7 +51,12 @@
                 android:parentActivityName=".Settings">
         </activity>
         <activity android:name=".ForgotPasswordActivity"/>
-        <activity android:name=".Registration"/>
+        <activity android:name=".Registration">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".PhotoActivity">
         </activity>
         <activity android:name=".Dashboard"/> <!-- <intent-filter> -->
