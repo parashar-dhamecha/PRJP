@@ -2,29 +2,39 @@ package com.dxdevil.pd.prjp;
 
 import com.dxdevil.pd.prjp.Model.Request.ForgotRequest;
 import com.dxdevil.pd.prjp.Model.Request.Login;
-import com.dxdevil.pd.prjp.Model.Request.SignUp;
-import com.dxdevil.pd.prjp.Model.Response.DashboardResponse;
-import com.dxdevil.pd.prjp.Model.Response.ForgotResponse;
-import com.dxdevil.pd.prjp.Model.Response.LoginModel;
-import com.dxdevil.pd.prjp.Model.Response.SignUpMode;
+import com.dxdevil.pd.prjp.Model.Request.Otp;
+import com.dxdevil.pd.prjp.Model.Request.Verify;
+import com.dxdevil.pd.prjp.Model.Response.*;
 import retrofit2.Call;
 import retrofit2.http.*;
 
 public interface Api {
 
 
-    @POST("api/account/login")
+    @POST("account/login")
     Call<LoginModel>login(@Body Login login );
 
-    @POST("api/account/register")
-    Call<SignUpMode>register(@Body SignUp register);
-
-    @POST("api/account/forgot-password")
+    @POST("account/forgot-password")
     Call<ForgotResponse>forgotpass(
             @Body ForgotRequest forgotRequest
             );
-    @GET("api/dashboard/document-counts")
-    Call<DashboardResponse>getDashboard(
-            @Header("Authorization")String Auth
+
+    @GET("dashboard/document-counts")
+    Call<DashboardResponse>getDashboardCouts(
+            @Header("Authorization") String Authorization
     );
+
+    @POST("account/send-login-otp")
+    Call<OtpModel>sendotp(
+            @Header("Authorization") String Authorization,
+            @Body Otp otp
+    );
+
+
+    @POST("account/validate-login-otp")
+    Call<VerifyModel>verifyotp(
+            @Header("Authorization") String Authorization,
+            @Body Verify verifyotp
+            );
+
 }

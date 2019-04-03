@@ -14,22 +14,23 @@ import android.util.Patterns
 import android.widget.EditText
 import android.widget.Toast
 import com.dxdevil.pd.prjp.Model.Request.Login
+import com.dxdevil.pd.prjp.Model.Request.Otp
 import com.dxdevil.pd.prjp.Model.Response.LoginModel
+import com.dxdevil.pd.prjp.Model.Response.OtpModel
 
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Exception
+import java.util.*
 
 
 @SuppressLint("Registered")
 public class LoginActivity : AppCompatActivity() {
 
-    var passpattern: Regex =
-        """^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@${'$'}!%*?&])[A-Za-z\d@${'$'}!%*?&]{8,}${'$'}""".toRegex()
+    var passpattern: Regex = """^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@${'$'}!%*?&])[A-Za-z\d@${'$'}!%*?&]{8,}${'$'}""".toRegex()
     var pref: SharedPreferences? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -54,8 +55,7 @@ public class LoginActivity : AppCompatActivity() {
             if (validateemail() && validatepass()) {
 
                 var pd = ProgressDialog(this)
-                pd.setMessage("Loading...")
-                pd.setTitle("Logging in..")
+                pd.setMessage("Sending Otp..")
                 pd.isIndeterminate = true
                 pd.show()
 
@@ -66,9 +66,9 @@ public class LoginActivity : AppCompatActivity() {
                 call!!.enqueue(object : Callback<LoginModel> {
 
                     override fun onFailure(call: Call<LoginModel>, t: Throwable) {
-                        call.cancel()
                         pd.dismiss()
-                        Toast.makeText(this@LoginActivity, "faliure", Toast.LENGTH_LONG).show()
+                        call.cancel()
+                        Toast.makeText(this@LoginActivity, "check your network connection", Toast.LENGTH_LONG).show()
                     }
 
                     override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
@@ -79,18 +79,54 @@ public class LoginActivity : AppCompatActivity() {
                             try {
 
                                 var lm = response.body()
-                                var t = lm!!.data[0]?.token?.toString()
+                                var t = "Bearer "+ lm!!.data[0]?.token?.toString()
                                 var rt = lm!!.data[0]?.refreshToken?.toString()
 
                                 edpref.putString("Token", t)
                                 edpref.putString("RefreshToken", rt)
+                                edpref.commit()
 
-                                pd.dismiss()
+                                //storing details to preference
+                                if(remembercb.isChecked){
+                                    var detpref = getSharedPreferences("Login Details",0) as SharedPreferences
+                                    var ed = detpref.edit()
+                                    ed.putString("email",edEmail!!.text.toString())
+                                    ed.putString("password",edPassword!!.text.toString())
+                                    ed.putString("rememberflag","0")
+                                    ed?.commit()
 
-                                edpref?.commit()
+                                }
 
-                                startActivity(Intent(this@LoginActivity, Otpactivity::class.java))
-                                Toast.makeText(this@LoginActivity, lm.message.toString(), Toast.LENGTH_LONG).show()
+                                // Sending otp
+                                var api2 = RetrofitClient.getInstance().api as Api
+                                var call2 = api2.sendotp(t, Otp("1")) as Call<OtpModel>
+                                call2.enqueue(object : Callback<OtpModel> {
+                                    override fun onFailure(call: Call<OtpModel>, t: Throwable) {
+                                        call2.cancel()
+                                        pd.dismiss()
+                                        Toast.makeText(
+                                            this@LoginActivity,
+                                            "check your network connection",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+
+                                    }
+
+                                    override fun onResponse(call: Call<OtpModel>, response: Response<OtpModel>) {
+                                        if (response.isSuccessful) {
+                                            pd.dismiss()
+                                            startActivity(Intent(this@LoginActivity, Otpactivity::class.java))
+                                            Toast.makeText(this@LoginActivity, response.body()!!.message.toString(), Toast.LENGTH_LONG).show()
+                                        } else {
+                                            pd.dismiss()
+                                            Toast.makeText(this@LoginActivity, response.body()!!.message.toString(), Toast.LENGTH_LONG).show()
+
+                                        }
+
+
+                                    }
+
+                                })
 
                             } catch (e: Exception) {
                                 Toast.makeText(this@LoginActivity, "exception thrown :$e", Toast.LENGTH_LONG).show()
@@ -109,6 +145,12 @@ public class LoginActivity : AppCompatActivity() {
             }
 
         }
+
+
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 
     fun validateemail(): Boolean {
@@ -137,9 +179,5 @@ public class LoginActivity : AppCompatActivity() {
             return true
         }
 
-    }
-
-  public  fun getsp(): SharedPreferences? {
-        return pref
     }
 }

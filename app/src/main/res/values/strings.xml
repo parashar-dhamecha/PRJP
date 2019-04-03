@@ -144,5 +144,8 @@
     <string name="todo">TODO</string>
     <string name="anoteButton">Annote</string>
     <string name="otp">Verify OTP</string>
+    <string name="Resendotp">Resend Otp</string>
+    <string name="Remembercb">Remember me</string>
+    <string name="Loginanther">have another account..?</string>
 
 </resources>
