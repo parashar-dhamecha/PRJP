@@ -1,12 +1,15 @@
 package com.dxdevil.pd.prjp
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.dxdevil.pd.prjp.Model.Request.SignUp
-import com.dxdevil.pd.prjp.Model.Response.SignUpMode
+import com.dxdevil.pd.prjp.Model.Request.Register.SignUp
+import com.dxdevil.pd.prjp.Model.Response.Register.UserExistResponse
+import com.dxdevil.pd.prjp.Model.Response.Register.SignUpModel
 import kotlinx.android.synthetic.main.activity_registration.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -51,50 +54,98 @@ class Registration : AppCompatActivity() {
             var cID = etCountryId!!.text.toString()
             var mo =etMobileNo!!.text.toString()
 
-            if(validation()) {
-                val api = RetrofitClient.getInstance()!!.api as Api
-                val call =api.register(
-                   SignUp( fname,
+            if(true) {
+
+
+                val pd = ProgressDialog(this)
+                pd.setMessage("Signing Up...")
+                pd.isIndeterminate = true
+                pd.show()
+
+
+
+                var apiR = RetrofitClient.getInstance()!!.api as Api
+                var callR =apiR.register(
+                    SignUp(fname,
                         lname,
                         email,
                         pass,
                         confirmPass,
-                       jt,
+                        jt,
                         cn,
                         cID,
                         mo,
-                       "4.092356",
-                       "-56.062161","Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0 Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0",
-                       "+05:30")
-                   ) as Call<SignUpMode>
+                        "4.092356",
+                        "-56.062161","Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0 Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0",
+                        "+05:30")
+                ) as Call<SignUpModel>
 
-                call.enqueue(object : Callback<SignUpMode> {
+                callR.enqueue(object : Callback<SignUpModel> {
 
-                    override fun onResponse(call: Call<SignUpMode>, response: Response<SignUpMode>) {
+                    override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
 
                         try {
 
                             //Log.e("error",response.body()!!.message.toString())
                             if (response.isSuccessful) {
-
-                                Toast.makeText(this@Registration, response.body()?.message, Toast.LENGTH_SHORT).show()
+                                pd.dismiss()
+                                Toast.makeText(this@Registration, "succes", Toast.LENGTH_SHORT).show()
 
                             } else {
-                               Toast.makeText(this@Registration,"error", Toast.LENGTH_SHORT).show()
+                                pd.dismiss()
+                                Toast.makeText(this@Registration,"error", Toast.LENGTH_SHORT).show()
                             }
 
                         }catch (e:IOException){
                             Toast.makeText(applicationContext,"error",Toast.LENGTH_SHORT).show()
-                           // e.printStackTrace()
+
                         }
 
                     }
-                    override fun onFailure(call: Call<SignUpMode>, t: Throwable)
+                    override fun onFailure(call: Call<SignUpModel>, t: Throwable)
                     {
-
+                        pd.dismiss()
                         Toast.makeText(this@Registration,t.message, Toast.LENGTH_LONG).show()
                     }
                 })
+
+//////////////////// check if user already exist////////////////////////////////////////////////////////////////////////////
+
+//                val api = RetrofitClient.getInstance()!!.api as Api
+//                val call =api.isUserExist(email) as Call<UserExistResponse>
+//
+//                call.enqueue(object : Callback<UserExistResponse> {
+//
+//                    override fun onResponse(call: Call<UserExistResponse>, response: Response<UserExistResponse>) {
+//
+//                        try {
+//
+//                            if (response.isSuccessful) {
+//                                pd.dismiss()
+//
+//                                Toast.makeText(this@Registration, response.body()?.message, Toast.LENGTH_SHORT).show()
+//
+//                            } else {
+//                                pd.dismiss()
+//                                Toast.makeText(this@Registration,"error", Toast.LENGTH_SHORT).show()
+//                            }
+//
+//                        }catch (e:IOException){
+//                            Toast.makeText(applicationContext,"Exception",Toast.LENGTH_SHORT).show()
+//                        }
+//
+//                    }
+//                    override fun onFailure(call: Call<UserExistResponse>, t: Throwable)
+//                    {
+//                        call.cancel()
+//                        pd.dismiss()
+//                        Toast.makeText(this@Registration,"Check your connection", Toast.LENGTH_LONG).show()
+//                    }
+//                })
+//Api code finish////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
             }
         }
