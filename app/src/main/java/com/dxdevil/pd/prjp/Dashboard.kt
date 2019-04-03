@@ -1,5 +1,6 @@
 package com.dxdevil.pd.prjp
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -30,19 +31,24 @@ class Dashboard : AppCompatActivity() {
         drawerLayout.addDrawerListener(ntoggle)
         ntoggle.syncState()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         //Api calling
         var preference = getSharedPreferences("Token", Context.MODE_PRIVATE) as SharedPreferences
+        var tok =preference.getString("Token","")!!.toString() as String?
+
         var dapi = RetrofitClient.getInstance().api as Api
-        var call= dapi.getDashboard(preference.getString("Token","")!!.toString()) as Call<DashboardResponse>
+        var call= dapi.getDashboardCouts(tok) as Call<DashboardResponse>
         call?.enqueue(object : Callback<DashboardResponse>{
 
+
             override fun onFailure(call: Call<DashboardResponse>, t: Throwable) {
-                Toast.makeText(this@Dashboard,"Check your connection",Toast.LENGTH_LONG)
+                call.cancel()
+                Toast.makeText(this@Dashboard,"Check your connection",Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<DashboardResponse>, response: Response<DashboardResponse>) {
                 if(response.isSuccessful){
-                var ob = response.body()
+                var ob = response.body() as DashboardResponse
                     awatingsigntv?.text =ob!!.data[0]!!.awaitingMySign.toString()
                     awatingotherstv?.text = ob!!.data[0]!!.awaitingOthers.toString()
                     completedtv?.text = ob!!.data[0]!!.completed.toString()
@@ -50,7 +56,7 @@ class Dashboard : AppCompatActivity() {
                     Toast.makeText(this@Dashboard,"Success",Toast.LENGTH_LONG).show()
                 }
                 else{
-                    Toast.makeText(this@Dashboard,"error",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@Dashboard,response!!.body()!!.message!!.toString(),Toast.LENGTH_LONG).show()
                 }
             }
         })
@@ -92,6 +98,10 @@ class Dashboard : AppCompatActivity() {
                 return true
             return super.onOptionsItemSelected(item)
         }
+
+    override fun onBackPressed() {
+        finish()
+    }
 }
 
 
