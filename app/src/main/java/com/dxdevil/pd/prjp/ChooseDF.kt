@@ -10,7 +10,10 @@ import androidx.fragment.app.DialogFragment
 import android.view.Gravity
 import android.R.attr.x
 import android.app.Dialog
+import android.content.Intent
 import android.view.WindowManager
+import android.widget.Button
+import android.widget.Toast
 import kotlinx.android.synthetic.main.signpopup.*
 
 
@@ -34,7 +37,28 @@ class ChooseDF : DialogFragment() {
         return inflater.inflate(R.layout.signpopup, container,false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        val draw:Button? = view?.findViewById<View>(R.id.draw_signature) as Button?
+        val photo:Button? = view?.findViewById<View>(R.id.photobutton) as Button?
+        val type:Button?= view?.findViewById<View>(R.id.typebutton) as Button?
+        draw?.setOnClickListener {
+            var intent= Intent(context,DrawSignature::class.java)
+            startActivity(intent)
+        }
+        photo?.setOnClickListener {
+            var intent= Intent(context,PhotoActivity::class.java)
+            startActivity(intent)
+        }
+        type?.setOnClickListener {
+            var intent= Intent(context,Type::class.java)
+            startActivity(intent)
+        }
+
+        popupcancel.setOnClickListener {
+            dialog!!.dismiss()
+        }
+    }
 }
 
 

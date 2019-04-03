@@ -6,12 +6,13 @@
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
+    <string name="sign_up">New User? Register Here</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
-    <string name="username">UserName or Email</string>
+    <string name="username">Email</string>
     <string name="pass">Password</string>
     <string name="open">open</string>
     <string name="close">close</string>
@@ -50,15 +51,15 @@
     <string name="takepic">Take Photo</string>
     <string name="Register">Register</string>
     <string name="get_started">Get Started</string>
-    <string name="AlreadyRegister">Already Registered?</string>
+    <string name="AlreadyRegister">Already Registered? Log In</string>
 
     <!--Reg Page Hints-->
-    <string name="fname">First Name</string>
-    <string name="lname">Last Name</string>
-    <string name="email">E-Mail</string>
-    <string name="phone">Phone Number</string>
-    <string name="passwd">Password</string>
-    <string name="cpasswd">Confirm Password</string>
+    <string name="fname">First Name*</string>
+    <string name="lname">Last Name*</string>
+    <string name="EmailId">Email Id*</string>
+    <string name="phone">Mobile No*</string>
+    <string name="passwd">Password*</string>
+    <string name="cpasswd">Confirm Password*</string>
     <string name="aw_sign">Awaiting My Sign</string>
     <string name="button_clear">clear</string>
     <string name="savebutton">Save</string>
@@ -68,17 +69,19 @@
     <string name="signature">Signature</string>
     <string name="upload">Upload Document</string>
 
+
     <!-- Profile Page Strings-->
+    <string name="prf_title">Profile</string>
     <string name="Username">Robert Downey</string>
     <string name="Signature">Signature</string>
     <string name="useremail">robertdownyjr89@gmail.com</string>
     <string name="Info">Info</string>
     <string name="mail_image">Mail Image</string>
-    <string name="profession">Profession</string>
+    <string name="profession">Profession:</string>
     <string name="profession_value">Android Developer</string>
-    <string name="Company">Company</string>
+    <string name="Company">Company:</string>
     <string name="Company_value">Cygnet</string>
-    <string name="Phone">Phone</string>
+    <string name="Phone">Phone:</string>
     <string name="Phone_value">9865457825</string>
 
     <!-- contacts strings-->
@@ -90,15 +93,20 @@
         <item>yogita</item>
     </string-array>
 
+    <!-- Notification -->
+    <string name="notification_title">Notifications</string>
     <!-- Contacts-->
+
 
     <string name="MobileNo">Mobile No</string>
     <string name="JobTitle">JobTitle</string>
     <string name="JobDescription">Job Description</string>
     <string name="Search">Search</string>
     <string name="CreateContact">Create Contact</string>
+
     <string name="CreateGroup">Create Group</string>
     <!-- Edit Profile Page Strings-->
+    <string name="edit_title">Edit Profile</string>
     <string name="Image_des">User_image</string>
     <string name="First_Name">First Name</string>
     <string name="Last_Name">Last Name</string>
@@ -129,5 +137,13 @@
     <string name="Job_title">Job Title</string>
     <string name="Job_Description">Job Description</string>
     <string name="Name">Name</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+    <string name="todo">TODO</string>
+    <string name="anoteButton">Annote</string>
+    <string name="otp">Verify OTP</string>
+    <string name="Resendotp">Resend Otp</string>
+    <string name="Remembercb">Remember me</string>
+    <string name="Loginanther">have another account..?</string>
 
 </resources>

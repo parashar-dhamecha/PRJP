@@ -9,7 +9,7 @@ public class Login {
         this.password = password;
     }
 
-   @SerializedName("email")
+    @SerializedName("email")
     @Expose
     private String email;
     @SerializedName("password")

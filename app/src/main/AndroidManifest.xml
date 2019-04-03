@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="CODE_WRITE_EXTERNAL_STORAGE_PERMISSION"/>
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <uses-feature android:name="android.hardware.camera2"/>
 
@@ -21,8 +23,11 @@
         </activity>
         <activity android:name=".PhotoActivity"/>
         <activity android:name=".AddContact">
+        <activity android:name=".Otpactivity" >
         </activity>
-        <activity android:name=".EditProfile">
+        <activity android:name=".SetAnnotation">
+        </activity>
+        <activity android:name=".Type">
         </activity>
         <activity
                 android:name=".AddGroup"
@@ -40,19 +45,48 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".LoginActivity">
+
+        </activity>
+        <activity
+                android:name=".ProfileActivity"
+                android:label="@string/prf_title"
+                android:parentActivityName=".Settings">
         <activity android:name=".ChangePassword">
         </activity>
+        <activity
+                android:name=".EditProfile"
+                android:label="@string/edit_title"
+                android:parentActivityName=".ProfileActivity">
         <activity android:name=".MainActivity">
         </activity>
+        <activity android:name=".Settings">
+        </activity>
+        <activity
+                android:name=".ChangePassword"
+                android:parentActivityName=".Settings">
         <activity android:name=".LoginActivity">
         </activity>
         <activity android:name=".ForgotPasswordActivity"/>
+        <activity android:name=".Registration"/>
+        <activity android:name=".PhotoActivity">
+        </activity>
+        <activity android:name=".Dashboard"/> <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN"/> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+        <!-- </intent-filter> -->
         <activity android:name=".Dashboard"/>
         <activity
                 android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
                 android:theme="@style/Base.Theme.AppCompat"/>
         <activity android:name=".Registration"/>
         <activity android:name=".DrawSignature"/>
+
+        <activity
+                android:name=".PhotoActivity"
+                tools:ignore="DuplicateActivity"/>
+        <activity android:name=".Contacts">
+        </activity>
         <activity android:name=".ResetPasswordActivity">
         </activity>
         <activity
