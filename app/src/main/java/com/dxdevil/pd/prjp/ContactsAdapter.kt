@@ -41,7 +41,7 @@ class ContactsAdapter(private val context: Context, private val Con: ArrayList<C
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var name: TextView = itemView.findViewById(R.id.name) as TextView
         var pro: ImageView = itemView.findViewById(R.id.pro) as ImageView
-        var del: Button = itemView.findViewById(R.id.del)
+        var del: Button = itemView.findViewById(R.id.del) as Button
 
     }
 }

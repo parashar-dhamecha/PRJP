@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_add_group.*
 import kotlinx.android.synthetic.main.activity_group.*
 
 class GroupActivity : AppCompatActivity() {
