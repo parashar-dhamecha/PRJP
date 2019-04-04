@@ -4,12 +4,11 @@ import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.dxdevil.pd.prjp.Model.Request.Register.SignUp
-import com.dxdevil.pd.prjp.Model.Response.Register.UserExistResponse
-import com.dxdevil.pd.prjp.Model.Response.Register.SignUpModel
+import com.dxdevil.pd.prjp.Model.Request.SignUp
+import com.dxdevil.pd.prjp.Model.Response.SignUpModel
+import com.dxdevil.pd.prjp.Model.Response.UserExistResponse
 import kotlinx.android.synthetic.main.activity_registration.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,17 +43,18 @@ class Registration : AppCompatActivity() {
         btregister!!.setOnClickListener {
 
 
-            var fname=etFirstName!!.text.toString()
-            var lname=etLastName!!.text.toString()
-            var email= etEmail!!.text.toString()
-            var pass =etPassword!!.text.toString()
-            var confirmPass =etConfirmPassword!!.text.toString()
-            var jt = etJobTitle!!.text.toString()
-            var cn =etCompanyName!!.text.toString()
-            var cID = etCountryId!!.text.toString()
-            var mo =etMobileNo!!.text.toString()
+            val fname=etFirstName!!.text.toString()
+            val lname=etLastName!!.text.toString()
+            val email= etEmail!!.text.toString()
+            val pass =etPassword!!.text.toString()
+            val confirmPass =etConfirmPassword!!.text.toString()
+            val jt = etJobTitle!!.text.toString()
+            val cn =etCompanyName!!.text.toString()
+            val cID = etCountryId!!.text.toString()
+            val mo =etMobileNo!!.text.toString()
 
-            if(true) {
+
+            if(validation()) {
 
 
                 val pd = ProgressDialog(this)
@@ -63,33 +63,71 @@ class Registration : AppCompatActivity() {
                 pd.show()
 
 
+//////////////////// check if user already exist////////////////////////////////////////////////////////////////////////////
 
-                var apiR = RetrofitClient.getInstance()!!.api as Api
-                var callR =apiR.register(
-                    SignUp(fname,
-                        lname,
-                        email,
-                        pass,
-                        confirmPass,
-                        jt,
-                        cn,
-                        cID,
-                        mo,
-                        "4.092356",
-                        "-56.062161","Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0 Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0",
-                        "+05:30")
-                ) as Call<SignUpModel>
+                val api = RetrofitClient.getInstance()!!.api as Api
+                val call1 =api.isUserExist(email) as Call<UserExistResponse>
 
-                callR.enqueue(object : Callback<SignUpModel> {
+                call1.enqueue(object : Callback<UserExistResponse> {
 
-                    override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
+                    override fun onResponse(call: Call<UserExistResponse>, response: Response<UserExistResponse>) {
 
                         try {
 
-                            //Log.e("error",response.body()!!.message.toString())
                             if (response.isSuccessful) {
-                                pd.dismiss()
-                                Toast.makeText(this@Registration, "succes", Toast.LENGTH_SHORT).show()
+                                //pd.dismiss()
+
+                                if(response.body()!!.data[0]==true){
+                                    pd.dismiss()
+                                    Toast.makeText(this@Registration,response.body()!!.message, Toast.LENGTH_SHORT).show()}
+                                else{
+                                    val apiReg = RetrofitClient.getInstance().api as Api
+                                    val call2= apiReg.register(
+                                        SignUp(fname,
+                                            lname,
+                                            email,
+                                            pass,
+                                            confirmPass,
+                                            jt,
+                                            cn,
+                                            cID,
+                                            mo,
+                                            "4.092356",
+                                            "-56.062161",
+                                            "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0 Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0",
+                                            "+05:30")
+                                    ) as Call<SignUpModel>
+
+                                    call2.enqueue(object : Callback<SignUpModel> {
+
+                                        override fun onResponse(call: Call<SignUpModel>, response: Response<SignUpModel>) {
+
+                                            try {
+
+                                                //Log.e("error",response.body()!!.message.toString())
+                                                if (response.isSuccessful) {
+                                                    pd.dismiss()
+                                                    Toast.makeText(this@Registration, response.body()!!.message, Toast.LENGTH_SHORT).show()
+
+                                                } else {
+                                                    pd.dismiss()
+                                                    Toast.makeText(this@Registration,"error", Toast.LENGTH_SHORT).show()
+                                                }
+
+                                            }catch (e: IOException){
+                                                Toast.makeText(applicationContext,"Exceprtion",Toast.LENGTH_SHORT).show()
+
+                                            }
+
+                                        }
+                                        override fun onFailure(call: Call<SignUpModel>, t: Throwable)
+                                        {
+                                            pd.dismiss()
+                                            Toast.makeText(this@Registration,"Something went wrong. Try again", Toast.LENGTH_LONG).show()
+                                        }
+                                    })
+
+                                }
 
                             } else {
                                 pd.dismiss()
@@ -97,61 +135,24 @@ class Registration : AppCompatActivity() {
                             }
 
                         }catch (e:IOException){
-                            Toast.makeText(applicationContext,"error",Toast.LENGTH_SHORT).show()
-
+                            Toast.makeText(applicationContext,"Exception",Toast.LENGTH_SHORT).show()
                         }
 
                     }
-                    override fun onFailure(call: Call<SignUpModel>, t: Throwable)
+                    override fun onFailure(call: Call<UserExistResponse>, t: Throwable)
                     {
+                        call.cancel()
                         pd.dismiss()
-                        Toast.makeText(this@Registration,t.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@Registration,"Check your connection", Toast.LENGTH_LONG).show()
                     }
                 })
-
-//////////////////// check if user already exist////////////////////////////////////////////////////////////////////////////
-
-//                val api = RetrofitClient.getInstance()!!.api as Api
-//                val call =api.isUserExist(email) as Call<UserExistResponse>
-//
-//                call.enqueue(object : Callback<UserExistResponse> {
-//
-//                    override fun onResponse(call: Call<UserExistResponse>, response: Response<UserExistResponse>) {
-//
-//                        try {
-//
-//                            if (response.isSuccessful) {
-//                                pd.dismiss()
-//
-//                                Toast.makeText(this@Registration, response.body()?.message, Toast.LENGTH_SHORT).show()
-//
-//                            } else {
-//                                pd.dismiss()
-//                                Toast.makeText(this@Registration,"error", Toast.LENGTH_SHORT).show()
-//                            }
-//
-//                        }catch (e:IOException){
-//                            Toast.makeText(applicationContext,"Exception",Toast.LENGTH_SHORT).show()
-//                        }
-//
-//                    }
-//                    override fun onFailure(call: Call<UserExistResponse>, t: Throwable)
-//                    {
-//                        call.cancel()
-//                        pd.dismiss()
-//                        Toast.makeText(this@Registration,"Check your connection", Toast.LENGTH_LONG).show()
-//                    }
-//                })
-//Api code finish////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             }
         }
     }
 
-   private fun validation(): Boolean {
+    private fun validation(): Boolean {
 
         var valid = false
 
@@ -244,4 +245,6 @@ class Registration : AppCompatActivity() {
     }
 
 }
+
+
 

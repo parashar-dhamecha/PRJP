@@ -1,17 +1,17 @@
 package com.dxdevil.pd.prjp;
 
 import com.dxdevil.pd.prjp.Model.Request.*;
-import com.dxdevil.pd.prjp.Model.Request.Register.SignUp;
+import com.dxdevil.pd.prjp.Model.Request.SignUp;
 import com.dxdevil.pd.prjp.Model.Response.*;
-import com.dxdevil.pd.prjp.Model.Response.Register.SignUpModel;
-import com.dxdevil.pd.prjp.Model.Response.Register.UserExistResponse;
+import com.dxdevil.pd.prjp.Model.Response.SignUpModel;
+import com.dxdevil.pd.prjp.Model.Response.UserExistResponse;
 import retrofit2.Call;
 import retrofit2.http.*;
 
 public interface Api {
 
     @POST("account/register")
-    Call<SignUpModel>register(SignUp signup);
+    Call<SignUpModel>register(@Body  SignUp signUp);
 
 
     @GET("account/check-user-exists/{id}")
