@@ -45,4 +45,10 @@ public interface Api {
             @Body Verify verifyotp
             );
 
+    @POST("user/change-password")
+    Call<ChangePasswordModel>changepassword(
+            @Header("Authorization") String Authorization,
+            @Body ChangePasswordRequest request
+    );
+
 }

@@ -14,6 +14,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
+import java.util.*
 
 
 val Passwordregex = """^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@${'$'}!%*?&])[A-Za-z\d@${'$'}!%*?&]{8,}${'$'}""".toRegex()
@@ -35,7 +36,8 @@ class Registration : AppCompatActivity() {
 
 
 
-        loginlink!!.setOnClickListener{
+
+        loginlink!!.setOnClickListener{                                //link to the login activity
             startActivity(Intent(this@Registration, LoginActivity::class.java))
         }
 
