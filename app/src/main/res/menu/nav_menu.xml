@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
+      tools:ignore="ExtraText">
     <item
-    android:id="@+id/item1"
+    android:id="@+id/dashboard"
     android:icon="@color/digitbg"
     android:title="@string/dashboard"/>
     <item
-            android:id="@+id/item2"
+            android:id="@+id/documents"
             android:icon="@color/digitbg"
             android:title="@string/documents"/>
     <item
-            android:id="@+id/item3"
+            android:id="@+id/editsignature"
             android:icon="@color/digitbg"
             android:title="@string/editsign"/>
     <item
-            android:id="@+id/item4"
+            android:id="@+id/contacts"
             android:icon="@color/digitbg"
             android:title="@string/contacts"/>
     <item
-            android:id="@+id/item5"
-            android:icon="@color/digitbg"
+            android:id="@+id/settings"
+           android:icon="@drawable/ic_menu_manage"
             android:title="@string/settings"/>
     <item
-            android:id="@+id/item6"
+            android:id="@+id/logout"
             android:icon="@color/digitbg"
             android:title="@string/logout"/>
 </menu>

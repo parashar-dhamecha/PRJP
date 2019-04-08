@@ -1,9 +1,6 @@
 package com.dxdevil.pd.prjp;
 
-import com.dxdevil.pd.prjp.Model.Request.ForgotRequest;
-import com.dxdevil.pd.prjp.Model.Request.Login;
-import com.dxdevil.pd.prjp.Model.Request.Otp;
-import com.dxdevil.pd.prjp.Model.Request.Verify;
+import com.dxdevil.pd.prjp.Model.Request.*;
 import com.dxdevil.pd.prjp.Model.Response.*;
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -37,4 +34,19 @@ public interface Api {
             @Body Verify verifyotp
             );
 
+    @POST("user/update-signature")
+    Call<UpdateSignatureModel>updatesignature(
+            @Header("Authorization") String Authorization,
+            @Body UpdateSignature updateSignature
+            );
+
+    @GET("user/profile")
+    Call<ProfileModel>getprofiledetails(
+            @Header("Authorization") String Authorization
+    );
+
+    @POST("account/refresh-token")
+    Call<RefreshTokenModel>refreshtoken(
+         @Body RefreshToken refreshtoken
+    );
 }

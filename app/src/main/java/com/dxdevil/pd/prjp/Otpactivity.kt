@@ -17,7 +17,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.alimuzaffar.lib.pin.PinEntryEditText
-import kotlinx.android.synthetic.main.activity_otpactivity.view.*
 
 
 class Otpactivity : AppCompatActivity() {
@@ -60,7 +59,7 @@ class Otpactivity : AppCompatActivity() {
                        }
                        else{
                            pd.dismiss()
-                           startActivity(Intent(applicationContext,Dashboard::class.java))
+                           startActivity(Intent(applicationContext,Dashboarrd::class.java))
                            Toast.makeText(this@Otpactivity, "Successfully logged in ", Toast.LENGTH_LONG).show()
                        }
 

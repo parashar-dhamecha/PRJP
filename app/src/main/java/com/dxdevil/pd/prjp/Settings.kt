@@ -12,7 +12,7 @@ class Settings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        cardView.setOnClickListener {
+        myaccountcv.setOnClickListener {
             startActivity(Intent(applicationContext,ProfileActivity::class.java))
         }
 

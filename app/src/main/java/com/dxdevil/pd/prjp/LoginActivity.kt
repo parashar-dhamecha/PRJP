@@ -93,7 +93,11 @@ public class LoginActivity : AppCompatActivity() {
                                     ed.putString("password",edPassword!!.text.toString())
                                     ed.putString("rememberflag","0")
                                     ed?.commit()
-
+                                }
+                                else{
+                                    var detpref = getSharedPreferences("Login Details",0) as SharedPreferences
+                                    var ed = detpref.edit()
+                                    ed.putString("rememberflag","1")
                                 }
 
                                 // Sending otp
@@ -149,7 +153,7 @@ public class LoginActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        finish()
+        this@LoginActivity.finish()
     }
 
     fun validateemail(): Boolean {
