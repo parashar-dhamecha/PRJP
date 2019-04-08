@@ -19,40 +19,25 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity
-                android:name=".Dashboarrd"
-                android:label="@string/title_activity_dashboarrd"
-                android:theme="@style/AppTheme">
-
-        </activity>
         <activity android:name=".PhotoActivity"/>
         <activity android:name=".AddContact"/>
-        <activity android:name=".Otpactivity" >
+
         <activity android:name=".Otpactivity">
         </activity>
         <activity android:name=".SetAnnotation">
         </activity>
 
-        <activity
-                android:name=".MainActivity"
-                tools:ignore="ExtraText">
-
-
-
-        </activity>
-        <activity android:name=".LoginActivity">
+         <activity android:name=".LoginActivity">
         </activity>
         <activity
                 android:name=".ProfileActivity"
                 android:label="@string/prf_title"
-                android:parentActivityName=".Settings">
                 android:parentActivityName=".Settings"/>
         <activity android:name=".ChangePassword">
         </activity>
         <activity
                 android:name=".EditProfile"
                 android:label="@string/edit_title"
-                android:parentActivityName=".ProfileActivity">
                 android:parentActivityName=".ProfileActivity"/>
         <activity android:name=".MainActivity">
 
@@ -65,20 +50,12 @@
         </activity>
         <activity android:name=".Settings">
         </activity>
-        <activity
-                android:name=".ChangePassword"
-                android:parentActivityName=".Settings">
-        </activity>
 
 
         <activity android:name=".ForgotPasswordActivity"/>
         <activity android:name=".Registration">
 
         </activity>
-        <activity android:name=".Dashboard"/> <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MAIN"/> -->
-        <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-        <!-- </intent-filter> -->
 
         <activity
                 android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
