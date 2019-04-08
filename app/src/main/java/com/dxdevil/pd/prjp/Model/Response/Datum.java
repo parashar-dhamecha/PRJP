@@ -1,6 +1,6 @@
 
 package com.dxdevil.pd.prjp.Model.Response;
-
+// This class is for log in
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

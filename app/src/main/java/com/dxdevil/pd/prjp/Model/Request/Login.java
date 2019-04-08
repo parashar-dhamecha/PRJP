@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Login {
+
     public Login(String email, String password) {
         this.email = email;
         this.password = password;

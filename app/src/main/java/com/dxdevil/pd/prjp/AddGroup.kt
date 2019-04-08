@@ -5,11 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
+import android.widget.AdapterView
 import android.widget.CheckBox
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_add_group.*
-
 import kotlinx.android.synthetic.main.grp.*
 
 class AddGroup : AppCompatActivity(), ItemClickListener {
@@ -41,7 +41,6 @@ class AddGroup : AppCompatActivity(), ItemClickListener {
             }
 
             // send group member name to next activity groupActivity
-
 
 
             val intent = Intent(this,GroupActivity::class.java)
@@ -79,9 +78,7 @@ class AddGroup : AppCompatActivity(), ItemClickListener {
         recyclerView.layoutManager = layoutManager
 
 
-
-        recyclerView!!.adapter = AddGroupAdapter(this,contactList,this)
-
+        recyclerView!!.adapter = AddGroupAdapter(this, contactList, this)
 
     }
 

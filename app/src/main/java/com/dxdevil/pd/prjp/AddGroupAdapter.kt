@@ -1,16 +1,16 @@
-
 package com.dxdevil.pd.prjp
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.dxdevil.pd.prjp.R
+import android.widget.CheckBox
 
-public class AddGroupAdapter() : RecyclerView.Adapter<AddGroupAdapter.ViewHolder>() {
+
+ class AddGroupAdapter() : RecyclerView.Adapter<AddGroupAdapter.ViewHolder>() {
     private lateinit var context: Context
     private lateinit var onItemClickListener: ItemClickListener
     private lateinit var Con: ArrayList<ContactModel>
@@ -56,10 +56,9 @@ public class AddGroupAdapter() : RecyclerView.Adapter<AddGroupAdapter.ViewHolder
         var pro: ImageView = itemView.findViewById(R.id.pro)
         var checkbox: CheckBox = itemView.findViewById(R.id.checkbox)
 
+        init {
 
-    }
-    init{
-
+        }
 
     }
 }
