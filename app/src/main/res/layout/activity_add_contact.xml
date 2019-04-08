@@ -10,8 +10,22 @@
         tools:context=".AddContact">
 
     <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/code"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/Email">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/CountryCode"
+                android:id="@+id/etcode"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
-            android:layout_height="52dp"
+            android:layout_height="wrap_content"
             android:id="@+id/Name"
             app:hintTextAppearance="@style/MyHintText"
             app:errorEnabled="true"
@@ -27,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:theme="@style/MyEditText"
                 android:hint="@string/Name"
+                android:id="@+id/etName"
                 android:layout_margin="@dimen/dp5"
                 android:inputType="text"/>
 
@@ -35,7 +50,7 @@
     <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
             app:hintTextAppearance="@style/MyHintText"
-            android:layout_height="52dp"
+            android:layout_height="wrap_content"
             android:id="@+id/Email"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,6 +67,7 @@
                 android:theme="@style/MyEditText"
                 android:layout_margin="@dimen/dp5"
                 android:hint="@string/EmailId"
+                android:id="@id/etEmail"
                 android:inputType="textEmailAddress"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -59,22 +75,21 @@
     <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
             app:hintTextAppearance="@style/MyHintText"
-            android:layout_height="52dp"
+            android:layout_height="wrap_content"
             android:id="@+id/MobileNo"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.526"
-            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/Email">
+            app:layout_constraintTop_toBottomOf="@+id/Email"
+            app:layout_constraintStart_toEndOf="@+id/code" android:layout_marginStart="24dp">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/MyEditText"
                 android:hint="@string/MobileNo"
+                android:id="@+id/etMobileNo"
                 android:layout_margin="@dimen/dp5"
                 android:inputType="text"/>
 
@@ -83,7 +98,7 @@
     <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
             app:hintTextAppearance="@style/MyHintText"
-            android:layout_height="52dp"
+            android:layout_height="wrap_content"
             android:id="@+id/JobTitle"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -99,6 +114,7 @@
                 android:theme="@style/MyEditText"
                 android:layout_margin="@dimen/dp5"
                 android:hint="@string/JobTitle"
+                android:id="@+id/etJobTitle"
                 android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -106,7 +122,7 @@
     <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
             app:hintTextAppearance="@style/MyHintText"
-            android:layout_height="52dp"
+            android:layout_height="wrap_content"
             android:id="@+id/JobDescription"
             app:errorEnabled="true"
             app:layout_constraintStart_toStartOf="parent"
@@ -122,6 +138,7 @@
                 android:layout_margin="@dimen/dp5"
                 android:theme="@style/MyEditText"
                 android:hint="@string/JobDescription"
+                android:id="@+id/etJobDescription"
                 android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>

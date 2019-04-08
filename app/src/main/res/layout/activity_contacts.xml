@@ -6,42 +6,36 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
 
-    <EditText
-            android:layout_width="195dp"
-            android:layout_height="37dp"
-            android:ems="10"
-            android:hint="@string/Search"
-            android:padding="@dimen/dp10"
-            android:drawableLeft="@drawable/searchicon"
-            android:id="@+id/editText4"
-            android:inputType="text" android:layout_marginTop="40dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/adduser" app:layout_constraintHorizontal_bias="0.0"/>
+    <androidx.appcompat.widget.SearchView android:layout_width="220dp"
+                                          android:id="@+id/search"
+                                          android:layout_height="wrap_content"
+                                          tools:ignore="MissingConstraints"
+                                          android:layout_marginTop="8dp"
+                                          app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+                                          app:layout_constraintBottom_toTopOf="@+id/r1"
+                                          app:layout_constraintStart_toStartOf="parent"
+                                          android:layout_marginStart="8dp"
+                                          app:layout_constraintVertical_bias="0.259" android:layout_marginEnd="8dp"
+                                          app:layout_constraintEnd_toStartOf="@+id/adduser"
+                                          app:layout_constraintHorizontal_bias="0.176">
+
+    </androidx.appcompat.widget.SearchView>
     <Button
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="50dp"
+            android:layout_height="54dp"
             android:background="@drawable/ic_person_add_black_24dp"
             android:id="@+id/adduser"
-            android:layout_marginTop="40dp"
-            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginTop="16dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toStartOf="@+id/grp"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginEnd="24dp"/>
     <Button
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="50dp"
+            android:layout_height="54dp"
             android:background="@drawable/ic_group_add_black_24dp"
             android:id="@+id/grp"
-            android:layout_marginTop="40dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toStartOf="@+id/bulkimport"
-            android:layout_marginEnd="16dp"/>
-    <Button
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_folder_black_24dp"
-            android:id="@+id/bulkimport"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp" android:layout_marginTop="40dp" app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"/>
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/r1"
             android:layout_width="390dp"

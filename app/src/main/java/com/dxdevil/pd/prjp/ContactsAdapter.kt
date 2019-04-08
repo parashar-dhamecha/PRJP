@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 
-class ContactsAdapter(private val context: Context, private val Con: ArrayList<ContactModel>) :
+class ContactsAdapter(private val context: Context, private var Con: ArrayList<ContactModel>) :
     RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
 
@@ -34,6 +34,12 @@ class ContactsAdapter(private val context: Context, private val Con: ArrayList<C
 
 
         }
+
+       /* fun setContactsListItems(Con: ArrayList<ContactModel>)
+        {
+            this.Con=Con
+            notifyDataSetChanged()
+        }*/
 
 
     }

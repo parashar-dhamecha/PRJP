@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.alimuzaffar.lib.pin.PinEntryEditText
 import com.dxdevil.pd.prjp.Model.Request.Otp
 import com.dxdevil.pd.prjp.Model.Request.Verify
 import com.dxdevil.pd.prjp.Model.Response.OtpModel
@@ -16,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_otpactivity.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.alimuzaffar.lib.pin.PinEntryEditText
 import kotlinx.android.synthetic.main.activity_otpactivity.view.*
 
 
@@ -35,7 +35,8 @@ class Otpactivity : AppCompatActivity() {
         }
 
 
-       txt_pin_entry.setOnPinEnteredListener(PinEntryEditText.OnPinEnteredListener { str ->
+       txt_pin_entry.setOnPinEnteredListener(PinEntryEditText.OnPinEnteredListener {
+        str ->
            var pd = ProgressDialog(this)
            pd.setMessage("Verifying Otp..")
            pd.isIndeterminate = true
@@ -66,7 +67,7 @@ class Otpactivity : AppCompatActivity() {
 
                    }else{
                        pd.dismiss()
-                       txt_pin_entry.clearComposingText()
+                      // txt_pin_entry.clearComposingText()
                        Toast.makeText(this@Otpactivity, response.body()!!.message.toString(), Toast.LENGTH_LONG).show()
                    }
                }
@@ -75,7 +76,7 @@ class Otpactivity : AppCompatActivity() {
 
 
         resend_otp_button!!.setOnClickListener{
-            txt_pin_entry.text = null
+           // txt_pin_entry.text = null
             var pd = ProgressDialog(this)
             pd.setMessage("Resending otp...")
             pd.isIndeterminate = true
@@ -107,10 +108,9 @@ class Otpactivity : AppCompatActivity() {
 
 
                 }
+            }) }
 
-            })
 
-        }
 
 
     }
