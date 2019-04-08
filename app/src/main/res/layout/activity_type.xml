@@ -24,7 +24,7 @@
             app:layout_constraintHorizontal_bias="0.23" android:layout_marginTop="72dp"
             app:layout_constraintTop_toTopOf="parent"/>
     <ScrollView android:layout_width="match_parent"
-                android:layout_height="@dimen/dp250" android:id="@+id/idscrollview"
+                android:layout_height="@dimen/dp200" android:id="@+id/idscrollview"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="@dimen/dp5"
                 android:layout_marginEnd="@dimen/dp100"
@@ -94,7 +94,7 @@
             android:id="@+id/finalsigntv" android:layout_marginTop="@dimen/dp40"
             android:layout_marginRight="@dimen/dp10"
             android:layout_marginLeft="@dimen/dp10"
-            android:paddingTop="@dimen/dp40"
+            android:paddingTop="@dimen/dp20"
             android:paddingBottom="@dimen/dp40"
             android:paddingLeft="@dimen/dp10"
             android:paddingRight="@dimen/dp10"
@@ -103,12 +103,19 @@
             android:textAlignment="center"
             app:layout_constraintTop_toBottomOf="@+id/idscrollview" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
-    <ImageView android:layout_width="match_parent" android:layout_height="100dp"
-               android:layout_margin="@dimen/dp10"
-               android:id="@+id/tvimageview"
-               app:layout_constraintTop_toBottomOf="@+id/finalsigntv" app:layout_constraintStart_toStartOf="parent"
-               />
 
-
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/savebutton"
+            android:layout_margin="@dimen/dp20"
+            android:id="@+id/typesavebutton"
+            android:layout_marginTop="8dp"
+            android:padding="@dimen/dp20"
+            android:background="@drawable/custbutton"
+            app:layout_constraintTop_toBottomOf="@+id/finalsigntv"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

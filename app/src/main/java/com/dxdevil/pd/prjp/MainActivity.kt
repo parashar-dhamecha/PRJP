@@ -27,12 +27,12 @@ class MainActivity : AppCompatActivity() {
             var detpreference = getSharedPreferences("Login Details",0)
             var flag = detpreference.getString("rememberflag","0")
 
-
             if(flag=="0"){
                 var email = detpreference.getString("email","")
                 var pass = detpreference.getString("password","")
 
                 var pd = ProgressDialog(this)
+                pd.setTitle("Logging you in...")
                 pd.setMessage("Sending Otp..")
                 pd.isIndeterminate = true
                 pd.show()

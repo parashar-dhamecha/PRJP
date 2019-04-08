@@ -60,6 +60,8 @@
     <string name="phone">Mobile No*</string>
     <string name="passwd">Password*</string>
     <string name="cpasswd">Confirm Password*</string>
+    <string name="company_name">Company Name</string>
+    <string name="country_id">Country Id</string>
     <string name="aw_sign">Awaiting My Sign</string>
     <string name="button_clear">clear</string>
     <string name="savebutton">Save</string>
@@ -148,5 +150,9 @@
     <string name="Resendotp">Resend Otp</string>
     <string name="Remembercb">Remember me</string>
     <string name="Loginanther">have another account..?</string>
+    <string name="title_activity_dashboarrd">Dashboarrd</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
 
 </resources>

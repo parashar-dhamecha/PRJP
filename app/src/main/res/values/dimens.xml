@@ -34,4 +34,7 @@
     <dimen name="dp200">200dp</dimen>
     <dimen name="sp34">34sp</dimen>
     <dimen name="sp40">40sp</dimen>
+    <dimen name="dp1">1dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
 </resources>

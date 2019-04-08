@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.dxdevil.pd.prjp.Model.Response.DashboardResponse
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -18,9 +19,37 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Exception
+import com.google.android.material.navigation.NavigationView
 
 
-class Dashboard : AppCompatActivity() {
+
+
+class Dashboard : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener{
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            R.id.dashboard -> {
+            }
+            R.id.editsignature -> {
+            }
+            R.id.documents-> {
+            }
+            R.id.contacts -> {
+            }
+            R.id.settings -> {
+                Toast.makeText(this@Dashboard,"settings",Toast.LENGTH_LONG)
+                startActivity(Intent(applicationContext,Settings::class.java))
+                return true
+            }
+            R.id.logout ->{
+
+            }
+        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var ntoggle: ActionBarDrawerToggle
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +91,6 @@ class Dashboard : AppCompatActivity() {
         })
 
 
-
         uploadcv.setOnClickListener { view ->
            startActivity(Intent(applicationContext,SetAnnotation::class.java))
         }
@@ -89,6 +117,7 @@ class Dashboard : AppCompatActivity() {
             }
         }
 
+
     }
 
 
@@ -96,13 +125,16 @@ class Dashboard : AppCompatActivity() {
         override fun onOptionsItemSelected(item: MenuItem?): Boolean {
             if(ntoggle.onOptionsItemSelected(item))
                 return true
+
             return super.onOptionsItemSelected(item)
         }
 
     override fun onBackPressed() {
-        finish()
+        this@Dashboard.finish()
     }
 }
+
+
 
 
 

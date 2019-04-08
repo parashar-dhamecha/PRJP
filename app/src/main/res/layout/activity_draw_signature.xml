@@ -6,12 +6,13 @@
     <com.dxdevil.pd.prjp.PaintView android:layout_width="match_parent" android:layout_height="203dp"
                                    tools:ignore="MissingConstraints"
                                    android:foregroundGravity="center"
+                                   android:background="@drawable/edit_round"
                                    android:id="@+id/paintviewid"
                                    android:elevation="@dimen/dp5"
                                    android:layout_margin="@dimen/dp10"
                                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                                   app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="28dp"
+                                   app:layout_constraintHorizontal_bias="0.333" android:layout_marginTop="8dp"
                                    app:layout_constraintTop_toBottomOf="@+id/textView7"/>
     <TextView
             android:text="@string/drawsig"
@@ -39,12 +40,29 @@
             android:layout_width="@dimen/dp80"
             android:layout_height="@dimen/dp80"
             android:background="@drawable/custbutton"
-            android:id="@+id/clearButtonid" android:layout_marginTop="60dp"
-
-            app:layout_constraintTop_toBottomOf="@+id/paintviewid" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/saveButtonid"
-            android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.475"
+            android:id="@+id/clearButtonid"
+            android:layout_marginTop="60dp"
+            app:layout_constraintTop_toBottomOf="@+id/paintviewid"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/saveButtonid"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.475"
             app:layout_constraintVertical_bias="0.064"/>
+    <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp30"
+            android:layout_marginRight="@dimen/dp10"
+            android:layout_marginLeft="@dimen/dp10"
+            android:scaleType="fitCenter"
+            android:id="@+id/displaysingniv"
+            android:background="@color/edittext"
+            app:layout_constraintTop_toBottomOf="@+id/clearButtonid"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
