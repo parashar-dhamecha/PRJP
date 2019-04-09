@@ -33,6 +33,7 @@
         <activity
                 android:name=".MainActivity"
                 tools:ignore="ExtraText">
+        </activity>
 
         <activity android:name="Contacts"
         android:launchMode="singleTop"
@@ -41,13 +42,13 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
-        </activity>
-        <activity android:name=".LoginActivity">
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
-
         </activity>
+
+
+
         <activity
                 android:name=".ProfileActivity"
                 android:label="@string/prf_title"
@@ -58,11 +59,9 @@
                 android:name=".EditProfile"
                 android:label="@string/edit_title"
                 android:parentActivityName=".ProfileActivity"/>
-        <activity android:name=".MainActivity">
 
 
 
-        </activity>
         <activity android:name=".Settings">
         </activity>
 
@@ -85,12 +84,7 @@
         <activity
                 android:name=".DocumentActivity"
                 tools:ignore="WrongManifestParent">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+         </activity>
 
     </application>
 
