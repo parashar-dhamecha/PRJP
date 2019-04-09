@@ -30,6 +30,9 @@
 
          <activity android:name=".LoginActivity">
         </activity>
+        <activity
+                android:name=".MainActivity"
+                tools:ignore="ExtraText">
 
         <activity android:name="Contacts"
         android:launchMode="singleTop"
@@ -38,6 +41,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
+        </activity>
+        <activity android:name=".LoginActivity">
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
@@ -80,6 +85,11 @@
         <activity
                 android:name=".DocumentActivity"
                 tools:ignore="WrongManifestParent">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
 
     </application>
