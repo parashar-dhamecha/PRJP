@@ -1,19 +1,18 @@
-package com.dxdevil.pd.prjp.Model.Response;
+
+package com.dxdevil.pd.prjp.Model.Response.Document;
 
 import java.util.List;
-
-import com.dxdevil.pd.prjp.Model.Response.ChangePasswordDatum;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ChangePasswordModel {
+public class DocDetailsResponse {
 
     @SerializedName("message")
     @Expose
     private String message;
     @SerializedName("data")
     @Expose
-    private List<ChangePasswordDatum> data = null;
+    private List<Datum> data = null;
     @SerializedName("license")
     @Expose
     private Object license;
@@ -26,11 +25,11 @@ public class ChangePasswordModel {
         this.message = message;
     }
 
-    public List<ChangePasswordDatum> getData() {
+    public List<Datum> getData() {
         return data;
     }
 
-    public void setData(List<ChangePasswordDatum> data) {
+    public void setData(List<Datum> data) {
         this.data = data;
     }
 

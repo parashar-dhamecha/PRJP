@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+            android:id="@+id/filterdocs"
+            android:icon="@drawable/ic_autorenew_white_24dp"
+            android:title="Filter"
+            app:showAsAction="always"
+            tools:ignore="HardcodedText">
+        <menu>
+            <item
+                    android:id="@+id/menu_awsign"
+                    android:title="Awaiting My Sign"/>
+
+            <item android:id="@+id/menu_awOthers"
+                  android:title="Awaiting Others"/>
+
+            <item android:id="@+id/menu_completed"
+                  android:title="Completed"/>
+
+            <item android:id="@+id/menu_duesoon"
+                  android:title="Due Soon"/>
+
+        </menu>
+    </item>
+
+
+</menu>

@@ -1,4 +1,4 @@
-package com.dxdevil.pd.prjp.Model.Response;
+package com.dxdevil.pd.prjp.Model.Response.ChangePassword;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

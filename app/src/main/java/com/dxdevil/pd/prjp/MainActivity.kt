@@ -105,6 +105,7 @@ class MainActivity : AppCompatActivity() {
                             }
                         } else {
                             pd.dismiss()
+                            startActivity(Intent(applicationContext,LoginActivity::class.java))
                             Toast.makeText(
                                 this@MainActivity,
                                 "Something went wrong please try again",
