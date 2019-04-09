@@ -47,10 +47,10 @@ class AddContact : AppCompatActivity() {
                 pd.setMessage("Adding Contact...")
                 pd.isIndeterminate = true
                 pd.show()
-
-                var token = getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token","")
+                var tok:String = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.N9w0jV/v+9PKjqTQVRprezt4+qqzzgZZjY68hHbb/VdLYi/P2x192in+N/puRDAp8zEKMMqdnOPVvgPE6C6bukPznNX+g+jkb5sv8FfeS7Q7UXY/QIHjeYLQJ4Tk0Aziq/VdzyrDQLOq20vUdEYJjwIBiq1pk+R/7xBYPpEEPI6lQtTxggOw72uJnYt/kwviC0i6ppoGmWZHU5sX4ZyNBnhSp5RPMYvQKENl5w3MdkGet6cb9MaMD55LM0Ytqy2DMHMqW4H1t4ql13hFw3c/1MhX/sNci8G6WNp1Bo6qnFwi+eu6ABRNaQ0C4lXKjy4K/9Mj9ZN6dqQLCWdpsbW6Bx1K46PitJsHNo6bqFVlUWyxRHNeIJKu655Ema646p9o62EeO4LDIrUhOJLPMpXXDwbdcgHAsLBpM/TMfOdQlaLsB2d6rOlkqlh0n8ForetQ+M19xiDH0C+YxrDeDlnY6v62VfXDwwayEVEgmjZv2SM/CKPoyQgHsYEh3tGXECqP9UVxmqL+jPbLhIrTlku4Z1LsZXmRVc/gEq1/NJPIU7DtF1PEkfIs4VUHuwGClKyyQ2GfWmecbn5RZ4WF4HZpOr8KUDo5TsLVee+4w0W75MRPSaQZVRBz/AaW5owhvQ1DsBzHmO01XfKxj5oXASQUaSOA6OoAyFgrA+JHMi3g10sjOVFPhiHSDyOPenpYcw7rrxB7pXpVEdnW1gen3oT5BSJ+PzMfFkt2sg0Mg4KRFMMG0/cG6wP5C1W2gKQT2hVENRxfTYeifEjLE0oTVot9g+xlczLrrvAjqJS9SuHk+nErJo2j31G2MKpTcEMv5vUrc0B9K2sZT4fZJX8rgfZEfX9Z/N2zUNXAZZ7g3vdBtGDYgndGnmmOhylClGUaS8uV.I5duylWh-_E4qGtLEYmagN3X33dIZTQ2aGMtyiMKq2k"
+               // var token = getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token","")
                 val apiadd = RetrofitClient.getInstance()!!.api as Api
-                val calladd =apiadd.addcontact(token,
+                val calladd =apiadd.addcontact(tok,
                    AddContactRequest( "abc",
                      "abcc@gmail.com",
                        91,

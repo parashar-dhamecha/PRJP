@@ -54,7 +54,7 @@ public interface Api {
     );
 
     @GET("contact/get")
-    Call<AddContactResponse>addcontactresponse(
+    Call<GetContactResponse>getcontactresponse(
             @Header("Authorization") String Authorization
     );
 

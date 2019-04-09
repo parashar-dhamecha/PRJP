@@ -87,13 +87,13 @@
     <string name="Phone_value">9865457825</string>
 
     <!-- contacts strings-->
-    //<string name="contact_name">Juhi</string>
-    //<string-array name="names">
-        //<item>pooja</item>
-        //<item>juhi</item>
-      //  <item>dhruv</item>
-    //    <item>yogita</item>
-   // </string-array>
+    <string name="contact_name">Juhi</string>
+    <string-array name="names">
+        <item>pooja</item>
+        <item>juhi</item>
+        <item>dhruv</item>
+        <item>yogita</item>
+    </string-array>
 
     <!-- Notification -->
     <string name="notification_title">Notifications</string>

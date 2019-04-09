@@ -1,6 +1,5 @@
 package com.dxdevil.pd.prjp
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 
-class ContactsAdapter(private val context: Context, private var Con: ArrayList<ContactModel>) :
-    RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
+class ContactsAdapter(var Con: ArrayList<ContactModel>) :
+    RecyclerView.Adapter<ContactsAdapter.ViewHolder>(){
+
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.contactsadapter, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.contactsadapter, parent, false)
         return ViewHolder(view)
     }
 
@@ -48,6 +49,8 @@ class ContactsAdapter(private val context: Context, private var Con: ArrayList<C
         var name: TextView = itemView.findViewById(R.id.name) as TextView
         var pro: ImageView = itemView.findViewById(R.id.pro) as ImageView
         var del: Button = itemView.findViewById(R.id.del) as Button
+
+
 
     }
 }

@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.alimuzaffar.lib.pin.PinEntryEditText
 import com.dxdevil.pd.prjp.Model.Request.Otp
 import com.dxdevil.pd.prjp.Model.Request.Verify
 import com.dxdevil.pd.prjp.Model.Response.OtpModel
@@ -62,7 +61,7 @@ class Otpactivity : AppCompatActivity() {
                        }
                        else{
                            pd.dismiss()
-                           startActivity(Intent(applicationContext,Dashboarrd::class.java))
+                           startActivity(Intent(applicationContext,Dashboard::class.java))
                            Toast.makeText(this@Otpactivity, "Successfully logged in ", Toast.LENGTH_LONG).show()
                        }
 
