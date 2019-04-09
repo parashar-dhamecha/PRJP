@@ -2,14 +2,14 @@ package com.dxdevil.pd.prjp
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.dxdevil.pd.prjp.Model.Request.ChangePasswordRequest
-import com.dxdevil.pd.prjp.Model.Response.ChangePasswordModel
+import com.dxdevil.pd.prjp.Model.Response.ChangePassword.ChangePasswordModel
 import kotlinx.android.synthetic.main.activity_change_password.*
-import kotlinx.android.synthetic.main.activity_registration.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,7 +54,8 @@ class ChangePassword : AppCompatActivity() {
                     override fun onResponse(call: Call<ChangePasswordModel>, response: Response<ChangePasswordModel>) {
                         if (response.isSuccessful) {
                             pd.dismiss()
-                            Toast.makeText(this@ChangePassword, response.body()!!.message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@ChangePassword, response.body()!!.message, Toast.LENGTH_LONG).show()
+                            startActivity(Intent(this@ChangePassword,LoginActivity::class.java))
                         } else {
                             pd.dismiss()
                             Toast.makeText(this@ChangePassword, "Invalid Current Password", Toast.LENGTH_LONG).show()

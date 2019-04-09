@@ -1,7 +1,10 @@
 package com.dxdevil.pd.prjp;
 
 import com.dxdevil.pd.prjp.Model.Request.*;
+import com.dxdevil.pd.prjp.Model.Request.Document.ListOfDocument;
 import com.dxdevil.pd.prjp.Model.Response.*;
+import com.dxdevil.pd.prjp.Model.Response.ChangePassword.ChangePasswordModel;
+import com.dxdevil.pd.prjp.Model.Response.Document.DocDetailsResponse;
 import com.dxdevil.pd.prjp.Model.Response.SignUpModel;
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse;
 import retrofit2.Call;
@@ -15,6 +18,7 @@ public interface Api {
 
     @GET("account/check-user-exists/{id}")
     Call<UserExistResponse>isUserExist(@Path("id") String  id);
+
 
 
     @POST("account/login")
@@ -64,5 +68,13 @@ public interface Api {
     @POST("account/refresh-token")
     Call<RefreshTokenModel>refreshtoken(
          @Body RefreshToken refreshtoken
+    );
+    @GET("document/document-detail/{id}")
+    Call<DocDetailsResponse>doc_details(@Path("id") String  id);
+
+    @POST("document/documents")
+    Call<ListOfDocument>doclist(
+            @Header("Authorization") String Authorization,
+            @Body ListOfDocument list
     );
 }
