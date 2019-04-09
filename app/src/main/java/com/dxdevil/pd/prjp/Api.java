@@ -4,6 +4,7 @@ import com.dxdevil.pd.prjp.Model.Request.*;
 import com.dxdevil.pd.prjp.Model.Response.*;
 import com.dxdevil.pd.prjp.Model.Response.SignUpModel;
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -64,5 +65,11 @@ public interface Api {
     @POST("account/refresh-token")
     Call<RefreshTokenModel>refreshtoken(
          @Body RefreshToken refreshtoken
+    );
+    @PUT("user/profile/{UserId}")
+    Call<ResponseBody>updateprofile(
+            @Header("Authorization") String Authorization,
+            @Path("UserId") String userid,
+        @Body UpdateProfile updateProfile
     );
 }
