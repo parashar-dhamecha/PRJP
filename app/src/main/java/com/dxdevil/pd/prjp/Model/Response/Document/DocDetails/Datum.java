@@ -1,7 +1,9 @@
 
-package com.dxdevil.pd.prjp.Model.Response.Document;
+package com.dxdevil.pd.prjp.Model.Response.Document.DocDetails;
 
 import java.util.List;
+
+import com.dxdevil.pd.prjp.Model.Response.Document.Signer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,10 +11,10 @@ public class Datum {
 
     @SerializedName("documentDetail")
     @Expose
-    private DocumentDetail documentDetail;
+    private com.dxdevil.pd.prjp.Model.Response.Document.DocumentDetail documentDetail;
     @SerializedName("documentHistory")
     @Expose
-    private List<DocumentHistory> documentHistory = null;
+    private List<com.dxdevil.pd.prjp.Model.Response.Document.DocumentHistory> documentHistory = null;
     @SerializedName("signedByCurrentUser")
     @Expose
     private Boolean signedByCurrentUser;
@@ -42,7 +44,7 @@ public class Datum {
     private Boolean rejectedByCurrentUser;
     @SerializedName("notarization")
     @Expose
-    private Notarization notarization;
+    private com.dxdevil.pd.prjp.Model.Response.Document.Notarization notarization;
     @SerializedName("documentVerifiedByBlockchain")
     @Expose
     private Boolean documentVerifiedByBlockchain;
@@ -71,19 +73,19 @@ public class Datum {
     @Expose
     private Object ownerLong;
 
-    public DocumentDetail getDocumentDetail() {
+    public com.dxdevil.pd.prjp.Model.Response.Document.DocumentDetail getDocumentDetail() {
         return documentDetail;
     }
 
-    public void setDocumentDetail(DocumentDetail documentDetail) {
+    public void setDocumentDetail(com.dxdevil.pd.prjp.Model.Response.Document.DocumentDetail documentDetail) {
         this.documentDetail = documentDetail;
     }
 
-    public List<DocumentHistory> getDocumentHistory() {
+    public List<com.dxdevil.pd.prjp.Model.Response.Document.DocumentHistory> getDocumentHistory() {
         return documentHistory;
     }
 
-    public void setDocumentHistory(List<DocumentHistory> documentHistory) {
+    public void setDocumentHistory(List<com.dxdevil.pd.prjp.Model.Response.Document.DocumentHistory> documentHistory) {
         this.documentHistory = documentHistory;
     }
 
@@ -159,11 +161,11 @@ public class Datum {
         this.rejectedByCurrentUser = rejectedByCurrentUser;
     }
 
-    public Notarization getNotarization() {
+    public com.dxdevil.pd.prjp.Model.Response.Document.Notarization getNotarization() {
         return notarization;
     }
 
-    public void setNotarization(Notarization notarization) {
+    public void setNotarization(com.dxdevil.pd.prjp.Model.Response.Document.Notarization notarization) {
         this.notarization = notarization;
     }
 
