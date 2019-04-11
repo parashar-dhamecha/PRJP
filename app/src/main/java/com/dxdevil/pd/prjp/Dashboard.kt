@@ -30,8 +30,6 @@ class Dashboard : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         when (id) {
             R.id.dashboard -> {
             }
-            R.id.editsignature -> {
-            }
             R.id.documents-> {
             }
             R.id.contacts -> {

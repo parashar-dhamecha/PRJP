@@ -8,6 +8,7 @@ import com.dxdevil.pd.prjp.Model.Response.Document.DocDetailsResponse;
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse;
 import com.dxdevil.pd.prjp.Model.Response.SignUpModel;
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -90,5 +91,11 @@ public interface Api {
     Call<ListOfDocumentResponse>doclist(
             @Header("Authorization") String Authorization,
             @Body ListOfDocument list
+    );
+    @PUT("user/profile/{UserId}")
+    Call<ResponseBody>updateprofile(
+            @Header("Authorization") String Authorization,
+            @Path("UserId") String userid,
+        @Body UpdateProfile updateProfile
     );
 }
