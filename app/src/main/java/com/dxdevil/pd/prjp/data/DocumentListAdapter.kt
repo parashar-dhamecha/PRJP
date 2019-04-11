@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dxdevil.pd.prjp.R
 import com.dxdevil.pd.prjp.Model.Document
+import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Datum
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse
 
 //class DocumentListAdapter(private val list:ArrayList<Document>, private val context:Context) :
@@ -39,7 +40,9 @@ import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocument
 //
 //}
 
-class DocumentListAdapter(val list:List<Document>,val context:Context):
+class DocumentListAdapter(
+    val list: List<com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document>,
+    val context:Context):
     RecyclerView.Adapter<DocumentListAdapter.ViewHolder>(){
 
     override fun getItemCount(): Int {
@@ -54,15 +57,16 @@ class DocumentListAdapter(val list:List<Document>,val context:Context):
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder?.bindItem(list[position])
+        holder.bindItem(list[position])
 
     }
 
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindItem(document: Document){
-            var docname:TextView = itemView.findViewById(R.id.txt_doc) as TextView
 
-            docname.text = document.docname
+            fun bindItem(document : com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document){
+                var docname:TextView = itemView.findViewById(R.id.txt_doc) as TextView
+                docname.text=document.name
+
         }
     }
 
