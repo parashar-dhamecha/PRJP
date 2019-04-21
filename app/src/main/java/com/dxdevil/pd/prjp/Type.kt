@@ -145,7 +145,7 @@ class Type : AppCompatActivity(), View.OnClickListener {
             pd.show()
 
             var baos2: ByteArrayOutputStream = ByteArrayOutputStream()
-            bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos2)
+            bitmap?.compress(Bitmap.CompressFormat.PNG, 100, baos2)
             var ba = baos2.toByteArray()
             var signstring = Base64.encodeToString(ba, Base64.DEFAULT)
             //token

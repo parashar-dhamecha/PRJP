@@ -37,7 +37,7 @@ public class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         pref = getSharedPreferences("Token", Context.MODE_PRIVATE)
-        var edpref: SharedPreferences.Editor = pref!!.edit()
+        var edpref1: SharedPreferences.Editor = pref!!.edit()
 
         var UsernameEmail = findViewById<EditText>(R.id.edEmail)
         var edPassword = findViewById<EditText>(R.id.edPassword)
@@ -81,10 +81,15 @@ public class LoginActivity : AppCompatActivity() {
                                 var lm = response.body()
                                var t = "Bearer "+ lm!!.data[0]?.token?.toString()
                                 var rt = lm!!.data[0]?.refreshToken?.toString()
-
-                                edpref.putString("Token", t)
-                                edpref.putString("RefreshToken", rt)
-                                edpref.commit()
+                                var userid = lm!!.data[0]?.userId?.toString()
+                                edpref1.putString("userid",userid)
+                                edpref1.putString("Token", t)
+                                edpref1.putString("RefreshToken", rt)
+                                edpref1.putString("profieimage",lm!!.data[0]!!.profileByte.toString())
+                                edpref1.putString("fname",lm.data[0].firstName.toString())
+                                edpref1.putString("lname",lm.data[0].lastName.toString())
+                                edpref1.putString("email",lm.data[0].email.toString())
+                                edpref1.apply()
 
                                 //storing details to preference
                                 if(remembercb.isChecked){
@@ -92,13 +97,13 @@ public class LoginActivity : AppCompatActivity() {
                                     var ed = detpref.edit()
                                     ed.putString("email",edEmail!!.text.toString())
                                     ed.putString("password",edPassword!!.text.toString())
-                                    ed.putString("rememberflag","0")
-                                    ed?.commit()
+                                    ed.putString("rememberflag","1")
+                                    ed?.apply()
                                 }
                                 else{
                                     var detpref = getSharedPreferences("Login Details",0) as SharedPreferences
                                     var ed = detpref.edit()
-                                    ed.putString("rememberflag","1")
+                                    ed.putString("rememberflag","0")
                                 }
 
                                 // Sending otp
