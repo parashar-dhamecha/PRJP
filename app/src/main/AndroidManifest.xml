@@ -40,18 +40,8 @@
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-        <activity android:name="Contacts"
-        android:launchMode="singleTop"
-        android:screenOrientation="portrait"
-        android:windowSoftInputMode="adjustPan">
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-
         </activity>
+
         <activity
                 android:name=".ProfileActivity"
                 android:label="@string/prf_title"
@@ -62,7 +52,6 @@
                 android:label="@string/edit_title"
                 android:parentActivityName=".ProfileActivity">
         </activity>
-                android:parentActivityName=".ProfileActivity"/>
         <activity android:name=".Settings">
         </activity>
         <activity
@@ -70,10 +59,7 @@
                 android:parentActivityName=".Settings">
         </activity>
         <activity android:name=".ForgotPasswordActivity"/>
-        <activity android:name=".Registration">
         <activity android:name=".Registration"/>
-        <activity android:name=".PhotoActivity">
-        </activity>
         <activity android:name=".Dashboard"/> <!-- <intent-filter> -->
         <!-- <action android:name="android.intent.action.MAIN"/> -->
         <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
@@ -85,8 +71,7 @@
         <activity
                 android:name=".PhotoActivity"
                 tools:ignore="DuplicateActivity"/>
-                tools:ignore="DuplicateActivity">
-        </activity>
+
         <activity android:name=".ResetPasswordActivity">
         </activity>
         <activity
@@ -94,7 +79,6 @@
                 tools:ignore="WrongManifestParent">
         </activity>
 
-        </activity>
         <activity android:name=".DocActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
