@@ -9,7 +9,7 @@
 >
     <de.hdodenhof.circleimageview.CircleImageView android:layout_width="@dimen/dp100"
                                                         android:layout_height="@dimen/dp100"
-                                                        android:layout_margin="@dimen/dp20"
+                                                        android:layout_margin="@dimen/dp10"
                                                   android:background="@drawable/profile_bg"
                                                   android:id="@+id/imageview_header"/>
     <TextView android:layout_width="@dimen/dp100"
@@ -24,7 +24,6 @@
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:id="@+id/header_emailtv"
-              android:layout_marginTop="@dimen/dp10"
               android:layout_marginLeft="@dimen/dp20"
               android:layout_marginBottom="@dimen/dp10"
               android:layout_marginRight="@dimen/dp20"

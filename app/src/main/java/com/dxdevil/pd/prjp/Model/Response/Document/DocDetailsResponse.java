@@ -2,6 +2,8 @@
 package com.dxdevil.pd.prjp.Model.Response.Document;
 
 import java.util.List;
+
+import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.Datum;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

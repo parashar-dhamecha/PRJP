@@ -19,8 +19,13 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".UpdateContact">
+        <activity android:name=".uploadfile">
         </activity>
+        <activity
+                android:name=".Dashboarrd"
+                android:label="@string/title_activity_dashboarrd"
+                android:theme="@style/AppTheme"/>
+
         <activity android:name=".PhotoActivity"/>
 
         <activity android:name=".AddContact">
@@ -34,6 +39,11 @@
         <activity
                 android:name=".MainActivity"
                 tools:ignore="ExtraText">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
                 android:name=".Contacts"
@@ -58,7 +68,6 @@
                 android:name=".ChangePassword"
                 android:parentActivityName=".Settings">
         </activity>
-        <activity android:name=".ForgotPasswordActivity"/>
         <activity android:name=".Registration"/>
         <activity android:name=".Dashboard"/> <!-- <intent-filter> -->
         <!-- <action android:name="android.intent.action.MAIN"/> -->

@@ -8,6 +8,8 @@ import com.dxdevil.pd.prjp.Model.Response.Document.DocDetailsResponse;
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse;
 import com.dxdevil.pd.prjp.Model.Response.SignUpModel;
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -98,4 +100,12 @@ public interface Api {
             @Path("UserId") String userid,
         @Body UpdateProfile updateProfile
     );
+
+    @Multipart
+    @POST("document/upload")
+    Call<UploadfileModel> uploadfile(
+            @Header("Authorization") String Authorization,
+            @Part MultipartBody.Part file
+    );
 }
+
