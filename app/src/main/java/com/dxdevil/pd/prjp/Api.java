@@ -5,6 +5,7 @@ import com.dxdevil.pd.prjp.Model.Request.Document.ListOfDocument;
 import com.dxdevil.pd.prjp.Model.Response.*;
 import com.dxdevil.pd.prjp.Model.Response.ChangePassword.ChangePasswordModel;
 import com.dxdevil.pd.prjp.Model.Response.Document.DocDetailsResponse;
+import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse;
 import com.dxdevil.pd.prjp.Model.Response.SignUpModel;
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse;
 import okhttp3.MultipartBody;
@@ -89,7 +90,7 @@ public interface Api {
     Call<DocDetailsResponse>doc_details(@Path("id") String  id);
 
     @POST("document/documents")
-    Call<ListOfDocument>doclist(
+    Call<ListOfDocumentResponse>doclist(
             @Header("Authorization") String Authorization,
             @Body ListOfDocument list
     );

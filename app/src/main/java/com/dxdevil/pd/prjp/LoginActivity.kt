@@ -79,7 +79,7 @@ public class LoginActivity : AppCompatActivity() {
                             try {
 
                                 var lm = response.body()
-                                var t = "Bearer "+ lm!!.data[0]?.token?.toString()
+                               var t = "Bearer "+ lm!!.data[0]?.token?.toString()
                                 var rt = lm!!.data[0]?.refreshToken?.toString()
                                 var userid = lm!!.data[0]?.userId?.toString()
                                 edpref1.putString("userid",userid)
