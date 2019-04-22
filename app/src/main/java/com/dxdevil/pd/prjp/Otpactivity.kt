@@ -61,7 +61,7 @@ class Otpactivity : AppCompatActivity() {
                        }
                        else{
                            pd.dismiss()
-                           startActivity(Intent(applicationContext,Dashboard::class.java))
+                           startActivity(Intent(applicationContext,Dashboarrd::class.java))
                            Toast.makeText(this@Otpactivity, "Successfully logged in ", Toast.LENGTH_LONG).show()
                        }
 
