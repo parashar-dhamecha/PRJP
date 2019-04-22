@@ -4,7 +4,7 @@ package com.dxdevil.pd.prjp.Model.Response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Datum {
+public class LoginDatum {
 
     @SerializedName("userId")
     @Expose

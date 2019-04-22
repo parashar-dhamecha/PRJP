@@ -19,29 +19,29 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".UpdateContact">
+        </activity>
+        <activity android:name=".PhotoActivity"/>
 
         <activity android:name=".AddContact">
-           </activity>
-
+        </activity>
         <activity android:name=".Otpactivity">
         </activity>
         <activity android:name=".SetAnnotation">
         </activity>
-
-         <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity">
         </activity>
         <activity
                 android:name=".MainActivity"
                 tools:ignore="ExtraText">
         </activity>
-
-        <activity android:name="Contacts"
-        android:launchMode="singleTop"
-        android:screenOrientation="portrait"
-        android:windowSoftInputMode="adjustPan">
-
-
+        <activity
+                android:name=".Contacts"
+                android:launchMode="singleTop"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustPan">
         </activity>
+
         <activity
                 android:name=".ProfileActivity"
                 android:label="@string/prf_title"
@@ -60,8 +60,6 @@
         </activity>
         <activity android:name=".ForgotPasswordActivity"/>
         <activity android:name=".Registration"/>
-        <activity android:name=".PhotoActivity">
-        </activity>
         <activity android:name=".Dashboard"/> <!-- <intent-filter> -->
         <!-- <action android:name="android.intent.action.MAIN"/> -->
         <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
@@ -72,15 +70,15 @@
         <activity android:name=".DrawSignature"/>
         <activity
                 android:name=".PhotoActivity"
-                tools:ignore="DuplicateActivity">
-        </activity>
+                tools:ignore="DuplicateActivity"/>
+
         <activity android:name=".ResetPasswordActivity">
         </activity>
         <activity
                 android:name=".DocumentActivity"
                 tools:ignore="WrongManifestParent">
-
         </activity>
+
         <activity android:name=".DocActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
