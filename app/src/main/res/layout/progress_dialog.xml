@@ -7,7 +7,7 @@
     <ProgressBar
             android:layout_width="@dimen/dp50"
                  android:layout_height="@dimen/dp50"
-                 android:layout_margin="dp16"/>
+                 android:layout_margin="@dimen/dp16"/>
 
     <TextView
             android:id="@+id/progress_message"
