@@ -30,7 +30,7 @@ class AwOthersListAdapter(private val list: ArrayList<AwOthers>, private val con
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItem(document: AwOthers) {
             var docname: TextView = itemView.findViewById(R.id.txt_doc) as TextView
-            var bt_sign: Button = itemView.findViewById(R.id.bt_sign) as Button
+            //var bt_sign: Button = itemView.findViewById(R.id.bt_sign) as Button
             //bt_sign.text("Remind")
            // bt_sign.setText("Remind")
             docname.text = document.docname

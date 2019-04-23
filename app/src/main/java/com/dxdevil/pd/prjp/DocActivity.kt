@@ -4,19 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.dxdevil.pd.prjp.Model.AwOthers
 import com.dxdevil.pd.prjp.Model.Completed
 import com.dxdevil.pd.prjp.data.DocumentListAdapter
-import com.dxdevil.pd.prjp.Model.Document
+import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document
 import com.dxdevil.pd.prjp.Model.DueSoon
 import com.dxdevil.pd.prjp.Model.Request.Document.ListOfDocument
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse
 import kotlinx.android.synthetic.main.activity_doc.*
-import kotlinx.android.synthetic.main.item_notification.*
+import kotlinx.android.synthetic.main.row_doclist.*
+
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,24 +26,33 @@ import retrofit2.Response
 
 class DocActivity : AppCompatActivity() {
     private var adapter: DocumentListAdapter? = null
-    private var documentList: ArrayList<com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document>? = null
-    private var layoutManager: RecyclerView.LayoutManager? = null
-    private  var size:Int=0
-    private var docname:String?=null
+    private var documentList: MutableList<Document>? = null
+    public  var extention: String? =null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_doc)
 
 
-        mrecyclerView.layoutManager = layoutManager
+
+        val builder = android.app.AlertDialog.Builder(this)
+        val dialogview = layoutInflater.inflate(R.layout.progress_dialog,null)
+        val message = dialogview.findViewById<TextView>(R.id.progress_message)
+        message.text="Loading..."
+        builder.setView(dialogview)
+        builder.setCancelable(false)
+        val dialog=builder.create()
+        dialog.show()
+
+
+
+        mrecyclerView.layoutManager = LinearLayoutManager(this@DocActivity)
         mrecyclerView.adapter = adapter
 
-
-
-        var token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.N9w0jV/v+9PKjqTQVRprezt4+qqzzgZZjY68hHbb/VdLYi/P2x192in+N/puRDAp8zEKMMqdnOPVvgPE6C6bukPznNX+g+jkb5sv8FfeS7Q7UXY/QIHjeYLQJ4Tk0Aziq/VdzyrDQLOq20vUdEYJjwIBiq1pk+R/7xBYPpEEPI6lQtTxggOw72uJnYt/kwviC0i6ppoGmWZHU5sX4ZyNBnhSp5RPMYvQKENl5w3MdkGet6cb9MaMD55LM0Ytqy2DMHMqW4H1t4ql13hFw3c/1MhX/sNci8G6WNp1Bo6qnFwi+eu6ABRNaQ0C4lXKjy4K/9Mj9ZN6dqQLCWdpsbW6Bx1K46PitJsHNo6bqFVlUWyxRHNeIJKu655Ema646p9o62EeO4LDIrUhOJLPMpXXDwbdcgHAsLBpM/TMfOdQlaLsB2d6rOlkqlh0n8ForetQ+M19xiDH0C+YxrDeDlnY6v62VfXDwwayEVEgmjZv2SM/CKPoyQgHsYEh3tGXECqP9UVxmqL+jPbLhIrTlku4Z1LsZXmRVc/gEq1/NJPIU7DtF1PEkfIs4VUHuwGClKyyQ2GfWmecbn5RZ4WF4HZpOr8KUDo5TsLVee+4w0W75MRPSaQZVRBz/AaW5owhvQ1DsBzHmO01XfKxj5oXASQUaSOA6OoAyFgrA+JHMi3g10sjOVFPhiHSDyOPenpYcw7rrxB7pXpVEdnW1gen3oT5BSJ+PzMfFkt2sg0Mg4KRFMMG0/cG6wP5C1W2gKQT2hVENRxfTYeifEjLE0oTVot9g+xlczLrrvAjqJS9SuHk+nHNoS6E5sfspp65Z4MS78I7DzL6HmdWxpWyNuX0OHwUMTn4GcfSgO+7DNMU5JrHpyPNEElL6tJCPSTl+ERNA8WO.vpBM4TUrwCrUupzPXvKmD1TLxSPR93UFfgPROIJoN_s"
-        var api = RetrofitClient.getInstance().api as Api
-        var call = api.doclist(
+        val token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.N9w0jV/v+9PKjqTQVRprezt4+qqzzgZZjY68hHbb/VdLYi/P2x192in+N/puRDAp8zEKMMqdnOPVvgPE6C6bukPznNX+g+jkb5sv8FfeS7Q7UXY/QIHjeYLQJ4Tk0Aziq/VdzyrDQLOq20vUdEYJjwIBiq1pk+R/7xBYPpEEPI6lQtTxggOw72uJnYt/kwviC0i6ppoGmWZHU5sX4ZyNBnhSp5RPMYvQKENl5w3MdkGet6cb9MaMD55LM0Ytqy2DMHMqW4H1t4ql13hFw3c/1MhX/sNci8G6WNp1Bo6qnFwi+eu6ABRNaQ0C4lXKjy4K/9Mj9ZN6dqQLCWdpsbW6Bx1K46PitJsHNo6bqFVlUWyxRHNeIJKu655Ema646p9o62EeO4LDIrUhOJLPMpXXDwbdcgHAsLBpM/TMfOdQlaLsB2d6rOlkqlh0n8ForetQ+M19xiDH0C+YxrDeDlnY6v62VfXDwwayEVEgmjZv2SM/CKPoyQgHsYEh3tGXECqP9UVxmqL+jPbLhIrTlku4Z1LsZXmRVc/gEq1/NJPIU7DtF1PEkfIs4VUHuwGClKyyQ2GfWmecbn5RZ4WF4HZpOr8KUDo5TsLVee+4w0W75MRPSaQZVRBz/AaW5owhvQ1DsBzHmO01XfKxj5oXASQUaSOA6OoAyFgrA+JHMi3g10sjOVFPhiHSDyOPenpYcw7rrxB7pXpVEdnW1gen3oT5BSJ+PzMfFkt2sg0Mg4KRFMMG0/cG6wP5C1W2gKQT2hVENRxfTYeifEjLE0oTVot9g+xlczLrrvAjqJS9SuHk+nEk/Jp9TPyv6Aj/qPMtuy09koJ9fKSl0K35bGMMmwxZYVly4Se1dAPJ+YAIO7Ux6rhs7AuDezmqPIsKwdDB9C96.E9qpFP0Y7gSB_8vo4ejR6M2mWHxnhRaMJGUQP5NxdNM"
+        val api = RetrofitClient.getInstance().api as Api
+        val call = api.doclist(
             token, ListOfDocument(
                 0,
                 0,
@@ -56,7 +67,6 @@ class DocActivity : AppCompatActivity() {
             )
         )as Call<ListOfDocumentResponse>
 
-
         try{
             call.enqueue(object : Callback<ListOfDocumentResponse> {
                 override fun onFailure(call: Call<ListOfDocumentResponse>, t: Throwable) {
@@ -67,49 +77,35 @@ class DocActivity : AppCompatActivity() {
 
 
                     if (response.isSuccessful) {
-                        Toast.makeText(this@DocActivity,"Response is Successfull", Toast.LENGTH_SHORT).show()
+
                         try {
-                            //  var documentList = ArrayList<ListOfDocumentResponse>(response.body()?.data)
-                            layoutManager = LinearLayoutManager(this@DocActivity)
+
+
                             adapter = DocumentListAdapter(response.body()!!.data[0].documents, this@DocActivity)
-                            documentList?.addAll(response.body()!!.data[0].documents)
+                            documentList= response.body()!!.data[0].documents
 
-                            for(i  in 0 .. 10)
-                            {
-                                val document =  com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document()
 
-                                 documentList!!.add(document)
-                            }
+                            mrecyclerView.layoutManager = LinearLayoutManager(this@DocActivity)
+                            mrecyclerView.adapter = DocumentListAdapter(response.body()!!.data[0].documents, this@DocActivity)
                             adapter!!.notifyDataSetChanged()
+
+                            dialog.dismiss()
 
                         }catch (e:Exception)
                         {
+                            dialog.dismiss()
                             Toast.makeText(this@DocActivity, e.message,Toast.LENGTH_LONG).show()
                         }
 
                     } else {
-                        Toast.makeText(this@DocActivity, "Response is Failure", Toast.LENGTH_SHORT).show()
+                        dialog.dismiss()
+                        Toast.makeText(this@DocActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
                     }
                 }
             })
         }catch (e:Exception){
             Toast.makeText(this@DocActivity,"Excetion",Toast.LENGTH_SHORT).show()
         }
-////////original code for recyclerview
-
-
-//
-//        for (i in 0..10) {
-//            val document = Document()
-//            document.docname = docname
-//            documentList!!.add(document)
-//        }
-//        adapter!!.notifyDataSetChanged()
-/////////////////////////////////////////////
-
-
-
-
 
     }
 

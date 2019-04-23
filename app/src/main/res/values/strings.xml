@@ -154,5 +154,6 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="done">done</string>
+    <string name="awaiting">Awaiting My sign</string>
 
 </resources>

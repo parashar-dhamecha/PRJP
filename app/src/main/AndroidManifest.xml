@@ -39,11 +39,8 @@
         <activity
                 android:name=".MainActivity"
                 tools:ignore="ExtraText">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
         </activity>
         <activity
                 android:name=".Contacts"
@@ -88,12 +85,15 @@
                 tools:ignore="WrongManifestParent">
         </activity>
 
-        <activity android:name=".DocActivity">
+        <activity android:name=".DocActivity"
+        android:label="@string/documents"
+        android:parentActivityName=".Dashboard">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
         </activity>
 
     </application>

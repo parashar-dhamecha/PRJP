@@ -32,7 +32,7 @@ class DueSoonListAdapter(private val list: ArrayList<DueSoon>, private val conte
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItem(document: DueSoon) {
             var docname: TextView = itemView.findViewById(R.id.txt_doc) as TextView
-            var bt_sign: Button = itemView.findViewById(R.id.bt_sign) as Button
+            //var bt_sign: Button = itemView.findViewById(R.id.bt_sign) as Button
             docname.text = document.docname
         }
     }

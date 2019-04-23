@@ -31,9 +31,9 @@ class CompletedListAdapter(private val list: ArrayList<Completed>, private val c
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItem(document: Completed) {
             var docname: TextView = itemView.findViewById(R.id.txt_doc) as TextView
-            var bt_sign: Button = itemView.findViewById(R.id.bt_sign) as Button
+            //var bt_sign: Button = itemView.findViewById(R.id.bt_sign) as Button
             //bt_sign.text("Remind")
-            bt_sign.setText("Details")
+//            bt_sign.setText("Details")
             docname.text = document.docname
         }
 
