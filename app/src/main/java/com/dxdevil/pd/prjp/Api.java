@@ -103,7 +103,7 @@ public interface Api {
 
     @Multipart
     @POST("document/upload")
-    Call<UploadfileModel> uploadfile(
+    Call<UploadfileModel>upload(
             @Header("Authorization") String Authorization,
             @Part MultipartBody.Part file
     );

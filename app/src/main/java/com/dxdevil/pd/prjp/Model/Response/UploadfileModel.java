@@ -11,10 +11,10 @@ public class UploadfileModel {
     public String message;
     @SerializedName("data")
     @Expose
-    public List<UploadDatum> data;
+    public List<UploadDatum> data = null;
     @SerializedName("license")
     @Expose
-    public License license;
+    public UploadLicense license;
 
     /**
      * No args constructor for use in serialization
@@ -29,7 +29,7 @@ public class UploadfileModel {
      * @param data
      * @param license
      */
-    public UploadfileModel(String message, List<UploadDatum> data, License license) {
+    public UploadfileModel(String message, List<UploadDatum> data, UploadLicense license) {
         super();
         this.message = message;
         this.data = data;

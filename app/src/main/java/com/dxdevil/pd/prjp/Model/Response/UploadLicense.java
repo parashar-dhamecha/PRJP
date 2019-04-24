@@ -17,7 +17,7 @@ public class UploadLicense {
     public Object displayRedRibbon;
     @SerializedName("featuresSupported")
     @Expose
-    public List<UploadFeaturesSupported> featuresSupported;
+    public List<UploadFeatures> featuresSupported = null;
     @SerializedName("supportedFileTypes")
     @Expose
     public String supportedFileTypes;
@@ -41,7 +41,7 @@ public class UploadLicense {
      * @param featuresSupported
      * @param acknowledgementMessage
      */
-    public UploadLicense(Object acknowledgementMessage, Object informationMessage, Object displayRedRibbon, List<UploadFeaturesSupported> featuresSupported, String supportedFileTypes, Boolean expired) {
+    public UploadLicense(Object acknowledgementMessage, Object informationMessage, Object displayRedRibbon, List<UploadFeatures> featuresSupported, String supportedFileTypes, Boolean expired) {
         super();
         this.acknowledgementMessage = acknowledgementMessage;
         this.informationMessage = informationMessage;

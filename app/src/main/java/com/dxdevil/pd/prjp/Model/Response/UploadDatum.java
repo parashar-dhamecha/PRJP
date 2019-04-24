@@ -1,5 +1,7 @@
 package com.dxdevil.pd.prjp.Model.Response;
 
+
+
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -26,7 +28,7 @@ public class UploadDatum {
     public Integer pageTo;
     @SerializedName("pages")
     @Expose
-    public List<String> pages ;
+    public List<String> pages = null;
 
     /**
      * No args constructor for use in serialization
