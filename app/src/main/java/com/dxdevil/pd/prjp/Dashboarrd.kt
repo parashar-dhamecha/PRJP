@@ -171,7 +171,6 @@ class Dashboarrd : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.dashboard -> {
                 // Handle the camera action
