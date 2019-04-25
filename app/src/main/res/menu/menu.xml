@@ -10,11 +10,13 @@
             app:showAsAction="always"
             tools:ignore="HardcodedText">
         <menu>
-            <item
-                    android:id="@+id/menu_awsign"
+            <item android:id="@+id/allDocuments"
+                  android:title="All Documents"/>
+
+            <item   android:id="@+id/menu_awaitingMySign"
                     android:title="Awaiting My Sign"/>
 
-            <item android:id="@+id/menu_awOthers"
+            <item android:id="@+id/menu_awaitingOthers"
                   android:title="Awaiting Others"/>
 
             <item android:id="@+id/menu_completed"
@@ -22,6 +24,9 @@
 
             <item android:id="@+id/menu_duesoon"
                   android:title="Due Soon"/>
+
+            <item android:id="@+id/menu_Declined"
+                  android:title="@string/Declined"/>
 
         </menu>
     </item>

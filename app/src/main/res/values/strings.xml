@@ -155,5 +155,10 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="done">done</string>
     <string name="awaiting">Awaiting My sign</string>
+    <string name="Declined">Declined</string>
+    <string name="Loading">Loading...</string>
+    <string name="Previous"><![CDATA[<]]></string>
+    <string name="next"><![CDATA[>]]></string>
+    <string name="PageNumber">TextView</string>
 
 </resources>

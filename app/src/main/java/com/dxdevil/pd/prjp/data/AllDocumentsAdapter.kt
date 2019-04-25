@@ -1,6 +1,7 @@
 package com.dxdevil.pd.prjp.data
 
 import android.content.Context
+import android.graphics.Color.rgb
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +14,10 @@ import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document
 
 
 
-class DocumentListAdapter(
+class AllDocumentsAdapter(
     val list: List<Document>,
     val context:Context):
-    RecyclerView.Adapter<DocumentListAdapter.ViewHolder>(){
+    RecyclerView.Adapter<AllDocumentsAdapter.ViewHolder>(){
 
     override fun getItemCount(): Int {
         return list.size
@@ -26,35 +27,43 @@ class DocumentListAdapter(
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.row_doclist, parent, false))
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        holder.docname.text=list[position].name
+        holder.docname.setTextColor(rgb(20,3,54))
 
-        holder.docname.text = list.get(position).name
-        list.get(position).extension
-        if(list.get(position).extension==".pdf")
+        if(list[position].extension==".pdf")
             holder.fileimage.setImageResource(R.drawable.pdf3)
-        if(list.get(position).extension==".docx"||list.get(position).extension=="doc")
-            holder.fileimage.setImageResource(R.drawable.doc)
-        if(list.get(position).extension==".xlsx"||list.get(position).extension==".xls")
+        if(list[position].extension==".docx"|| list[position].extension==".doc")
+            holder.fileimage.setImageResource(R.drawable.doc4)
+        if(list[position].extension==".xlsx"|| list[position].extension==".xls")
             holder.fileimage.setImageResource(R.drawable.excel)
-        if(list.get(position).extension==".pptx"||list.get(position).extension==".ppt")
-            holder.fileimage.setImageResource(R.drawable.ppt)
-        
+        if(list[position].extension==".pptx"|| list[position].extension==".ppt")
+            holder.fileimage.setImageResource(R.drawable.ppt2)
+
         if(list[position].documentStatusForUser==0) {
             holder.docstatus.text=context.getString(R.string.awaiting)
+            holder.docstatus.setTextColor(rgb(128,0,0))
         }
         if(list[position].documentStatusForUser==3) {
             holder.docstatus.text=context.getString(R.string.awatingothers)
+            holder.docstatus.setTextColor(rgb(255,174,66))
         }
         if(list[position].documentStatusForUser==2) {
             holder.docstatus.text=context.getString(R.string.completed)
+            holder.docstatus.setTextColor(rgb(53,117,55))
         }
         if(list[position].documentStatusForUser==6) {
             holder.docstatus.text=context.getString(R.string.signingdue)
+            holder.docstatus.setTextColor(rgb(105,105,105))
+        }
+        if(list[position].documentStatusForUser==7) {
+            holder.docstatus.text=context.getString(R.string.Declined)
+            holder.docstatus.setTextColor(rgb(255,51,51))
         }
     }
-
-        class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             var docname:TextView = itemView.findViewById(R.id.txt_doc) as TextView
             var docstatus:TextView=itemView.findViewById(R.id.doc_status) as TextView

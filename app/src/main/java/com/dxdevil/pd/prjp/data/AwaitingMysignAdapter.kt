@@ -14,10 +14,10 @@ import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document
 
 
 
-class AwOthersListAdapter(
+class AwaitingMysignAdapter(
     val list: List<Document>,
     val context:Context):
-    RecyclerView.Adapter<AwOthersListAdapter.ViewHolder>(){
+    RecyclerView.Adapter<AwaitingMysignAdapter.ViewHolder>(){
 
     override fun getItemCount(): Int {
         return list.size
@@ -49,7 +49,6 @@ class AwOthersListAdapter(
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
 
         var docname:TextView = itemView.findViewById(R.id.txt_doc) as TextView
         var docstatus:TextView=itemView.findViewById(R.id.doc_status) as TextView
