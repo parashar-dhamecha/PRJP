@@ -8,6 +8,8 @@ import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.DocDetailsResponse
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse;
 import com.dxdevil.pd.prjp.Model.Response.SignUpModel;
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -111,4 +113,13 @@ public interface Api {
     Call<DeleteIdResponse>deleteid(@Header("Authorization") String Authorization,
                                    @Path("UserId") String userid
                                    );
+
+    @Multipart
+    @POST("document/upload")
+    Call<UploadfileModel>upload(
+            @Header("Authorization") String Authorization,
+            @Part MultipartBody.Part file
+//            @Part("file") RequestBody file
+    );
 }
+
