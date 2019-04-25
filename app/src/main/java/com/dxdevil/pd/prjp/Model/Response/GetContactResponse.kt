@@ -5,14 +5,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-
-data class ContactList(
-    @SerializedName("contact")
-    var contacts: ArrayList<ContactModel>
-)
-
-
-data class Datum (
+data class Data (
 
     @SerializedName("Id")
     var id: String,
@@ -35,13 +28,13 @@ data class Datum (
 )
 
 
- data class GetContactResponse (
+ data class ContactList (
 
 
      @SerializedName("message")
      var message:String,
      @SerializedName("data")
-     var data: List<Datum>? = null,
+     var data: List<Data>?,
      @SerializedName("license")
      var license:Object
  )

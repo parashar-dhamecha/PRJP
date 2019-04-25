@@ -106,6 +106,7 @@
     <string name="Search">Search</string>
     <string name="CreateContact">Create Contact</string>
     <string name="CountryCode">Code</string>
+    <string name="SaveContact">Save Contact</string>
 
 
     <string name="CreateGroup">Create Group</string>

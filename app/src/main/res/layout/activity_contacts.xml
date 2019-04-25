@@ -10,14 +10,13 @@
                                           android:id="@+id/search"
                                           android:layout_height="wrap_content"
                                           tools:ignore="MissingConstraints"
-                                          android:layout_marginTop="8dp"
-                                          app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-                                          app:layout_constraintBottom_toTopOf="@+id/r1"
+                                          android:layout_marginTop="16dp"
+                                          app:layout_constraintTop_toTopOf="parent"
                                           app:layout_constraintStart_toStartOf="parent"
                                           android:layout_marginStart="8dp"
-                                          app:layout_constraintVertical_bias="0.259" android:layout_marginEnd="8dp"
+                                          android:layout_marginEnd="8dp"
                                           app:layout_constraintEnd_toStartOf="@+id/adduser"
-                                          app:layout_constraintHorizontal_bias="0.176">
+                                          app:layout_constraintHorizontal_bias="0.0">
 
     </androidx.appcompat.widget.SearchView>
     <Button
@@ -26,24 +25,28 @@
             android:background="@drawable/ic_person_add_black_24dp"
             android:id="@+id/adduser"
             android:layout_marginTop="20dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toStartOf="@+id/grp"
-            android:layout_marginEnd="24dp"/>
-    <Button
-            android:layout_width="40dp"
-            android:layout_height="35dp"
-            android:background="@drawable/ic_group_add_black_24dp"
-            android:id="@+id/grp"
-            android:layout_marginTop="20dp"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"/>
+            tools:layout_editor_absoluteX="299dp"/>
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/r1"
-            android:layout_width="390dp"
-            android:layout_height="476dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp10"
+            android:layout_marginLeft="@dimen/dp10"
             android:scrollbars="vertical" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText4" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.476"
-            app:layout_constraintVertical_bias="1.0"/>
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="48dp" app:layout_constraintTop_toBottomOf="@+id/search"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.157" app:layout_constraintVertical_bias="0.047"/>
+    <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="@+id/r1"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

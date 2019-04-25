@@ -4,7 +4,7 @@ import com.dxdevil.pd.prjp.Model.Request.*;
 import com.dxdevil.pd.prjp.Model.Request.Document.ListOfDocument;
 import com.dxdevil.pd.prjp.Model.Response.*;
 import com.dxdevil.pd.prjp.Model.Response.ChangePassword.ChangePasswordModel;
-import com.dxdevil.pd.prjp.Model.Response.Document.DocDetailsResponse;
+import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.DocDetailsResponse;
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse;
 import com.dxdevil.pd.prjp.Model.Response.SignUpModel;
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse;
@@ -22,7 +22,9 @@ public interface Api {
     @GET("account/check-user-exists/{id}")
     Call<UserExistResponse>isUserExist(@Path("id") String  id);
 
-
+    @GET("contact/get-contact-by-id/{UserId}")
+    Call<GetContactIdResponse>getcontactid(@Header("Authorization") String Authorization,
+                                             @Path("UserId") String UserId);
 
     @POST("account/login")
     Call<LoginModel>login(@Body Login login );
@@ -58,7 +60,7 @@ public interface Api {
     );
 
     @GET("contact/get")
-    Call<GetContactResponse>getcontactresponse(
+    Call<ContactList>getcontactresponse(
             @Header("Authorization") String Authorization
     );
 
@@ -98,4 +100,15 @@ public interface Api {
             @Path("UserId") String userid,
         @Body UpdateProfile updateProfile
     );
+
+    @PUT("contact/update/{UserId}")
+    Call<UpdateIdResponse>updateid(@Header("Authorization") String Authorization,
+                                     @Path("UserId") String userid,
+                                     @Body UpdateIdRequest updateId
+    );
+
+    @DELETE("contact/delete/{UserId}")
+    Call<DeleteIdResponse>deleteid(@Header("Authorization") String Authorization,
+                                   @Path("UserId") String userid
+                                   );
 }
