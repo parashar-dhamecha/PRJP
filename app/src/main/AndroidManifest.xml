@@ -86,9 +86,7 @@
         </activity>
 
         <activity android:name=".DocActivity"
-        android:label="@string/documents"
         android:parentActivityName=".Dashboard">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

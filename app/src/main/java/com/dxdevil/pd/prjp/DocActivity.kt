@@ -15,107 +15,83 @@ import com.dxdevil.pd.prjp.data.*
 import kotlinx.android.synthetic.main.activity_doc.*
 
 
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class DocActivity : AppCompatActivity() {
-    var currentPage=0
+   private var currentPage=0
     var totalPages:Int=0
 
-   // var cpage:Int=0
     private var adapter: AllDocumentsAdapter? = null
     private lateinit var documentList: ArrayList<Document>
 
     lateinit var alldocs : List<Document>
-    val token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.N9w0jV/v+9PKjqTQVRpre3RUiN3wdIdsrq1N180MSCy6TWjRC69b0sK/LNMIiAMehYWjcQhhc3gpadVlW//A/OjbgREERhooiUtBj3Qc3bispZ0uzeoYMwXx1SAULv/lwD+6crG4AJf/zBCPXQCvwyRlI8mw9rwmLCdAJon2bxLr/5MIZwisAOPvC9BnJlAW7t38vIkXhXAB3cK7BIZM+jTIoHfZGQXHm2GeRgGOCTTq3MigXtbb3utVCNCZ1EuRkbd6G24UD8/0HJ+yTYJwJiNwcj5Q6t59kzyGezMGcVrMVde2d8kEOe5XnDkv/Wn5JPXqud+6WL4Z/hbvo6IJpUnatlNZD1p7fFHFecG6ChWnpVCNov+BPxL/k8+ROCb1zSMHPTr4c7TD2PNtp8LwDFQysvGbPThyD9ZFd/3ZB8m1EtXbOImhDNRxEUHGHnwrTObIY1gUycJ3gwCz8HsCGxY+62EnBA1rxG0TqERjQzqjaGeBqR9f4okL5KE+L5v/aGoUC4+XLEYsdsCjdn0VHtC7JEOK3NWcOIeuZWwEqLmJrZ7mF71HBjtjHiGIgzy5pVetEl3jEllw0F3Q99nDAYZIA1FQEeiXsUmLjDiHv/JOA2Ace7Oxybofke7dJc+X5hXJvSc6j5PgdwRA9+BP27ohQdBXADrh45RxeNbzdIVIlhRJ7Qqu+yBFucqQy5whh2ryEU0QEpDBOCeVIUhIceiUNB/oFf65TqohBfR+E8szzLkNXV1em0k6e5JZXXGBYQDXAng+3ps9mA4eRQ/hH2fR2hmjhOT+opPCg/DXt6L8tUcob59ecGerJhlaCB5/bHjXlDuouUnfC84PXG+ropSrbVD0RoSjE6pdrmnQCR+AFnjMcKDVL8UhQ/DoNlxE.nqkuagfxdK5CyM6Fv7ypOZTgOrT16altAWi1nQEjIKI"
-
-   // @SuppressLint("InflateParams")
-
+    val token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.N9w0jV/v+9PKjqTQVRpre3RUiN3wdIdsrq1N180MSCy6TWjRC69b0sK/LNMIiAMehYWjcQhhc3gpadVlW//A/OjbgREERhooiUtBj3Qc3bispZ0uzeoYMwXx1SAULv/lwD+6crG4AJf/zBCPXQCvwyRlI8mw9rwmLCdAJon2bxLr/5MIZwisAOPvC9BnJlAW7t38vIkXhXAB3cK7BIZM+jTIoHfZGQXHm2GeRgGOCTTq3MigXtbb3utVCNCZ1EuRkbd6G24UD8/0HJ+yTYJwJiNwcj5Q6t59kzyGezMGcVrMVde2d8kEOe5XnDkv/Wn5JPXqud+6WL4Z/hbvo6IJpUnatlNZD1p7fFHFecG6ChWnpVCNov+BPxL/k8+ROCb1zSMHPTr4c7TD2PNtp8LwDFQysvGbPThyD9ZFd/3ZB8m1EtXbOImhDNRxEUHGHnwrTObIY1gUycJ3gwCz8HsCGxY+62EnBA1rxG0TqERjQzqjaGeBqR9f4okL5KE+L5v/aGoUC4+XLEYsdsCjdn0VHtC7JEOK3NWcOIeuZWwEqLmJrZ7mF71HBjtjHiGIgzy5pVetEl3jEllw0F3Q99nDAYZIA1FQEeiXsUmLjDiHv/JOA2Ace7Oxybofke7dJc+X5hXJvSc6j5PgdwRA9+BP27ohQdBXADrh45RxeNbzdIVIlhRJ7Qqu+yBFucqQy5whh2ryEU0QEpDBOCeVIUhIceiUNB/oFf65TqohBfR+E8szzLkNXV1em0k6e5JZXXGBYQDXAng+3ps9mA4eRQ/hH2fR2hmjhOT+opPCg/DXt6KAlJCOWGyFV9C/LXlPsRXIR32P121WCDyd3hRDVN8Pr28gydL+uDRt2VggwjP76NqzGh+u4LLAnHJalhZjyWPw.T079IGySX_3y0NFRRpVcxNEfq77mLZrgxt-DDPcHcZg"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_doc)
+        setTitle(R.string.documents)
 
         apiCalling(0, 0, token)
 
-       // page_number.setText(cpage)
-
-            button_previous.isClickable=false
-
         button_next.setOnClickListener {
-            if(totalPages==1||currentPage>=totalPages.inc())
-                Toast.makeText(this@DocActivity,"There are no more Documents",Toast.LENGTH_SHORT).show()
-            else{
+            button_previous.isEnabled=true
                 currentPage +=1
                 apiCalling(0,currentPage,token)}
 
-        }
-        button_previous.setOnClickListener {
+      button_previous.setOnClickListener {
             currentPage -= 1
             apiCalling(0,currentPage,token)
         }
 
-
-
-
+       
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.menu, menu)
         return true
     }
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         when (item!!.itemId) {
 
             R.id.allDocuments -> {
-
-                Toast.makeText(applicationContext, "All documents", Toast.LENGTH_SHORT).show()
                 apiCalling(0,currentPage,token)
                 return true
             }
 
             R.id.menu_awaitingMySign -> {
-
-                Toast.makeText(applicationContext, "Awaiting My sign", Toast.LENGTH_SHORT).show()
                 apiCalling(0,currentPage,token)
                 return true
             }
 
             R.id.menu_awaitingOthers -> {
-
-                Toast.makeText(applicationContext, "Awaiting Others", Toast.LENGTH_SHORT).show()
                 apiCalling(3,currentPage,token)
                 return true
             }
 
             R.id.menu_completed -> {
 
-                Toast.makeText(applicationContext, "Completed", Toast.LENGTH_SHORT).show()
                 apiCalling(2,currentPage,token)
                 return true
             }
 
 
             R.id.menu_duesoon -> {
-
-                Toast.makeText(applicationContext, "Due Soon", Toast.LENGTH_SHORT).show()
                 apiCalling(6,currentPage,token)
                 return  true
             }
 
             R.id.menu_Declined -> {
-                Toast.makeText(applicationContext, "Declined", Toast.LENGTH_SHORT).show()
                 apiCalling(7,currentPage,token)
                 return  true
               }
             }
         return super.onOptionsItemSelected(item)
         }
-
-
 
     @SuppressLint("InflateParams")
     private fun apiCalling(status:Int, currentpage:Int, token:String ){
@@ -172,8 +148,21 @@ class DocActivity : AppCompatActivity() {
 
                             alldocs=response.body()!!.data[0].documents
                             totalPages=response.body()!!.data[0].totalPages
-                            //cpage=response.body()!!.data[0].currentPage
+
                             adapter!!.notifyDataSetChanged()
+
+                            cpage_number.text=response.body()!!.data[0].currentPage.toString()
+                            total_pages.text=response.body()!!.data[0].totalPages.toString()
+
+                           if(response.body()!!.data[0].currentPage==1)
+                                button_previous.isEnabled=false
+                            if(cpage_number.text==total_pages.text)
+                                button_next.isEnabled=false
+                            if(cpage_number.text!=total_pages.text) {
+                                button_next.isEnabled = true
+                            }
+                            if(response.body()!!.data[0].totalRows==0)
+                                Toast.makeText(this@DocActivity, "No Documents", Toast.LENGTH_SHORT).show()
 
                             dialog.dismiss()
 

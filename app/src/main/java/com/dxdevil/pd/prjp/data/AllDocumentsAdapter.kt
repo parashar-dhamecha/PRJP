@@ -5,6 +5,7 @@ import android.graphics.Color.rgb
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -68,7 +69,6 @@ class AllDocumentsAdapter(
             var docname:TextView = itemView.findViewById(R.id.txt_doc) as TextView
             var docstatus:TextView=itemView.findViewById(R.id.doc_status) as TextView
             var fileimage:ImageView = itemView.findViewById(R.id.file_image) as ImageView
-
     }
 
 }
