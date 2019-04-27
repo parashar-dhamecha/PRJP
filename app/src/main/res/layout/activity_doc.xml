@@ -29,7 +29,6 @@
             app:layout_constraintStart_toStartOf="parent"
     >
         <Button
-                android:text="@string/Previous"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:gravity="center"
@@ -45,7 +44,6 @@
                 tools:layout_conversion_wrapHeight="105"
                 app:layout_constraintBottom_toBottomOf="parent"/>
         <Button
-                android:text="@string/next"
                 android:background="@drawable/mybutton"
                 android:gravity="center"
                 android:layout_width="60dp"

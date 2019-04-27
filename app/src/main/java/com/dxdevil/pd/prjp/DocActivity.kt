@@ -20,6 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class DocActivity : AppCompatActivity() {
    private var currentPage=0
     var totalPages:Int=0
@@ -114,6 +115,7 @@ class DocActivity : AppCompatActivity() {
 
         val api = RetrofitClient.getInstance().api as Api
 
+
         val call = api.doclist(
             token, ListOfDocument(
                 status,
@@ -178,7 +180,7 @@ class DocActivity : AppCompatActivity() {
                 }
             })
         } catch (e: Exception) {
-            Toast.makeText(this@DocActivity, "Excetion", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@DocActivity, e.message, Toast.LENGTH_SHORT).show()
         }
     }
 }
