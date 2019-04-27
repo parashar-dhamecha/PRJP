@@ -5,19 +5,20 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_dashboarrd.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.content_setting.*
 
 
-class Settings : AppCompatActivity() {
-
+class Settings : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var ntoggle: ActionBarDrawerToggle
@@ -25,7 +26,11 @@ class Settings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-
+        drawerLayout = findViewById(R.id.drawer_layout_setting)
+        ntoggle= ActionBarDrawerToggle(this,drawerLayout,R.string.navigation_drawer_open,R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(ntoggle)
+        ntoggle.syncState()
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         myaccountcv.setOnClickListener {
             startActivity(Intent(applicationContext,ProfileActivity::class.java))
@@ -39,5 +44,44 @@ class Settings : AppCompatActivity() {
             startActivity(Intent(applicationContext,LoginActivity::class.java))
         }
 
+    }
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(ntoggle.onOptionsItemSelected(item))
+            return true
+
+        return super.onOptionsItemSelected(item)
+    }
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.dashboard -> {
+                // Handle the camera action
+            }
+            R.id.documents -> {
+
+            }
+            R.id.contacts -> {
+
+            }
+            R.id.settings -> {
+                Toast.makeText(this@Settings,"settings",Toast.LENGTH_LONG)
+                startActivity(Intent(this@Settings,Settings::class.java))
+                drawer_layout.closeDrawer(GravityCompat.START)
+            }
+            R.id.logout -> {
+                var sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
+                sp.edit().remove("Token").apply()
+                sp.edit().remove("RefreshToken").apply()
+                startActivity(Intent(this@Settings,LoginActivity::class.java))
+                drawer_layout.closeDrawer(GravityCompat.START)
+            }
+        }
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
+    }
+    override fun onKeyDown(keycode:Int, event: KeyEvent):Boolean {
+        if (keycode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(true)
+        }
+        return super.onKeyDown(keycode, event)
     }
 }

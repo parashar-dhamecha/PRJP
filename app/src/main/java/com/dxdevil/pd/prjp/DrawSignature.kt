@@ -54,7 +54,6 @@ class DrawSignature : AppCompatActivity() {
                 var b :ByteArray = baos.toByteArray()
                 var signstring = Base64.encodeToString(b,Base64.DEFAULT)
 
-                //api caling
                 var pd = ProgressDialog(this)
                 pd.setMessage("Saving..")
                 pd.isIndeterminate = true

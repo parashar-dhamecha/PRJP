@@ -1,9 +1,7 @@
-<resources >
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Cygnature</string>
     <string name="title_activity_login">Sign in</string>
-
     <!-- Strings related to login -->
-
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -54,7 +52,6 @@
     <string name="Register">Register</string>
     <string name="get_started">Get Started</string>
     <string name="AlreadyRegister">Already Registered? Log In</string>
-    <string name="details">Details</string>
 
     <!--Reg Page Hints-->
     <string name="fname">First Name*</string>
@@ -100,9 +97,8 @@
 
     <!-- Notification -->
     <string name="notification_title">Notifications</string>
-
-
     <!-- Contacts-->
+
 
     <string name="MobileNo">Mobile No</string>
     <string name="JobTitle">JobTitle</string>
@@ -110,9 +106,9 @@
     <string name="Search">Search</string>
     <string name="CreateContact">Create Contact</string>
     <string name="CountryCode">Code</string>
+
+
     <string name="CreateGroup">Create Group</string>
-
-
     <!-- Edit Profile Page Strings-->
     <string name="edit_title">Edit Profile</string>
     <string name="Image_des">User_image</string>
@@ -158,13 +154,5 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="done">done</string>
-    <string name="awaiting">Awaiting My sign</string>
-    <string name="Declined">Declined</string>
-    <string name="Loading">Loading…</string>
-    <string name="Previous">prev.</string>
-    <string name="next">next</string>
-    <string name="devide">/</string>
-    <string name="CurrentPage">1</string>
-    <string name="total">2</string>
 
 </resources>

@@ -1,26 +1,27 @@
 package com.dxdevil.pd.prjp.Model.Response;
 
+
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UploadfileModel {
+public class DeleteIdResponse {
 
     @SerializedName("message")
     @Expose
     public String message;
     @SerializedName("data")
     @Expose
-    public List<UploadDatum> data = null;
+    public List<Boolean> data = null;
     @SerializedName("license")
     @Expose
-    public UploadLicense license;
+    public Object license;
 
     /**
      * No args constructor for use in serialization
      *
      */
-    public UploadfileModel() {
+    public DeleteIdResponse() {
     }
 
     /**
@@ -29,7 +30,7 @@ public class UploadfileModel {
      * @param data
      * @param license
      */
-    public UploadfileModel(String message, List<UploadDatum> data, UploadLicense license) {
+    public DeleteIdResponse(String message, List<Boolean> data, Object license) {
         super();
         this.message = message;
         this.data = data;

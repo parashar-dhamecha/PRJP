@@ -23,7 +23,9 @@ public interface Api {
     @GET("account/check-user-exists/{id}")
     Call<UserExistResponse>isUserExist(@Path("id") String  id);
 
-
+    @GET("contact/get-contact-by-id/{UserId}")
+    Call<GetContactIdResponse>getcontactid(@Header("Authorization") String Authorization,
+                                             @Path("UserId") String UserId);
 
     @POST("account/login")
     Call<LoginModel>login(@Body Login login );
@@ -59,7 +61,7 @@ public interface Api {
     );
 
     @GET("contact/get")
-    Call<GetContactResponse>getcontactresponse(
+    Call<ContactList>getcontactresponse(
             @Header("Authorization") String Authorization
     );
 
@@ -100,11 +102,23 @@ public interface Api {
         @Body UpdateProfile updateProfile
     );
 
+    @PUT("contact/update/{UserId}")
+    Call<UpdateIdResponse>updateid(@Header("Authorization") String Authorization,
+                                     @Path("UserId") String userid,
+                                     @Body UpdateIdRequest updateId
+    );
+
+    @DELETE("contact/delete/{UserId}")
+    Call<DeleteIdResponse>deleteid(@Header("Authorization") String Authorization,
+                                   @Path("UserId") String userid
+                                   );
+
     @Multipart
     @POST("document/upload")
-    Call<UploadfileModel> uploadfile(
+    Call<UploadfileModel>upload(
             @Header("Authorization") String Authorization,
             @Part MultipartBody.Part file
+//            @Part("file") RequestBody file
     );
 }
 
