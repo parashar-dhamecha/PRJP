@@ -9,7 +9,6 @@ import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocument
 import com.dxdevil.pd.prjp.Model.Response.SignUpModel;
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
