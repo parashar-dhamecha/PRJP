@@ -19,6 +19,7 @@ import retrofit2.Response
 
 class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
     RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
+
     var sp = context.getSharedPreferences("userid",0) as SharedPreferences
     var ed = sp.edit()
 
@@ -34,13 +35,17 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
          holder.pro.setImageResource(R.drawable.user)
         holder.name.text = Con[position].name
+        holder.email.text=Con[position].email
+        holder.mobileno.text=Con[position].mobileNumber
+
+
 
         // Log.d("ContactsAdapter", "email" + Con[position].email)
        holder.editbutton.setOnClickListener{
                var s = Con[position].id
            ed.putString("userid",s)
            ed.commit()
-            val intent = Intent(context, UpdateContact::class.java)
+           val intent = Intent(context, UpdateContact::class.java)
             context.startActivity(intent)
 
         }
@@ -116,8 +121,6 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
             }
             builder.setNegativeButton("No") { dialogInterface:DialogInterface?, i:Int->
 
-
-
             }
 
             //builder.show()
@@ -137,11 +140,6 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
 //
 //        }
 
-        /* fun setContactsListItems(Con: ArrayList<ContactModel>)
-         {
-             this.Con=Con
-             notifyDataSetChanged()
-         }*/
 
 
     }
@@ -149,6 +147,8 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var name: TextView = itemView.findViewById(R.id.name) as TextView
         var pro: ImageView = itemView.findViewById(R.id.pro) as ImageView
+        var email:TextView=itemView.findViewById(R.id.email) as TextView
+        var mobileno:TextView=itemView.findViewById(R.id.mobileno) as TextView
 //        var del: Button = itemView.findViewById(R.id.del) as Button
         // @SuppressLint("WrongViewCast")
         var delbutton: ImageButton = itemView.findViewById(R.id.delbutton) as ImageButton

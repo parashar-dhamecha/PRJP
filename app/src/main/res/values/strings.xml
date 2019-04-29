@@ -107,6 +107,8 @@
     <string name="CreateContact">Create Contact</string>
     <string name="CountryCode">Code</string>
     <string name="SaveContact">Save Contact</string>
+    <string name="Contacts">Contacts</string>
+    <string name="Add">Add</string>
 
 
     <string name="CreateGroup">Create Group</string>

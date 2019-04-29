@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#4caa4f</color>
-    <color name="colorPrimaryDark">#357537</color>
+    <color name="colorPrimaryDark">#3E8140</color>
     <color name="colorAccent">#192DB6</color>
     <color name="textcolor">#140336</color>
     <color name="edittext">#28B463</color>
@@ -11,4 +11,5 @@
     <color name="digitbg">#AED581</color>
     <color name="textcolor3">#FAF9F9</color>
     <color name="textcolor4">#E28FA0A0</color>
+    <color name="deletebutton">#FF0000</color>
 </resources>

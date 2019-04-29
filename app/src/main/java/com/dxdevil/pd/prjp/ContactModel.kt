@@ -3,8 +3,7 @@ package com.dxdevil.pd.prjp
 import java.io.Serializable
 
 
-data class ContactModel(var name:String, var photo: Int, var isSelected: Boolean = false):Serializable
-
+data class ContactModel(var name:String, var photo: Int, var isSelected: Boolean = false, var email:String, var mobileno:String ):Serializable
 
 
 

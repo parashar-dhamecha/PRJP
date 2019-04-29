@@ -1,52 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    xmlns:tools="http://schemas.android.com/tools"
-                                                   android:orientation="horizontal"
-                                                   android:layout_width="match_parent"
+                                                   android:orientation="vertical"
+                                                   android:layout_width="wrap_content"
                                                    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.SearchView android:layout_width="220dp"
+    <androidx.appcompat.widget.SearchView android:layout_width="match_parent"
                                           android:id="@+id/search"
                                           android:layout_height="wrap_content"
-                                          tools:ignore="MissingConstraints"
-                                          android:layout_marginTop="16dp"
-                                          app:layout_constraintTop_toTopOf="parent"
-                                          app:layout_constraintStart_toStartOf="parent"
+                                          android:layout_marginTop="8dp"
                                           android:layout_marginStart="8dp"
-                                          android:layout_marginEnd="8dp"
-                                          app:layout_constraintEnd_toStartOf="@+id/adduser"
-                                          app:layout_constraintHorizontal_bias="0.0">
+                                          android:hint="@string/Search"
+                                          android:text="@string/Search"
+                                          android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+    >
 
     </androidx.appcompat.widget.SearchView>
-    <Button
-            android:layout_width="40dp"
-            android:layout_height="35dp"
-            android:background="@drawable/ic_person_add_black_24dp"
-            android:id="@+id/adduser"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="299dp"/>
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/r1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp10"
-            android:layout_marginLeft="@dimen/dp10"
-            android:scrollbars="vertical" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="48dp" app:layout_constraintTop_toBottomOf="@+id/search"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.157" app:layout_constraintVertical_bias="0.047"/>
-    <ProgressBar
-            android:id="@+id/progressbar"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="@+id/r1"/>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="wrap_content"
+                                                         android:layout_height="match_parent">
+
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout android:layout_width="match_parent"
+                                                               android:layout_height="wrap_content"
+                                                               android:id="@+id/swipeRefresh"
+                                                               android:layout_marginTop="@dimen/dp10"
+                                                              >
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/r1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_margin="@dimen/dp10"
+                    android:scrollbars="vertical"   android:layout_marginTop="150dp"  android:layout_marginBottom="8dp" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
