@@ -65,8 +65,6 @@ class ProfileActivity : AppCompatActivity() {
         var api3 = RetrofitClient.getInstance().api as Api
         var callprofile =api3.getprofiledetails(token) as Call<ProfileModel>
 
-        Toast.makeText(this@ProfileActivity,"error1",Toast.LENGTH_LONG)
-
         callprofile?.enqueue(object : Callback<ProfileModel> {
 
             override fun onFailure(call: Call<ProfileModel>, t: Throwable) {

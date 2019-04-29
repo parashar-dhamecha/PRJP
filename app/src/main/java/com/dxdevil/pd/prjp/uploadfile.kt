@@ -13,10 +13,8 @@ import retrofit2.Response
 import java.io.File
 import android.provider.MediaStore
 import android.content.Context
-import android.database.Cursor
 import android.os.Environment
 import android.webkit.MimeTypeMap
-import com.google.android.material.internal.ContextUtils.getActivity
 import android.net.Uri as Uri1
 
 
@@ -36,12 +34,14 @@ class uploadfile : AppCompatActivity() {
                 "application/vnd.ms-powerpoint",
                 "application/x-excel"
                 )
+
             val intent = Intent()
                .setAction(Intent.ACTION_GET_CONTENT).addCategory(Intent.CATEGORY_OPENABLE)
             intent.type = if (mimeTypes.size === 1) mimeTypes[0] else "*/*"
             if (mimeTypes.size > 0) {
                 intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
             }
+
             startActivityForResult(Intent.createChooser(intent, "Select a file"), 111)
 
         }

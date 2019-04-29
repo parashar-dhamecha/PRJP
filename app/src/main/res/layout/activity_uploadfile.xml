@@ -7,13 +7,5 @@
         android:layout_height="match_parent"
         tools:context=".uploadfile">
 
-    <Button
-            android:text="@string/upload"
-            android:layout_width="136dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/uploadfileid"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginTop="64dp" app:layout_constraintHorizontal_bias="0.498" android:layout_margin="20dp"
-            android:background="@drawable/edit_round2" android:padding="@dimen/dp5"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

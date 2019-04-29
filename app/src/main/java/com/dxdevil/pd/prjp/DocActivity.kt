@@ -1,11 +1,19 @@
 package com.dxdevil.pd.prjp
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dxdevil.pd.prjp.Model.AwOthers
@@ -15,7 +23,13 @@ import com.dxdevil.pd.prjp.Model.Document
 import com.dxdevil.pd.prjp.Model.DueSoon
 import com.dxdevil.pd.prjp.Model.Request.Document.ListOfDocument
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse
+import com.google.android.material.navigation.NavigationView
+import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.activity_dashboarrd.*
 import kotlinx.android.synthetic.main.activity_doc.*
+import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.content_docactivity.*
+import kotlinx.android.synthetic.main.content_setting.*
 import kotlinx.android.synthetic.main.item_notification.*
 
 import retrofit2.Call
@@ -28,10 +42,71 @@ class DocActivity : AppCompatActivity() {
     private var layoutManager: RecyclerView.LayoutManager? = null
     private  var size:Int=0
     private var docname:String?=null
-
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var ntoggle: ActionBarDrawerToggle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_doc)
+
+
+
+        drawerLayout = findViewById(R.id.drawer_layout_document)
+        ntoggle= ActionBarDrawerToggle(this,drawerLayout,R.string.navigation_drawer_open,R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(ntoggle)
+        ntoggle.syncState()
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        var profilestring = getSharedPreferences("Token",0).getString("profileimage","")
+        var bytearray = Base64.decode(profilestring, Base64.DEFAULT)
+        var btmap = BitmapFactory.decodeByteArray(bytearray,0,bytearray.size)
+
+        var navid = findViewById<NavigationView>(R.id.nav_view_document)
+        var h = navid.getHeaderView(0)
+        var inagev = h.findViewById<CircleImageView>(R.id.imageview_header)
+        inagev!!.setImageBitmap(btmap)
+
+        var htv = h.findViewById<TextView>(R.id.header_nametv)
+        var htvem = h.findViewById<TextView>(R.id.header_emailtv)
+        htv!!.text =
+            getSharedPreferences("Token",0).getString("fname","").toString()+getSharedPreferences("Token",0).getString("lname","").toString()
+
+        htvem!!.text =getSharedPreferences("Token",0).getString("email","")
+
+
+        nav_view_document!!.setNavigationItemSelectedListener { menuItem ->
+            menuItem.isChecked = true
+            drawerLayout.closeDrawers()
+
+
+            when (menuItem.itemId) {
+                R.id.dashboard -> {
+                    startActivity(Intent(this@DocActivity,Dashboarrd::class.java))
+                    drawer_layout_document.closeDrawer(GravityCompat.START)
+                }
+                R.id.documents -> {
+                    drawer_layout_document.closeDrawer(GravityCompat.START)
+                }
+                R.id.contacts -> {
+                    startActivity(Intent(this@DocActivity,Contacts::class.java))
+                    drawer_layout_document.closeDrawer(GravityCompat.START)
+                }
+                R.id.settings -> {
+                    startActivity(Intent(this@DocActivity,Contacts::class.java))
+                    drawer_layout_document.closeDrawer(GravityCompat.START)
+                }
+                R.id.logout -> {
+                    var sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
+                    sp.edit().remove("Token").apply()
+                    sp.edit().remove("RefreshToken").apply()
+                    startActivity(Intent(this@DocActivity,LoginActivity::class.java))
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                }
+            }
+
+
+            true
+        }
+
 
 
         mrecyclerView.layoutManager = layoutManager
@@ -123,6 +198,9 @@ class DocActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
+        if(ntoggle.onOptionsItemSelected(item))
+            return true
+
         when (item!!.itemId) {
 
             R.id.menu_awsign -> {
@@ -155,6 +233,12 @@ class DocActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+    override fun onKeyDown(keycode:Int, event: KeyEvent):Boolean {
+        if (keycode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(true)
+        }
+        return super.onKeyDown(keycode, event)
     }
 
 }

@@ -2,39 +2,98 @@ package com.dxdevil.pd.prjp
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import android.util.Base64
+import android.view.KeyEvent
+import android.view.MenuItem
+import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dxdevil.pd.prjp.Model.Response.AddContactResponse
-import com.dxdevil.pd.prjp.Model.Response.ContactList
-import com.dxdevil.pd.prjp.Model.Response.GetContactResponse
+import com.google.android.material.navigation.NavigationView
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_contacts.*
-import kotlinx.android.synthetic.main.contactsadapter.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.IOException
-
+import kotlinx.android.synthetic.main.activity_dashboarrd.*
+import kotlinx.android.synthetic.main.content_contacts.*
 class Contacts : AppCompatActivity() {
 
 
     private var contactList = ArrayList<ContactModel>()
-   // private var alertDialog: AlertDialog.Builder?=null
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var ntoggle: ActionBarDrawerToggle
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts)
 
 
+       drawerLayout = findViewById(R.id.drawer_layout_contacts)
+       ntoggle= ActionBarDrawerToggle(this,drawerLayout,R.string.navigation_drawer_open,R.string.navigation_drawer_close)
+       drawerLayout.addDrawerListener(ntoggle)
+       ntoggle.syncState()
+       supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+       var profilestring = getSharedPreferences("Token",0).getString("profileimage","")
+       var bytearray = Base64.decode(profilestring, Base64.DEFAULT)
+       var btmap = BitmapFactory.decodeByteArray(bytearray,0,bytearray.size)
+
+       var navid = findViewById<NavigationView>(R.id.nav_view_contacts)
+       var h = navid.getHeaderView(0)
+       var inagev = h.findViewById<CircleImageView>(R.id.imageview_header)
+       inagev!!.setImageBitmap(btmap)
+
+       var htv = h.findViewById<TextView>(R.id.header_nametv)
+       var htvem = h.findViewById<TextView>(R.id.header_emailtv)
+       htv!!.text =
+           getSharedPreferences("Token",0).getString("fname","").toString()+getSharedPreferences("Token",0).getString("lname","").toString()
+
+       htvem!!.text =getSharedPreferences("Token",0).getString("email","")
+
+
+       nav_view_contacts.setNavigationItemSelectedListener { menuItem ->
+           menuItem.isChecked = true
+           drawerLayout.closeDrawers()
+
+
+           when (menuItem.itemId) {
+               R.id.dashboard -> {
+                   startActivity(Intent(this@Contacts,Dashboarrd::class.java))
+                   drawer_layout_contacts.closeDrawer(GravityCompat.START)
+               }
+               R.id.documents -> {
+                   startActivity(Intent(this@Contacts,DocActivity::class.java))
+                   drawer_layout_contacts.closeDrawer(GravityCompat.START)
+               }
+               R.id.contacts -> {
+                   drawer_layout_contacts.closeDrawer(GravityCompat.START)
+               }
+               R.id.settings -> {
+                   startActivity(Intent(this@Contacts,Settings::class.java))
+                   drawer_layout_contacts.closeDrawer(GravityCompat.START)
+               }
+               R.id.logout -> {
+                   var sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
+                   sp.edit().remove("Token").apply()
+                   sp.edit().remove("RefreshToken").apply()
+                   startActivity(Intent(this@Contacts,LoginActivity::class.java))
+                   drawer_layout.closeDrawer(GravityCompat.START)
+               }
+           }
+
+
+           true
+       }
+
+
+
+
+
+
         contactList = ArrayList()
-
-
-
-
-
-
 
         adduser.setOnClickListener {
 
@@ -148,8 +207,18 @@ class Contacts : AppCompatActivity() {
 
 
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(ntoggle.onOptionsItemSelected(item))
+            return true
 
-
+        return super.onOptionsItemSelected(item)
+    }
+    override fun onKeyDown(keycode:Int, event: KeyEvent):Boolean {
+        if (keycode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(true)
+        }
+        return super.onKeyDown(keycode, event)
+    }
 }
 
 

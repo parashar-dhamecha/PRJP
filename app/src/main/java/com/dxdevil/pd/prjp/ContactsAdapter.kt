@@ -1,20 +1,12 @@
 package com.dxdevil.pd.prjp
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import androidx.core.content.ContextCompat.startActivity
-
-
-
-
-
 
 class ContactsAdapter(private var context: Context, var Con: ArrayList<ContactModel>) :
     RecyclerView.Adapter<ContactsAdapter.ViewHolder>(){
