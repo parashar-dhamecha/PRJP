@@ -9,7 +9,6 @@ import android.widget.Toast
 import com.dxdevil.pd.prjp.Model.Request.AddContactRequest
 import com.dxdevil.pd.prjp.Model.Response.AddContactDatum
 import com.dxdevil.pd.prjp.Model.Response.AddContactResponse
-import com.dxdevil.pd.prjp.Model.Response.Datum
 import kotlinx.android.synthetic.main.activity_add_contact.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,6 +27,12 @@ class AddContact : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_contact)
 
+        val actionbar = supportActionBar
+        actionbar!!.title = "Add Contact"
+        actionbar.setDisplayHomeAsUpEnabled(true)
+        actionbar.setDisplayHomeAsUpEnabled(true)
+
+
 
         CreateContact!!.setOnClickListener{
 
@@ -44,24 +49,24 @@ class AddContact : AppCompatActivity() {
 
 
                 var pd = ProgressDialog(this)
-                pd.setMessage("Adding Contact...")
+                pd.setMessage("Adding Contact")
                 pd.isIndeterminate = true
                 pd.show()
-               // var tok:String = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.N9w0jV/v+9PKjqTQVRprezt4+qqzzgZZjY68hHbb/VdLYi/P2x192in+N/puRDAp8zEKMMqdnOPVvgPE6C6bukPznNX+g+jkb5sv8FfeS7Q7UXY/QIHjeYLQJ4Tk0Aziq/VdzyrDQLOq20vUdEYJjwIBiq1pk+R/7xBYPpEEPI6lQtTxggOw72uJnYt/kwviC0i6ppoGmWZHU5sX4ZyNBnhSp5RPMYvQKENl5w3MdkGet6cb9MaMD55LM0Ytqy2DMHMqW4H1t4ql13hFw3c/1MhX/sNci8G6WNp1Bo6qnFwi+eu6ABRNaQ0C4lXKjy4K/9Mj9ZN6dqQLCWdpsbW6Bx1K46PitJsHNo6bqFVlUWyxRHNeIJKu655Ema646p9o62EeO4LDIrUhOJLPMpXXDwbdcgHAsLBpM/TMfOdQlaLsB2d6rOlkqlh0n8ForetQ+M19xiDH0C+YxrDeDlnY6v62VfXDwwayEVEgmjZv2SM/CKPoyQgHsYEh3tGXECqP9UVxmqL+jPbLhIrTlku4Z1LsZXmRVc/gEq1/NJPIU7DtF1PEkfIs4VUHuwGClKyyQ2GfWmecbn5RZ4WF4HZpOr8KUDo5TsLVee+4w0W75MRPSaQZVRBz/AaW5owhvQ1DsBzHmO01XfKxj5oXASQUaSOA6OoAyFgrA+JHMi3g10sjOVFPhiHSDyOPenpYcw7rrxB7pXpVEdnW1gen3oT5BSJ+PzMfFkt2sg0Mg4KRFMMG0/cG6wP5C1W2gKQT2hVENRxfTYeifEjLE0oTVot9g+xlczLrrvAjqJS9SuHk+nErJo2j31G2MKpTcEMv5vUrc0B9K2sZT4fZJX8rgfZEfX9Z/N2zUNXAZZ7g3vdBtGDYgndGnmmOhylClGUaS8uV.I5duylWh-_E4qGtLEYmagN3X33dIZTQ2aGMtyiMKq2k"
+               // var tok:String = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.N9w0jV/v+9PKjqTQVRprezt4+qqzzgZZjY68hHbb/VdLYi/P2x192in+N/puRDAp8zEKMMqdnOPVvgPE6C6bukPznNX+g+jkb5sv8FfeS7Q7UXY/QIHjeYLQJ4Tk0Aziq/VdzyrDQLOq20vUdEYJjwIBiq1pk+R/7xBYPpEEPI6lQtTxggOw72uJnYt/kwviC0i6ppoGmWZHU5sX4ZyNBnhSp5RPMYvQKENl5w3MdkGet6cb9MaMD55LM0Ytqy2DMHMqW4H1t4ql13hFw3c/1MhX/sNci8G6WNp1Bo6qnFwi+eu6ABRNaQ0C4lXKjy4K/9Mj9ZN6dqQLCWdpsbW6Bx1K46PitJsHNo6bqFVlUWyxRHNeIJKu655Ema646p9o62EeO4LDIrUhOJLPMpXXDwbdcgHAsLBpM/TMfOdQlaLsB2d6rOlkqlh0n8ForetQ+M19xiDH0C+YxrDeDlnY6v62VfXDwwayEVEgmjZv2SM/CKPoyQgHsYEh3tGXECqP9UVxmqL+jPbLhIrTlku4Z1LsZXmRVc/gEq1/NJPIU7DtF1PEkfIs4VUHuwGClKyyQ2GfWmecbn5RZ4WF4HZpOr8KUDo5TsLVee+4w0W75MRPSaQZVRBz/AaW5owhvQ1DsBzHmO01XfKxj5oXASQUaSOA6OoAyFgrA+JHMi3g10sjOVFPhiHSDyOPenpYcw7rrxB7pXpVEdnW1gen3oT5BSJ+PzMfFkt2sg0Mg4KRFMMG0/cG6wP5C1W2gKQT2hVENRxfTYeifEjLE0oTVot9g+xlczLrrvAjqJS9SuHk+nHJvXRxzQ5h1YwGl2ecOTud5xdrVjj26lFvfLmEdQRMvKV6IzYxOnoizyvng9j5awF8o0AS+LSMvvrAIi/Tu56J.dhaFBoNQUKEFO6u7hwaPv7I8aT8CgCCM6zxn8_xTErw"
                 var token = getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token","")
                 val apiadd = RetrofitClient.getInstance()!!.api as Api
                 val calladd =apiadd.addcontact(token,
-                   AddContactRequest( "abc",
-                     "abcc@gmail.com",
+                   AddContactRequest(etName!!.text.toString(),etEmail!!.text.toString() ,
                        91,
-                       "94279666887",
-                       "wr",
-                       "wr")) as Call<AddContactResponse>
+                               etMobileNo!!.text.toString(),
+                       etJobTitle.text.toString(),
+                       etJobDescription.text.toString()
+                       )) as Call<AddContactResponse>
 
                 calladd?.enqueue(object : Callback<AddContactResponse>{
                     override fun onFailure(call: Call<AddContactResponse>, t: Throwable) {
                         pd.dismiss()
-                        Toast.makeText(this@AddContact,t.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@AddContact,"Check your Internet Connection", Toast.LENGTH_LONG).show()
                     }
 
                     override fun onResponse(call: Call<AddContactResponse>, response: Response<AddContactResponse>) {
@@ -145,14 +150,14 @@ class AddContact : AppCompatActivity() {
             flagJd= true
         }
 
-        if (cid.isEmpty() ||!Numberregex.matches(cid)||cid.length>3) {
+        if (cid.isEmpty() ||!Numberregex.matches(cid)||cid.length>2) {
 
-            etcode!!.setError("Enter a valid company name")
+            etcode!!.setError("Enter a valid country name")
         } else {
             flagcid= true
         }
 
-        if (mn.isEmpty() || mn.length > 15 || !Numberregex.matches(mn)) {
+        if (mn.isEmpty() || mn.length > 10|| !Numberregex.matches(mn)) {
             etMobileNo!!.setError("Enter a valid MobileNo")
         } else {
             flagmn = true

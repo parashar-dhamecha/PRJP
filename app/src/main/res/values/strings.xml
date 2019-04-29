@@ -70,6 +70,12 @@
     <string name="name">Name</string>
     <string name="signature">Signature</string>
     <string name="upload">Upload Document</string>
+    <string name="CurrentPage">1</string>
+    <string name="devide">/</string>
+    <string name="total">2</string>
+    <string name="Declined">Declined</string>
+
+
 
 
     <!-- Profile Page Strings-->
@@ -88,6 +94,9 @@
 
     <!-- contacts strings-->
     <string name="contact_name">Juhi</string>
+    <string name="SaveContact">Save Contact</string>
+
+
     <string-array name="names">
         <item>pooja</item>
         <item>juhi</item>
@@ -106,6 +115,9 @@
     <string name="Search">Search</string>
     <string name="CreateContact">Create Contact</string>
     <string name="CountryCode">Code</string>
+    <string name="SaveContact">Save Contact</string>
+    <string name="Contacts">Contacts</string>
+    <string name="Add">Add</string>
 
 
     <string name="CreateGroup">Create Group</string>
@@ -154,5 +166,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="done">done</string>
+    <string name="Loading">Loading...</string>
+    <string name="awaiting">Awaiting My Sign</string>
 
 </resources>
