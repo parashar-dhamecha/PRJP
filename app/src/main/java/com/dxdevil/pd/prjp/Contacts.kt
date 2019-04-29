@@ -30,7 +30,7 @@ class Contacts : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts)
 
-
+//  Drawer Code
        drawerLayout = findViewById(R.id.drawer_layout_contacts)
        ntoggle= ActionBarDrawerToggle(this,drawerLayout,R.string.navigation_drawer_open,R.string.navigation_drawer_close)
        drawerLayout.addDrawerListener(ntoggle)
@@ -135,22 +135,6 @@ class Contacts : AppCompatActivity() {
 
                     println("contact list size" + contactList)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     // contactList= ContactModel(response.body.data[0].name.toString())
                     //  r1.adapter=ContactsAdapter(this@Contacts,response?.body().)
 
@@ -168,8 +152,7 @@ class Contacts : AppCompatActivity() {
         })
     }*/
 
-
-
+// contacts
 
         private fun setRecyclerView() {
      contactList.add(
@@ -203,7 +186,6 @@ class Contacts : AppCompatActivity() {
 
 
         }
-
 
 
 

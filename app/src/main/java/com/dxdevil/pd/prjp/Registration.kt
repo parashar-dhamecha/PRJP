@@ -110,7 +110,7 @@ class Registration : AppCompatActivity() {
                                                 if (response.isSuccessful) {
                                                     pd.dismiss()
                                                     Toast.makeText(this@Registration, response.body()!!.message, Toast.LENGTH_SHORT).show()
-
+                                                    startActivity(Intent(this@Registration,LoginActivity::class.java))
                                                 } else {
                                                     pd.dismiss()
                                                     Toast.makeText(this@Registration,"error", Toast.LENGTH_SHORT).show()
@@ -148,7 +148,6 @@ class Registration : AppCompatActivity() {
                         Toast.makeText(this@Registration,"Check your connection", Toast.LENGTH_LONG).show()
                     }
                 })
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             }
         }

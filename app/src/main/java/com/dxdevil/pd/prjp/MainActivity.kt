@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                         pd.dismiss()
                         call.cancel()
                         Toast.makeText(this@MainActivity, "check your network connection", Toast.LENGTH_LONG).show()
+                        startActivity(Intent(this@MainActivity,LoginActivity::class.java))
                     }
 
                     override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
@@ -111,6 +112,7 @@ class MainActivity : AppCompatActivity() {
                                 "Something went wrong please try again",
                                 Toast.LENGTH_LONG
                             ).show()
+                            startActivity(Intent(this@MainActivity,LoginActivity::class.java))
                         }
 
                     }

@@ -41,7 +41,7 @@ import retrofit2.Response
 import java.lang.Exception
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class Dashboarrd : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class Dashboarrd : AppCompatActivity(){
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var ntoggle: ActionBarDrawerToggle
     @SuppressLint("SetTextI18n", "WrongViewCast")
@@ -125,7 +125,6 @@ class Dashboarrd : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
                     awatingotherstv?.text = ob!!.data[0]!!.awaitingOthers.toString()
                     completedtv?.text = ob!!.data[0]!!.completed.toString()
                     duesoontv?.text = ob!!.data[0]!!.expireSoon.toString()
-                    Toast.makeText(this@Dashboarrd,"Success", Toast.LENGTH_LONG).show()
                 }
                 else{
                     Toast.makeText(this@Dashboarrd,response!!.body()!!.message!!.toString(), Toast.LENGTH_LONG).show()
@@ -183,33 +182,6 @@ class Dashboarrd : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.dashboard -> {
-                // Handle the camera action
-            }
-            R.id.documents -> {
-
-            }
-            R.id.contacts -> {
-
-            }
-            R.id.settings -> {
-                Toast.makeText(this@Dashboarrd,"settings",Toast.LENGTH_LONG)
-                startActivity(Intent(this@Dashboarrd,Settings::class.java))
-                drawer_layout.closeDrawer(GravityCompat.START)
-            }
-            R.id.logout -> {
-                var sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
-                sp.edit().remove("Token").apply()
-                sp.edit().remove("RefreshToken").apply()
-                startActivity(Intent(this@Dashboarrd,LoginActivity::class.java))
-                drawer_layout.closeDrawer(GravityCompat.START)
-            }
-        }
-        drawer_layout.closeDrawer(GravityCompat.START)
-        return true
-    }
 
     override fun onKeyDown(keycode:Int, event: KeyEvent):Boolean {
     if (keycode == KeyEvent.KEYCODE_BACK) {
