@@ -23,6 +23,9 @@ public interface Api {
     @GET("account/check-user-exists/{id}")
     Call<UserExistResponse>isUserExist(@Path("id") String  id);
 
+    @POST("account/verify")
+    Call<ResponseBody>verify_user(@Body  VerifyUser verify);
+
     @GET("contact/get-contact-by-id/{UserId}")
     Call<GetContactIdResponse>getcontactid(@Header("Authorization") String Authorization,
                                              @Path("UserId") String UserId);
@@ -88,7 +91,11 @@ public interface Api {
          @Body RefreshToken refreshtoken
     );
     @GET("document/document-detail/{id}")
-    Call<DocDetailsResponse>doc_details(@Path("id") String  id);
+    Call<DocDetailsResponse>docdetails(
+            @Header("Authorization") String Authorization,
+            @Path("id") String  id
+    );
+
 
     @POST("document/documents")
     Call<ListOfDocumentResponse>doclist(

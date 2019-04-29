@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources >
     <string name="app_name">Cygnature</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
@@ -97,6 +97,7 @@
     <string name="SaveContact">Save Contact</string>
 
 
+
     <string-array name="names">
         <item>pooja</item>
         <item>juhi</item>
@@ -115,7 +116,6 @@
     <string name="Search">Search</string>
     <string name="CreateContact">Create Contact</string>
     <string name="CountryCode">Code</string>
-    <string name="SaveContact">Save Contact</string>
     <string name="Contacts">Contacts</string>
     <string name="Add">Add</string>
 
@@ -166,7 +166,11 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="done">done</string>
-    <string name="Loading">Loading...</string>
+    <string name="Loading">Loading…</string>
     <string name="awaiting">Awaiting My Sign</string>
+    <string name="next">next</string>
+    <string name="previous">previ.</string>
+    <string name="uploaded_by">Uploaded By :</string>
+    <string name="hash">Document Hash</string>
 
 </resources>

@@ -2,19 +2,21 @@ package com.dxdevil.pd.prjp
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dxdevil.pd.prjp.Model.Request.SignUp
+import com.dxdevil.pd.prjp.Model.Request.VerifyUser
 import com.dxdevil.pd.prjp.Model.Response.SignUpModel
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse
 import kotlinx.android.synthetic.main.activity_registration.*
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
-import java.util.*
 
 
 val Passwordregex = """^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@${'$'}!%*?&])[A-Za-z\d@${'$'}!%*?&]{8,}${'$'}""".toRegex()
@@ -27,7 +29,7 @@ class Registration : AppCompatActivity() {
 
     @SuppressLint("MissingPermission")
 
-    //private lateinit var fusedLocationClient: FusedLocationProviderClient
+
 
     //@SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +55,7 @@ class Registration : AppCompatActivity() {
             val jt = etJobTitle!!.text.toString()
             val cn =etCompanyName!!.text.toString()
             val cID = etCountryId!!.text.toString()
+            val cIDInt:Int= etCountryId!!.text.toString().toInt()
             val mo =etMobileNo!!.text.toString()
 
 
@@ -110,6 +113,35 @@ class Registration : AppCompatActivity() {
                                                 if (response.isSuccessful) {
                                                     pd.dismiss()
                                                     Toast.makeText(this@Registration, response.body()!!.message, Toast.LENGTH_SHORT).show()
+
+                                                    val call3=api.verify_user(VerifyUser(fname,
+                                                        lname,
+                                                        email,
+                                                        pass,
+                                                        confirmPass,
+                                                        jt,
+                                                        cn,
+                                                        cIDInt,
+                                                        mo,
+                                                        "4.092356",
+                                                        "-56.062161",
+                                                        "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0 Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0",
+                                                        "+05:30"
+                                                    )) as Call<ResponseBody>
+
+                                                    call3.enqueue(object:Callback<ResponseBody>{
+                                                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                                                            Toast.makeText(this@Registration,"Something went Wrong",Toast.LENGTH_SHORT).show()
+                                                        }
+
+                                                        override fun onResponse(
+                                                            call: Call<ResponseBody>,
+                                                            response: Response<ResponseBody>
+                                                        ) {
+                                                          //  Toast.makeText(this@Registration,"verified user successfully",Toast.LENGTH_SHORT).show()
+                                                        }
+                                                    })
+
 
                                                 } else {
                                                     pd.dismiss()

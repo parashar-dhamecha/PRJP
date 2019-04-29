@@ -10,7 +10,9 @@
     <color name="cardbg">#4D9E53</color>
     <color name="digitbg">#AED581</color>
     <color name="textcolor3">#FAF9F9</color>
-    <color name="textcolor4">#E28FA0A0</color>
+    <color name="bg_gray">#ECEDEF</color>
+
+    <!--<color name="textcolor4">#E28FA0A0</color>-->
     <color name="deletebutton">#FF0000</color>
     <color name="textcolor4">#A2DAA4</color>
     <color name="AwaitingMySign">#192DB6</color>
