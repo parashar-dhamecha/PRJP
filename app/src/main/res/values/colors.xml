@@ -17,5 +17,9 @@
     <color name="Completed">#357537</color>
     <color name="DueSoon">#696969</color>
     <color name="Declined">#FF3333</color>
+    <color name="edit">#a8a8a8</color>
+    <color name="delete">#1DC9B7</color>
+    <color name="gray">#ECEDEF</color>
+
 
 </resources>

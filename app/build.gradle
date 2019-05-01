@@ -23,6 +23,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.github.clans:fab:1.6.4'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
@@ -53,4 +54,5 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     //noinspection GradleDynamicVersion
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
 }

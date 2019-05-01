@@ -76,8 +76,6 @@
     <string name="Declined">Declined</string>
 
 
-
-
     <!-- Profile Page Strings-->
     <string name="prf_title">Profile</string>
     <string name="Username">Robert Downey</string>
@@ -115,7 +113,6 @@
     <string name="Search">Search</string>
     <string name="CreateContact">Create Contact</string>
     <string name="CountryCode">Code</string>
-    <string name="SaveContact">Save Contact</string>
     <string name="Contacts">Contacts</string>
     <string name="Add">Add</string>
 

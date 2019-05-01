@@ -6,30 +6,84 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dxdevil.pd.prjp.Model.Response.ContactList
 import com.dxdevil.pd.prjp.Model.Response.Data
 import com.dxdevil.pd.prjp.Model.Response.DeleteIdResponse
+import com.dxdevil.pd.prjp.Model.Response.GetContactIdResponse
+import com.github.clans.fab.FloatingActionMenu
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_bulk_import.*
+import kotlinx.android.synthetic.main.activity_bulk_import.view.*
 import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.contactsadapter.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
+import java.util.Locale.filter
 
 class Contacts : AppCompatActivity() {
     private var contactList = ArrayList<ContactModel>()
+    private var mcontactList= ArrayList<ContactModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts)
+
+
+        var fab =findViewById<FloatingActionMenu>(R.id.floatingActionMenu)
+        var fab1: com.github.clans.fab.FloatingActionButton? =findViewById<com.github.clans.fab.FloatingActionButton>(R.id.add)
+        var fab2: com.github.clans.fab.FloatingActionButton? =findViewById<com.github.clans.fab.FloatingActionButton>(R.id.bulkimport)
+
+        fab1!!.setOnClickListener{
+
+
+            val intent = Intent(this@Contacts, AddContact::class.java)
+            startActivity(intent)
+
+
+        }
+
+
+        fab2!!.setOnClickListener{
+
+
+            val mDialogView= LayoutInflater.from(this).inflate(R.layout.activity_bulk_import,null)
+            val mBuilder= AlertDialog.Builder(this)
+                .setView(mDialogView)
+                .setTitle("BulkContactsImport")
+
+            val mAlertDialog=mBuilder.show()
+            sample.setOnClickListener{
+
+
+            }
+            mDialogView.upload.setOnClickListener{
+
+
+
+                mAlertDialog.dismiss()
+            }
+
+
+
+        }
+
+
+
 
         val actionbar = supportActionBar
         actionbar!!.title = "Contacts"
@@ -38,6 +92,39 @@ class Contacts : AppCompatActivity() {
 
 
         contactList = ArrayList()
+        mcontactList= ArrayList(contactList)
+
+
+        search.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(p0: Editable?) {
+
+
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                filter(p0.toString())
+
+
+            }
+
+        })
+
+
+
+
+
+
+
+
+
+
 
         //progressbar.visibility = View.VISIBLE
         // getContactApi()
@@ -58,6 +145,22 @@ class Contacts : AppCompatActivity() {
             }
         })
     }
+
+
+    private  fun filter(text:String){
+
+        var filteredList = ArrayList<ContactModel>()
+
+   //         name.filterTo(filteredList){
+     //           it.name.toLowercase().contains(text.toLowerCase())
+
+            }
+       // ContactsAdapter.filterList(filteredList)
+
+
+
+
+
 
     fun isNetworkAvailable(context: Context): Boolean {
         return (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo != null
@@ -134,7 +237,7 @@ class Contacts : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.addcontact, menu)
         return true
@@ -156,7 +259,7 @@ class Contacts : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
 
 
-    }
+    }*/
 
 }
 

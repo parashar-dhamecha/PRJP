@@ -4,6 +4,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
+        android:id="@+id/swipe"
         android:layout_height="120dp" xmlns:tools="http://schemas.android.com/tools"
         android:layout_gravity="center_vertical"
         app:dragFromEdge="right"
@@ -19,23 +20,26 @@
                     android:gravity="center_vertical|end"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
+
                     android:orientation="horizontal">
 
                 <ImageButton
                         android:id="@+id/delbutton"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="@color/colorPrimaryDark"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+
+                        android:background="@color/edit"
                         android:layout_marginBottom="2dp"
                         app:srcCompat="@drawable/ic_delete_black_24dp"
+                        android:theme="@style/MyEditText"
                         android:text="Delete"/>
 
                 <ImageButton
                         android:layout_marginBottom="2dp"
                         android:id="@+id/editbutton"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="@color/deletebutton"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@color/colorPrimaryDark"
                         app:srcCompat="@drawable/ic_edit_black_24dp"
                         android:text="Edit"/>
 
@@ -54,10 +58,18 @@
                     android:layout_height="100dp"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="5dp"
-                    app:cardBackgroundColor="@color/bg_gray"
                     android:visibility="visible"
-                    android:id="@+id/cardv1"
-                    android:layout_margin="5dp">
+                    android:layout_marginTop="1dp"
+                    android:layout_margin="@dimen/dp5"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/gray"
+                    android:id="@+id/cardv1">
+
+                <FrameLayout android:layout_width="4dp"
+                             android:background="@color/colorPrimary"
+            android:layout_height="match_parent">
+
+                </FrameLayout>
                 <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -74,28 +86,28 @@
                             android:layout_alignParentBottom="true" android:layout_marginBottom="0dp"
                             android:layout_marginTop="0dp" android:layout_marginStart="0dp"/>
 
-                    <TextView android:layout_width="100dp" android:layout_height="wrap_content"
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                               android:id="@+id/name"
                               android:gravity="center_vertical"
-                              android:text="juhi"
+                              android:text="shubhyogyam"
                               android:layout_toRightOf="@id/pro"
                               android:layout_alignParentTop="true"
-                              android:textSize="20sp"
+                              android:textSize="15sp"
                               android:layout_marginLeft="28dp"
                               android:layout_marginTop="3dp"/>
 
-                    <TextView android:layout_width="171dp" android:layout_height="wrap_content"
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                               android:id="@+id/email"
                               android:layout_below="@+id/name"
-
-                              android:layout_marginTop="3dp"
-                              android:layout_marginStart="28dp" android:layout_toEndOf="@+id/pro"/>
+                              android:text="shubhyogyampandhare@gmail.com"
+                              android:layout_marginTop="2dp"
+                              android:layout_marginStart="29dp" android:layout_toEndOf="@+id/pro"/>
                     <TextView
-                            android:text="TextView"
-                            android:layout_width="171dp"
+                            android:text="TextView00"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="68dp" android:layout_alignParentBottom="true"
-                            android:id="@+id/mobileno" android:layout_marginBottom="0dp"
+                            android:id="@+id/mobileno" android:layout_marginBottom="10dp"
                             android:layout_below="@+id/email" android:layout_marginTop="7dp"/>
 
                 </RelativeLayout>

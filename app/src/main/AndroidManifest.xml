@@ -20,15 +20,16 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".BulkImport">
+        </activity>
         <activity android:name=".uploadfile">
         </activity>
         <activity
                 android:name=".Dashboarrd"
                 android:label="@string/title_activity_dashboarrd"
-                android:theme="@style/AppTheme"/>
-
+                android:theme="@style/AppTheme">
+        </activity>
         <activity android:name=".PhotoActivity"/>
-
         <activity android:name=".AddContact">
         </activity>
         <activity android:name=".Otpactivity">
@@ -38,19 +39,11 @@
         <activity android:name=".LoginActivity">
 
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-
-
-
         </activity>
         <activity
                 android:name=".MainActivity"
                 tools:ignore="ExtraText">
-            </activity>
+        </activity>
         <activity
                 android:name=".Contacts"
                 android:launchMode="singleTop"
@@ -58,16 +51,15 @@
                 android:windowSoftInputMode="adjustPan">
 
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
-
-
-
-
-
-
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
 
         </activity>
-
+        <activity android:name=".UpdateContact">
+        </activity>
         <activity
                 android:name=".ProfileActivity"
                 android:label="@string/prf_title"
@@ -96,22 +88,14 @@
         <activity
                 android:name=".PhotoActivity"
                 tools:ignore="DuplicateActivity"/>
-
         <activity android:name=".ResetPasswordActivity">
         </activity>
         <activity
                 android:name=".DocumentActivity"
                 tools:ignore="WrongManifestParent">
         </activity>
-
         <activity android:name=".DocActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
