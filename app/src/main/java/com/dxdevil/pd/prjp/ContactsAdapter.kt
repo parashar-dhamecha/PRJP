@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.dxdevil.pd.prjp.Model.Response.Data
 import com.dxdevil.pd.prjp.Model.Response.DeleteIdResponse
+import com.dxdevil.pd.prjp.Model.Response.GetContactIdResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,8 +22,10 @@ import retrofit2.Response
 class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
     RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
+
     var sp = context.getSharedPreferences("userid",0) as SharedPreferences
     var ed = sp.edit()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.contactsadapter, parent, false)
@@ -31,6 +34,8 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
 
     override fun getItemCount(): Int {
         return Con.size
+
+
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -38,6 +43,10 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
         holder.name.text = Con[position].name
         holder.email.text=Con[position].email
         holder.mobileno.text=Con[position].mobileNumber
+        holder.swipe.open(true)
+        holder.swipe.close(false)
+
+        //itemMangr.bindView(holder.itemView,position)
 
 
 
@@ -59,12 +68,13 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
 
         }
 
+
+
         holder.delbutton.setOnClickListener{
 
             var s = Con[position].id
             ed.putString("userid",s)
             ed.commit()
-
 
 
 
@@ -153,6 +163,7 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
 
     }
 
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var name: TextView = itemView.findViewById(R.id.name) as TextView
         var pro: ImageView = itemView.findViewById(R.id.pro) as ImageView
@@ -164,9 +175,17 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
         var delbutton: ImageButton = itemView.findViewById(R.id.delbutton) as ImageButton
 
         var editbutton: ImageButton = itemView.findViewById(R.id.editbutton) as ImageButton
+        var swipe:SwipeRevealLayout=itemView.findViewById(R.id.swipe) as SwipeRevealLayout
 
 
     }
+
+
+   /* fun filterList(filteredList: ArrayList<ContactModel>) {
+        this.Con = filteredList
+        notifyDataSetChanged()
+    }*/
+
 }
 
 
