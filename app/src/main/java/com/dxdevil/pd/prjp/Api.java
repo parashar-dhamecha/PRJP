@@ -75,6 +75,13 @@ public interface Api {
             @Body ChangePasswordRequest request
     );
 
+
+    @POST("user/enroll-signature")
+    Call<EnrollSignModel>enrollsignature(
+            @Header("Authorization") String Authorization,
+            @Body EnrollSignRequest enrollsignrequest
+    );
+
     @POST("user/update-signature")
     Call<UpdateSignatureModel>updatesignature(
             @Header("Authorization") String Authorization,

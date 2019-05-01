@@ -13,12 +13,16 @@ import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.dxdevil.pd.prjp.Model.Request.EnrollSignRequest
 import com.dxdevil.pd.prjp.Model.Request.UpdateSignature
+import com.dxdevil.pd.prjp.Model.Response.EnrollSignModel
+import com.dxdevil.pd.prjp.Model.Response.ProfileModel
 import com.dxdevil.pd.prjp.Model.Response.UpdateSignatureModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.activity_type.*
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.lang.Exception
@@ -139,43 +143,90 @@ class Type : AppCompatActivity(), View.OnClickListener {
         Log.d("2", "exception $e")
     }
         typesavebutton.setOnClickListener{
-            var pd = ProgressDialog(this)
-            pd.setMessage("Saving..")
-            pd.isIndeterminate = true
-            pd.show()
+
 
             var baos2: ByteArrayOutputStream = ByteArrayOutputStream()
             bitmap?.compress(Bitmap.CompressFormat.PNG, 100, baos2)
             var ba = baos2.toByteArray()
             var signstring = Base64.encodeToString(ba, Base64.DEFAULT)
             //token
-            var token = getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token","")
+            var pd = ProgressDialog(this)
+            pd.setMessage("Saving..")
+            pd.isIndeterminate = true
+            pd.show()
+            var token1 = getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token","").toString()
+            var api3 = RetrofitClient.getInstance().api as Api
+            var callprofile =api3.getprofiledetails(token1) as Call<ProfileModel>
 
-            var api = RetrofitClient.getInstance().api as Api
-            var updatecall = api?.updatesignature(token, UpdateSignature(2,signstring )) as Call<UpdateSignatureModel>
-
-
-            updatecall.enqueue(object : retrofit2.Callback<UpdateSignatureModel> {
-                override fun onFailure(call: Call<UpdateSignatureModel>, t: Throwable) {
-                    pd.dismiss()
-                    Toast.makeText(this@Type, "check your network connection", Toast.LENGTH_LONG).show()
+            callprofile?.enqueue(object : Callback<ProfileModel> {
+                override fun onFailure(call: Call<ProfileModel>, t: Throwable) {
+                    Toast.makeText(this@Type,"something went wrong please try again later",Toast.LENGTH_LONG).show()
                 }
 
-                override fun onResponse(call: Call<UpdateSignatureModel>, response: Response<UpdateSignatureModel>) {
-                    if (response.isSuccessful){
-                        var st =  response.body()!!.data.toString()
-                        var by = Base64.decode(st,Base64.DEFAULT)
-                        var bitmap1 = BitmapFactory.decodeByteArray(by,0,by.size) as Bitmap?
+                override fun onResponse(call: Call<ProfileModel>, response: Response<ProfileModel>) {
+                    var ob = response.body()!!.data[0]
+                    if (ob.impressions[0].imageBytes.toString() == null){
 
-                        pd.dismiss()
-                        Toast.makeText(this@Type,"Saved successfully..", Toast.LENGTH_LONG).show()
+                        var ppref = getSharedPreferences("Token", Context.MODE_PRIVATE)
+                        var token = ppref.getString("Token","") as String
+                        var updateapi = RetrofitClient.getInstance()!!.api as Api
+                        var updatecall1 = updateapi?.enrollsignature(token, EnrollSignRequest(2,signstring )) as Call<EnrollSignModel>
+
+                        updatecall1.enqueue(object : Callback<EnrollSignModel> {
+                            override fun onFailure(call: Call<EnrollSignModel>, t: Throwable) {
+                                pd.dismiss()
+                                Toast.makeText(this@Type, "check your network connection", Toast.LENGTH_LONG).show()
+                            }
+
+                            override fun onResponse(call: Call<EnrollSignModel>, response: Response<EnrollSignModel>) {
+                                if (response.isSuccessful){
+                                    var st =  response.body()!!.data.toString()
+                                    var by = Base64.decode(st,Base64.DEFAULT)
+                                    var bitmap1 =BitmapFactory.decodeByteArray(by,0,by.size) as Bitmap?
+                                    pd.dismiss()
+                                    Toast.makeText(this@Type,"Saved successfully..",Toast.LENGTH_LONG).show()
+                                }else{
+                                    pd.dismiss()
+                                    Snackbar.make(it,response.errorBody().toString(),Snackbar.LENGTH_LONG).show()
+                                }
+
+                            }
+                        })
+
+
                     }else{
-                        pd.dismiss()
-                        Snackbar.make(it,response.errorBody().toString(), Snackbar.LENGTH_LONG).show()
-                    }
+                        var ppref = getSharedPreferences("Token", Context.MODE_PRIVATE)
+                        var token = ppref.getString("Token","") as String
+                        var updateapi = RetrofitClient.getInstance()!!.api as Api
+                        var updatecall = updateapi?.updatesignature(token, UpdateSignature(2,signstring )) as Call<UpdateSignatureModel>
 
+
+                        updatecall.enqueue(object : Callback<UpdateSignatureModel> {
+                            override fun onFailure(call: Call<UpdateSignatureModel>, t: Throwable) {
+                                pd.dismiss()
+                                Toast.makeText(this@Type, "check your network connection", Toast.LENGTH_LONG).show()
+                            }
+
+                            override fun onResponse(call: Call<UpdateSignatureModel>, response: Response<UpdateSignatureModel>) {
+                                if (response.isSuccessful){
+                                    var st =  response.body()!!.data.toString()
+                                    var by = Base64.decode(st,Base64.DEFAULT)
+                                    var bitmap1 =BitmapFactory.decodeByteArray(by,0,by.size) as Bitmap?
+                                    pd.dismiss()
+                                    Toast.makeText(this@Type,"Saved successfully..",Toast.LENGTH_LONG).show()
+                                }else{
+                                    pd.dismiss()
+                                    Snackbar.make(it,response.errorBody().toString(),Snackbar.LENGTH_LONG).show()
+                                }
+
+                            }
+                        })
+                    }
                 }
             })
+
+
+
         }
 }
 

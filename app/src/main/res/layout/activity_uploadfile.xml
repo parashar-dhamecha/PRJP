@@ -6,14 +6,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".uploadfile">
-
-    <Button
-            android:text="@string/upload"
-            android:layout_width="136dp"
+    <ImageView android:layout_width="@dimen/dp80"
+               android:layout_height="@dimen/dp80"
+               android:layout_marginTop="@dimen/dp20"
+               android:layout_marginRight="@dimen/dp15"
+               android:layout_marginStart="@dimen/dp15"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               android:id="@+id/imageView4"/>
+    <TextView android:layout_width="214dp"
+              android:layout_height="40dp"
+              app:layout_constraintStart_toEndOf="@+id/imageView4"
+              android:layout_marginStart="@dimen/dp10"
+              app:layout_constraintEnd_toEndOf="parent"
+              android:layout_marginEnd="8dp"
+              app:layout_constraintHorizontal_bias="0.44"
+              app:layout_constraintTop_toTopOf="@+id/imageView4"
+              android:id="@+id/textView4"/>
+    <EditText
+            android:layout_width="216dp"
             android:layout_height="wrap_content"
-            android:id="@+id/uploadfileid"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginTop="64dp" app:layout_constraintHorizontal_bias="0.498" android:layout_margin="20dp"
-            android:background="@drawable/edit_round2" android:padding="@dimen/dp5"/>
+            android:layout_marginTop="20dp"
+            android:lines="3"
+            android:paddingBottom="10dp"
+            android:singleLine="false"
+            android:ems="10"
+            android:hint="@string/Description"
+            android:textSize="@dimen/sp13"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

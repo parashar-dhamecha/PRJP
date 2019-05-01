@@ -144,7 +144,7 @@ public class LoginActivity : AppCompatActivity() {
                             pd.dismiss()
                             Toast.makeText(
                                 this@LoginActivity,
-                                "Something went wrong please try again",
+                                response.message().toString(),
                                 Toast.LENGTH_LONG
                             ).show()
                         }
@@ -155,6 +155,9 @@ public class LoginActivity : AppCompatActivity() {
 
         }
 
+        registeruser!!.setOnClickListener {
+            startActivity(Intent(this@LoginActivity,Registration::class.java))
+        }
 
     }
 

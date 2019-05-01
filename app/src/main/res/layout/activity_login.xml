@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".LoginActivity"
         android:id="@+id/constLayout">
 
@@ -14,20 +20,25 @@
             android:layout_height="wrap_content"
             app:hintTextAppearance="@style/MyHintText"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp150"
+            android:layout_marginRight="@dimen/dp10"
+            android:layout_marginBottom="@dimen/dp10"
             app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/textInputLayout13" android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayout16" app:layout_constraintHorizontal_bias="0.0">
+            android:id="@+id/textInputLayout13"
+            app:layout_constraintBottom_toTopOf="@+id/textInputLayout16"
+            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:theme="@style/MyEditText"
-                android:layout_margin="@dimen/dp10"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_marginTop="@dimen/dp100"
+                android:layout_marginRight="@dimen/dp10"
+                android:layout_marginBottom="@dimen/dp10"
                 android:id="@+id/edEmail"
-                android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:hint="@string/username"
@@ -123,7 +134,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0" android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView9"/>
+            app:layout_constraintBottom_toTopOf="@+id/registeruser"/>
 
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"
@@ -135,7 +146,9 @@
               android:layout_marginEnd="8dp"
               android:layout_marginBottom="16dp"
               app:layout_constraintBottom_toBottomOf="parent"
-              android:id="@+id/textView9"/>
+              android:paddingBottom="@dimen/dp15"
+              android:id="@+id/registeruser"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
