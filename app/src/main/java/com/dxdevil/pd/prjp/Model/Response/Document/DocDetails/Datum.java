@@ -9,10 +9,10 @@ public class Datum {
 
     @SerializedName("documentDetail")
     @Expose
-    private com.dxdevil.pd.prjp.Model.Response.Document.DocumentDetail documentDetail;
+    private DocumentDetail documentDetail;
     @SerializedName("documentHistory")
     @Expose
-    private List<com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.DocumentHistory> documentHistory = null;
+    private List<DocumentHistory> documentHistory = null;
     @SerializedName("signedByCurrentUser")
     @Expose
     private Boolean signedByCurrentUser;
@@ -36,7 +36,7 @@ public class Datum {
     private List<Signer> signers = null;
     @SerializedName("observers")
     @Expose
-    private List<Object> observers = null;
+    private List<Observer> observers = null;
     @SerializedName("rejectedByCurrentUser")
     @Expose
     private Boolean rejectedByCurrentUser;
@@ -71,19 +71,19 @@ public class Datum {
     @Expose
     private Object ownerLong;
 
-    public com.dxdevil.pd.prjp.Model.Response.Document.DocumentDetail getDocumentDetail() {
+    public DocumentDetail getDocumentDetail() {
         return documentDetail;
     }
 
-    public void setDocumentDetail(com.dxdevil.pd.prjp.Model.Response.Document.DocumentDetail documentDetail) {
+    public void setDocumentDetail(DocumentDetail documentDetail) {
         this.documentDetail = documentDetail;
     }
 
-    public List<com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.DocumentHistory> getDocumentHistory() {
+    public List<DocumentHistory> getDocumentHistory() {
         return documentHistory;
     }
 
-    public void setDocumentHistory(List<com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.DocumentHistory> documentHistory) {
+    public void setDocumentHistory(List<DocumentHistory> documentHistory) {
         this.documentHistory = documentHistory;
     }
 
@@ -143,11 +143,11 @@ public class Datum {
         this.signers = signers;
     }
 
-    public List<Object> getObservers() {
+    public List<Observer> getObservers() {
         return observers;
     }
 
-    public void setObservers(List<Object> observers) {
+    public void setObservers(List<Observer> observers) {
         this.observers = observers;
     }
 

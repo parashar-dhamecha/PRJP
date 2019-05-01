@@ -1,5 +1,6 @@
 package com.dxdevil.pd.prjp
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,22 +14,29 @@ import retrofit2.Response
 import java.io.File
 import android.provider.MediaStore
 import android.content.Context
-import android.database.Cursor
+import android.graphics.drawable.Drawable
 import android.os.Environment
 import android.webkit.MimeTypeMap
-import com.google.android.material.internal.ContextUtils.getActivity
 import android.net.Uri as Uri1
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.Color.parseColor
 
 
-@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+
+
+@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS",
+    "DEPRECATION"
+)
 class uploadfile : AppCompatActivity() {
     val READ_REQUEST_CODE =42
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_uploadfile)
 
-        uploadfileid!!.setOnClickListener {
             val mimeTypes = arrayOf(
                 "application/pdf",
                 "application/msword",
@@ -36,17 +44,18 @@ class uploadfile : AppCompatActivity() {
                 "application/vnd.ms-powerpoint",
                 "application/x-excel"
                 )
+
             val intent = Intent()
                .setAction(Intent.ACTION_GET_CONTENT).addCategory(Intent.CATEGORY_OPENABLE)
             intent.type = if (mimeTypes.size === 1) mimeTypes[0] else "*/*"
             if (mimeTypes.size > 0) {
                 intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
             }
+
             startActivityForResult(Intent.createChooser(intent, "Select a file"), 111)
 
         }
 
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -61,14 +70,24 @@ class uploadfile : AppCompatActivity() {
 
 
     private fun callapi(uri : android.net.Uri) {
+
         val file = File(getRealPathFromURI(this,uri))
      Toast.makeText(this@uploadfile,MimeTypeMap.getSingleton().getMimeTypeFromExtension(MimeTypeMap.getFileExtensionFromUrl(uri.toString())),Toast.LENGTH_LONG).show()
 
         var rb =RequestBody.create(MediaType.parse(MimeTypeMap.getFileExtensionFromUrl(uri.toString()))
             ,file)
-        var rb2 =RequestBody.create(MediaType.parse("multipart/form-data"),file.path)
         var mpb :MultipartBody.Part = MultipartBody.Part.createFormData("file",file.name,rb)
         var token = getSharedPreferences("Token",0).getString("Token","").toString()
+
+
+        var pd = ProgressDialog(this@uploadfile,R.style.Base_ThemeOverlay_AppCompat_Dark)
+        var dr = getDrawable(R.drawable.customprogressbar)
+        pd.setProgressDrawable(dr)
+        pd.setCancelable(false)
+        pd.setTitle("Uploading...")
+        pd.setMessage(file.name)
+        pd.isIndeterminate = true
+        pd.show()
 
         var uapi = RetrofitClient.getInstance().api as Api
         var ucall = uapi.upload(token,mpb) as Call<UploadfileModel>
@@ -76,18 +95,19 @@ class uploadfile : AppCompatActivity() {
 
             override fun onFailure(call: Call<UploadfileModel>, t: Throwable) {
                 Toast.makeText(this@uploadfile,"Something went wrong please try again later" ,Toast.LENGTH_LONG).show()
+                pd.dismiss()
             }
 
             override fun onResponse(call: Call<UploadfileModel>, response: Response<UploadfileModel>) {
             if(response.isSuccessful){
-                var pagebytes :ArrayList<String>
 
                 Toast.makeText(this@uploadfile, response.body()!!.data[0].name.toString(),Toast.LENGTH_LONG).show()
-
+                pd.dismiss()
             }
                 else{
                 Toast.makeText(this@uploadfile,response.message().toString(),Toast.LENGTH_LONG).show()
-
+                startActivity(Intent(this@uploadfile,Dashboarrd::class.java))
+                pd.dismiss()
             }
             }
         })

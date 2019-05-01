@@ -1,70 +1,120 @@
 package com.dxdevil.pd.prjp
 
+import android.annotation.SuppressLint
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
-import com.dxdevil.pd.prjp.Model.Request.Document.ListOfDocument
-import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse
+import androidx.recyclerview.widget.LinearLayoutManager
 
+import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.DocDetailsResponse
+import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.Observer
+import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.Signer
+import com.dxdevil.pd.prjp.data.ObserversAdapter
+import com.dxdevil.pd.prjp.data.SignersAdapter
 
-
+import kotlinx.android.synthetic.main.activity_document_detail.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DocumentActivity : AppCompatActivity() {
+class DocumentDetailActivity : AppCompatActivity() {
 
+    var token: String? = null
+    lateinit  var signerlist :List<Signer>
+    lateinit  var observerslist :List<Observer>
+
+    @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_document_detail)
 
-
-        var token: String = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.N9w0jV/v+9PKjqTQVRprezt4+qqzzgZZjY68hHbb/VdLYi/P2x192in+N/puRDAp8zEKMMqdnOPVvgPE6C6bukPznNX+g+jkb5sv8FfeS7Q7UXY/QIHjeYLQJ4Tk0Aziq/VdzyrDQLOq20vUdEYJjwIBiq1pk+R/7xBYPpEEPI6lQtTxggOw72uJnYt/kwviC0i6ppoGmWZHU5sX4ZyNBnhSp5RPMYvQKENl5w3MdkGet6cb9MaMD55LM0Ytqy2DMHMqW4H1t4ql13hFw3c/1MhX/sNci8G6WNp1Bo6qnFwi+eu6ABRNaQ0C4lXKjy4K/9Mj9ZN6dqQLCWdpsbW6Bx1K46PitJsHNo6bqFVlUWyxRHNeIJKu655Ema646p9o62EeO4LDIrUhOJLPMpXXDwbdcgHAsLBpM/TMfOdQlaLsB2d6rOlkqlh0n8ForetQ+M19xiDH0C+YxrDeDlnY6v62VfXDwwayEVEgmjZv2SM/CKPoyQgHsYEh3tGXECqP9UVxmqL+jPbLhIrTlku4Z1LsZXmRVc/gEq1/NJPIU7DtF1PEkfIs4VUHuwGClKyyQ2GfWmecbn5RZ4WF4HZpOr8KUDo5TsLVee+4w0W75MRPSaQZVRBz/AaW5owhvQ1DsBzHmO01XfKxj5oXASQUaSOA6OoAyFgrA+JHMi3g10sjOVFPhiHSDyOPenpYcw7rrxB7pXpVEdnW1gen3oT5BSJ+PzMfFkt2sg0Mg4KRFMMG0/cG6wP5C1W2gKQT2hVENRxfTYeifEjLE0oTVot9g+xlczLrrvAjqJS9SuHk+nGtV+sko7zYwM2NHV5S14ycsBfNho2BcEK/PG5HV/1akRCH5lZydkgmW1rA2HLckCkGT4ihzlL2hGeLdbkq9Q2r.V7HugwbHkLcyJrkNEt9svt-LlGaEAYqevDhHYxavuAEBearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.N9w0jV/v+9PKjqTQVRprezt4+qqzzgZZjY68hHbb/VdLYi/P2x192in+N/puRDAp8zEKMMqdnOPVvgPE6C6bukPznNX+g+jkb5sv8FfeS7Q7UXY/QIHjeYLQJ4Tk0Aziq/VdzyrDQLOq20vUdEYJjwIBiq1pk+R/7xBYPpEEPI6lQtTxggOw72uJnYt/kwviC0i6ppoGmWZHU5sX4ZyNBnhSp5RPMYvQKENl5w3MdkGet6cb9MaMD55LM0Ytqy2DMHMqW4H1t4ql13hFw3c/1MhX/sNci8G6WNp1Bo6qnFwi+eu6ABRNaQ0C4lXKjy4K/9Mj9ZN6dqQLCWdpsbW6Bx1K46PitJsHNo6bqFVlUWyxRHNeIJKu655Ema646p9o62EeO4LDIrUhOJLPMpXXDwbdcgHAsLBpM/TMfOdQlaLsB2d6rOlkqlh0n8ForetQ+M19xiDH0C+YxrDeDlnY6v62VfXDwwayEVEgmjZv2SM/CKPoyQgHsYEh3tGXECqP9UVxmqL+jPbLhIrTlku4Z1LsZXmRVc/gEq1/NJPIU7DtF1PEkfIs4VUHuwGClKyyQ2GfWmecbn5RZ4WF4HZpOr8KUDo5TsLVee+4w0W75MRPSaQZVRBz/AaW5owhvQ1DsBzHmO01XfKxj5oXASQUaSOA6OoAyFgrA+JHMi3g10sjOVFPhiHSDyOPenpYcw7rrxB7pXpVEdnW1gen3oT5BSJ+PzMfFkt2sg0Mg4KRFMMG0/cG6wP5C1W2gKQT2hVENRxfTYeifEjLE0oTVot9g+xlczLrrvAjqJS9SuHk+nGtV+sko7zYwM2NHV5S14ycsBfNho2BcEK/PG5HV/1akRCH5lZydkgmW1rA2HLckCkGT4ihzlL2hGeLdbkq9Q2r.V7HugwbHkLcyJrkNEt9svt-LlGaEAYqevDhHYxavuAE"
-
-        var api = RetrofitClient.getInstance().api as Api
-        var call = api.doclist(
-            token, ListOfDocument(
-                0,
-                0,
-                true,
-                null,
-                null,
-                null,
-                0,
-                null,
-                null,
-                null
-            )
-        )as Call<ListOfDocumentResponse>
+        val builder = android.app.AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(R.layout.progress_dialog, null)
+        val message = dialogView.findViewById<TextView>(R.id.progress_message)
+        message.text = getString(R.string.fetch)
+        builder.setView(dialogView)
+        builder.setCancelable(false)
+        val dialog = builder.create()
+        dialog.show()
 
 
-              try{
-        call.enqueue(object : Callback<ListOfDocumentResponse> {
-            override fun onFailure(call: Call<ListOfDocumentResponse>, t: Throwable) {
-                Toast.makeText(this@DocumentActivity, "Check your connection", Toast.LENGTH_SHORT).show()
+        setTitle(R.string.Details)
+
+        token=getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token", "")
+
+
+        val api = RetrofitClient.getInstance().api as Api
+
+        val call = api.docdetails(
+            token,"3de9b91b-b6ce-4bc5-9645-b06e672c3b20"
+
+        )as Call<DocDetailsResponse>
+
+        try{
+          call.enqueue(object : Callback<DocDetailsResponse> {
+            override fun onFailure(call: Call<DocDetailsResponse>, t: Throwable) {
+                dialog.dismiss()
+               Toast.makeText(this@DocumentDetailActivity,"Something went wrong.",Toast.LENGTH_SHORT).show()
             }
 
-            override fun onResponse(call: Call<ListOfDocumentResponse>, response: Response<ListOfDocumentResponse>) {
+            override fun onResponse(call: Call<DocDetailsResponse>, response: Response<DocDetailsResponse>) {
+
+                if(response.isSuccessful) {
+                    try {
+                        Toast.makeText(this@DocumentDetailActivity, "successful.", Toast.LENGTH_SHORT).show()
 
 
-                if (response.isSuccessful) {
-                    Toast.makeText(this@DocumentActivity,"Response is Successfull", Toast.LENGTH_SHORT).show()
-                  try {
-                      var name = response.body()!!.data[0].documents[0].name.toString()
-                      Toast.makeText(this@DocumentActivity, name,Toast.LENGTH_SHORT).show()
-                  }catch (e:Exception)
-                  {
-                      Toast.makeText(this@DocumentActivity, e.message,Toast.LENGTH_LONG).show()
-                  }
-                    //Toast.makeText(this@DocumentActivity, name,Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this@DocumentActivity, "Response is Failure", Toast.LENGTH_SHORT).show()
+
+                        if (response.body()!!.data[0].documentDetail.extension == ".pdf")
+                            doc_image.setImageResource(R.drawable.pdf3)
+                        if (response.body()!!.data[0].documentDetail.extension == ".doc" || response.body()!!.data[0].documentDetail.extension == ".docx")
+                            doc_image.setImageResource(R.drawable.doc4)
+                        if (response.body()!!.data[0].documentDetail.extension == ".ppt" || response.body()!!.data[0].documentDetail.extension == ".pptx")
+                            doc_image.setImageResource(R.drawable.ppt2)
+                        if (response.body()!!.data[0].documentDetail.extension == ".xls" || response.body()!!.data[0].documentDetail.extension == ".xlsx")
+                            doc_image.setImageResource(R.drawable.excel)
+
+                        tvDoc_name.text = response.body()!!.data[0].documentDetail.name
+                        tvUploaded_by_value.text = response.body()!!.data[0].documentDetail.uploadedBy
+                        tvDocument_Hash_value.text = response.body()!!.data[0].documentDetail.documentFileHash
+
+                        try {
+                            signerlist = response.body()!!.data[0].signers
+                            observerslist = response.body()!!.data[0].observers
+
+                            val layoutManager = LinearLayoutManager(applicationContext)
+                            val layoutManager2 = LinearLayoutManager(applicationContext)
+                            signer_recyclerview.layoutManager = layoutManager
+                            signer_recyclerview.adapter = SignersAdapter(signerlist, this@DocumentDetailActivity)
+                            observer_recyclerview.layoutManager = layoutManager2
+                            observer_recyclerview.adapter = ObserversAdapter(observerslist, this@DocumentDetailActivity)
+
+                            time_date.text = response.body()!!.data[0].notarization.notarizedOn
+                            transaction_hash.text = response.body()!!.data[0].notarization.txHash.toString()
+
+                            dialog.dismiss()
+                        }catch (e:Exception)
+                        {
+                            dialog.dismiss()
+                            Toast.makeText(this@DocumentDetailActivity, e.message, Toast.LENGTH_LONG).show()
+                        }
+                    }catch (e:Exception){
+                        dialog.dismiss()
+                        Toast.makeText(this@DocumentDetailActivity, e.toString(), Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
-        })
-    }catch (e:Exception){
-                  Toast.makeText(this@DocumentActivity,"Excetion",Toast.LENGTH_SHORT).show()
-              }
+                else {
+                    dialog.dismiss()
+                    Toast.makeText(this@DocumentDetailActivity, "failure", Toast.LENGTH_SHORT).show()
+                }
 
+               }
+
+
+        }) }catch (e:Exception){
+                  Toast.makeText(this@DocumentDetailActivity,"Exception:"+e.message,Toast.LENGTH_SHORT).show()
+              }
     }
 }

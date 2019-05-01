@@ -24,8 +24,15 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.dxdevil.pd.prjp.Model.Response.DashboardResponse
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.activity_dashboard.addsign
+import kotlinx.android.synthetic.main.activity_dashboard.awatingotherstv
+import kotlinx.android.synthetic.main.activity_dashboard.awatingsigntv
+import kotlinx.android.synthetic.main.activity_dashboard.completedtv
+import kotlinx.android.synthetic.main.activity_dashboard.duesoontv
+import kotlinx.android.synthetic.main.activity_dashboard.uploadcv
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
 import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.content_dashboarrd.*
 import kotlinx.android.synthetic.main.navigationbar_header.*
 import kotlinx.android.synthetic.main.signpopup.*
 import retrofit2.Call
@@ -34,13 +41,15 @@ import retrofit2.Response
 import java.lang.Exception
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class Dashboarrd : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class Dashboarrd : AppCompatActivity(){
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var ntoggle: ActionBarDrawerToggle
     @SuppressLint("SetTextI18n", "WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboarrd)
+
+
         drawerLayout = findViewById(R.id.drawer_layout)
         ntoggle= ActionBarDrawerToggle(this,drawerLayout,R.string.navigation_drawer_open,R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(ntoggle)
@@ -70,21 +79,25 @@ class Dashboarrd : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
 
             when (menuItem.itemId) {
                 R.id.dashboard -> {
-                    // Handle the camera action
-                }
+                    drawer_layout.closeDrawer(GravityCompat.START)                }
                 R.id.documents -> {
-
+                    startActivity(Intent(this@Dashboarrd,DocActivity::class.java))
+                    drawer_layout.closeDrawer(GravityCompat.START)
                 }
                 R.id.contacts -> {
-
+                    startActivity(Intent(this@Dashboarrd,Contacts::class.java))
+                    drawer_layout.closeDrawer(GravityCompat.START)
                 }
                 R.id.settings -> {
-                    Toast.makeText(this@Dashboarrd,"settings",Toast.LENGTH_LONG)
                     startActivity(Intent(this@Dashboarrd,Settings::class.java))
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
                 R.id.logout -> {
-
+                    var sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
+                    sp.edit().remove("Token").apply()
+                    sp.edit().remove("RefreshToken").apply()
+                    startActivity(Intent(this@Dashboarrd,LoginActivity::class.java))
+                    drawer_layout.closeDrawer(GravityCompat.START)
                 }
             }
 
@@ -112,7 +125,6 @@ class Dashboarrd : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
                     awatingotherstv?.text = ob!!.data[0]!!.awaitingOthers.toString()
                     completedtv?.text = ob!!.data[0]!!.completed.toString()
                     duesoontv?.text = ob!!.data[0]!!.expireSoon.toString()
-                    Toast.makeText(this@Dashboarrd,"Success", Toast.LENGTH_LONG).show()
                 }
                 else{
                     Toast.makeText(this@Dashboarrd,response!!.body()!!.message!!.toString(), Toast.LENGTH_LONG).show()
@@ -170,33 +182,6 @@ class Dashboarrd : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.dashboard -> {
-                // Handle the camera action
-            }
-            R.id.documents -> {
-
-            }
-            R.id.contacts -> {
-
-            }
-            R.id.settings -> {
-                Toast.makeText(this@Dashboarrd,"settings",Toast.LENGTH_LONG)
-                startActivity(Intent(this@Dashboarrd,Settings::class.java))
-                drawer_layout.closeDrawer(GravityCompat.START)
-            }
-            R.id.logout -> {
-                var sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
-                sp.edit().remove("Token").apply()
-                sp.edit().remove("RefreshToken").apply()
-                startActivity(Intent(this@Dashboarrd,LoginActivity::class.java))
-                drawer_layout.closeDrawer(GravityCompat.START)
-            }
-        }
-        drawer_layout.closeDrawer(GravityCompat.START)
-        return true
-    }
 
     override fun onKeyDown(keycode:Int, event: KeyEvent):Boolean {
     if (keycode == KeyEvent.KEYCODE_BACK) {

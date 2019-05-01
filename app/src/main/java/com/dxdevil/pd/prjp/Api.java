@@ -23,6 +23,9 @@ public interface Api {
     @GET("account/check-user-exists/{id}")
     Call<UserExistResponse>isUserExist(@Path("id") String  id);
 
+    @POST("account/verify")
+    Call<ResponseBody>verify_user(@Body  VerifyUser verify);
+
     @GET("contact/get-contact-by-id/{UserId}")
     Call<GetContactIdResponse>getcontactid(@Header("Authorization") String Authorization,
                                              @Path("UserId") String UserId);
@@ -72,6 +75,13 @@ public interface Api {
             @Body ChangePasswordRequest request
     );
 
+
+    @POST("user/enroll-signature")
+    Call<EnrollSignModel>enrollsignature(
+            @Header("Authorization") String Authorization,
+            @Body EnrollSignRequest enrollsignrequest
+    );
+
     @POST("user/update-signature")
     Call<UpdateSignatureModel>updatesignature(
             @Header("Authorization") String Authorization,
@@ -88,7 +98,11 @@ public interface Api {
          @Body RefreshToken refreshtoken
     );
     @GET("document/document-detail/{id}")
-    Call<DocDetailsResponse>doc_details(@Path("id") String  id);
+    Call<DocDetailsResponse>docdetails(
+            @Header("Authorization") String Authorization,
+            @Path("id") String  id
+    );
+
 
     @POST("document/documents")
     Call<ListOfDocumentResponse>doclist(

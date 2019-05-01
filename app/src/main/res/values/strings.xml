@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources >
     <string name="app_name">Cygnature</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
@@ -32,7 +32,7 @@
     <string name="awatingothers">Awating Others</string>
     <string name="completed">Completed</string>
     <string name="signingdue">Due Soon</string>
-    <string name="awsdata">2</string>
+    <string name="awsdata">0</string>
     <string name="addsign">Edit/Add Signature</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="edit_your_signature">Edit Your Signature</string>
@@ -93,6 +93,7 @@
     <!-- contacts strings-->
     <string name="contact_name">Juhi</string>
     <string name="SaveContact">Save Contact</string>
+
 
 
     <string-array name="names">
@@ -163,7 +164,25 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="done">done</string>
-    <string name="Loading">Loading...</string>
+    <string name="Loading">Loading…</string>
     <string name="awaiting">Awaiting My Sign</string>
+    <string name="next">next</string>
+    <string name="previous">previ.</string>
+    <string name="uploaded_by">Uploaded By :</string>
+    <string name="hash">Document Hash</string>
+    <string name="Details">Details</string>
+    <string name="copy">Copy</string>
+    <string name="fetch">Fetching Details</string>
+    <string name="preview">Preview</string>
+    <string name="signers">Signers</string>
+    <string name="sequential">Sequential Signature</string>
+    <string name="observers">Observers</string>
+    <string name="notarization">Notarization Details</string>
+    <string name="notarized_on">Notarized On:</string>
+    <string name="transaction_hash">Transaction hash</string>
+    <string name="pg">PG</string>
+    <string name="uploader_name">Uploader_name</string>
+    <string name="time_and_date">time and date</string>
+    <string name="thash">hash</string>
 
 </resources>
