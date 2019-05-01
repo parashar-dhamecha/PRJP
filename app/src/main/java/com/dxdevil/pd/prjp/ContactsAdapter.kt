@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.dxdevil.pd.prjp.Model.Response.Data
 import com.dxdevil.pd.prjp.Model.Response.DeleteIdResponse
@@ -42,11 +43,19 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
 
         // Log.d("ContactsAdapter", "email" + Con[position].email)
        holder.editbutton.setOnClickListener{
-               var s = Con[position].id
-           ed.putString("userid",s)
-           ed.commit()
+//               var s = Con[position].id
+//           ed.putString("userid",s)
+//           ed.commit()
+//           val intent = Intent(context, UpdateContact::class.java)
+//           intent.putExtra("quantity","");
+//            context.startActivity(intent)
+           Toast.makeText(context, "Check your internet Connection"+Con[position].id, Toast.LENGTH_LONG).show()
+
+//           context.startActivity<UpdateContact>(COUNTRIES to countries)
+
            val intent = Intent(context, UpdateContact::class.java)
-            context.startActivity(intent)
+           intent.putExtra("value", Con[position].id)
+           context.startActivity(intent)
 
         }
 
@@ -148,6 +157,7 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
         var name: TextView = itemView.findViewById(R.id.name) as TextView
         var pro: ImageView = itemView.findViewById(R.id.pro) as ImageView
         var email:TextView=itemView.findViewById(R.id.email) as TextView
+        var swipe:SwipeRevealLayout=itemView.findViewById(R.id.swipe) as SwipeRevealLayout
         var mobileno:TextView=itemView.findViewById(R.id.mobileno) as TextView
 //        var del: Button = itemView.findViewById(R.id.del) as Button
         // @SuppressLint("WrongViewCast")

@@ -1,9 +1,20 @@
 package com.dxdevil.pd.prjp
 
+import android.annotation.SuppressLint
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.DocDetailsResponse
+import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.Observer
+import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.Signer
+import com.dxdevil.pd.prjp.data.ObserversAdapter
+import com.dxdevil.pd.prjp.data.SignersAdapter
+
+import kotlinx.android.synthetic.main.activity_document_detail.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -11,38 +22,99 @@ import retrofit2.Response
 class DocumentDetailActivity : AppCompatActivity() {
 
     var token: String? = null
+    lateinit  var signerlist :List<Signer>
+    lateinit  var observerslist :List<Observer>
 
+    @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_document_detail)
 
+        val builder = android.app.AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(R.layout.progress_dialog, null)
+        val message = dialogView.findViewById<TextView>(R.id.progress_message)
+        message.text = getString(R.string.fetch)
+        builder.setView(dialogView)
+        builder.setCancelable(false)
+        val dialog = builder.create()
+        dialog.show()
 
-        token="Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.N9w0jV/v+9PKjqTQVRpre3RUiN3wdIdsrq1N180MSCy6TWjRC69b0sK/LNMIiAMehYWjcQhhc3gpadVlW//A/OjbgREERhooiUtBj3Qc3bispZ0uzeoYMwXx1SAULv/lwD+6crG4AJf/zBCPXQCvwyRlI8mw9rwmLCdAJon2bxLr/5MIZwisAOPvC9BnJlAW7t38vIkXhXAB3cK7BIZM+jTIoHfZGQXHm2GeRgGOCTTq3MigXtbb3utVCNCZ1EuRkbd6G24UD8/0HJ+yTYJwJiNwcj5Q6t59kzyGezMGcVrMVde2d8kEOe5XnDkv/Wn5JPXqud+6WL4Z/hbvo6IJpUnatlNZD1p7fFHFecG6ChWnpVCNov+BPxL/k8+ROCb1zSMHPTr4c7TD2PNtp8LwDFQysvGbPThyD9ZFd/3ZB8m1EtXbOImhDNRxEUHGHnwrTObIY1gUycJ3gwCz8HsCGxY+62EnBA1rxG0TqERjQzqjaGeBqR9f4okL5KE+L5v/aGoUC4+XLEYsdsCjdn0VHtC7JEOK3NWcOIeuZWwEqLmJrZ7mF71HBjtjHiGIgzy5pVetEl3jEllw0F3Q99nDAYZIA1FQEeiXsUmLjDiHv/JOA2Ace7Oxybofke7dJc+X5hXJvSc6j5PgdwRA9+BP27ohQdBXADrh45RxeNbzdIVIlhRJ7Qqu+yBFucqQy5whh2ryEU0QEpDBOCeVIUhIceiUNB/oFf65TqohBfR+E8szzLkNXV1em0k6e5JZXXGBYQDXAng+3ps9mA4eRQ/hH2fR2hmjhOT+opPCg/DXt6IjQ+6L9mow5I1VdVopDbyO41vXjenrkP4H6xTXD2a58HJEd58T8XeVNLjI6+d0KRnwqpas7hY5UuoB6xLnNLMZ.xer4AsDW9pfxhxYhcsgT0rDVOxol5skggGOhn7BNQsU"
+
+        setTitle(R.string.Details)
+
+        token=getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token", "")
+
 
         val api = RetrofitClient.getInstance().api as Api
 
         val call = api.docdetails(
-            token,"92832b2f-872b-408d-94ec-017c3b333acc"
+            token,"3de9b91b-b6ce-4bc5-9645-b06e672c3b20"
 
         )as Call<DocDetailsResponse>
 
         try{
           call.enqueue(object : Callback<DocDetailsResponse> {
             override fun onFailure(call: Call<DocDetailsResponse>, t: Throwable) {
+                dialog.dismiss()
                Toast.makeText(this@DocumentDetailActivity,"Something went wrong.",Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call<DocDetailsResponse>, response: Response<DocDetailsResponse>) {
 
-                if(response.isSuccessful)
-                    Toast.makeText(this@DocumentDetailActivity,"successful.",Toast.LENGTH_SHORT).show()
-                else
-                    Toast.makeText(this@DocumentDetailActivity,"failure",Toast.LENGTH_SHORT).show()
+                if(response.isSuccessful) {
+                    try {
+                        Toast.makeText(this@DocumentDetailActivity, "successful.", Toast.LENGTH_SHORT).show()
+
+
+
+                        if (response.body()!!.data[0].documentDetail.extension == ".pdf")
+                            doc_image.setImageResource(R.drawable.pdf3)
+                        if (response.body()!!.data[0].documentDetail.extension == ".doc" || response.body()!!.data[0].documentDetail.extension == ".docx")
+                            doc_image.setImageResource(R.drawable.doc4)
+                        if (response.body()!!.data[0].documentDetail.extension == ".ppt" || response.body()!!.data[0].documentDetail.extension == ".pptx")
+                            doc_image.setImageResource(R.drawable.ppt2)
+                        if (response.body()!!.data[0].documentDetail.extension == ".xls" || response.body()!!.data[0].documentDetail.extension == ".xlsx")
+                            doc_image.setImageResource(R.drawable.excel)
+
+                        tvDoc_name.text = response.body()!!.data[0].documentDetail.name
+                        tvUploaded_by_value.text = response.body()!!.data[0].documentDetail.uploadedBy
+                        tvDocument_Hash_value.text = response.body()!!.data[0].documentDetail.documentFileHash
+
+                        try {
+                            signerlist = response.body()!!.data[0].signers
+                            observerslist = response.body()!!.data[0].observers
+
+                            val layoutManager = LinearLayoutManager(applicationContext)
+                            val layoutManager2 = LinearLayoutManager(applicationContext)
+                            signer_recyclerview.layoutManager = layoutManager
+                            signer_recyclerview.adapter = SignersAdapter(signerlist, this@DocumentDetailActivity)
+                            observer_recyclerview.layoutManager = layoutManager2
+                            observer_recyclerview.adapter = ObserversAdapter(observerslist, this@DocumentDetailActivity)
+
+                            time_date.text = response.body()!!.data[0].notarization.notarizedOn
+                            transaction_hash.text = response.body()!!.data[0].notarization.txHash.toString()
+
+                            dialog.dismiss()
+                        }catch (e:Exception)
+                        {
+                            dialog.dismiss()
+                            Toast.makeText(this@DocumentDetailActivity, e.message, Toast.LENGTH_LONG).show()
+                        }
+                    }catch (e:Exception){
+                        dialog.dismiss()
+                        Toast.makeText(this@DocumentDetailActivity, e.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                }
+                else {
+                    dialog.dismiss()
+                    Toast.makeText(this@DocumentDetailActivity, "failure", Toast.LENGTH_SHORT).show()
+                }
+
                }
 
 
         }) }catch (e:Exception){
-                  Toast.makeText(this@DocumentDetailActivity,"Excetion",Toast.LENGTH_SHORT).show()
+                  Toast.makeText(this@DocumentDetailActivity,"Exception:"+e.message,Toast.LENGTH_SHORT).show()
               }
     }
 }

@@ -4,7 +4,7 @@ package com.dxdevil.pd.prjp.Model.Response.Document.DocDetails;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Signer {
+public class Observer {
 
     @SerializedName("userId")
     @Expose
@@ -17,7 +17,7 @@ public class Signer {
     private String firstName;
     @SerializedName("lastName")
     @Expose
-    private Object lastName;
+    private String lastName;
     @SerializedName("profileShortName")
     @Expose
     private String profileShortName;
@@ -35,7 +35,7 @@ public class Signer {
     private Integer signType;
     @SerializedName("signButtonText")
     @Expose
-    private String signButtonText;
+    private Object signButtonText;
 
     public String getUserId() {
         return userId;
@@ -61,11 +61,11 @@ public class Signer {
         this.firstName = firstName;
     }
 
-    public Object getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(Object lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
@@ -109,11 +109,11 @@ public class Signer {
         this.signType = signType;
     }
 
-    public String getSignButtonText() {
+    public Object getSignButtonText() {
         return signButtonText;
     }
 
-    public void setSignButtonText(String signButtonText) {
+    public void setSignButtonText(Object signButtonText) {
         this.signButtonText = signButtonText;
     }
 

@@ -172,5 +172,19 @@
     <string name="previous">previ.</string>
     <string name="uploaded_by">Uploaded By :</string>
     <string name="hash">Document Hash</string>
+    <string name="Details">Details</string>
+    <string name="copy">Copy</string>
+    <string name="fetch">Fetching Details</string>
+    <string name="preview">Preview</string>
+    <string name="signers">Signers</string>
+    <string name="sequential">Sequential Signature</string>
+    <string name="observers">Observers</string>
+    <string name="notarization">Notarization Details</string>
+    <string name="notarized_on">Notarized On:</string>
+    <string name="transaction_hash">Transaction hash</string>
+    <string name="pg">PG</string>
+    <string name="uploader_name">Uploader_name</string>
+    <string name="time_and_date">time and date</string>
+    <string name="thash">hash</string>
 
 </resources>
