@@ -2,18 +2,19 @@ package com.dxdevil.pd.prjp
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.DocDetailsResponse
 import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.Observer
 import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.Signer
 import com.dxdevil.pd.prjp.data.ObserversAdapter
 import com.dxdevil.pd.prjp.data.SignersAdapter
-
 import kotlinx.android.synthetic.main.activity_document_detail.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,6 +31,12 @@ class DocumentDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_document_detail)
 
+//        var st = getSharedPreferences("DocId", 0) as SharedPreferences
+//        var docId=st.getString("DocId","")
+        val intent = getIntent();
+        val docId:String? = intent.getStringExtra("doc")
+        tvNo_observers.visibility=View.GONE
+
         val builder = android.app.AlertDialog.Builder(this)
         val dialogView = layoutInflater.inflate(R.layout.progress_dialog, null)
         val message = dialogView.findViewById<TextView>(R.id.progress_message)
@@ -40,6 +47,7 @@ class DocumentDetailActivity : AppCompatActivity() {
         dialog.show()
 
 
+
         setTitle(R.string.Details)
 
         token=getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token", "")
@@ -48,7 +56,7 @@ class DocumentDetailActivity : AppCompatActivity() {
         val api = RetrofitClient.getInstance().api as Api
 
         val call = api.docdetails(
-            token,"3de9b91b-b6ce-4bc5-9645-b06e672c3b20"
+            token,docId
 
         )as Call<DocDetailsResponse>
 
@@ -62,12 +70,8 @@ class DocumentDetailActivity : AppCompatActivity() {
             override fun onResponse(call: Call<DocDetailsResponse>, response: Response<DocDetailsResponse>) {
 
                 if(response.isSuccessful) {
-                    try {
-                        Toast.makeText(this@DocumentDetailActivity, "successful.", Toast.LENGTH_SHORT).show()
 
-
-
-                        if (response.body()!!.data[0].documentDetail.extension == ".pdf")
+                    if (response.body()!!.data[0].documentDetail.extension == ".pdf")
                             doc_image.setImageResource(R.drawable.pdf3)
                         if (response.body()!!.data[0].documentDetail.extension == ".doc" || response.body()!!.data[0].documentDetail.extension == ".docx")
                             doc_image.setImageResource(R.drawable.doc4)
@@ -80,7 +84,6 @@ class DocumentDetailActivity : AppCompatActivity() {
                         tvUploaded_by_value.text = response.body()!!.data[0].documentDetail.uploadedBy
                         tvDocument_Hash_value.text = response.body()!!.data[0].documentDetail.documentFileHash
 
-                        try {
                             signerlist = response.body()!!.data[0].signers
                             observerslist = response.body()!!.data[0].observers
 
@@ -92,18 +95,19 @@ class DocumentDetailActivity : AppCompatActivity() {
                             observer_recyclerview.adapter = ObserversAdapter(observerslist, this@DocumentDetailActivity)
 
                             time_date.text = response.body()!!.data[0].notarization.notarizedOn
+
+                            if(response.body()!!.data[0].observers.size==0){
+                                observer_recyclerview.visibility=View.GONE
+                                tvNo_observers.visibility=View.VISIBLE}
+
+                            if(response.body()!!.data[0].notarization.txHash==null)
+                                transaction_hash.text=response.body()!!.data[0].notarization.notarizeMessage
+                            else
                             transaction_hash.text = response.body()!!.data[0].notarization.txHash.toString()
 
                             dialog.dismiss()
-                        }catch (e:Exception)
-                        {
-                            dialog.dismiss()
-                            Toast.makeText(this@DocumentDetailActivity, e.message, Toast.LENGTH_LONG).show()
-                        }
-                    }catch (e:Exception){
-                        dialog.dismiss()
-                        Toast.makeText(this@DocumentDetailActivity, e.toString(), Toast.LENGTH_SHORT).show()
-                    }
+
+
                 }
                 else {
                     dialog.dismiss()

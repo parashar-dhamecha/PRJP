@@ -186,5 +186,6 @@
     <string name="uploader_name">Uploader_name</string>
     <string name="time_and_date">time and date</string>
     <string name="thash">hash</string>
+    <string name="no_observers">There are no observers</string>
 
 </resources>

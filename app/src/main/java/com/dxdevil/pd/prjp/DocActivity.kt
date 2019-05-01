@@ -39,7 +39,7 @@ class DocActivity : AppCompatActivity() {
 
         token=getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token", "")
 
-        apiCalling(0, 0, token)
+        apiCalling(null, 0, token)
 
         button_next.setOnClickListener {
             button_previous.isEnabled=true
@@ -63,7 +63,7 @@ class DocActivity : AppCompatActivity() {
         when (item!!.itemId) {
 
             R.id.allDocuments -> {
-                apiCalling(0,currentPage,token)
+                apiCalling(null,currentPage,token)
                 return true
             }
 
@@ -98,7 +98,7 @@ class DocActivity : AppCompatActivity() {
         }
 
     @SuppressLint("InflateParams")
-    private fun apiCalling(status:Int, currentpage:Int, token:String? ){
+    private fun apiCalling(status:Int?, currentpage:Int, token:String? ){
 
 
 
