@@ -3,13 +3,11 @@
             android:layout_height="match_parent"
             xmlns:android="http://schemas.android.com/apk/res/android">
 <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/dashid"
         android:layout_width="match_parent"
         android:background="@color/design_default_color_background"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".Dashboarrd">
 
@@ -71,14 +69,14 @@
         <androidx.cardview.widget.CardView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:paddingRight="@dimen/dp10"
+                android:paddingEnd="@dimen/dp10"
                 app:cardBackgroundColor="@color/design_default_color_background"
 
         >
             <RelativeLayout android:layout_width="@dimen/dp130"
                             android:layout_height="@dimen/dp120"
                             android:background="@drawable/cardborder"
-                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_marginStart="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:elevation="@dimen/dp0"
                             android:layout_marginTop="@dimen/dp10"
@@ -152,19 +150,19 @@
                           android:textColor="@color/textcolor3"
                 />
                 <TextView android:layout_width="wrap_content"
-                          android:layout_height="21dp"
+                          android:layout_height="wrap_content"
                           android:layout_below="@+id/completedtv"
+                          android:layout_centerHorizontal="true"
                           android:text="@string/completed"
-                          android:layout_marginStart="-29dp"
-                          android:layout_marginLeft="@dimen/dp5"
-                          android:layout_marginRight="@dimen/dp5"
+                          android:layout_marginStart="@dimen/dp5"
                           android:textColor="@color/textcolor3"
-                          android:layout_align="center"
                           android:layout_marginTop="15dp"
-                          android:textSize="@dimen/sp20"
+                          android:layout_marginRight="@dimen/dp5"
+                          android:layout_marginLeft="@dimen/dp5"
+                          android:textSize="@dimen/sp17"
+                          android:layout_marginEnd="@dimen/dp5"
                           android:layout_marginBottom="@dimen/dp5"
-                          android:id="@+id/AwatingSign" android:layout_alignStart="@+id/completedtv"
-                          android:layout_marginEnd="-33dp" android:layout_alignEnd="@+id/completedtv"/>
+                          android:id="@+id/Completed"/>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
