@@ -20,15 +20,14 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".uploadfile"
-        android:parentActivityName=".Dashboarrd">
+
+        <activity android:name=".uploadfile">
         </activity>
         <activity
                 android:name=".Dashboarrd"
                 android:label="@string/title_activity_dashboarrd"
                 android:theme="@style/AppTheme">
         </activity>
-
         <activity android:name=".PhotoActivity"/>
 
         <activity android:name=".AddContact">
@@ -43,17 +42,30 @@
         <activity
                 android:name=".MainActivity"
                 tools:ignore="ExtraText">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+
         </activity>
+        <activity android:name=".UpdateContact" >
+
+        </activity>
+
         <activity
                 android:name=".Contacts"
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustPan">
+
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
         </activity>
         <activity
                 android:name=".ProfileActivity"
@@ -71,8 +83,10 @@
                 android:name=".ChangePassword"
                 android:parentActivityName=".Settings">
         </activity>
-        <activity android:name=".Registration"/>
+        <activity android:name=".Registration">
 
+        </activity>
+        <activity android:name=".Dashboard"/>
         <activity
                 android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
                 android:theme="@style/Base.Theme.AppCompat"/>
@@ -84,12 +98,23 @@
         <activity android:name=".ResetPasswordActivity">
         </activity>
         <activity
+                android:name=".DocumentDetailActivity"
+                android:parentActivityName=".DocActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+        </activity>
+
+        <activity android:name=".DocActivity">
+
+
                 android:name=".DocumentActivity"
                 tools:ignore="WrongManifestParent">
         </activity>
 
-        <activity android:name=".DocActivity">
-        </activity>
     </application>
 
 </manifest>

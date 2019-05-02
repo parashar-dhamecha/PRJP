@@ -9,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.dxdevil.pd.prjp.Model.Response.Data
 import com.dxdevil.pd.prjp.Model.Response.DeleteIdResponse
+import com.dxdevil.pd.prjp.Model.Response.GetContactIdResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,8 +22,10 @@ import retrofit2.Response
 class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
     RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
+
     var sp = context.getSharedPreferences("userid",0) as SharedPreferences
     var ed = sp.edit()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.contactsadapter, parent, false)
@@ -30,6 +34,8 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
 
     override fun getItemCount(): Int {
         return Con.size
+
+
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -37,22 +43,39 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
         holder.name.text = Con[position].name
         holder.email.text=Con[position].email
         holder.mobileno.text=Con[position].mobileNumber
+        holder.swipe.open(true)
+        holder.swipe.close(false)
+
+        //itemMangr.bindView(holder.itemView,position)
 
 
-        holder.editbutton.setOnClickListener{
-           var s = Con[position].id
-           ed.putString("userid",s)
-           ed.commit()
+
+        // Log.d("ContactsAdapter", "email" + Con[position].email)
+       holder.editbutton.setOnClickListener{
+//               var s = Con[position].id
+//           ed.putString("userid",s)
+//           ed.commit()
+//           val intent = Intent(context, UpdateContact::class.java)
+//           intent.putExtra("quantity","");
+//            context.startActivity(intent)
+           Toast.makeText(context, "Check your internet Connection"+Con[position].id, Toast.LENGTH_LONG).show()
+
+//           context.startActivity<UpdateContact>(COUNTRIES to countries)
+
            val intent = Intent(context, UpdateContact::class.java)
-            context.startActivity(intent)
+           intent.putExtra("value", Con[position].id)
+           context.startActivity(intent)
 
         }
+
+
 
         holder.delbutton.setOnClickListener{
 
             var s = Con[position].id
             ed.putString("userid",s)
             ed.commit()
+
 
 
             val builder= AlertDialog.Builder(context)
@@ -99,6 +122,14 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
                     })
 
 
+
+
+
+
+
+                    // Con.removeAt(position)
+                //notifyItemRemoved(position)
+
             } catch(e:Exception)
                 {
 
@@ -132,19 +163,29 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
 
     }
 
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var name: TextView = itemView.findViewById(R.id.name) as TextView
         var pro: ImageView = itemView.findViewById(R.id.pro) as ImageView
         var email:TextView=itemView.findViewById(R.id.email) as TextView
+        var swipe:SwipeRevealLayout=itemView.findViewById(R.id.swipe) as SwipeRevealLayout
         var mobileno:TextView=itemView.findViewById(R.id.mobileno) as TextView
 //        var del: Button = itemView.findViewById(R.id.del) as Button
         // @SuppressLint("WrongViewCast")
         var delbutton: ImageButton = itemView.findViewById(R.id.delbutton) as ImageButton
 
         var editbutton: ImageButton = itemView.findViewById(R.id.editbutton) as ImageButton
+        var swipe:SwipeRevealLayout=itemView.findViewById(R.id.swipe) as SwipeRevealLayout
 
 
     }
+
+
+   /* fun filterList(filteredList: ArrayList<ContactModel>) {
+        this.Con = filteredList
+        notifyDataSetChanged()
+    }*/
+
 }
 
 
