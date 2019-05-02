@@ -127,18 +127,16 @@ class Dashboarrd : AppCompatActivity(){
                     duesoontv?.text = ob!!.data[0]!!.expireSoon.toString()
                 }
                 else{
-                    Toast.makeText(this@Dashboarrd,response!!.body()!!.message!!.toString(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@Dashboarrd,response.message().toString(), Toast.LENGTH_LONG).show()
                 }
             }
         })
-
 
         uploadcv.setOnClickListener { view ->
             startActivity(Intent(applicationContext,uploadfile::class.java))
         }
 
         draw_signature?.setOnClickListener {
-            Toast.makeText(applicationContext, "hello", Toast.LENGTH_LONG)
             startActivity(Intent(applicationContext, DrawSignature::class.java))
         }
         photobutton?.setOnClickListener {

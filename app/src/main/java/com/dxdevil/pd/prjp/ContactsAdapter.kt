@@ -39,10 +39,8 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
         holder.mobileno.text=Con[position].mobileNumber
 
 
-
-        // Log.d("ContactsAdapter", "email" + Con[position].email)
-       holder.editbutton.setOnClickListener{
-               var s = Con[position].id
+        holder.editbutton.setOnClickListener{
+           var s = Con[position].id
            ed.putString("userid",s)
            ed.commit()
            val intent = Intent(context, UpdateContact::class.java)
@@ -55,8 +53,6 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
             var s = Con[position].id
             ed.putString("userid",s)
             ed.commit()
-
-
 
 
             val builder= AlertDialog.Builder(context)
@@ -102,14 +98,6 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
 
                     })
 
-
-
-
-
-
-
-                    // Con.removeAt(position)
-                //notifyItemRemoved(position)
 
             } catch(e:Exception)
                 {

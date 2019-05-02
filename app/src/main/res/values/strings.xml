@@ -94,8 +94,6 @@
 
     <!-- contacts strings-->
     <string name="contact_name">Juhi</string>
-    <string name="SaveContact">Save Contact</string>
-
 
     <string-array name="names">
         <item>pooja</item>
@@ -115,7 +113,6 @@
     <string name="Search">Search</string>
     <string name="CreateContact">Create Contact</string>
     <string name="CountryCode">Code</string>
-    <string name="SaveContact">Save Contact</string>
     <string name="Contacts">Contacts</string>
     <string name="Add">Add</string>
 
@@ -168,5 +165,20 @@
     <string name="done">done</string>
     <string name="Loading">Loading...</string>
     <string name="awaiting">Awaiting My Sign</string>
+    <string name="SaveContact">SaveContact</string>
+    <string name="selectsigners">Select Signers</string>
+    <string name="selectobservers">Select Observers</string>
+    <string name="pickDateandtime"><![CDATA[Expiry Date & Time]]></string>
+    <string name="picktime">Time</string>
+    <string name="ExpireyDate">Expiry Date</string>
+    <string name="time">Time</string>
+    <string name="expirey_date">Expirey Date</string>
+    <string name="expirey_end_date" tools:ignore="ExtraTranslation">Expirey End Date</string>
+    <string name="expirey_start_date">Expirey Start Date</string>
+    <string name="Signing_Due_date">Signing Due Date</string>
+    <string name="sequential">Sequential</string>
+    <string name="paralel">Paralel</string>
+    <string name="remindbefore">Remind Before</string>
+    <string name="days">days</string>
 
 </resources>
