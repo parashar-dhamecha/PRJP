@@ -195,5 +195,8 @@
     <string name="paralel">Paralel</string>
     <string name="remindbefore">Remind Before</string>
     <string name="days">days</string>
+    <string name="button_clearall">Clear All</string>
+    <string name="prev"><![CDATA[<]]></string>
+    <string name="nextf"><![CDATA[>]]></string>
 
 </resources>
