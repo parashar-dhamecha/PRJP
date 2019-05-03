@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.RelativeLayout
 import android.view.MotionEvent
 import android.view.View
+import kotlinx.android.synthetic.main.activity_annotation2.*
 
 
 @Suppress("ImplicitThis")
@@ -16,32 +17,37 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener {
     lateinit var view: ImageView
     lateinit var view1: ImageView
     lateinit var root: ViewGroup
+    lateinit var root2: ViewGroup
     private var _xDelta: Int = 0
     private var _yDelta: Int = 0
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility", "ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_annotation2)
-        root = findViewById<ViewGroup>(R.id.rootview)
+        root = findViewById(R.id.Relativelid)
+
         view = ImageView(this)
         view.setImageDrawable(getDrawable(R.drawable.logo))
         view1 = ImageView(this)
         view1.setImageDrawable(getDrawable(R.drawable.logo))
 
-        val layoutParams = RelativeLayout.LayoutParams(500,200)
-        layoutParams.leftMargin = 50
-        layoutParams.topMargin = 50
+        val layoutParams = RelativeLayout.LayoutParams(500, 200)
+        layoutParams.leftMargin = 0
+        layoutParams.topMargin = 0
         layoutParams.bottomMargin = -250
         layoutParams.rightMargin = -250
         view.setLayoutParams(layoutParams)
-        view1.setLayoutParams(layoutParams)
+        view.setBackgroundColor(R.color.digitbg)
+        view.x= 100F
+        view.y=100F
+        previewdocid.setImageDrawable(getDrawable(R.drawable.sampledoc))
+        view.setOnClickListener {
+    view.setOnTouchListener(this)
+       }
 
-
-        view.setOnTouchListener(this)
-        view1.setOnTouchListener(this)
         root.addView(view)
     }
-
     override fun onTouch(view: View, event: MotionEvent): Boolean {
         val X = event.rawX.toInt()
         val Y = event.rawY.toInt()
@@ -63,6 +69,7 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener {
                 layoutParams.topMargin = Y - _yDelta
                 layoutParams.rightMargin = -250
                 layoutParams.bottomMargin = -250
+                xycoordinates.text= "X:${view.x},Y:${view.y}"
                 view.setLayoutParams(layoutParams)
             }
         }
