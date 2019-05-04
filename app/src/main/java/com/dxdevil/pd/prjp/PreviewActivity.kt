@@ -32,8 +32,8 @@ class PreviewActivity : AppCompatActivity() {
     var cpage:Int=1
     var currentpage:Int=0
     var pageNo:Int=1
-    var length:Int=1
-    var length2:Int=1
+    var length:Int=5
+    var length2:Int=0
     var pageList = arrayOfNulls<String>(10)
     lateinit var by:ByteArray
     lateinit var bitmap:Bitmap
@@ -54,8 +54,6 @@ class PreviewActivity : AppCompatActivity() {
         button_previous.isEnabled=false
 
         apiPreview(token,docId)
-
-        if(length==1)button_next.isEnabled=false
 
         cpage_number.text=pageNo.toString()
 
@@ -159,6 +157,10 @@ class PreviewActivity : AppCompatActivity() {
 
                         length=response.body()!!.data[0].documentData.pages.size
                         length=length.dec()
+
+                        if(length==0)
+                            button_next.isEnabled=false
+
                         title=response.body()!!.data[0].documentData.name
                         setTitle(title)
                         pageCount=response.body()!!.data[0].documentData.pageCount
@@ -215,6 +217,7 @@ class PreviewActivity : AppCompatActivity() {
 
                    length2=response.body()!!.data[0].pages.size
                    length2=length2.dec()
+                   if(length2==0)button_next.isEnabled=false
 
                    for(i in 0..length2)
                        {
