@@ -190,5 +190,7 @@
     <string name="not_notarized_message">This Document is yet not Notarized.</string>
     <string name="view_doc">Preview the document</string>
     <string name="no_documents">No Documents</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="refresh_page">Try refreshing the page</string>
 
 </resources>

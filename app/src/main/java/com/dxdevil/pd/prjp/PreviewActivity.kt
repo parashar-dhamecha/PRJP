@@ -7,11 +7,14 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dxdevil.pd.prjp.Model.Request.Document.NextPage
 import com.dxdevil.pd.prjp.Model.Response.Document.NextPage.NextPageResponse
 import com.dxdevil.pd.prjp.Model.Response.Document.Preview.PreviewDocResponse
+import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_preview.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,14 +23,17 @@ import retrofit2.Response
 
 class PreviewActivity : AppCompatActivity() {
 
+    var title:String?=null
+    var pageCount:Int=0
     var token:String? =null
     var docId:String?=null
     var fromP:Int?=null
     var toP:Int?=null
     var cpage:Int=1
-    var currentpage:Int = 0
+    var currentpage:Int=0
     var pageNo:Int=1
     var length:Int=1
+    var length2:Int=1
     var pageList = arrayOfNulls<String>(10)
     lateinit var by:ByteArray
     lateinit var bitmap:Bitmap
@@ -37,81 +43,88 @@ class PreviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preview)
 
+
         token=getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token", "")
         docId = intent.getStringExtra("doc")
 
-        apiPreview(token,docId)
-
+        setTitle(R.string.preview)
+        tvSomethingWrong.visibility=View.GONE
+        tvRefresh.visibility=View.GONE
+        swipeRefreshImage.isEnabled=false
         button_previous.isEnabled=false
 
-//        if(length==1)
-//            button_next.isEnabled=false
+        apiPreview(token,docId)
+
+        if(length==1)button_next.isEnabled=false
 
         cpage_number.text=pageNo.toString()
 
-        try {
-            button_next.setOnClickListener {
+        button_next.setOnClickListener {
 
                 button_previous.isEnabled = true
 
-                if(cpage%6==0||currentpage==6){
-                    fromP=cpage
+            currentpage+=1
+            if(currentpage==6)currentpage=0
+
+            if(pageNo%6==0){
+
+                    fromP=cpage+1
                     toP=cpage+6
-                    apiNextPage(token,fromP.toString(),toP.toString())
-                    // pageNo = pageNo.inc()
-                }
-                cpage=cpage.inc()
-                pageNo= pageNo.inc()
-                cpage_number.text = pageNo.toString()
+                    apiNextPage(token,fromP.toString(),toP.toString(),true)
 
-
-                currentpage+=1
-                if(currentpage==6)currentpage=0
-
-                if(currentpage<6){
-                    by = Base64.decode(pageList[currentpage], Base64.DEFAULT)
-                    bitmap = BitmapFactory.decodeByteArray(by, 0, by.size)
-                    img_fileBITMAP.setImageBitmap(bitmap)
-                }
+                } else{
+                        by = Base64.decode(pageList[currentpage], Base64.DEFAULT)
+                        bitmap = BitmapFactory.decodeByteArray(by, 0, by.size)
+                        img_fileBITMAP.setImageBitmap(bitmap)
+                        pageNo = pageNo.inc()
 
             }
-        }catch (e:Exception)
-        {
-            Toast.makeText(applicationContext, e.message, Toast.LENGTH_SHORT).show()
-        }
+            cpage=cpage.inc()
+            cpage_number.text = pageNo.toString()
+            if(pageNo==pageCount)
+                button_next.isEnabled=false
+            }
 
         button_previous.setOnClickListener {
 
+            currentpage-=1
+            if(currentpage==-1)currentpage=5
 
-            if(pageNo==1)
-                button_previous.isEnabled=false
-
-            if(cpage%6==1&&cpage!=1){
+            if(pageNo%6==1&&cpage!=1){
 
                 fromP=cpage-6
                 toP=cpage-1
+                apiNextPage(token,fromP.toString(),toP.toString(),false)
 
-                apiNextPage(token,fromP.toString(),toP.toString())
+            }else{
+                    by = Base64.decode(pageList[currentpage], Base64.DEFAULT)
+                    bitmap= BitmapFactory.decodeByteArray(by,0,by.size)
+                    img_fileBITMAP.setImageBitmap(bitmap)
+                    pageNo=pageNo.dec()
 
             }
-                cpage=cpage.dec()
-                pageNo=pageNo.dec()
-                cpage_number.text=pageNo.toString()
+            cpage=cpage.dec()
+            cpage_number.text=pageNo.toString()
 
-
-                if(currentpage==-1)currentpage=5
-                currentpage-=1
-
-            if(currentpage>=0){
-                by = Base64.decode(pageList[currentpage], Base64.DEFAULT)
-                bitmap= BitmapFactory.decodeByteArray(by,0,by.size)
-                img_fileBITMAP.setImageBitmap(bitmap)
-            }
-
-
+            if(pageNo==1)
+                button_previous.isEnabled=false
         }
 
-    }
+        swipeRefreshImage!!.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
+            override fun onRefresh() {
+                refreshItem()
+            }
+            private fun refreshItem() {
+                    apiPreview(token,docId)
+                itemLoadComplete()
+            }
+            private fun itemLoadComplete() {
+                swipeRefreshImage!!.isRefreshing = false
+            }
+        })
+ }
+
+
 
     fun apiPreview(token:String?,docId:String?){
 
@@ -128,9 +141,13 @@ class PreviewActivity : AppCompatActivity() {
         dialog.show()
 
         call.enqueue(object : Callback<PreviewDocResponse> {
+
             override fun onFailure(call: Call<PreviewDocResponse>, t: Throwable) {
                 dialog.dismiss()
-                Toast.makeText(applicationContext, "Failure", Toast.LENGTH_SHORT).show()
+                tvSomethingWrong.visibility=View.VISIBLE
+                tvRefresh.visibility=View.VISIBLE
+                swipeRefreshImage.isEnabled=true
+
             }
 
             override fun onResponse(call: Call<PreviewDocResponse>, response: Response<PreviewDocResponse>) {
@@ -138,11 +155,15 @@ class PreviewActivity : AppCompatActivity() {
                     if (response.isSuccessful){
                         Toast.makeText(applicationContext,"Success",Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
+                        swipeRefreshImage.isEnabled=false
 
                         length=response.body()!!.data[0].documentData.pages.size
+                        length=length.dec()
+                        title=response.body()!!.data[0].documentData.name
+                        setTitle(title)
+                        pageCount=response.body()!!.data[0].documentData.pageCount
 
-
-                        for(i in 0..5)
+                        for(i in 0..length)
                         {
                             pageList[i]=response.body()!!.data[0].documentData.pages[i]
                         }
@@ -160,14 +181,14 @@ class PreviewActivity : AppCompatActivity() {
         })
     }
 
-    fun apiNextPage(toke:String?,pageFrom:String,pageTo:String)
+    fun apiNextPage(toke:String?,pageFrom:String,pageTo:String,nextORPrevious:Boolean)
     {
         val builder = android.app.AlertDialog.Builder(this)
         val dialogView = layoutInflater.inflate(R.layout.progress_dialog, null)
         val message = dialogView.findViewById<TextView>(R.id.progress_message)
         message.text = getString(R.string.Getting)
         builder.setView(dialogView)
-        builder.setCancelable(true)
+        builder.setCancelable(false)
         val dialog = builder.create()
         dialog.show()
 
@@ -181,7 +202,8 @@ class PreviewActivity : AppCompatActivity() {
         call.enqueue(object :Callback<NextPageResponse>{
             override fun onFailure(call: Call<NextPageResponse>, t: Throwable) {
                 dialog.dismiss()
-                Toast.makeText(applicationContext, "Check your Connection", Toast.LENGTH_SHORT).show()
+                tvSomethingWrong.visibility=View.VISIBLE
+                tvRefresh.visibility=View.VISIBLE
             }
 
             override fun onResponse(call: Call<NextPageResponse>, response: Response<NextPageResponse>) {
@@ -189,17 +211,32 @@ class PreviewActivity : AppCompatActivity() {
                 dialog.dismiss()
                if(response.isSuccessful)
                {
-                   length=response.body()!!.data[0].pages.size
+                   pageCount=response.body()!!.data[0].pageCount
 
+                   length2=response.body()!!.data[0].pages.size
+                   length2=length2.dec()
 
-                   for(i in 0..5)
+                   for(i in 0..length2)
                        {
                            pageList[i]=response.body()!!.data[0].pages[i]
                        }
-                       pageList[0]=response.body()!!.data[0].pages[0]
+
+
+                   if(nextORPrevious==true){
+                       pageNo=pageNo.inc()
+                       cpage_number.text=pageNo.toString()
                        by = Base64.decode(pageList[0], Base64.DEFAULT)
                        bitmap= BitmapFactory.decodeByteArray(by,0,by.size)
                        img_fileBITMAP.setImageBitmap(bitmap)
+                   }
+                   else
+                   {
+                       by = Base64.decode(pageList[5], Base64.DEFAULT)
+                       bitmap= BitmapFactory.decodeByteArray(by,0,by.size)
+                       img_fileBITMAP.setImageBitmap(bitmap)
+                       pageNo=pageNo.dec()
+                       cpage_number.text=pageNo.toString()
+                   }
 
 
                    dialog.dismiss()

@@ -48,11 +48,11 @@ class DocActivity : AppCompatActivity() {
         button_next.setOnClickListener {
             button_previous.isEnabled=true
                 currentPage +=1
-                apiCalling(0,currentPage,token)}
+                apiCalling(null,currentPage,token)}
 
       button_previous.setOnClickListener {
             currentPage -= 1
-            apiCalling(0,currentPage,token)
+            apiCalling(null,currentPage,token)
         }
 
        
