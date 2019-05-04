@@ -3,9 +3,10 @@ package com.dxdevil.pd.prjp
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -25,17 +26,19 @@ class DocumentDetailActivity : AppCompatActivity() {
     var token: String? = null
     lateinit  var signerlist :List<Signer>
     lateinit  var observerslist :List<Observer>
-
+    private var docId:String?=null
     @SuppressLint("InflateParams")
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_document_detail)
 
-//        var st = getSharedPreferences("DocId", 0) as SharedPreferences
-//        var docId=st.getString("DocId","")
-        val intent = getIntent();
-        val docId:String? = intent.getStringExtra("doc")
+        val intent = intent
+         docId = intent.getStringExtra("doc")
+
         tvNo_observers.visibility=View.GONE
+        tvNot_notarized.visibility=View.GONE
 
         val builder = android.app.AlertDialog.Builder(this)
         val dialogView = layoutInflater.inflate(R.layout.progress_dialog, null)
@@ -53,6 +56,11 @@ class DocumentDetailActivity : AppCompatActivity() {
         token=getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token", "")
 
 
+        btn_Preview.setOnClickListener {
+            val intent1 = Intent(this@DocumentDetailActivity, PreviewActivity::class.java)
+            intent1.putExtra("doc", docId)
+            this.startActivity(intent1)
+        }
         val api = RetrofitClient.getInstance().api as Api
 
         val call = api.docdetails(
@@ -71,7 +79,7 @@ class DocumentDetailActivity : AppCompatActivity() {
 
                 if(response.isSuccessful) {
 
-                    if (response.body()!!.data[0].documentDetail.extension == ".pdf")
+                        if (response.body()!!.data[0].documentDetail.extension == ".pdf")
                             doc_image.setImageResource(R.drawable.pdf3)
                         if (response.body()!!.data[0].documentDetail.extension == ".doc" || response.body()!!.data[0].documentDetail.extension == ".docx")
                             doc_image.setImageResource(R.drawable.doc4)
@@ -105,9 +113,15 @@ class DocumentDetailActivity : AppCompatActivity() {
                             else
                             transaction_hash.text = response.body()!!.data[0].notarization.txHash.toString()
 
+                          if(response.body()!!.data[0].notarization.isNotarized==false){
+                                notarized_on.visibility=View.GONE
+                                time_date.visibility=View.GONE
+                                transaction_hash.visibility=View.GONE
+                                transaction_hash_value.visibility=View.GONE
+                                button2.visibility=View.GONE
+                                tvNot_notarized.visibility=View.VISIBLE
+                          }
                             dialog.dismiss()
-
-
                 }
                 else {
                     dialog.dismiss()
@@ -115,10 +129,27 @@ class DocumentDetailActivity : AppCompatActivity() {
                 }
 
                }
-
-
-        }) }catch (e:Exception){
+          }) }catch (e:Exception){
                   Toast.makeText(this@DocumentDetailActivity,"Exception:"+e.message,Toast.LENGTH_SHORT).show()
               }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.docdetails_menu, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        when (item!!.itemId) {
+
+            R.id.preview -> {
+                val intent = Intent(this@DocumentDetailActivity, PreviewActivity::class.java)
+                intent.putExtra("doc", docId)
+                this.startActivity(intent)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

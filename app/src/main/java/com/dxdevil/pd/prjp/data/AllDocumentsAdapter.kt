@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.dxdevil.pd.prjp.DocumentDetailActivity
@@ -66,10 +65,9 @@ class AllDocumentsAdapter(
         }
 
         holder.run { cardfile.setOnClickListener{
-            val intent = Intent(context, DocumentDetailActivity::class.java)
 
+            val intent = Intent(context, DocumentDetailActivity::class.java)
             intent.putExtra("doc", list[position].id)
-            //intent.putExtra("samplename", "abd")
             context.startActivity(intent)
         }
         }

@@ -173,6 +173,8 @@
     <string name="Details">Details</string>
     <string name="copy">Copy</string>
     <string name="fetch">Fetching Details</string>
+    <string name="loading_preview">Loading Preview</string>
+    <string name="Getting">Getting pages</string>
     <string name="preview">Preview</string>
     <string name="signers">Signers</string>
     <string name="sequential">Sequential Signature</string>
@@ -185,5 +187,8 @@
     <string name="time_and_date">time and date</string>
     <string name="thash">hash</string>
     <string name="no_observers">There are no observers</string>
+    <string name="not_notarized_message">This Document is yet not Notarized.</string>
+    <string name="view_doc">Preview the document</string>
+    <string name="no_documents">No Documents</string>
 
 </resources>

@@ -9,12 +9,27 @@
     <ScrollView android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="none"
-                android:id="@+id/scrollView2" tools:layout_editor_absoluteY="81dp"
-                tools:layout_editor_absoluteX="-42dp">
+                android:id="@+id/scrollView2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+            <Button
+                    android:id="@+id/btn_Preview"
+                    android:text="@string/view_doc"
+                    android:textColor="@color/AwaitingMySign"
+                    android:layout_width="0dp"
+                    android:background="#ffffff"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardview_doc_details"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="8dp" android:layout_marginEnd="8dp">
+
+
+            </Button>
 
             <androidx.cardview.widget.CardView
                     android:id="@+id/cardview_doc_details"
@@ -136,7 +151,7 @@
             <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/cardview_doc_details"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_Preview"
                     android:id="@+id/cardview_signers" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" android:layout_marginTop="16dp">
@@ -178,6 +193,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="match_parent"
                             android:id="@+id/signer_recyclerview"
+                            android:nestedScrollingEnabled="false"
                             android:layout_height="wrap_content"
                             android:layout_alignTop="@id/divider"/>
 
@@ -222,6 +238,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
                             android:id="@+id/observer_recyclerview"
                             android:layout_alignTop="@+id/divider2"/>
                     <TextView
@@ -323,7 +340,6 @@
                             android:layout_width="80dp"
                             android:layout_height="20dp"
                             android:textAllCaps="false"
-
                             android:background="@drawable/mybutton"
                             android:id="@+id/button2"
                             android:textSize="12sp"
@@ -335,6 +351,22 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginTop="8dp"/>
+
+                    <TextView
+                            android:text="@string/not_notarized_message"
+                            android:background="@color/bg_gray"
+                            android:id="@+id/tvNot_notarized"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="@dimen/dp16"
+                            android:padding="@dimen/dp5"
+                            android:layout_marginBottom="@dimen/dp16"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/slate_black"
+                            android:layout_below="@+id/divider3"
+                            android:layout_marginTop="16dp"/>
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>

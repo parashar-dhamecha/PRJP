@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -38,6 +39,9 @@ class DocActivity : AppCompatActivity() {
         setTitle(R.string.documents)
 
         token=getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token", "")
+
+        img_No_doc.visibility=View.GONE
+        tvNo_doc.visibility=View.GONE
 
         apiCalling(null, 0, token)
 
@@ -167,7 +171,18 @@ class DocActivity : AppCompatActivity() {
                                 button_next.isEnabled = true
                             }
                             if(response.body()!!.data[0].totalRows==0)
-                                Toast.makeText(this@DocActivity, "No Documents", Toast.LENGTH_SHORT).show()
+                            {
+                                img_No_doc.visibility=View.VISIBLE
+                                tvNo_doc.visibility=View.VISIBLE
+                                mrecyclerView.visibility=View.GONE
+                            }
+
+                            if(response.body()!!.data[0].totalRows!=0)
+                            {
+                                img_No_doc.visibility=View.GONE
+                                tvNo_doc.visibility=View.GONE
+                                mrecyclerView.visibility=View.VISIBLE
+                            }
 
                             dialog.dismiss()
 

@@ -8,6 +8,31 @@
         tools:context=".DocActivity"
         android:id="@+id/coordinatorLayout">
 
+    <ImageView
+
+            android:id="@+id/img_No_doc"
+            android:src="@drawable/nodoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="64dp" android:layout_marginStart="8dp"/>
+    <TextView
+            android:id="@+id/tvNo_doc"
+            android:text="@string/no_documents"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="#808080"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_No_doc" android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -27,8 +52,7 @@
             android:id="@+id/mRelativelayout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-    >
+            app:layout_constraintStart_toStartOf="parent">
         <Button
                 android:text="@string/previous"
                 android:layout_width="60dp"
@@ -111,7 +135,8 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="2dp"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="2dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
