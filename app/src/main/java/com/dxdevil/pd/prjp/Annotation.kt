@@ -12,8 +12,8 @@ import kotlinx.android.synthetic.main.activity_annotation.*
 
 
 class Annotation : AppCompatActivity(),View.OnTouchListener{
-     var cx :Float? =null
-    var cy:Float?=  null
+     var cx :Float? = null
+     var cy :Float? = null
     private val matrix = Matrix()
     private val savedMatrix = Matrix()
     // we can be in one of these 3 states

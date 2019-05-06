@@ -21,7 +21,7 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener {
     private var _yDelta: Int = 0
      var arr : ArrayList<String> = ArrayList()
 
-    @SuppressLint("ClickableViewAccessibility", "ResourceAsColor")
+    @SuppressLint("ClickableViewAccessibility", "ResourceAsColor", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -35,6 +35,8 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener {
         var adapter:ArrayAdapter<String> = ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,arr)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         signerspinner.adapter=adapter
+
+
         view = ImageView(this)
         view.setImageDrawable(getDrawable(R.drawable.logo))
 
@@ -51,6 +53,7 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener {
 
         addantbutton.setOnClickListener {
             view = addannotatio() as ImageView
+            view.id = 1
             root.addView(view)
             view.setOnClickListener {
                 view.setOnTouchListener(this)
@@ -67,7 +70,9 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener {
 
     }
 
+    @SuppressLint("ResourceType")
     private fun addannotatio():View {
+        view.id=1
         view = ImageView(this)
         view.setImageDrawable(getDrawable(R.drawable.logo))
         setLayoutsize(400,170)

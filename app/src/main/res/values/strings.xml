@@ -198,5 +198,6 @@
     <string name="button_clearall">Clear All</string>
     <string name="prev"><![CDATA[<]]></string>
     <string name="nextf"><![CDATA[>]]></string>
+    <string name="id">imageview</string>
 
 </resources>
