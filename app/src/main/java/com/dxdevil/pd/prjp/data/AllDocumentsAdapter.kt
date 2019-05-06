@@ -1,17 +1,18 @@
 package com.dxdevil.pd.prjp.data
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color.rgb
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.dxdevil.pd.prjp.DocumentDetailActivity
 import com.dxdevil.pd.prjp.R
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document
-
-
 
 
 class AllDocumentsAdapter(
@@ -61,12 +62,21 @@ class AllDocumentsAdapter(
             holder.docstatus.text=context.getString(R.string.Declined)
             holder.docstatus.setTextColor(rgb(255,51,51))
         }
+
+        holder.run { cardfile.setOnClickListener{
+
+            val intent = Intent(context, DocumentDetailActivity::class.java)
+            intent.putExtra("doc", list[position].id)
+            context.startActivity(intent)
+        }
+        }
     }
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             var docname:TextView = itemView.findViewById(R.id.txt_doc) as TextView
             var docstatus:TextView=itemView.findViewById(R.id.doc_status) as TextView
             var fileimage:ImageView = itemView.findViewById(R.id.file_image) as ImageView
+            var cardfile:CardView=itemView.findViewById(R.id.card_view_file) as CardView
     }
 
 }

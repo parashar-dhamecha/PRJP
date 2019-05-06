@@ -38,6 +38,7 @@
                 android:name=".Dashboarrd"
                 android:label="@string/title_activity_dashboarrd"
                 android:theme="@style/AppTheme">
+
         </activity>
         <activity android:name=".PhotoActivity"/>
         <activity android:name=".AddContact">
@@ -47,17 +48,16 @@
         <activity android:name=".SetAnnotation">
         </activity>
         <activity android:name=".LoginActivity">
+
         </activity>
         <activity
                 android:name=".MainActivity"
                 tools:ignore="ExtraText">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN"/> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-            <!-- </intent-filter> -->
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
 
         </activity>
         <activity android:name=".UpdateContact">
@@ -72,6 +72,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+
         </activity>
         <activity
                 android:name=".ProfileActivity"
@@ -90,12 +92,14 @@
                 android:parentActivityName=".Settings">
         </activity>
         <activity android:name=".Registration">
+
         </activity>
         <activity android:name=".Dashboard"/>
         <activity
                 android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
                 android:theme="@style/Base.Theme.AppCompat"/>
         <activity android:name=".DrawSignature"/>
+
         <activity
                 android:name=".PhotoActivity"
                 tools:ignore="DuplicateActivity"/>
@@ -105,10 +109,21 @@
                 android:name=".DocumentDetailActivity"
                 android:parentActivityName=".DocActivity">
         </activity>
-        <activity
-                android:name=".DocActivity"
-                tools:ignore="ExtraText">
+
+        <activity android:name=".DocActivity"
+        android:parentActivityName=".Dashboard">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
         </activity>
+
+        <activity android:name=".PreviewActivity"
+                  android:parentActivityName=".DocumentDetailActivity"/>
+
+
     </application>
 
 </manifest>

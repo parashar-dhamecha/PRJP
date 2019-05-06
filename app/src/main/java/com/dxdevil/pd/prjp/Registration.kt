@@ -61,7 +61,6 @@ class Registration : AppCompatActivity() {
 
             if(validation()) {
 
-
                 val pd = ProgressDialog(this)
                 pd.setMessage("Signing Up...")
                 pd.isIndeterminate = true

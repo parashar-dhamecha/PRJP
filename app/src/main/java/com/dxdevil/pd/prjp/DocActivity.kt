@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -39,16 +40,19 @@ class DocActivity : AppCompatActivity() {
 
         token=getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token", "")
 
-        apiCalling(0, 0, token)
+        img_No_doc.visibility=View.GONE
+        tvNo_doc.visibility=View.GONE
+
+        apiCalling(null, 0, token)
 
         button_next.setOnClickListener {
             button_previous.isEnabled=true
                 currentPage +=1
-                apiCalling(0,currentPage,token)}
+                apiCalling(null,currentPage,token)}
 
       button_previous.setOnClickListener {
             currentPage -= 1
-            apiCalling(0,currentPage,token)
+            apiCalling(null,currentPage,token)
         }
 
        
@@ -63,7 +67,7 @@ class DocActivity : AppCompatActivity() {
         when (item!!.itemId) {
 
             R.id.allDocuments -> {
-                apiCalling(0,currentPage,token)
+                apiCalling(null,currentPage,token)
                 return true
             }
 
@@ -98,7 +102,7 @@ class DocActivity : AppCompatActivity() {
         }
 
     @SuppressLint("InflateParams")
-    private fun apiCalling(status:Int, currentpage:Int, token:String? ){
+    private fun apiCalling(status:Int?, currentpage:Int, token:String? ){
 
 
 
@@ -167,7 +171,18 @@ class DocActivity : AppCompatActivity() {
                                 button_next.isEnabled = true
                             }
                             if(response.body()!!.data[0].totalRows==0)
-                                Toast.makeText(this@DocActivity, "No Documents", Toast.LENGTH_SHORT).show()
+                            {
+                                img_No_doc.visibility=View.VISIBLE
+                                tvNo_doc.visibility=View.VISIBLE
+                                mrecyclerView.visibility=View.GONE
+                            }
+
+                            if(response.body()!!.data[0].totalRows!=0)
+                            {
+                                img_No_doc.visibility=View.GONE
+                                tvNo_doc.visibility=View.GONE
+                                mrecyclerView.visibility=View.VISIBLE
+                            }
 
                             dialog.dismiss()
 

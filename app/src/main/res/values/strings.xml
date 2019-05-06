@@ -170,6 +170,8 @@
     <string name="Details">Details</string>
     <string name="copy">Copy</string>
     <string name="fetch">Fetching Details</string>
+    <string name="loading_preview">Loading Preview</string>
+    <string name="Getting">Getting pages</string>
     <string name="preview">Preview</string>
     <string name="signers">Signers</string>
     <string name="observers">Observers</string>
@@ -191,7 +193,6 @@
     <string name="expirey_end_date" tools:ignore="ExtraTranslation">Expirey End Date</string>
     <string name="expirey_start_date">Expirey Start Date</string>
     <string name="Signing_Due_date">Signing Due Date</string>
-    <string name="sequential">Sequential</string>
     <string name="paralel">Paralel</string>
     <string name="remindbefore">Remind Before</string>
     <string name="days">days</string>
@@ -199,5 +200,11 @@
     <string name="prev"><![CDATA[<]]></string>
     <string name="nextf"><![CDATA[>]]></string>
     <string name="id">imageview</string>
+    <string name="no_observers">There are no observers</string>
+    <string name="not_notarized_message">This Document is yet not Notarized.</string>
+    <string name="view_doc">Preview the document</string>
+    <string name="no_documents">No Documents</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="refresh_page">Try refreshing the page</string>
 
 </resources>
