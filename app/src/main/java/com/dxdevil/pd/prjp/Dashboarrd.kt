@@ -15,15 +15,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
 import com.dxdevil.pd.prjp.Model.Response.DashboardResponse
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.activity_dashboard.addsign
 import kotlinx.android.synthetic.main.activity_dashboard.awatingotherstv
 import kotlinx.android.synthetic.main.activity_dashboard.awatingsigntv
@@ -31,9 +27,6 @@ import kotlinx.android.synthetic.main.activity_dashboard.completedtv
 import kotlinx.android.synthetic.main.activity_dashboard.duesoontv
 import kotlinx.android.synthetic.main.activity_dashboard.uploadcv
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
-import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.content_dashboarrd.*
-import kotlinx.android.synthetic.main.navigationbar_header.*
 import kotlinx.android.synthetic.main.signpopup.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -133,7 +126,7 @@ class Dashboarrd : AppCompatActivity(){
         })
 
         uploadcv.setOnClickListener { view ->
-            startActivity(Intent(applicationContext,uploadfile::class.java))
+            startActivity(Intent(applicationContext,Uploadfile::class.java))
         }
 
         draw_signature?.setOnClickListener {

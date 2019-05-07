@@ -89,8 +89,6 @@
             android:background="@drawable/edit_round2"
             android:id="@+id/clearallantbutton"
             android:textAlignment="center"
-            android:paddingBottom="@dimen/dp20"
-            android:paddingTop="@dimen/dp10"
             app:layout_constraintEnd_toEndOf="@+id/Relativelid"
             app:layout_constraintTop_toTopOf="@+id/clearantbutton"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,7 +32,8 @@
         </activity>
         <activity android:name=".Annotation">
         </activity>
-        <activity android:name=".uploadfile">
+        <activity android:name=".Uploadfile">
+
         </activity>
         <activity
                 android:name=".Dashboarrd"
@@ -53,12 +54,6 @@
         <activity
                 android:name=".MainActivity"
                 tools:ignore="ExtraText">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-
         </activity>
         <activity android:name=".UpdateContact">
         </activity>
@@ -67,12 +62,6 @@
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-
 
         </activity>
         <activity
@@ -112,12 +101,6 @@
 
         <activity android:name=".DocActivity"
         android:parentActivityName=".Dashboard">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-
         </activity>
 
         <activity android:name=".PreviewActivity"

@@ -5,21 +5,28 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.RelativeLayout
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_annotation2.*
 
 
-@Suppress("ImplicitThis")
+@Suppress("ImplicitThis", "RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS",
+    "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS"
+)
 class Annotation2 : AppCompatActivity(),View.OnTouchListener {
-    lateinit var view: ImageView
+    lateinit var viewarr: ArrayList<ImageView>
+    lateinit var view :ImageView
+     var viewcount: Int = 0
     lateinit var root: ViewGroup
     private var _xDelta: Int = 0
     private var _yDelta: Int = 0
-     var arr : ArrayList<String> = ArrayList()
+     var selsigners : ArrayList<String>? = ArrayList()
+    var signersid : ArrayList<String>? = ArrayList()
+
+
 
     @SuppressLint("ClickableViewAccessibility", "ResourceAsColor", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,52 +34,61 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_annotation2)
         root = findViewById(R.id.Relativelid)
+       selsigners=this.intent.getStringArrayListExtra("ssname")
+        signersid=this.intent.getStringArrayListExtra("ssid")
+        viewarr=ArrayList<ImageView>()
 
-        arr.add("Rishabh")
-        arr.add("Ashish")
-        arr.add("kalpesh")
+        if(selsigners!=null) {
+            var adapter: ArrayAdapter<String> =
+                ArrayAdapter(this, android.R.layout.simple_spinner_item, selsigners)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            signerspinner.adapter = adapter!!
+            val contains = selsigners!!.indexOf(signerspinner.selectedItem)
+        }
+//        view = ImageView(this)
 
-        var adapter:ArrayAdapter<String> = ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,arr)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        signerspinner.adapter=adapter
-
-
-        view = ImageView(this)
-        view.setImageDrawable(getDrawable(R.drawable.logo))
-
-        val layoutParams = RelativeLayout.LayoutParams(500, 200)
-        layoutParams.leftMargin = 0
-        layoutParams.topMargin = 0
-        layoutParams.bottomMargin = -250
-        layoutParams.rightMargin = -250
-        view.setLayoutParams(layoutParams)
-        view.setBackgroundColor(R.color.digitbg)
-        view.x= 100F
-        view.y=100F
+//        val layoutParams = RelativeLayout.LayoutParams(500, 200)
+//        layoutParams.leftMargin = 0
+//        layoutParams.topMargin = 0
+//        layoutParams.bottomMargin = -250
+//        layoutParams.rightMargin = -250
+//        view.setLayoutParams(layoutParams)
+//        view.setBackgroundColor(R.color.digitbg)
+//        view.x= 100F
+//        view.y=100F
         previewdocid.setImageDrawable(getDrawable(R.drawable.sampledoc))
 
-        addantbutton.setOnClickListener {
-            view = addannotatio() as ImageView
-            view.id = 1
-            root.addView(view)
-            view.setOnClickListener {
-                view.setOnTouchListener(this)
+         addantbutton.setOnClickListener {
+             synchronized(this) {
+                 viewarr.add( addannotatio() as ImageView)
+                 viewarr[viewcount].id= viewcount
+                 root.addView(viewarr[viewcount])
+                 viewarr[viewcount].setOnTouchListener(this)
+                 viewcount+=1
+             }
+         }
+        clearantbutton.setOnClickListener {
+            synchronized(this) {
+                root.removeView(findViewById(viewcount-1))
+                viewcount-=1
             }
         }
-        clearantbutton.setOnClickListener {
-            root.removeView(view)
-        }
-        clearallantbutton.setOnClickListener {
-            root.removeAllViews()
-        }
+      clearallantbutton.setOnClickListener {
+         synchronized(this) {
+             while (viewcount > 0) {
+                 root.removeView(findViewById(viewcount-1))
+                 viewarr.removeAt(viewcount-1)
+                 viewcount -= 1
+             }
+         }
+      }
 
 
 
     }
 
     @SuppressLint("ResourceType")
-    private fun addannotatio():View {
-        view.id=1
+   @Synchronized private fun addannotatio():View {
         view = ImageView(this)
         view.setImageDrawable(getDrawable(R.drawable.logo))
         setLayoutsize(400,170)

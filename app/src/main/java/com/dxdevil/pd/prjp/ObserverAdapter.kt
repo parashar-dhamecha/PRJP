@@ -12,6 +12,8 @@ import com.dxdevil.pd.prjp.Model.Response.Data
 
 class ObserverAdapter(private var context: Context, var Con: ArrayList<Data>) :
     RecyclerView.Adapter<ObserverAdapter.ViewHolder>() {
+
+    lateinit var selobservers:ArrayList<Data>
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var name: TextView = itemView.findViewById(R.id.signername) as TextView
         var email:TextView=itemView.findViewById(R.id.signeremail) as TextView
@@ -21,6 +23,9 @@ class ObserverAdapter(private var context: Context, var Con: ArrayList<Data>) :
     override fun onBindViewHolder(h: ViewHolder, position: Int) {
         h.name.text= Con[position].name.toString()
         h.email.text= Con[position].email.toString()
+        if(h.cb.isSelected){
+            selobservers.add(Con[position])
+        }
     }
 
 
