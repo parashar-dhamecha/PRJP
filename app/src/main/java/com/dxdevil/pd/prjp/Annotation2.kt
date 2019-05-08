@@ -10,13 +10,15 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.dxdevil.pd.prjp.Model.Request.DocumentShapeModel
 import kotlinx.android.synthetic.main.activity_annotation2.*
 
 
 @Suppress("ImplicitThis", "RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS",
     "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS"
 )
-class Annotation2 : AppCompatActivity(),View.OnTouchListener {
+class Annotation2 : AppCompatActivity(),View.OnTouchListener{
+
     lateinit var viewarr: ArrayList<ImageView>
     lateinit var view :ImageView
      var viewcount: Int = 0
@@ -25,6 +27,7 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener {
     private var _yDelta: Int = 0
      var selsigners : ArrayList<String>? = ArrayList()
     var signersid : ArrayList<String>? = ArrayList()
+    var signuserdet : ArrayList<DocumentShapeModel> = ArrayList()
 
 
 
@@ -45,17 +48,7 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener {
             signerspinner.adapter = adapter!!
             val contains = selsigners!!.indexOf(signerspinner.selectedItem)
         }
-//        view = ImageView(this)
 
-//        val layoutParams = RelativeLayout.LayoutParams(500, 200)
-//        layoutParams.leftMargin = 0
-//        layoutParams.topMargin = 0
-//        layoutParams.bottomMargin = -250
-//        layoutParams.rightMargin = -250
-//        view.setLayoutParams(layoutParams)
-//        view.setBackgroundColor(R.color.digitbg)
-//        view.x= 100F
-//        view.y=100F
         previewdocid.setImageDrawable(getDrawable(R.drawable.sampledoc))
 
          addantbutton.setOnClickListener {
@@ -69,8 +62,10 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener {
          }
         clearantbutton.setOnClickListener {
             synchronized(this) {
-                root.removeView(findViewById(viewcount-1))
-                viewcount-=1
+                if (viewcount > 0) {
+                    root.removeView(findViewById(viewcount - 1))
+                    viewcount -= 1
+                }
             }
         }
       clearallantbutton.setOnClickListener {
@@ -91,7 +86,7 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener {
    @Synchronized private fun addannotatio():View {
         view = ImageView(this)
         view.setImageDrawable(getDrawable(R.drawable.logo))
-        setLayoutsize(400,170)
+        setLayoutsize(300,130)
         return view
     }
 
@@ -108,6 +103,8 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener {
         view.y=100F
     }
 
+
+
     override fun onTouch(view: View, event: MotionEvent): Boolean {
         val X = event.rawX.toInt()
         val Y = event.rawY.toInt()
@@ -118,7 +115,11 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener {
                 _yDelta = Y - lParams.topMargin
             }
             MotionEvent.ACTION_UP -> {
-
+            view.setOnTouchListener(null)
+                view.setOnClickListener {
+                    Toast.makeText(this,view.id.toString(),Toast.LENGTH_LONG).show()
+                }
+                view.setOnTouchListener(this)
             }
             MotionEvent.ACTION_POINTER_DOWN -> {
 
