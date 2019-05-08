@@ -207,5 +207,6 @@
     <string name="something_went_wrong">Something went wrong</string>
     <string name="refresh_page">Try refreshing the page</string>
     <string name="sequential">Sequential</string>
+    <string name="Create">Create</string>
 
 </resources>

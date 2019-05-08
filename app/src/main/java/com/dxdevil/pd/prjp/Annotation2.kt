@@ -1,17 +1,22 @@
 package com.dxdevil.pd.prjp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.RelativeLayout
-import android.view.MotionEvent
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.dxdevil.pd.prjp.Model.Request.CreateDocRequest
 import com.dxdevil.pd.prjp.Model.Request.DocumentShapeModel
 import kotlinx.android.synthetic.main.activity_annotation2.*
+import kotlinx.android.synthetic.main.activity_uploadfile.*
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Response
+import javax.security.auth.callback.Callback
 
 
 @Suppress("ImplicitThis", "RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS",
@@ -25,6 +30,7 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
     lateinit var root: ViewGroup
     private var _xDelta: Int = 0
     private var _yDelta: Int = 0
+    var currentpage=1
      var selsigners : ArrayList<String>? = ArrayList()
     var signersid : ArrayList<String>? = ArrayList()
     var signuserdet : ArrayList<DocumentShapeModel> = ArrayList()
@@ -46,7 +52,6 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
                 ArrayAdapter(this, android.R.layout.simple_spinner_item, selsigners)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             signerspinner.adapter = adapter!!
-            val contains = selsigners!!.indexOf(signerspinner.selectedItem)
         }
 
         previewdocid.setImageDrawable(getDrawable(R.drawable.sampledoc))
@@ -56,6 +61,9 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
                  viewarr.add( addannotatio() as ImageView)
                  viewarr[viewcount].id= viewcount
                  root.addView(viewarr[viewcount])
+                 var c =selsigners!!.indexOf(signerspinner.selectedItem)
+                 signuserdet[viewcount].userId = (signersid as java.util.ArrayList<String>?)!![c]
+                 signuserdet[viewcount].p=currentpage
                  viewarr[viewcount].setOnTouchListener(this)
                  viewcount+=1
              }
@@ -115,11 +123,25 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
                 _yDelta = Y - lParams.topMargin
             }
             MotionEvent.ACTION_UP -> {
-            view.setOnTouchListener(null)
-                view.setOnClickListener {
-                    Toast.makeText(this,view.id.toString(),Toast.LENGTH_LONG).show()
-                }
-                view.setOnTouchListener(this)
+                signuserdet[view.id].x=view.x as Int?
+                signuserdet[view.id].y=view.y as Int?
+                var rw= view.width/1.4
+                var rh:Double = (view.height/2).toDouble()
+                signuserdet[view.id].xPercentage=(((view.x*100)/rw)*root.width)/100
+                signuserdet[view.id].yPercentage=(((view.y*100)/rh)*root.width)/100
+                signuserdet[view.id].w=view.width
+                signuserdet[view.id].h=view.height
+                signuserdet[view.id].wPercentage=(100/rw)*100
+                signuserdet[view.id].hPercentage=(100/rh)*100
+                signuserdet[view.id].ratio="0.612903225806452"
+                signuserdet[view.id].isAnnotation=true
+                signuserdet[view.id].signatureType="ESignature"
+
+
+//            view.setOnTouchListener(null)
+//                view.setOnClickListener {
+//                }
+//                view.setOnTouchListener(this)
             }
             MotionEvent.ACTION_POINTER_DOWN -> {
 
@@ -139,4 +161,50 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
         }
         root.invalidate()
         return true
-    }}
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu to use in the action bar
+        val inflater = menuInflater
+        menuInflater.inflate(R.menu.create, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.create ->{
+                var sp = this.getSharedPreferences("CreateDocDetails",0)
+               var filename=  sp.getString("filename","")as String
+                var des =sp.getString("description","")as String
+                var endstartdate =sp.getString("endstartdate","")as String
+             var endexpdate  = sp.getString("endexpdate","")as String
+            var  sidningduedate=    sp.getString("signingduedate","")as String
+            var seqpar=    sp.getString("seqpara","")as String
+            var reminddays =   sp.getString("reminddays","")as Int
+              var docid =  sp.getString("docid","")as String
+
+
+            var call = RetrofitClient.getInstance().api.create(
+                CreateDocRequest(docid, filename,filename,".docx",des,endstartdate,endexpdate,sidningduedate,reminddays,signuserdet,null,null,null,null,null,null,null,null,null))
+            call.enqueue(object : Callback, retrofit2.Callback<RequestBody> {
+                override fun onFailure(call: Call<RequestBody>, t: Throwable) {
+                    Toast.makeText(this@Annotation2,"something went wrong",Toast.LENGTH_LONG).show()
+                }
+
+                override fun onResponse(call: Call<RequestBody>, response: Response<RequestBody>) {
+                    if(response.isSuccessful){
+                        Toast.makeText(this@Annotation2,"successfully uploaded",Toast.LENGTH_LONG).show()
+                    }
+                    else {
+                        Toast.makeText(this@Annotation2,"error",Toast.LENGTH_LONG).show()
+                    }
+                }
+
+            })
+
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+}

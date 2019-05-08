@@ -22,19 +22,19 @@
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".Annotation2">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".Annotation1">
         </activity>
         <activity android:name=".Annotation">
         </activity>
         <activity android:name=".Uploadfile">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
+    <activity android:name=".Type"/>
         <activity
                 android:name=".Dashboarrd"
                 android:label="@string/title_activity_dashboarrd"
