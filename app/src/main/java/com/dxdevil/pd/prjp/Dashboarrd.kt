@@ -139,11 +139,10 @@ class Dashboarrd : AppCompatActivity(){
                     duesoontv?.text = ob!!.data[0]!!.expireSoon.toString()
                 }
                 else{
-                    Toast.makeText(this@Dashboarrd,response!!.body()!!.message!!.toString(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@Dashboarrd,response.message().toString(), Toast.LENGTH_LONG).show()
                 }
             }
         })
-
 
         fab1!!.setOnClickListener { view ->
             startActivity(Intent(applicationContext,uploadfile::class.java))

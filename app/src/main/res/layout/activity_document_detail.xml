@@ -9,19 +9,34 @@
     <ScrollView android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="none"
-                android:id="@+id/scrollView2" tools:layout_editor_absoluteY="81dp"
-                tools:layout_editor_absoluteX="-42dp">
+                android:id="@+id/scrollView2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+            <Button
+                    android:id="@+id/btn_Preview"
+                    android:text="@string/view_doc"
+                    android:textColor="@color/AwaitingMySign"
+                    android:layout_width="0dp"
+                    android:background="#ffffff"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardview_doc_details"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="8dp" android:layout_marginEnd="8dp">
+
+
+            </Button>
 
             <androidx.cardview.widget.CardView
                     android:id="@+id/cardview_doc_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginStart="8dp"
@@ -61,8 +76,10 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/tvUploaded_by"
                             android:layout_marginTop="8dp"
-                            app:layout_constraintTop_toBottomOf="@+id/tvDoc_name" android:textSize="14sp"
-                            app:layout_constraintStart_toEndOf="@+id/doc_image" android:layout_marginStart="8dp"/>
+                            app:layout_constraintTop_toBottomOf="@+id/tvDoc_name"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toEndOf="@+id/doc_image"
+                            android:layout_marginStart="8dp"/>
                     <TextView
                             android:text="@string/uploader_name"
                             android:maxLines="1"
@@ -74,7 +91,8 @@
                             android:textSize="14sp"
                             app:layout_constraintStart_toEndOf="@+id/tvUploaded_by"
                             android:layout_marginTop="8dp"
-                            app:layout_constraintTop_toBottomOf="@+id/tvDoc_name" android:layout_marginStart="4dp"/>
+                            app:layout_constraintTop_toBottomOf="@+id/tvDoc_name"
+                            android:layout_marginStart="4dp"/>
                     <TextView
                             android:text="@string/hash"
                             android:textColor="@color/slate_black"
@@ -133,7 +151,7 @@
             <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/cardview_doc_details"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_Preview"
                     android:id="@+id/cardview_signers" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" android:layout_marginTop="16dp">
@@ -175,6 +193,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="match_parent"
                             android:id="@+id/signer_recyclerview"
+                            android:nestedScrollingEnabled="false"
                             android:layout_height="wrap_content"
                             android:layout_alignTop="@id/divider"/>
 
@@ -219,8 +238,25 @@
                     <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
                             android:id="@+id/observer_recyclerview"
                             android:layout_alignTop="@+id/divider2"/>
+                    <TextView
+                            android:text="@string/no_observers"
+                            android:background="@color/bg_gray"
+                            android:id="@+id/tvNo_observers"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="@dimen/dp16"
+                            android:padding="@dimen/dp5"
+                            android:layout_marginBottom="@dimen/dp16"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/slate_black"
+                            android:layout_below="@id/divider2"
+                            android:layout_marginTop="16dp"/>
+
 
                 </RelativeLayout>
 
@@ -232,7 +268,8 @@
                     android:id="@+id/cardview_notarization"
                     app:layout_constraintTop_toBottomOf="@id/cardview_observer" android:layout_marginTop="16dp"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp">
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent">
 
                 <RelativeLayout android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
@@ -257,6 +294,7 @@
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/slate_black"
                             android:id="@+id/notarized_on"
                             android:layout_marginStart="@dimen/dp16"
                             android:layout_marginTop="20dp"
@@ -267,6 +305,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/time_date"
+                            android:textColor="@color/textcolor"
                             android:layout_marginStart="@dimen/dp16"
                             android:layout_marginTop="8dp"
                             android:layout_below="@id/notarized_on"
@@ -276,6 +315,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/transaction_hash"
+                            android:textColor="@color/slate_black"
                             android:layout_marginStart="@dimen/dp16"
                             android:layout_marginTop="@dimen/dp16"
                             android:layout_below="@id/time_date"
@@ -287,6 +327,7 @@
                             android:maxLines="1"
                             android:layout_marginStart="16dp"
                             android:ellipsize="end"
+                            android:textColor="@color/textcolor"
                             android:layout_below="@id/transaction_hash"
                             android:id="@+id/transaction_hash_value"
                             android:text="@string/thash"
@@ -296,10 +337,9 @@
 
                     <Button
                             android:text="@string/copy"
-                            android:layout_width="30dp"
+                            android:layout_width="80dp"
                             android:layout_height="20dp"
                             android:textAllCaps="false"
-
                             android:background="@drawable/mybutton"
                             android:id="@+id/button2"
                             android:textSize="12sp"
@@ -311,6 +351,22 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginTop="8dp"/>
+
+                    <TextView
+                            android:text="@string/not_notarized_message"
+                            android:background="@color/bg_gray"
+                            android:id="@+id/tvNot_notarized"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="@dimen/dp16"
+                            android:padding="@dimen/dp5"
+                            android:layout_marginBottom="@dimen/dp16"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/slate_black"
+                            android:layout_below="@+id/divider3"
+                            android:layout_marginTop="16dp"/>
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>

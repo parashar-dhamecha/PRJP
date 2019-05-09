@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+android:layout_margin="@dimen/dp5">
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="@color/bg_gray"
+            android:visibility="visible"
+            android:id="@+id/cardv1"
+            >
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp5" android:layout_alignTop="@+id/cardv1"
+                android:layout_alignStart="@+id/cardv1">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/shortnametv"
+                      android:text="RM"
+                      android:layout_marginStart="@dimen/dp10"
+                      android:background="@drawable/edit_round2"
+                      android:layout_toLeftOf="@id/signername" android:layout_marginRight="-16dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/signername"
+                      android:gravity="center_vertical"
+                      android:text="abc"
+                      android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                      android:textSize="20sp"
+                      android:textStyle="bold"
+                      android:padding="@dimen/dp1"
+                      android:layout_marginStart="@dimen/dp15"
+            />
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/signeremail"
+                      android:text="abc@gmail.com"
+                      android:textSize="@dimen/sp13"
+                      android:layout_below="@+id/signername"
+                      android:padding="@dimen/dp1"
+                      android:layout_marginTop="@dimen/dp5"
+                      android:layout_marginStart="@dimen/dp15"
+                      android:layout_toEndOf="@+id/pro"
+                      tools:ignore="UnknownIdInLayout"/>
+            <CheckBox
+                    android:text=""
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp15"
+                    android:layout_marginEnd="@dimen/dp25"
+                    android:id="@+id/selectcb"
+                    android:layout_alignParentEnd="true"/>
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

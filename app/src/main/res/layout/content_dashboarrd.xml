@@ -3,13 +3,12 @@
             android:layout_height="match_parent"
             xmlns:android="http://schemas.android.com/apk/res/android">
 <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/dashid"
         android:layout_width="match_parent"
         android:background="@color/design_default_color_background"
         android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".Dashboarrd">
 
@@ -32,8 +31,8 @@
                 android:paddingLeft="@dimen/dp15"
                 app:cardBackgroundColor="@color/design_default_color_background"
         >
-            <RelativeLayout android:layout_width="@dimen/dp150"
-                            android:layout_height="@dimen/dp130"
+            <RelativeLayout android:layout_width="@dimen/dp130"
+                            android:layout_height="@dimen/dp120"
                             android:background="@drawable/cardborder"
                             android:layout_marginEnd="@dimen/dp10"
                             android:elevation="@dimen/dp0"
@@ -41,8 +40,8 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginLeft="@dimen/dp0"
             >
-                <TextView android:layout_width="@dimen/dp80"
-                          android:layout_height="@dimen/dp80"
+                <TextView android:layout_width="@dimen/dp50"
+                          android:layout_height="@dimen/dp60"
                           android:layout_marginRight="@dimen/dp50"
                           android:layout_marginLeft="@dimen/dp50"
                           android:layout_marginTop="@dimen/dp10"
@@ -58,10 +57,10 @@
                           android:layout_height="wrap_content"
                           android:layout_below="@+id/awatingsigntv"
                           android:layout_centerHorizontal="true"
-                          android:textSize="@dimen/sp20"
+                          android:textSize="@dimen/sp17"
                           android:text="@string/awatingsign"
                           android:layout_marginStart="@dimen/dp5"
-                          android:layout_marginTop="@dimen/dp5"
+                          android:layout_marginTop="15dp"
                           android:layout_marginEnd="@dimen/dp5" android:layout_marginBottom="@dimen/dp5"
                           android:id="@+id/AwatingSign21"
                           android:textColor="@color/textcolor3"
@@ -71,20 +70,20 @@
         <androidx.cardview.widget.CardView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:paddingRight="@dimen/dp10"
+                android:paddingEnd="@dimen/dp10"
                 app:cardBackgroundColor="@color/design_default_color_background"
 
         >
-            <RelativeLayout android:layout_width="@dimen/dp150"
-                            android:layout_height="@dimen/dp130"
+            <RelativeLayout android:layout_width="@dimen/dp130"
+                            android:layout_height="@dimen/dp120"
                             android:background="@drawable/cardborder"
-                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_marginStart="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:elevation="@dimen/dp0"
                             android:layout_marginTop="@dimen/dp10"
             >
-                <TextView android:layout_width="@dimen/dp80"
-                          android:layout_height="@dimen/dp80"
+                <TextView android:layout_width="@dimen/dp50"
+                          android:layout_height="@dimen/dp60"
                           android:layout_marginRight="@dimen/dp50"
                           android:layout_marginLeft="@dimen/dp50"
                           android:layout_marginTop="@dimen/dp10"
@@ -102,10 +101,10 @@
                           android:text="@string/awatingothers"
                           android:layout_marginStart="@dimen/dp5"
                           android:textColor="@color/textcolor3"
-                          android:layout_marginTop="@dimen/dp5"
+                          android:layout_marginTop="15dp"
                           android:layout_marginRight="@dimen/dp5"
                           android:layout_marginLeft="@dimen/dp5"
-                          android:textSize="@dimen/sp20"
+                          android:textSize="@dimen/sp17"
                           android:layout_marginEnd="@dimen/dp5" android:layout_marginBottom="@dimen/dp5"
                           android:id="@+id/AwatingSign222"/>
             </RelativeLayout>
@@ -131,16 +130,16 @@
 
 
         >
-            <RelativeLayout android:layout_width="@dimen/dp150"
-                            android:layout_height="@dimen/dp130"
+            <RelativeLayout android:layout_width="@dimen/dp130"
+                            android:layout_height="@dimen/dp120"
                             android:background="@drawable/cardborder"
                             android:elevation="@dimen/dp0"
                             android:layout_marginRight="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginLeft="@dimen/dp0">
-                <TextView android:layout_width="@dimen/dp80"
-                          android:layout_height="@dimen/dp80"
+                <TextView android:layout_width="@dimen/dp50"
+                          android:layout_height="@dimen/dp60"
                           android:layout_marginRight="@dimen/dp50"
                           android:layout_marginLeft="@dimen/dp50"
                           android:layout_marginTop="@dimen/dp10"
@@ -157,13 +156,14 @@
                           android:layout_centerHorizontal="true"
                           android:text="@string/completed"
                           android:layout_marginStart="@dimen/dp5"
-                          android:layout_marginLeft="@dimen/dp5"
-                          android:layout_marginRight="@dimen/dp5"
                           android:textColor="@color/textcolor3"
-                          android:layout_marginTop="@dimen/dp5"
-                          android:textSize="@dimen/sp20"
-                          android:layout_marginEnd="@dimen/dp5" android:layout_marginBottom="@dimen/dp5"
-                          android:id="@+id/AwatingSign"/>
+                          android:layout_marginTop="15dp"
+                          android:layout_marginRight="@dimen/dp5"
+                          android:layout_marginLeft="@dimen/dp5"
+                          android:textSize="@dimen/sp17"
+                          android:layout_marginEnd="@dimen/dp5"
+                          android:layout_marginBottom="@dimen/dp5"
+                          android:id="@+id/Completed"/>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
@@ -172,16 +172,16 @@
                 android:paddingRight="@dimen/dp10"
 
         >
-            <RelativeLayout android:layout_width="@dimen/dp150"
-                            android:layout_height="@dimen/dp130"
+            <RelativeLayout android:layout_width="@dimen/dp130"
+                            android:layout_height="@dimen/dp120"
                             android:background="@drawable/cardborder"
                             android:layout_marginLeft="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:elevation="@dimen/dp0"
                             android:layout_marginTop="@dimen/dp10"
             >
-                <TextView android:layout_width="@dimen/dp80"
-                          android:layout_height="@dimen/dp80"
+                <TextView android:layout_width="@dimen/dp50"
+                          android:layout_height="@dimen/dp60"
                           android:layout_marginRight="@dimen/dp50"
                           android:layout_marginLeft="@dimen/dp50"
                           android:layout_marginTop="@dimen/dp10"
@@ -199,7 +199,7 @@
                           android:text="@string/signingdue"
                           android:layout_marginStart="@dimen/dp5"
                           android:textColor="@color/textcolor3"
-                          android:layout_marginTop="@dimen/dp5"
+                          android:layout_marginTop="15dp"
                           android:textSize="@dimen/sp20"
                           android:layout_marginEnd="@dimen/dp5" android:layout_marginBottom="@dimen/dp5"
                           android:id="@+id/AwatingSign2"/>
@@ -207,6 +207,19 @@
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
+    <Button
+            android:text="@string/addsign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp30"
+            app:layout_goneMarginTop="@dimen/dp10"
+            android:textAllCaps="false"
+            android:id="@+id/addsign"
+            android:background="@drawable/cardborder2"
+            android:padding="@dimen/dp15"
+            android:textSize="@dimen/sp20"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="4dp" app:layout_constraintEnd_toEndOf="@+id/uploadcv"/>
     <androidx.cardview.widget.CardView android:layout_width="match_parent"
                                        android:layout_height="wrap_content"
                                        android:layout_marginLeft="@dimen/dp50"
@@ -222,6 +235,27 @@
     >
 
 
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:background="@drawable/cardborder2">
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:src="@drawable/ic_file_upload"
+                       android:id="@+id/cvimage"
+                       android:padding="@dimen/dp10"
+                       android:layout_marginTop="@dimen/dp5"
+                       android:layout_margin="@dimen/dp10"
+            />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="@string/upload"
+                      android:id="@+id/cardTextView1"
+                      android:padding="@dimen/dp10"
+                      android:textAlignment="center"
+                      android:textColor="@color/textcolor"
+                      android:layout_marginStart="@dimen/dp80"
+                      android:layout_marginEnd="@dimen/dp20"
+                      android:layout_marginTop="@dimen/dp10"
+                      android:layout_marginBottom="@dimen/dp10"
+                      android:textSize="@dimen/sp20" android:layout_alignParentTop="true"/>
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
     <com.github.clans.fab.FloatingActionMenu
