@@ -13,6 +13,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SimpleAdapter;
 import androidx.annotation.Nullable;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.core.view.ViewCompat;
@@ -23,7 +24,8 @@ import androidx.customview.widget.ViewDragHelper;
  */
 
 @SuppressLint("RtlHardcoded")
-public class SwipeRevealLayout extends ViewGroup {
+public class SwipeRevealLayout extends ViewGroup  {
+
 
     private static final String SUPER_INSTANCE_STATE = "saved_instance_state_parcelable";
 
@@ -32,6 +34,8 @@ public class SwipeRevealLayout extends ViewGroup {
 
     public static final int DRAG_EDGE_LEFT =   0x1;
     public static final int DRAG_EDGE_RIGHT =  0x1 << 1;
+
+
 
     /**
      * The secondary view will be under the main view.

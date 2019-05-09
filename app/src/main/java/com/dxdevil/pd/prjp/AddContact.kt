@@ -45,6 +45,8 @@ class AddContact : AppCompatActivity() {
 //            val mn =etMobileNo!!.text.toString()
 
 
+
+
             if(validation()) {
 
 
@@ -129,12 +131,14 @@ class AddContact : AppCompatActivity() {
         }
 
 
+
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(Em).matches()) {
             etEmail!!.error = "Enter a valid Email Address"
             valid = false
         } else {
             flagEm = true
         }
+
 
 
         if (Jt.isEmpty() ||!Nameregex.matches(Jt)) {
@@ -145,7 +149,7 @@ class AddContact : AppCompatActivity() {
         }
 
         if (Jd.isEmpty() ||!Nameregex.matches(Jd)) {
-            etJobDescription!!.setError("enter a valod job discription")
+            etJobDescription!!.setError("enter a valod job description")
         } else {
             flagJd= true
         }

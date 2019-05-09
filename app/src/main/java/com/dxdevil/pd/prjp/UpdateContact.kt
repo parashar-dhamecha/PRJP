@@ -48,6 +48,7 @@ class UpdateContact : AppCompatActivity() {
                     call: Call<GetContactIdResponse>, response: Response<GetContactIdResponse>) {
 
                     if (response.isSuccessful) {
+
                         var obj = response.body()!!.data?.get(0) as GetContactIdResponse.GetContactIdDatum
                         etName.setText(obj!!.name)
                         etEmail.setText(obj!!.email)

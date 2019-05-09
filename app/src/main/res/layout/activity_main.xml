@@ -11,7 +11,6 @@
                android:layout_height="match_parent"
                android:background="@drawable/cg"
                android:scaleType="center"
-               android:contentDescription="@string/splash_image" tools:layout_editor_absoluteY="0dp"
-               tools:layout_editor_absoluteX="0dp"/>
+               android:contentDescription="@string/splash_image"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

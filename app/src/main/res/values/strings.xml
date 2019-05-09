@@ -1,4 +1,4 @@
-<resources >
+<resources>
     <string name="app_name">Cygnature</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
@@ -93,7 +93,6 @@
     <!-- contacts strings-->
     <string name="contact_name">Juhi</string>
     <string name="SaveContact">Save Contact</string>
-
 
 
     <string-array name="names">

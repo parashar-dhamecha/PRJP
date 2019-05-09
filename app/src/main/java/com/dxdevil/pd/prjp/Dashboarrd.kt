@@ -22,6 +22,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
 import com.dxdevil.pd.prjp.Model.Response.DashboardResponse
+import com.github.clans.fab.FloatingActionMenu
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.activity_dashboard.addsign
@@ -48,6 +49,17 @@ class Dashboarrd : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboarrd)
+
+
+        var fab = findViewById<FloatingActionMenu>(R.id.fab)
+        var fab1: com.github.clans.fab.FloatingActionButton? =
+            findViewById<com.github.clans.fab.FloatingActionButton>(R.id.fab1)
+        var fab2: com.github.clans.fab.FloatingActionButton? =
+            findViewById<com.github.clans.fab.FloatingActionButton>(R.id.fab2)
+
+        var fab3: com.github.clans.fab.FloatingActionButton? =
+            findViewById<com.github.clans.fab.FloatingActionButton>(R.id.fab3)
+
 
 
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -133,11 +145,23 @@ class Dashboarrd : AppCompatActivity(){
         })
 
 
-        uploadcv.setOnClickListener { view ->
+        fab1!!.setOnClickListener { view ->
             startActivity(Intent(applicationContext,uploadfile::class.java))
         }
 
+        fab3!!.setOnClickListener{
+
+
+            startActivity(Intent(applicationContext,AddContact::class.java))
+
+
+
+
+
+        }
+
         draw_signature?.setOnClickListener {
+
             Toast.makeText(applicationContext, "hello", Toast.LENGTH_LONG)
             startActivity(Intent(applicationContext, DrawSignature::class.java))
         }
@@ -148,7 +172,7 @@ class Dashboarrd : AppCompatActivity(){
             startActivity(Intent(applicationContext, Type::class.java))
         }
 
-        addsign.setOnClickListener {
+        fab2!!.setOnClickListener {
             try {
                 var ft = supportFragmentManager.beginTransaction()
                 val cf: ChooseDF = ChooseDF()

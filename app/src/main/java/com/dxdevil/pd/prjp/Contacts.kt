@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +30,7 @@ import kotlinx.android.synthetic.main.activity_bulk_import.*
 import kotlinx.android.synthetic.main.activity_bulk_import.view.*
 import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.contactsadapter.*
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,19 +38,39 @@ import java.io.IOException
 import java.util.Locale.filter
 
 class Contacts : AppCompatActivity() {
-    private var contactList = ArrayList<ContactModel>()
-    private var mcontactList= ArrayList<ContactModel>()
 
+    private var contactList = ArrayList<Data>()
+
+
+
+    //var filteredList=this.contactList
+
+
+
+
+
+
+   /* override fun filterList(FilteredList: java.util.ArrayList<Data>?) {
+        filteredList=this.contactList
+
+    }*/
+
+
+lateinit var onbj:ContactsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts)
 
+         onbj = ContactsAdapter(this@Contacts,contactList)
 
-        var fab =findViewById<FloatingActionMenu>(R.id.floatingActionMenu)
-        var fab1: com.github.clans.fab.FloatingActionButton? =findViewById<com.github.clans.fab.FloatingActionButton>(R.id.add)
-        var fab2: com.github.clans.fab.FloatingActionButton? =findViewById<com.github.clans.fab.FloatingActionButton>(R.id.bulkimport)
 
-        fab1!!.setOnClickListener{
+        var fab = findViewById<FloatingActionMenu>(R.id.floatingActionMenu)
+        var fab1: com.github.clans.fab.FloatingActionButton? =
+            findViewById<com.github.clans.fab.FloatingActionButton>(R.id.add)
+        var fab2: com.github.clans.fab.FloatingActionButton? =
+            findViewById<com.github.clans.fab.FloatingActionButton>(R.id.bulkimport)
+
+        fab1!!.setOnClickListener {
 
 
             val intent = Intent(this@Contacts, AddContact::class.java)
@@ -58,32 +80,11 @@ class Contacts : AppCompatActivity() {
         }
 
 
-        fab2!!.setOnClickListener{
+        fab2!!.setOnClickListener {
 
-
-            val mDialogView= LayoutInflater.from(this).inflate(R.layout.activity_bulk_import,null)
-            val mBuilder= AlertDialog.Builder(this)
-                .setView(mDialogView)
-                .setTitle("BulkContactsImport")
-
-            val mAlertDialog=mBuilder.show()
-            sample.setOnClickListener{
-
-
-            }
-            mDialogView.upload.setOnClickListener{
-
-
-
-                mAlertDialog.dismiss()
-            }
-
-
-
+            val intent = Intent(this@Contacts, BulkImport::class.java)
+            startActivity(intent)
         }
-
-
-
 
         val actionbar = supportActionBar
         actionbar!!.title = "Contacts"
@@ -92,38 +93,31 @@ class Contacts : AppCompatActivity() {
 
 
         contactList = ArrayList()
-        mcontactList= ArrayList(contactList)
 
 
-        search.addTextChangedListener(object : TextWatcher {
+        search.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                        return false
 
-            override fun afterTextChanged(p0: Editable?) {
+                }
 
-
-
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-                filter(p0.toString())
+            override fun onQueryTextChange(p0: String): Boolean {
 
 
-            }
+                Toast.makeText(this@Contacts,"wrong ",Toast.LENGTH_LONG).show()
+
+
+
+                    onbj.filtereList1(p0)
+                onbj.notifyDataSetChanged()
+
+
+                return false
+
+              }
+
 
         })
-
-
-
-
-
-
-
-
-
 
 
         //progressbar.visibility = View.VISIBLE
@@ -140,22 +134,19 @@ class Contacts : AppCompatActivity() {
                 itemLoadComplete()
             }
 
+
             private fun itemLoadComplete() {
                 swipeRefresh!!.isRefreshing = false
             }
         })
+
     }
 
 
-    private  fun filter(text:String){
 
-        var filteredList = ArrayList<ContactModel>()
 
-   //         name.filterTo(filteredList){
-     //           it.name.toLowercase().contains(text.toLowerCase())
 
-            }
-       // ContactsAdapter.filterList(filteredList)
+
 
 
 
@@ -231,7 +222,8 @@ class Contacts : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(applicationContext)
         r1.layoutManager = layoutManager
-        r1!!.adapter = ContactsAdapter(this, contactList as ArrayList<Data>)
+        onbj = ContactsAdapter(this, contactList as ArrayList<Data>)
+        r1!!.adapter =onbj
         // r1.addItemDecoration(DividerItemDecoration(applicationContext, DividerItemDecoration.VERTICAL))
 
 

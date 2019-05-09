@@ -8,7 +8,6 @@
         android:layout_height="120dp" xmlns:tools="http://schemas.android.com/tools"
         android:layout_gravity="center_vertical"
         app:dragFromEdge="right"
-        android:id="@+id/swipe"
         android:layout_marginBottom="2dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp">
@@ -41,7 +40,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:background="@color/colorPrimaryDark"
-                        app:srcCompat="@drawable/ic_edit_black_24dp"
+                        app:srcCompat="@drawable/ic_mode_edit_black"
                         android:text="Edit"/>
 
             </LinearLayout>
@@ -77,19 +76,23 @@
                         android:layout_height="match_parent"
                         android:padding="10dp">
 
-                    <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-
-                            tools:srcCompat="@tools:sample/avatars"
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="63dp"
+                            android:background="@drawable/round2"
+                            android:text="ps"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textAlignment="center"
 
                             android:id="@+id/pro" android:layout_alignParentStart="true"
                             android:layout_alignParentTop="true"
-                            android:layout_alignParentBottom="true" android:layout_marginBottom="0dp"
-                            android:layout_marginTop="0dp" android:layout_marginStart="0dp"/>
+                            android:layout_alignParentBottom="true" android:layout_marginBottom="10dp"
+                            android:layout_marginTop="18dp" android:layout_marginStart="4dp"/>
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                               android:id="@+id/name"
+                              android:textColor="@color/textcolor"
                               android:gravity="center_vertical"
                               android:text="shubhyogyam"
                               android:layout_toRightOf="@id/pro"
@@ -100,17 +103,19 @@
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                               android:id="@+id/email"
+                              android:textColor="@color/slate_black"
                               android:layout_below="@+id/name"
                               android:text="shubhyogyampandhare@gmail.com"
-                              android:layout_marginTop="2dp"
+                              android:layout_marginTop="5dp"
                               android:layout_marginStart="29dp" android:layout_toEndOf="@+id/pro"/>
                     <TextView
                             android:text="TextView00"
+                            android:textColor="@color/slate_black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="68dp" android:layout_alignParentBottom="true"
+                            android:layout_marginStart="80dp" android:layout_alignParentBottom="true"
                             android:id="@+id/mobileno" android:layout_marginBottom="10dp"
-                            android:layout_below="@+id/email" android:layout_marginTop="7dp"/>
+                            android:layout_below="@+id/email" android:layout_marginTop="5dp"/>
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
