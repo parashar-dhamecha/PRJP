@@ -33,7 +33,6 @@ class AllDocumentsAdapter(
 
         holder.docname.text=list[position].name
         holder.docname.setTextColor(rgb(20,3,54))
-
         if(list[position].extension==".pdf")
             holder.fileimage.setImageResource(R.drawable.pdf3)
         if(list[position].extension==".docx"|| list[position].extension==".doc")

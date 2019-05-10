@@ -144,7 +144,6 @@ public interface Api {
     Call<UploadfileModel>upload(
             @Header("Authorization") String Authorization,
             @Part MultipartBody.Part file
-//            @Part("file") RequestBody file
     );
 }
 

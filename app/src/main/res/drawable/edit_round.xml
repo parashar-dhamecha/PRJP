@@ -2,8 +2,9 @@
 <shape xmlns:tools="http://schemas.android.com/tools"
        xmlns:android="http://schemas.android.com/apk/res/android"
        android:shape="rectangle">
+    <padding android:left="@dimen/dp0" android:right="@dimen/dp0"/>
     <stroke android:color="@color/edittext"/>
-    <stroke android:width="@dimen/dp1"/>
+    <stroke android:width="@dimen/dp1" android:color="#702722"/>
     <solid android:color="@color/textcolor3"/>
 
 </shape>

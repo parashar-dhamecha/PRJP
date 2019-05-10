@@ -1,4 +1,4 @@
-<resources>
+<resources >
     <string name="app_name">Cygnature</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
@@ -96,6 +96,7 @@
     <string name="SaveContact">Save Contact</string>
 
 
+
     <string-array name="names">
         <item>pooja</item>
         <item>juhi</item>
@@ -116,7 +117,6 @@
     <string name="CountryCode">Code</string>
     <string name="Contacts">Contacts</string>
     <string name="Add">Add</string>
-    <string name="Addc">Add Contact</string>
 
 
     <string name="CreateGroup">Create Group</string>
@@ -159,7 +159,7 @@
     <string name="otp">Verify OTP</string>
     <string name="Resendotp">Resend Otp</string>
     <string name="Remembercb">Remember me</string>
-    <string name="Loginanther">Have another account..?</string>
+    <string name="Loginanther">have another account..?</string>
     <string name="title_activity_dashboarrd">Dashboarrd</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
@@ -174,8 +174,8 @@
     <string name="Details">Details</string>
     <string name="copy">Copy</string>
     <string name="fetch">Fetching Details</string>
-    <string name="loading_preview">Loading preview…</string>
-    <string name="Getting">Getting next pages…</string>
+    <string name="loading_preview">Loading Preview</string>
+    <string name="Getting">Getting pages</string>
     <string name="preview">Preview</string>
     <string name="signers">Signers</string>
     <string name="sequential">Sequential Signature</string>
@@ -193,13 +193,5 @@
     <string name="no_documents">No Documents</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="refresh_page">Try refreshing the page</string>
-    <string name="Zero">0</string>
-    <string name="update_profile">Updating Profile</string>
-    <string name="Bulk">Bulk import</string>
-    <string name="upload_file">Upload File</string>
-    <string name="contact_mobile_no">9427966685</string>
-    <string name="contact_email">contactemailid@gmail.com</string>
-    <string name="contact_name_">contact name</string>
-    <string name="recent_documents">Recent Documents</string>
 
 </resources>

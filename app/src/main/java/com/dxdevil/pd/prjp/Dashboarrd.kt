@@ -68,59 +68,9 @@ class Dashboarrd : AppCompatActivity() {
 
         htvem!!.text = getSharedPreferences("Token", 0).getString("email", "")
 
-        var intent = Intent(this@Dashboarrd, DocActivity::class.java)
-        intent.putExtra("Source","DocActivity")
-        awatingsigntv.setOnClickListener{
-
-            intent.putExtra("Doc_status",0)
-            startActivity(intent)
-        }
-
-        AwatingSign21.setOnClickListener{
 
 
-            intent.putExtra("Doc_status",0)
-            startActivity(intent)
-        }
-
-
-        awatingotherstv.setOnClickListener{
-
-            intent.putExtra("Doc_status",3)
-            startActivity(intent)
-        }
-
-        AwatingSign222.setOnClickListener{
-
-            intent.putExtra("Doc_status",3)
-            startActivity(intent)
-        }
-        completedtv.setOnClickListener {
-
-
-            intent.putExtra("Doc_status",2)
-            startActivity(intent)
-        }
-
-        AwatingSign.setOnClickListener {
-
-
-            intent.putExtra("Doc_status",2)
-            startActivity(intent)
-        }
-
-        duesoontv.setOnClickListener {
-            intent.putExtra("Doc_status",6)
-            startActivity(intent)
-        }
-
-        AwatingSign2.setOnClickListener {
-            intent.putExtra("Doc_status",6)
-            startActivity(intent)
-        }
-
-
-               nav_view.setNavigationItemSelectedListener { menuItem ->
+        nav_view.setNavigationItemSelectedListener { menuItem ->
             menuItem.isChecked = true
             drawerLayout.closeDrawers()
 
@@ -167,17 +117,17 @@ class Dashboarrd : AppCompatActivity() {
 
             override fun onResponse(call: Call<DashboardResponse>, response: Response<DashboardResponse>) {
                 if (response.isSuccessful) {
-                    val ob = response.body() as DashboardResponse
-                    awatingsigntv?.text = ob.data[0]!!.awaitingMySign.toString()
-                    awatingotherstv?.text = ob.data[0]!!.awaitingOthers.toString()
-                    completedtv?.text = ob.data[0]!!.completed.toString()
-                    duesoontv?.text = ob.data[0]!!.expireSoon.toString()
+                    var ob = response.body() as DashboardResponse
+                    awatingsigntv?.text = ob!!.data[0]!!.awaitingMySign.toString()
+                    awatingotherstv?.text = ob!!.data[0]!!.awaitingOthers.toString()
+                    completedtv?.text = ob!!.data[0]!!.completed.toString()
+                    duesoontv?.text = ob!!.data[0]!!.expireSoon.toString()
                 } else {
-                    Toast.makeText(this@Dashboarrd, response!!.body()!!.message!!.toString(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@Dashboarrd, response.message().toString(), Toast.LENGTH_LONG).show()
+
                 }
             }
         })
-
 
 
         uploadcvFAB.setOnClickListener { view ->
