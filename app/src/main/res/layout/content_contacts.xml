@@ -62,23 +62,7 @@
                 android:layout_marginLeft="@dimen/dp10"
                 app:menu_backgroundColor="#00000000"
                 app:pressedTranslationZ="12dp"
-                android:elevation="@dimen/dp5">
+                android:elevation="@dimen/dp5"/>
 
-            <com.github.clans.fab.FloatingActionButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:fab_size="mini"
-                    app:fab_label="@string/Addc"
-                    app:fab_colorPressed="@color/colorPrimary"
-                    app:menu_colorPressed="@color/colorPrimary"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginEnd="@dimen/dp30"
-                    app:fab_colorNormal="@color/colorSecondary"
-                    android:layout_marginBottom="120dp"
-                    android:id="@+id/add"
-                    android:layout_marginStart="@dimen/dp20"
-                    android:src="@drawable/add_person"/>
-
-        </com.github.clans.fab.FloatingActionMenu>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

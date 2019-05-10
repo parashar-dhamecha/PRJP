@@ -52,10 +52,10 @@ class Contacts : AppCompatActivity() {
 
 
         var fab =findViewById<FloatingActionMenu>(R.id.floatingActionMenu)
-        val fab1: com.github.clans.fab.FloatingActionButton? =findViewById<com.github.clans.fab.FloatingActionButton>(R.id.add)
+        //val fab1: com.github.clans.fab.FloatingActionButton? =findViewById<com.github.clans.fab.FloatingActionButton>(R.id.add)
 
 
-        fab1!!.setOnClickListener{
+        fab!!.setOnClickListener{
             val intent = Intent(this@Contacts, AddContact::class.java)
             startActivity(intent)
         }

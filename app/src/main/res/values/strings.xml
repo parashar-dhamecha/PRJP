@@ -33,6 +33,7 @@
     <string name="signingdue">Due Soon</string>
     <string name="awsdata">0</string>
     <string name="addsign">Edit/Add Signature</string>
+    <string name="addsigng">Add Signature</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="edit_your_signature">Edit Your Signature</string>
     <string name="dashboard">Dashboard</string>
@@ -71,6 +72,9 @@
     <string name="devide">/</string>
     <string name="total">2</string>
     <string name="Declined">Declined</string>
+
+
+    <!-- Profile Page Strings-->
     <string name="prf_title">Profile</string>
     <string name="Username">Robert Downey</string>
     <string name="Signature">Signature</string>
@@ -150,6 +154,7 @@
     <string name="Getting">Getting pages</string>
     <string name="preview">Preview</string>
     <string name="signers">Signers</string>
+    <string name="sequential">Sequential Signature</string>
     <string name="observers">Observers</string>
     <string name="notarization">Notarization Details</string>
     <string name="notarized_on">Notarized On:</string>
@@ -165,8 +170,13 @@
     <string name="something_went_wrong">Something went wrong</string>
     <string name="refresh_page">Try refreshing the page</string>
     <string name="Create">Create</string>
-    <string name="Zero">0</string>
     <string name="Addc">Add Contacts</string>
     <string name="recent">Recent Documents</string>
+    <string name="contact_mobile_no">9427962585</string>
+    <string name="contact_email">contactemail@gmail.com</string>
+    <string name="contact_name_">contact name</string>
+    <string name="upload_file">Upload </string>
+    <string name="selectsigners">Select Signers</string>
+
 
 </resources>
