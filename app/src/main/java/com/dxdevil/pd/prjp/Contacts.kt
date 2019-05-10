@@ -1,22 +1,18 @@
 package com.dxdevil.pd.prjp
 
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dxdevil.pd.prjp.Model.Response.ContactList
@@ -28,7 +24,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_bulk_import.*
 import kotlinx.android.synthetic.main.activity_bulk_import.view.*
 import kotlinx.android.synthetic.main.activity_contacts.*
+import kotlinx.android.synthetic.main.activity_dashboarrd.*
 import kotlinx.android.synthetic.main.contactsadapter.*
+import kotlinx.android.synthetic.main.content_contacts.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,52 +36,29 @@ import java.util.Locale.filter
 class Contacts : AppCompatActivity() {
     private var contactList = ArrayList<ContactModel>()
     private var mcontactList= ArrayList<ContactModel>()
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var ntoggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts)
+        drawerLayout = findViewById(R.id.drawer_layout_contacts)
+        ntoggle =
+            ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(ntoggle)
+        ntoggle.syncState()
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
 
 
         var fab =findViewById<FloatingActionMenu>(R.id.floatingActionMenu)
-        var fab1: com.github.clans.fab.FloatingActionButton? =findViewById<com.github.clans.fab.FloatingActionButton>(R.id.add)
-        var fab2: com.github.clans.fab.FloatingActionButton? =findViewById<com.github.clans.fab.FloatingActionButton>(R.id.bulkimport)
+        val fab1: com.github.clans.fab.FloatingActionButton? =findViewById<com.github.clans.fab.FloatingActionButton>(R.id.add)
+
 
         fab1!!.setOnClickListener{
-
-
             val intent = Intent(this@Contacts, AddContact::class.java)
             startActivity(intent)
-
-
         }
-
-
-        fab2!!.setOnClickListener{
-
-
-            val mDialogView= LayoutInflater.from(this).inflate(R.layout.activity_bulk_import,null)
-            val mBuilder= AlertDialog.Builder(this)
-                .setView(mDialogView)
-                .setTitle("BulkContactsImport")
-
-            val mAlertDialog=mBuilder.show()
-            sample.setOnClickListener{
-
-
-            }
-            mDialogView.upload.setOnClickListener{
-
-
-
-                mAlertDialog.dismiss()
-            }
-
-
-
-        }
-
-
-
 
         val actionbar = supportActionBar
         actionbar!!.title = "Contacts"
@@ -92,7 +67,7 @@ class Contacts : AppCompatActivity() {
 
 
         contactList = ArrayList()
-        mcontactList= ArrayList(contactList)
+//        mcontactList= ArrayList(contactList)
 
 
         search.addTextChangedListener(object : TextWatcher {
@@ -116,15 +91,40 @@ class Contacts : AppCompatActivity() {
 
         })
 
+        nav_view_contacts.setNavigationItemSelectedListener { menuItem ->
+            menuItem.isChecked = true
+            drawerLayout.closeDrawers()
 
 
+            when (menuItem.itemId) {
+                R.id.dashboard -> {
+                    startActivity(Intent(this@Contacts, Dashboarrd::class.java))
+                    drawer_layout_contacts.closeDrawer(GravityCompat.START)
+                }
+                R.id.documents -> {
+                    startActivity(Intent(this@Contacts, DocActivity::class.java))
+                    drawer_layout_contacts.closeDrawer(GravityCompat.START)
+                }
+                R.id.contacts -> {
+                    startActivity(Intent(this@Contacts, Contacts::class.java))
+                    drawer_layout_contacts.closeDrawer(GravityCompat.START)
+                }
+                R.id.settings -> {
+                    startActivity(Intent(this@Contacts, Settings::class.java))
+                    drawer_layout_contacts.closeDrawer(GravityCompat.START)
+                }
+                R.id.logout -> {
+                    var sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
+                    sp.edit().remove("Token").apply()
+                    sp.edit().remove("RefreshToken").apply()
+                    startActivity(Intent(this@Contacts, LoginActivity::class.java))
+                    drawer_layout_contacts.closeDrawer(GravityCompat.START)
+                }
+            }
 
 
-
-
-
-
-
+            true
+        }
 
         //progressbar.visibility = View.VISIBLE
         // getContactApi()
@@ -146,7 +146,28 @@ class Contacts : AppCompatActivity() {
         })
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (ntoggle.onOptionsItemSelected(item))
+            return true
 
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            onBackPressed()
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onBackPressed() {
+        val myIntent = Intent(this@Contacts, Dashboarrd::class.java)
+
+        myIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(myIntent)
+        finish()
+        return
+    }
     private  fun filter(text:String){
 
         var filteredList = ArrayList<ContactModel>()

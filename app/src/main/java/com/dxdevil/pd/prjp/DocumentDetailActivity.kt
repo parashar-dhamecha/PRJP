@@ -1,6 +1,8 @@
 package com.dxdevil.pd.prjp
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +29,10 @@ class DocumentDetailActivity : AppCompatActivity() {
     lateinit  var signerlist :List<Signer>
     lateinit  var observerslist :List<Observer>
     private var docId:String?=null
+
+    private var myClipboard: ClipboardManager? = null
+    lateinit var myClip: ClipData
+
     @SuppressLint("InflateParams")
 
 
@@ -55,12 +61,31 @@ class DocumentDetailActivity : AppCompatActivity() {
 
         token=getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token", "")
 
+         myClipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+
 
         btn_Preview.setOnClickListener {
             val intent1 = Intent(this@DocumentDetailActivity, PreviewActivity::class.java)
             intent1.putExtra("doc", docId)
             this.startActivity(intent1)
         }
+        btnCopyTH.isEnabled=false
+
+        btnCopyDH.setOnClickListener {
+            myClip = ClipData.newPlainText("Document Hash", tvDocument_Hash_value.text)
+            myClipboard?.primaryClip = myClip
+
+            Toast.makeText(this@DocumentDetailActivity, "Document hash copied to clipboard", Toast.LENGTH_SHORT).show()
+        }
+
+
+        btnCopyTH.setOnClickListener{
+            myClip = ClipData.newPlainText("Transaction Hash", tvDocument_Hash_value.text)
+            myClipboard?.primaryClip = myClip
+            Toast.makeText(this@DocumentDetailActivity, "Transaction hash copied to clipboard", Toast.LENGTH_SHORT).show()
+        }
+
+
         val api = RetrofitClient.getInstance().api as Api
 
         val call = api.docdetails(
@@ -118,8 +143,11 @@ class DocumentDetailActivity : AppCompatActivity() {
                                 time_date.visibility=View.GONE
                                 transaction_hash.visibility=View.GONE
                                 transaction_hash_value.visibility=View.GONE
-                                button2.visibility=View.GONE
+                                btnCopyTH.visibility=View.GONE
                                 tvNot_notarized.visibility=View.VISIBLE
+                          }
+                    else{
+                              btnCopyTH.isEnabled=true
                           }
                             dialog.dismiss()
                 }
@@ -133,6 +161,20 @@ class DocumentDetailActivity : AppCompatActivity() {
                   Toast.makeText(this@DocumentDetailActivity,"Exception:"+e.message,Toast.LENGTH_SHORT).show()
               }
     }
+
+//    fun copyText(view: View) {
+//
+//    }
+
+    // on click paste button
+//    fun pasteText(view: View) {
+//        val abc = myClipboard?.getPrimaryClip()
+//        val item = abc?.getItemAt(0)
+//
+//        .text = item?.text.toString()
+//
+//        Toast.makeText(applicationContext, "Text Pasted", Toast.LENGTH_SHORT).show()
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)

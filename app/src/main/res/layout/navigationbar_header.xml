@@ -7,16 +7,21 @@
               android:layout_height="wrap_content"
               android:background="@color/digitbg"
 >
-    <de.hdodenhof.circleimageview.CircleImageView android:layout_width="@dimen/dp100"
-                                                        android:layout_height="@dimen/dp100"
-                                                        android:layout_margin="@dimen/dp10"
-                                                  android:background="@drawable/profile_bg"
-                                                  android:id="@+id/imageview_header"/>
-    <TextView android:layout_width="@dimen/dp100"
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/user"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginStart="@dimen/dp20"
+            android:layout_marginBottom="@dimen/dp10"
+            android:background="@drawable/profile_bg"
+            android:id="@+id/imageview_header"/>
+
+    <TextView android:layout_width="wrap_content"
               android:text="@string/headername"
               android:layout_height="wrap_content"
               android:id="@+id/header_nametv"
-              android:textColor="@color/textcolor"
+              android:textColor="@color/textcolor3"
               android:layout_marginBottom="@dimen/dp10"
               android:layout_marginStart="@dimen/dp20"
               android:layout_marginEnd="@dimen/dp10"
@@ -27,8 +32,8 @@
               android:layout_marginLeft="@dimen/dp20"
               android:layout_marginBottom="@dimen/dp10"
               android:layout_marginRight="@dimen/dp20"
-              android:textColor="@color/textcolor"
+              android:textColor="@color/textcolor3"
               android:text="@string/emailheader"
-           />
+    />
 
 </LinearLayout>

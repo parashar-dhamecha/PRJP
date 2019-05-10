@@ -80,14 +80,15 @@ class ProfileActivity : AppCompatActivity() {
                     var profileob = response.body()
                     Toast.makeText(this@ProfileActivity, "success", Toast.LENGTH_LONG).show()
                     fullnametextview!!.text =
-                        profileob!!.data[0].firstName.toString() + profileob!!.data[0].lastName.toString()
+                        profileob!!.data[0].firstName.toString() +" " + profileob!!.data[0].lastName.toString()
                     emailtv!!.text = profileob!!.data[0].email.toString()
                     jobdescriptiontv!!.text = profileob!!.data[0].jobTitle as String?
                     companeynametv!!.text = profileob!!.data[0].organization as String?
                     phonenotv!!.text = profileob!!.data[0].phoneNumber.toString()
+
                     //displaying profile pic
-                    if(profileob!!.data[0].isProfileImage) {
-                        var profilepic = profileob!!.data[0].profileByte.toString()
+                    if(profileob.data[0].isProfileImage) {
+                        var profilepic = profileob.data[0].profileByte.toString()
                         var byap = Base64.decode(profilepic, Base64.DEFAULT)
                         var bitmapprofile = BitmapFactory.decodeByteArray(byap, 0, byap.size) as Bitmap?
                         profilepicv!!.setImageBitmap(bitmapprofile)
@@ -146,11 +147,6 @@ class ProfileActivity : AppCompatActivity() {
         })
 
         }
-
-
-
-
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu to use in the action bar
         val inflater = menuInflater
@@ -166,6 +162,13 @@ class ProfileActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    override fun onBackPressed() {
+        val intent = Intent(this@ProfileActivity, Settings::class.java)
+        startActivity(intent)
+        super.onBackPressed()
+    }
+
 
 
 }

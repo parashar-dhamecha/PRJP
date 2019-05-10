@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4caa4f</color>
-    <color name="colorPrimaryDark">#3E8140</color>
-    <color name="colorAccent">#192DB6</color>
+    <color name="colorPrimary">#1a4a9f</color>
+    <color name="colorPrimaryDark">#26397b</color>
+    <color name="colorPrimaryLight">#317de8</color>
+    <color name="colorSecondary">#fec81e</color>
+    <color name="colorAccent">#347ee9</color>
     <color name="textcolor">#140336</color>
     <color name="edittext">#28B463</color>
     <color name="signupcolor">#2F63C1</color>
     <color name="textcolor2">#19001F</color>
     <color name="cardbg">#4D9E53</color>
-    <color name="digitbg">#6075E9</color>
+    <color name="digitbg">#1a4a9f</color>
     <color name="textcolor3">#FAF9F9</color>
     <color name="bg_gray">#ECEDEF</color>
+    <color name="black">#000000</color>
+    <color name="custom_color">#1a4a9f</color>
+    <color name="custom_arrow_color">#fec81e</color>
+    <color name="cyan">#03dac6</color>
+    <color name="red">#ff0000</color>
+    <color name="gray_button">#97afbb</color>
+
+
+    custom_color
 
     <!--<color name="textcolor4">#E28FA0A0</color>-->
     <color name="deletebutton">#FF0000</color>

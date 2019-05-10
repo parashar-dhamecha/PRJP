@@ -2,20 +2,27 @@ package com.dxdevil.pd.prjp
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document
 import com.dxdevil.pd.prjp.Model.Request.Document.ListOfDocument
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse
 import com.dxdevil.pd.prjp.data.*
+import kotlinx.android.synthetic.main.activity_dashboarrd.*
 import kotlinx.android.synthetic.main.activity_doc.*
-
+import kotlinx.android.synthetic.main.content_docactivity.*
+import kotlinx.android.synthetic.main.row_doclist.*
 
 
 import retrofit2.Call
@@ -24,6 +31,10 @@ import retrofit2.Response
 
 
 class DocActivity : AppCompatActivity() {
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var ntoggle: ActionBarDrawerToggle
+
    private var currentPage=0
     var totalPages:Int=0
 
@@ -38,12 +49,34 @@ class DocActivity : AppCompatActivity() {
         setContentView(R.layout.activity_doc)
         setTitle(R.string.documents)
 
+        val st = getSharedPreferences("Doc_status", 0) as SharedPreferences
+
+        drawerLayout = findViewById(R.id.drawer_layout_document)
+        ntoggle =
+            ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(ntoggle)
+        ntoggle.syncState()
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+
         token=getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token", "")
 
         img_No_doc.visibility=View.GONE
         tvNo_doc.visibility=View.GONE
 
-        apiCalling(null, 0, token)
+
+        val mIntent=intent
+        val source=intent.getStringExtra("Source")
+        if(source=="DocActivity"){
+            val docStatus=mIntent.getIntExtra("Doc_status",0)
+            apiCalling(docStatus,0, token)
+        }else
+        {
+            apiCalling(null,0, token)
+        }
+
+
+
 
         button_next.setOnClickListener {
             button_previous.isEnabled=true
@@ -54,7 +87,41 @@ class DocActivity : AppCompatActivity() {
             currentPage -= 1
             apiCalling(null,currentPage,token)
         }
+        nav_view_doc.setNavigationItemSelectedListener { menuItem ->
+            menuItem.isChecked = true
+            drawerLayout.closeDrawers()
 
+
+            when (menuItem.itemId) {
+                R.id.dashboard -> {
+                    startActivity(Intent(this@DocActivity, Dashboarrd::class.java))
+                    drawer_layout_document.closeDrawer(GravityCompat.START)
+                }
+                R.id.documents -> {
+                    startActivity(Intent(this@DocActivity, DocActivity::class.java))
+                    drawer_layout_document.closeDrawer(GravityCompat.START)
+                }
+                R.id.contacts -> {
+                    startActivity(Intent(this@DocActivity, Contacts::class.java))
+                    drawer_layout_document.closeDrawer(GravityCompat.START)
+                }
+                R.id.settings -> {
+                    startActivity(Intent(this@DocActivity, Settings::class.java))
+                    drawer_layout_document.closeDrawer(GravityCompat.START)
+                }
+                R.id.logout -> {
+                    val sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
+                    sp.edit().remove("Token").apply()
+                    sp.edit().remove("RefreshToken").apply()
+                    startActivity(Intent(this@DocActivity, LoginActivity::class.java))
+                    drawer_layout_document.closeDrawer(GravityCompat.START)
+
+                }
+            }
+
+
+            true
+        }
        
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -63,6 +130,8 @@ class DocActivity : AppCompatActivity() {
         return true
     }
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (ntoggle.onOptionsItemSelected(item))
+            return true
 
         when (item!!.itemId) {
 
