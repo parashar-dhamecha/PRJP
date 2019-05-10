@@ -1,3 +1,4 @@
+<resources >
 <resources>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Cygnature</string>
@@ -29,12 +30,13 @@
     <string name="enter_email">Enter your email address and we will send you a password reset link.</string>
     <string name="splash_image">cygnature</string>
     <string name="hint">enter email</string>
-    <string name="awatingsign">AwatingSign</string>
+    <string name="awatingsign">Awating My Sign</string>
     <string name="awatingothers">Awating Others</string>
     <string name="completed">Completed</string>
     <string name="signingdue">Due Soon</string>
     <string name="awsdata">0</string>
     <string name="addsign">Edit/Add Signature</string>
+    <string name="addsigng">Add Signature</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="edit_your_signature">Edit Your Signature</string>
     <string name="dashboard">Dashboard</string>
@@ -178,6 +180,7 @@
     <string name="Getting">Getting pages</string>
     <string name="preview">Preview</string>
     <string name="signers">Signers</string>
+    <string name="sequential">Sequential Signature</string>
     <string name="observers">Observers</string>
     <string name="notarization">Notarization Details</string>
     <string name="notarized_on">Notarized On:</string>
@@ -186,24 +189,6 @@
     <string name="uploader_name">Uploader_name</string>
     <string name="time_and_date">time and date</string>
     <string name="thash">hash</string>
-    <string name="SaveContact">SaveContact</string>
-    <string name="selectsigners">Select Signers</string>
-    <string name="selectobservers">Select Observers</string>
-    <string name="pickDateandtime"><![CDATA[Expiry Date & Time]]></string>
-    <string name="picktime">Time</string>
-    <string name="ExpireyDate">Expiry Date</string>
-    <string name="time">Time</string>
-    <string name="expirey_date">Expirey Date</string>
-    <string name="expirey_end_date" tools:ignore="ExtraTranslation">Expirey End Date</string>
-    <string name="expirey_start_date">Expirey Start Date</string>
-    <string name="Signing_Due_date">Signing Due Date</string>
-    <string name="paralel">Paralel</string>
-    <string name="remindbefore">Remind Before</string>
-    <string name="days">days</string>
-    <string name="button_clearall">Clear All</string>
-    <string name="prev"><![CDATA[<]]></string>
-    <string name="nextf"><![CDATA[>]]></string>
-    <string name="id">imageview</string>
     <string name="no_observers">There are no observers</string>
     <string name="not_notarized_message">This Document is yet not Notarized.</string>
     <string name="view_doc">Preview the document</string>

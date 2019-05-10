@@ -19,81 +19,26 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="wrap_content"
                                                          android:layout_height="match_parent">
 
+<androidx.drawerlayout.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawer_layout_contacts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:openDrawer="start">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout android:layout_width="match_parent"
-                                                               android:layout_height="wrap_content"
-                                                               android:id="@+id/swipeRefresh"
-                                                               android:layout_marginTop="@dimen/dp10"
-                                                              >
+    <include
+            layout="@layout/app_bar_contacts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/r1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/dp10"
-                    android:layout_marginLeft="@dimen/dp10"
-                    android:layout_margin="@dimen/dp10"
-                    android:scrollbars="vertical"   android:layout_marginTop="150dp"  android:layout_marginBottom="8dp" />
+    <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view_contacts"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/navigationbar_header"
+            app:menu="@menu/nav_menu"/>
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
-
-        <com.github.clans.fab.FloatingActionMenu
-                                                                                android:layout_width="wrap_content"
-                                                                               android:layout_height="wrap_content"
-                                                                               android:id="@+id/floatingActionMenu"
-                                                                               android:layout_margin="16dp"
-                                                                                android:layout_marginBottom="@dimen/dp10"
-                                                                                app:menu_colorRipple="#99d4d4d4"
-                                                                                app:menu_shadowXOffset="@dimen/dp1"
-                                                                                app:menu_shadowYOffset="@dimen/dp5"
-                                                                                app:menu_icon="@drawable/ic_add_black_24dp"
-                                                                                android:layout_gravity="bottom|end"
-                                                                                app:menu_openDirection="up"
-                                                                                android:backgroundTint="@color/colorPrimary"
-                                                 app:menu_fab_size="normal"
-                                                 app:menu_colorPressed="@color/colorPrimary"
-                                                 app:menu_buttonSpacing="@dimen/dp0"
-
-
-
-                                                 android:layout_marginRight="@dimen/dp10"
-                                                 android:layout_marginLeft="@dimen/dp10"
-                                                 app:menu_backgroundColor="#00000000"
-                app:pressedTranslationZ="12dp"
-        android:elevation="@dimen/dp5">
-        <com.github.clans.fab.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fab_size="mini"
-                android:layout_gravity="bottom|end"
-                android:layout_marginRight="@dimen/dp30"
-                android:layout_marginBottom="120dp"
-                android:id="@+id/add"
-                android:layout_marginLeft="@dimen/dp20"
-                android:src="@drawable/ic_person_add_black_24dp"/>
-
-
-        <com.github.clans.fab.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fab_size="mini"
-                android:layout_marginRight="@dimen/dp30"
-                android:layout_gravity="bottom|end"
-                android:layout_marginBottom="@dimen/dp180"
-                android:id="@+id/bulkimport"
-                android:src="@drawable/ic_cloud_upload_black_24dp"/>
-
-        </com.github.clans.fab.FloatingActionMenu>
-
-
-
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-
-
-
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

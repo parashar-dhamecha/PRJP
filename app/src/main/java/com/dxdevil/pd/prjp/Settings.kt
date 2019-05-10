@@ -2,8 +2,8 @@ package com.dxdevil.pd.prjp
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,14 +11,13 @@ import android.util.Base64
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
-import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.content_setting.*
 
@@ -41,17 +40,17 @@ class Settings : AppCompatActivity() {
         ntoggle.syncState()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        var profilestring = getSharedPreferences("Token",0).getString("profileimage","")
-        var bytearray = Base64.decode(profilestring, Base64.DEFAULT)
-        var btmap = BitmapFactory.decodeByteArray(bytearray,0,bytearray.size)
+        val profilestring = getSharedPreferences("Token",0).getString("profileimage","")
+        val bytearray = Base64.decode(profilestring, Base64.DEFAULT)
+        val btmap = BitmapFactory.decodeByteArray(bytearray,0,bytearray.size)
 
-        var navid = findViewById<NavigationView>(R.id.nav_view_settings)
-        var h = navid.getHeaderView(0)
-        var inagev = h.findViewById<CircleImageView>(R.id.imageview_header)
+        val navid = findViewById<NavigationView>(R.id.nav_view_settings)
+        val h = navid.getHeaderView(0)
+        val inagev = h.findViewById<CircleImageView>(R.id.imageview_header)
         inagev!!.setImageBitmap(btmap)
 
-        var htv = h.findViewById<TextView>(R.id.header_nametv)
-        var htvem = h.findViewById<TextView>(R.id.header_emailtv)
+        val htv = h.findViewById<TextView>(R.id.header_nametv)
+        val htvem = h.findViewById<TextView>(R.id.header_emailtv)
         htv!!.text =
             getSharedPreferences("Token",0).getString("fname","").toString()+getSharedPreferences("Token",0).getString("lname","").toString()
 
@@ -80,11 +79,11 @@ class Settings : AppCompatActivity() {
                     drawer_layout_setting.closeDrawer(GravityCompat.START)
                 }
                 R.id.logout -> {
-                    var sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
+                    val sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
                     sp.edit().remove("Token").apply()
                     sp.edit().remove("RefreshToken").apply()
                     startActivity(Intent(this@Settings,LoginActivity::class.java))
-                    drawer_layout.closeDrawer(GravityCompat.START)
+                    drawer_layout_setting.closeDrawer(GravityCompat.START)
                 }
             }
 
@@ -100,10 +99,44 @@ class Settings : AppCompatActivity() {
         }
 
         card_logout.setOnClickListener {
-            startActivity(Intent(applicationContext,LoginActivity::class.java))
+
+            val builder= AlertDialog.Builder(this@Settings)
+            builder.setTitle("Are you sure you want to Logout?")
+            builder.setPositiveButton("Yes") { dialogInterface: DialogInterface?, i: Int ->
+
+
+                val sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
+                sp.edit().remove("Token").apply()
+                sp.edit().remove("RefreshToken").apply()
+                startActivity(Intent(this@Settings, LoginActivity::class.java))
+
+            }
+
+            builder.setNegativeButton("No") { dialogInterface:DialogInterface?, i:Int->
+
+            }
+            val dialog: AlertDialog= builder.create()
+            dialog.show()
         }
 
     }
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            onBackPressed()
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onBackPressed() {
+        val myIntent = Intent(this@Settings, Dashboarrd::class.java)
+
+        myIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(myIntent)
+        finish()
+        return
+    }
+
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if(ntoggle.onOptionsItemSelected(item))
             return true
@@ -111,10 +144,7 @@ class Settings : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onKeyDown(keycode:Int, event: KeyEvent):Boolean {
-        if (keycode == KeyEvent.KEYCODE_BACK) {
-            moveTaskToBack(true)
-        }
-        return super.onKeyDown(keycode, event)
-    }
+
+
+
 }

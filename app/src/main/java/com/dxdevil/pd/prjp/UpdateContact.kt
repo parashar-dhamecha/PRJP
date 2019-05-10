@@ -5,17 +5,20 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import com.dxdevil.pd.prjp.Model.Request.UpdateIdRequest
 import com.dxdevil.pd.prjp.Model.Response.*
-import kotlinx.android.synthetic.main.activity_contacts.*
+import kotlinx.android.synthetic.main.activity_add_contact.*
 import kotlinx.android.synthetic.main.activity_update_contact.*
-import kotlinx.android.synthetic.main.contactsadapter.*
+import kotlinx.android.synthetic.main.activity_update_contact.etEmail
+import kotlinx.android.synthetic.main.activity_update_contact.etJobDescription
+import kotlinx.android.synthetic.main.activity_update_contact.etJobTitle
+import kotlinx.android.synthetic.main.activity_update_contact.etMobileNo
+import kotlinx.android.synthetic.main.activity_update_contact.etName
+import kotlinx.android.synthetic.main.activity_update_contact.etcode
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class UpdateContact : AppCompatActivity() {
 
@@ -39,7 +42,9 @@ class UpdateContact : AppCompatActivity() {
             var call1 =
                 apiup.getcontactid(token, st.getString("userid", "")) as Call<GetContactIdResponse>
             call1.enqueue(object : Callback<GetContactIdResponse> {
+
                 override fun onFailure(call: Call<GetContactIdResponse>, t: Throwable) {
+
                     Toast.makeText(this@UpdateContact, "Check your internet Connection", Toast.LENGTH_LONG).show()
 
                 }
@@ -50,41 +55,27 @@ class UpdateContact : AppCompatActivity() {
                     if (response.isSuccessful) {
 
                         var obj = response.body()!!.data?.get(0) as GetContactIdResponse.GetContactIdDatum
-                        etName.setText(obj!!.name)
-                        etEmail.setText(obj!!.email)
-                        etcode.setText(obj!!.countryId.toString())
-                        etMobileNo.setText(obj!!.mobileNumber)
-                        etJobTitle.setText(obj!!.jobTitle)
-                        etJobDescription.setText(obj!!.jobDescription)
+
+                        etName.setText(obj.name)
+                        etEmail.setText(obj.email)
+                        etcode.setCountryForPhoneCode(obj.countryId)
+                        etMobileNo.setText(obj.mobileNumber)
+                        etJobTitle.setText(obj.jobTitle)
+                        etJobDescription.setText(obj.jobDescription)
 
 
                         Toast.makeText(this@UpdateContact, "success", Toast.LENGTH_SHORT).show()
 
 
                     } else {
-                        Toast.makeText(
-                            this@UpdateContact,
-                            response.message().toString() + response.errorBody(),
-                            Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(this@UpdateContact, response.message().toString() + response.errorBody(), Toast.LENGTH_LONG).show()
                     }
-
                 }
-
-
             }
-
             )
-
-
         } catch (e: Exception) {
             Toast.makeText(this@UpdateContact, e.toString(), Toast.LENGTH_LONG).show()
         }
-
-
-
-
-
 
         SaveContact!!.setOnClickListener {
 
@@ -100,7 +91,7 @@ class UpdateContact : AppCompatActivity() {
                         UpdateIdRequest( st.getString("userid","").toString(),
                             etName.text.toString(),
                             etEmail.text.toString(),
-                            91,
+                            etcode.selectedCountryCodeAsInt,
                             etMobileNo.text.toString(),
                             etJobTitle.text.toString(),
                             etJobDescription.text.toString()
@@ -120,25 +111,14 @@ class UpdateContact : AppCompatActivity() {
                         } else {
                             Toast.makeText(this@UpdateContact, response.message().toString(), Toast.LENGTH_LONG).show()
                         }
-
-
                     }
-
                 })
-
-
             } catch (e: Exception) {
                 Toast.makeText(this@UpdateContact, "error", Toast.LENGTH_LONG).show()
-
             }
 
         }
     }
-
-
-
-
-
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true

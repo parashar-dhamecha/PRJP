@@ -1,49 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:orientation="horizontal"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.SearchView android:layout_width="220dp"
-                                          android:id="@+id/search"
-                                          android:layout_height="wrap_content"
-                                          tools:ignore="MissingConstraints"
-                                          android:layout_marginTop="8dp"
-                                          app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-                                          app:layout_constraintBottom_toTopOf="@+id/r1"
-                                          app:layout_constraintStart_toStartOf="parent"
-                                          android:layout_marginStart="8dp"
-                                          app:layout_constraintVertical_bias="0.259" android:layout_marginEnd="8dp"
-                                          app:layout_constraintEnd_toStartOf="@+id/adduser"
-                                          app:layout_constraintHorizontal_bias="0.176">
+    <EditText android:layout_width="match_parent"
+              android:id="@+id/search"
+              android:padding="10dp"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              android:layout_marginStart="8dp"
+              android:background="@drawable/round_textbox"
+              android:hint="@string/Search"
+              android:theme="@style/MyEditText"
+              android:layout_marginEnd="8dp"
+              android:layout_marginBottom="8dp" tools:ignore="Autofill,TextFields">
+    </EditText>
 
-    </androidx.appcompat.widget.SearchView>
-    <Button
-            android:layout_width="40dp"
-            android:layout_height="35dp"
-            android:background="@drawable/ic_person_add_black_24dp"
-            android:id="@+id/adduser"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toStartOf="@+id/grp"
-            android:layout_marginEnd="24dp"/>
-    <Button
-            android:layout_width="40dp"
-            android:layout_height="35dp"
-            android:background="@drawable/ic_group_add_black_24dp"
-            android:id="@+id/grp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"/>
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/r1"
-            android:layout_width="390dp"
-            android:layout_height="476dp"
-            android:scrollbars="vertical" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.476"
-            app:layout_constraintVertical_bias="1.0" tools:ignore="UnknownId"/>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/swipeRefresh"
+                android:layout_marginTop="@dimen/dp10">
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/r1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_margin="@dimen/dp10"
+                    android:scrollbars="vertical"
+                    android:layout_marginTop="150dp"
+                    android:layout_marginBottom="8dp" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        <com.github.clans.fab.FloatingActionMenu
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/floatingActionMenu"
+                android:layout_margin="16dp"
+                app:menu_colorNormal="@color/colorSecondary"
+                android:layout_marginBottom="@dimen/dp10"
+                app:menu_colorRipple="#99d4d4d4"
+                app:menu_icon="@drawable/add_black"
+                android:layout_gravity="bottom|end"
+                app:menu_openDirection="up"
+                android:backgroundTint="@color/colorPrimary"
+                app:menu_fab_size="normal"
+                app:menu_colorPressed="@color/colorPrimary"
+                app:menu_buttonSpacing="@dimen/dp0"
+                android:layout_marginRight="@dimen/dp10"
+                android:layout_marginLeft="@dimen/dp10"
+                app:menu_backgroundColor="#00000000"
+                app:pressedTranslationZ="12dp"
+                android:elevation="@dimen/dp5">
+
+            <com.github.clans.fab.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:fab_size="mini"
+                    app:fab_label="@string/Addc"
+                    app:fab_colorPressed="@color/colorPrimary"
+                    app:menu_colorPressed="@color/colorPrimary"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="@dimen/dp30"
+                    app:fab_colorNormal="@color/colorSecondary"
+                    android:layout_marginBottom="120dp"
+                    android:id="@+id/add"
+                    android:layout_marginStart="@dimen/dp20"
+                    android:src="@drawable/add_person"/>
+
+        </com.github.clans.fab.FloatingActionMenu>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

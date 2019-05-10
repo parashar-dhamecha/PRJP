@@ -3,6 +3,7 @@ package com.dxdevil.pd.prjp
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -33,8 +34,12 @@ class MainActivity : AppCompatActivity() {
 
                 var pd = ProgressDialog(this)
                 pd.setTitle("Logging you in...")
-                pd.setMessage("Sending Otp..")
+                pd.setMessage(email.toString())
                 pd.isIndeterminate = true
+                pd.setButton(DialogInterface.BUTTON_NEGATIVE,"cancel", DialogInterface.OnClickListener { dialog, which ->
+                    startActivity(Intent(this,LoginActivity::class.java))
+                    return@OnClickListener
+                })
                 pd.show()
 
 
