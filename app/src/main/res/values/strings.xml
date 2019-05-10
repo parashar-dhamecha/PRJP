@@ -193,5 +193,12 @@
     <string name="no_documents">No Documents</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="refresh_page">Try refreshing the page</string>
+    <string name="contact_mobile_no">9427962585</string>
+    <string name="Zero">0</string>
+    <string name="contact_email">contactemail@gmail.com</string>
+    <string name="contact_name_">contact name</string>
+    <string name="upload_file">Upload </string>
+    <string name="selectsigners">Select Signers</string>
+
 
 </resources>
