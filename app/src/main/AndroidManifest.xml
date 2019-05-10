@@ -39,7 +39,6 @@
                 android:name=".Dashboarrd"
                 android:label="@string/title_activity_dashboarrd"
                 android:theme="@style/AppTheme">
-
         </activity>
         <activity android:name=".PhotoActivity"/>
         <activity android:name=".AddContact">

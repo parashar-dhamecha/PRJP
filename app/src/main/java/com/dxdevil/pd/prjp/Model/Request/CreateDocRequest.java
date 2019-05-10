@@ -44,7 +44,7 @@ public class CreateDocRequest {
     public List<String> signerIds = null;
     @SerializedName("observerIds")
     @Expose
-    public List<Object> observerIds = null;
+    public List<String> observerIds = null;
     @SerializedName("signatures")
     @Expose
     public List<Integer> signatures = null;
@@ -93,7 +93,7 @@ public class CreateDocRequest {
      * @param documentLatitude
      * @param expiryStartDate
      */
-    public CreateDocRequest(String processDocumentId, String name, String fileName, String extension, String description, String expiryStartDate, String expiryEndDate, String signingDueDate, Integer reminderBefore, List<DocumentShapeModel> documentShapeModel, Integer signingFlowType, List<String> signerIds, List<Object> observerIds, List<Integer> signatures, Double documentLatitude, Double documentLongitude, String userAgent, String userIPAddress, List<Integer> authenticationTypes) {
+    public CreateDocRequest(String processDocumentId, String name, String fileName, String extension, String description, String expiryStartDate, String expiryEndDate, String signingDueDate, Integer reminderBefore, List<DocumentShapeModel> documentShapeModel, Integer signingFlowType, List<String> signerIds, List<String> observerIds, List<Integer> signatures, Double documentLatitude, Double documentLongitude, String userAgent, String userIPAddress, List<Integer> authenticationTypes) {
         super();
         this.processDocumentId = processDocumentId;
         this.name = name;

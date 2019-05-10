@@ -12,7 +12,6 @@ import com.dxdevil.pd.prjp.Model.Response.Document.Preview.PreviewDocResponse;
 import com.dxdevil.pd.prjp.Model.Response.SignUpModel;
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -24,7 +23,10 @@ public interface Api {
     Call<SignUpModel>register(@Body  SignUp signUp);
 
     @POST("document/create")
-    Call<RequestBody>create(@Body CreateDocRequest createdocrequest);
+    Call<CreateDocResponse>create(
+            @Header("Authorization") String Authorization,
+            @Body CreateDocRequest createdocrequest
+    );
 
     @GET("account/check-user-exists/{id}")
     Call<UserExistResponse>isUserExist(@Path("id") String  id);

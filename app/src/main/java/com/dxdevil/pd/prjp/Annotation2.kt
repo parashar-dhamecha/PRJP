@@ -11,16 +11,18 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.dxdevil.pd.prjp.Model.Request.CreateDocRequest
 import com.dxdevil.pd.prjp.Model.Request.DocumentShapeModel
+import com.dxdevil.pd.prjp.Model.Response.CreateDocResponse
 import kotlinx.android.synthetic.main.activity_annotation2.*
 import kotlinx.android.synthetic.main.activity_uploadfile.*
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import javax.security.auth.callback.Callback
 
 
 @Suppress("ImplicitThis", "RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS",
-    "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS"
+    "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "UNCHECKED_CAST"
 )
 class Annotation2 : AppCompatActivity(),View.OnTouchListener{
 
@@ -30,10 +32,18 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
     lateinit var root: ViewGroup
     private var _xDelta: Int = 0
     private var _yDelta: Int = 0
-    var currentpage=1
+    var currentpage = 1
      var selsigners : ArrayList<String>? = ArrayList()
     var signersid : ArrayList<String>? = ArrayList()
-    var signuserdet : ArrayList<DocumentShapeModel> = ArrayList()
+    var documentshapemodel : ArrayList<DocumentShapeModel> = ArrayList()
+    var xa :ArrayList<Int> = ArrayList()
+    var ya :ArrayList<Int> = ArrayList()
+    var wa :ArrayList<Int> = ArrayList()
+    var ha :ArrayList<Int> = ArrayList()
+    var xp :ArrayList<Double> = ArrayList()
+    var yp :ArrayList<Double> = ArrayList()
+    var wp :ArrayList<Double> = ArrayList()
+    var hp :ArrayList<Double> = ArrayList()
 
 
 
@@ -61,9 +71,6 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
                  viewarr.add( addannotatio() as ImageView)
                  viewarr[viewcount].id= viewcount
                  root.addView(viewarr[viewcount])
-                 var c =selsigners!!.indexOf(signerspinner.selectedItem)
-                 signuserdet[viewcount].userId = (signersid as java.util.ArrayList<String>?)!![c]
-                 signuserdet[viewcount].p=currentpage
                  viewarr[viewcount].setOnTouchListener(this)
                  viewcount+=1
              }
@@ -94,7 +101,7 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
    @Synchronized private fun addannotatio():View {
         view = ImageView(this)
         view.setImageDrawable(getDrawable(R.drawable.logo))
-        setLayoutsize(300,130)
+        setLayoutsize(250,110)
         return view
     }
 
@@ -122,20 +129,24 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
                 _xDelta = X - lParams.leftMargin
                 _yDelta = Y - lParams.topMargin
             }
+
+
             MotionEvent.ACTION_UP -> {
-                signuserdet[view.id].x=view.x as Int?
-                signuserdet[view.id].y=view.y as Int?
+                xa.add(view.id, view.x.toInt())
+                ya.add(view.id, view.y.toInt())
                 var rw= view.width/1.4
                 var rh:Double = (view.height/2).toDouble()
-                signuserdet[view.id].xPercentage=(((view.x*100)/rw)*root.width)/100
-                signuserdet[view.id].yPercentage=(((view.y*100)/rh)*root.width)/100
-                signuserdet[view.id].w=view.width
-                signuserdet[view.id].h=view.height
-                signuserdet[view.id].wPercentage=(100/rw)*100
-                signuserdet[view.id].hPercentage=(100/rh)*100
-                signuserdet[view.id].ratio="0.612903225806452"
-                signuserdet[view.id].isAnnotation=true
-                signuserdet[view.id].signatureType="ESignature"
+                xp.add(view.id,(((view.x*100)/rw)*root.width)/100)
+                yp.add(view.id,(((view.y*100)/rh)*root.width)/100)
+                wa.add(view.id,view.width)
+               ha.add(view.id,view.height)
+                wp.add(view.id,(100/rw)*100)
+                hp.add(view.id,(100/rh)*100)
+                documentshapemodel.add(view.id, DocumentShapeModel(242,31.002,663,38.33,369,65.21,104
+                    ,15.22,1,"0.612",
+                    signersid?.get(selsigners!!.indexOf(signerspinner!!.selectedItem)),true,"ESignature")
+                )
+                 Toast.makeText(this@Annotation2,documentshapemodel[view.id].x.toString(),Toast.LENGTH_LONG).show()
 
 
 //            view.setOnTouchListener(null)
@@ -179,31 +190,56 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
              var endexpdate  = sp.getString("endexpdate","")as String
             var  sidningduedate=    sp.getString("signingduedate","")as String
             var seqpar=    sp.getString("seqpara","")as String
-            var reminddays =   sp.getString("reminddays","")as Int
+            var reminddays =   sp.getString("reminddays","")?.toInt()
               var docid =  sp.getString("docid","")as String
+                var totsign=List<Int>(1) {3}
+                var authtype=List<Int>(1) {1}
+                var token = this.getSharedPreferences("Token",0).getString("Token","").toString()
+                Toast.makeText(this,documentshapemodel[0].signatureType.toString(),Toast.LENGTH_LONG).show()
+           var createapi = RetrofitClient.getInstance().api as Api
+                var createcall = createapi.create(
+                    token, CreateDocRequest(
+                        docid,
+                        "samplepdf",
+                        "pdfcreate",
+                        ".pdf",des,
+                        endstartdate,
+                        endexpdate,
+                        sidningduedate,
+                        reminddays,
+                        documentshapemodel as List<DocumentShapeModel>,
+                        1,
+                        signersid as List<String>,
+                        null,
+                        totsign as List<Int>,
+                        4.092356,
+                        -56.062161,
+                        "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36",
+                        "61.12.66.6",
+                        authtype) )as Call<CreateDocResponse>
 
-
-            var call = RetrofitClient.getInstance().api.create(
-                CreateDocRequest(docid, filename,filename,".docx",des,endstartdate,endexpdate,sidningduedate,reminddays,signuserdet,null,null,null,null,null,null,null,null,null))
-            call.enqueue(object : Callback, retrofit2.Callback<RequestBody> {
-                override fun onFailure(call: Call<RequestBody>, t: Throwable) {
-                    Toast.makeText(this@Annotation2,"something went wrong",Toast.LENGTH_LONG).show()
-                }
-
-                override fun onResponse(call: Call<RequestBody>, response: Response<RequestBody>) {
-                    if(response.isSuccessful){
-                        Toast.makeText(this@Annotation2,"successfully uploaded",Toast.LENGTH_LONG).show()
+                createcall.enqueue(object : retrofit2.Callback<CreateDocResponse>{
+                    override fun onFailure(call: Call<CreateDocResponse>, t: Throwable) {
+                        Toast.makeText(this@Annotation2,"somethinf-g went wrong",Toast.LENGTH_LONG).show()
                     }
-                    else {
-                        Toast.makeText(this@Annotation2,"error",Toast.LENGTH_LONG).show()
-                    }
-                }
 
-            })
+                    override fun onResponse(call: Call<CreateDocResponse>, response: Response<CreateDocResponse>) {
+                       if(response.isSuccessful){
+                           Toast.makeText(this@Annotation2,"successfully created",Toast.LENGTH_LONG).show()
+
+                       }else{
+                           Toast.makeText(this@Annotation2,response.message().toString(),Toast.LENGTH_LONG).show()
+
+                       }
+                    }
+                })
+
+
+                }
 
 
             }
-        }
+
         return super.onOptionsItemSelected(item)
     }
 

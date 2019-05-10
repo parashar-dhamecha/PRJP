@@ -39,9 +39,8 @@ import kotlin.collections.ArrayList
 
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS",
-    "DEPRECATION", "UNCHECKED_CAST"
-)
-public class Uploadfile : AppCompatActivity(),View.OnClickListener,CheckboxselectedListener {
+    "DEPRECATION", "UNCHECKED_CAST")
+ class Uploadfile : AppCompatActivity(),View.OnClickListener,CheckboxselectedListener {
 
     val READ_REQUEST_CODE =42
      var maxday:Int=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
