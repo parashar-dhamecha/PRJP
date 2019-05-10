@@ -11,6 +11,7 @@ import android.preference.Preference
 import android.preference.PreferenceManager
 import android.util.Log
 import android.util.Patterns
+import android.view.KeyEvent
 import android.widget.EditText
 import android.widget.Toast
 import com.dxdevil.pd.prjp.Model.Request.Login
@@ -124,7 +125,9 @@ public class LoginActivity : AppCompatActivity() {
                                     override fun onResponse(call: Call<OtpModel>, response: Response<OtpModel>) {
                                         if (response.isSuccessful) {
                                             pd.dismiss()
-                                            startActivity(Intent(this@LoginActivity, Otpactivity::class.java))
+                                            var i=Intent(this@LoginActivity, Otpactivity::class.java)
+                                            i.putExtra("loginemail",edEmail.text.toString())
+                                            startActivity(i)
                                             Toast.makeText(this@LoginActivity, response.body()!!.message.toString(), Toast.LENGTH_LONG).show()
                                         } else {
                                             pd.dismiss()
@@ -163,6 +166,7 @@ public class LoginActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         this@LoginActivity.finish()
+
     }
 
     fun validateemail(): Boolean {
@@ -179,6 +183,7 @@ public class LoginActivity : AppCompatActivity() {
 
     }
 
+
     fun validatepass(): Boolean {
         val pass = edPassword.text.toString()
         if (pass == "") {
@@ -191,5 +196,11 @@ public class LoginActivity : AppCompatActivity() {
             return true
         }
 
+    }
+    override fun onKeyDown(keycode: Int, event: KeyEvent): Boolean {
+        if (keycode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(true)
+        }
+        return super.onKeyDown(keycode, event)
     }
 }

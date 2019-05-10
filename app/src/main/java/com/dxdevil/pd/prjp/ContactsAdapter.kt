@@ -43,8 +43,8 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
         holder.name.text = Con[position].name
         holder.email.text=Con[position].email
         holder.mobileno.text=Con[position].mobileNumber
-        holder.swipe.open(true)
-        holder.swipe.close(false)
+//        holder.swipe.open(true)
+//        holder.swipe.close(false)
 
         //itemMangr.bindView(holder.itemView,position)
 
@@ -52,18 +52,18 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
 
         // Log.d("ContactsAdapter", "email" + Con[position].email)
        holder.editbutton.setOnClickListener{
-//               var s = Con[position].id
-//           ed.putString("userid",s)
-//           ed.commit()
+          var s = Con[position].id
+           ed.putString("userid",s)
+           ed.commit()
 //           val intent = Intent(context, UpdateContact::class.java)
 //           intent.putExtra("quantity","");
 //            context.startActivity(intent)
-           Toast.makeText(context, "Check your internet Connection"+Con[position].id, Toast.LENGTH_LONG).show()
+        //   Toast.makeText(context, "Check your internet Connection"+Con[position].id, Toast.LENGTH_LONG).show()
 
 //           context.startActivity<UpdateContact>(COUNTRIES to countries)
 
-           val intent = Intent(context, UpdateContact::class.java)
-           intent.putExtra("value", Con[position].id)
+          val intent = Intent(context, UpdateContact::class.java)
+           //intent.putExtra("value", Con[position].id)
            context.startActivity(intent)
 
         }
@@ -112,23 +112,9 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
 
 
                             }
-
-
-
-
                         }
-
-
                     })
 
-
-
-
-
-
-
-                    // Con.removeAt(position)
-                //notifyItemRemoved(position)
 
             } catch(e:Exception)
                 {
@@ -168,23 +154,25 @@ class ContactsAdapter(private var context: Context, var Con: ArrayList<Data>) :
         var name: TextView = itemView.findViewById(R.id.name) as TextView
         var pro: ImageView = itemView.findViewById(R.id.pro) as ImageView
         var email:TextView=itemView.findViewById(R.id.email) as TextView
-        var swipe:SwipeRevealLayout=itemView.findViewById(R.id.swipe) as SwipeRevealLayout
+//        var swipe:SwipeRevealLayout=itemView.findViewById(R.id.swipe) as SwipeRevealLayout
         var mobileno:TextView=itemView.findViewById(R.id.mobileno) as TextView
 //        var del: Button = itemView.findViewById(R.id.del) as Button
         // @SuppressLint("WrongViewCast")
         var delbutton: ImageButton = itemView.findViewById(R.id.delbutton) as ImageButton
 
         var editbutton: ImageButton = itemView.findViewById(R.id.editbutton) as ImageButton
-        var swipe:SwipeRevealLayout=itemView.findViewById(R.id.swipe) as SwipeRevealLayout
+//        var swipe:SwipeRevealLayout=itemView.findViewById(R.id.swipe) as SwipeRevealLayout
 
 
     }
 
 
-   /* fun filterList(filteredList: ArrayList<ContactModel>) {
+
+
+    fun filterList(filteredList: ArrayList<Data>) {
         this.Con = filteredList
         notifyDataSetChanged()
-    }*/
+    }
 
 }
 

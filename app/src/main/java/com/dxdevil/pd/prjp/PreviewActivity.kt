@@ -14,7 +14,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dxdevil.pd.prjp.Model.Request.Document.NextPage
 import com.dxdevil.pd.prjp.Model.Response.Document.NextPage.NextPageResponse
 import com.dxdevil.pd.prjp.Model.Response.Document.Preview.PreviewDocResponse
-import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_preview.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -34,7 +33,7 @@ class PreviewActivity : AppCompatActivity() {
     var pageNo:Int=1
     var length:Int=5
     var length2:Int=0
-    var pageList = arrayOfNulls<String>(10)
+    var page : ArrayList<String> = ArrayList()
     lateinit var by:ByteArray
     lateinit var bitmap:Bitmap
 
@@ -62,16 +61,14 @@ class PreviewActivity : AppCompatActivity() {
                 button_previous.isEnabled = true
 
             currentpage+=1
-            if(currentpage==6)currentpage=0
-
-            if(pageNo%6==0){
+            if(pageNo%6==0&&pageNo==page.size){
 
                     fromP=cpage+1
                     toP=cpage+6
                     apiNextPage(token,fromP.toString(),toP.toString(),true)
 
                 } else{
-                        by = Base64.decode(pageList[currentpage], Base64.DEFAULT)
+                        by = Base64.decode(page[currentpage], Base64.DEFAULT)
                         bitmap = BitmapFactory.decodeByteArray(by, 0, by.size)
                         img_fileBITMAP.setImageBitmap(bitmap)
                         pageNo = pageNo.inc()
@@ -85,22 +82,13 @@ class PreviewActivity : AppCompatActivity() {
 
         button_previous.setOnClickListener {
 
-            currentpage-=1
-            if(currentpage==-1)currentpage=5
+            button_next.isEnabled=true
+              currentpage-=1
 
-            if(pageNo%6==1&&cpage!=1){
-
-                fromP=cpage-6
-                toP=cpage-1
-                apiNextPage(token,fromP.toString(),toP.toString(),false)
-
-            }else{
-                    by = Base64.decode(pageList[currentpage], Base64.DEFAULT)
+            by = Base64.decode(page[currentpage], Base64.DEFAULT)
                     bitmap= BitmapFactory.decodeByteArray(by,0,by.size)
                     img_fileBITMAP.setImageBitmap(bitmap)
                     pageNo=pageNo.dec()
-
-            }
             cpage=cpage.dec()
             cpage_number.text=pageNo.toString()
 
@@ -145,6 +133,7 @@ class PreviewActivity : AppCompatActivity() {
                 tvSomethingWrong.visibility=View.VISIBLE
                 tvRefresh.visibility=View.VISIBLE
                 swipeRefreshImage.isEnabled=true
+                button_next.isEnabled=false
 
             }
 
@@ -155,6 +144,7 @@ class PreviewActivity : AppCompatActivity() {
                         dialog.dismiss()
                         swipeRefreshImage.isEnabled=false
 
+                        button_next.isEnabled=true
                         length=response.body()!!.data[0].documentData.pages.size
                         length=length.dec()
 
@@ -167,9 +157,10 @@ class PreviewActivity : AppCompatActivity() {
 
                         for(i in 0..length)
                         {
-                            pageList[i]=response.body()!!.data[0].documentData.pages[i]
+                            page.add(i,response.body()!!.data[0].documentData.pages[i])
+
                         }
-                        by = Base64.decode(pageList[0], Base64.DEFAULT)
+                        by = Base64.decode(page[0], Base64.DEFAULT)
                         bitmap= BitmapFactory.decodeByteArray(by,0,by.size)
                         img_fileBITMAP.setImageBitmap(bitmap)
 
@@ -221,37 +212,22 @@ class PreviewActivity : AppCompatActivity() {
 
                    for(i in 0..length2)
                        {
-                           pageList[i]=response.body()!!.data[0].pages[i]
+                           page.add(response.body()!!.data[0].pages[i])
+
                        }
-
-
-                   if(nextORPrevious==true){
-                       pageNo=pageNo.inc()
-                       cpage_number.text=pageNo.toString()
-                       by = Base64.decode(pageList[0], Base64.DEFAULT)
-                       bitmap= BitmapFactory.decodeByteArray(by,0,by.size)
-                       img_fileBITMAP.setImageBitmap(bitmap)
-                   }
-                   else
-                   {
-                       by = Base64.decode(pageList[5], Base64.DEFAULT)
-                       bitmap= BitmapFactory.decodeByteArray(by,0,by.size)
-                       img_fileBITMAP.setImageBitmap(bitmap)
-                       pageNo=pageNo.dec()
-                       cpage_number.text=pageNo.toString()
-                   }
-
+                   by = Base64.decode(page[pageNo], Base64.DEFAULT)
+                   bitmap= BitmapFactory.decodeByteArray(by,0,by.size)
+                   img_fileBITMAP.setImageBitmap(bitmap)
+                    pageNo=pageNo.inc()
+                   cpage_number.text=pageNo.toString()
 
                    dialog.dismiss()
-                   Toast.makeText(this@PreviewActivity, "Next page successfull", Toast.LENGTH_SHORT).show()
                }
                 else
                {
                    dialog.dismiss()
                    Toast.makeText(this@PreviewActivity, "else", Toast.LENGTH_SHORT).show()
                }
-
-
             }
         })}catch (e:Exception){
             dialog.dismiss()

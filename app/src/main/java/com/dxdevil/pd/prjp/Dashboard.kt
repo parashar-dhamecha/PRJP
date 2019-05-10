@@ -50,6 +50,7 @@ class Dashboard : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var ntoggle: ActionBarDrawerToggle
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
@@ -83,7 +84,7 @@ class Dashboard : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
                     Toast.makeText(this@Dashboard,"Success",Toast.LENGTH_LONG).show()
                 }
                 else{
-                    Toast.makeText(this@Dashboard,response!!.body()!!.message!!.toString(),Toast.LENGTH_LONG).show()
+//                    Toast.makeText(this@Dashboard,response!!.body()!!.message!!.toString(),Toast.LENGTH_LONG).show()
                 }
             }
         })

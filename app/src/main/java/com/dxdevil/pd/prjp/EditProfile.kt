@@ -12,6 +12,7 @@ import android.util.Base64
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import com.dxdevil.pd.prjp.Model.Request.UpdateProfile
 import com.dxdevil.pd.prjp.Model.Response.ProfileModel
@@ -41,6 +42,7 @@ lateinit var userid:String
   var profilebytes:String?= null
     lateinit var description:String
     lateinit var token :String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
@@ -130,10 +132,26 @@ lateinit var userid:String
         menuInflater.inflate(R.menu.done, menu)
         return true
     }
+    override fun onBackPressed() {
+        val intent = Intent(this@EditProfile, ProfileActivity::class.java)
+        startActivity(intent)
+        super.onBackPressed()
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
             R.id.done_icon ->{
+
+                val builder = android.app.AlertDialog.Builder(this)
+                val dialogView = layoutInflater.inflate(R.layout.progress_dialog, null)
+                val message = dialogView.findViewById<TextView>(R.id.progress_message)
+
+                message.text = getString(R.string.update_profile)
+                builder.setView(dialogView)
+                builder.setCancelable(true)
+                val dialog = builder.create()
+                dialog.show()
+
             userid=getSharedPreferences("Token",0).getString("userid","").toString()
             token=getSharedPreferences("Token",0).getString("Token","").toString()
                 emailid = emailedt!!.text.toString()
@@ -158,14 +176,20 @@ lateinit var userid:String
                 as Call<ResponseBody>
                 callupdate!!.enqueue(object : Callback<ResponseBody> {
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        dialog.dismiss()
                         Toast.makeText(this@EditProfile,"check your connection",Toast.LENGTH_LONG).show()
                     }
 
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                         if(response.isSuccessful){
+                            dialog.dismiss()
                             Toast.makeText(this@EditProfile,"Profile updated successfully",Toast.LENGTH_LONG).show()
+
+                            val intent = Intent(this@EditProfile, ProfileActivity::class.java)
+                            startActivity(intent)
                         }
                         else{
+                            dialog.dismiss()
                             Toast.makeText(this@EditProfile,"somethiing went wrong",Toast.LENGTH_LONG).show()
                         }
                     }

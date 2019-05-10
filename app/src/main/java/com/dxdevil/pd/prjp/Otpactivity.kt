@@ -28,8 +28,12 @@ class Otpactivity : AppCompatActivity() {
         var prefe = getSharedPreferences("Token", Context.MODE_PRIVATE) as SharedPreferences
         var token =prefe.getString("Token","")!!.toString()
         var dpref = getSharedPreferences("Login Details",0)
-        otpemail!!.text = dpref.getString("email","")
-
+        if(dpref.getString("rememberflag","")=="1") {
+            otpemail!!.text = dpref.getString("email", "")
+        }
+        else{
+            otpemail.text=this.intent.getStringExtra("loginemail")
+        }
         loginanother!!.setOnClickListener {
             startActivity(Intent(this@Otpactivity,LoginActivity::class.java))
         }
@@ -62,7 +66,7 @@ class Otpactivity : AppCompatActivity() {
                        else{
                            pd.dismiss()
                            startActivity(Intent(applicationContext,Dashboarrd::class.java))
-                           Toast.makeText(this@Otpactivity, "Successfully logged in ", Toast.LENGTH_LONG).show()
+                          // Toast.makeText(this@Otpactivity, "Successfully logged in ", Toast.LENGTH_LONG).show()
                        }
 
                    }else{

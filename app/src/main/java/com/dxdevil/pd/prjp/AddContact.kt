@@ -44,7 +44,6 @@ class AddContact : AppCompatActivity() {
 //            val cid:Int = etcode!!.text as Int
 //            val mn =etMobileNo!!.text.toString()
 
-
             if(validation()) {
 
 
@@ -57,8 +56,7 @@ class AddContact : AppCompatActivity() {
                 val apiadd = RetrofitClient.getInstance()!!.api as Api
                 val calladd =apiadd.addcontact(token,
                    AddContactRequest(etName!!.text.toString(),etEmail!!.text.toString() ,
-                       91,
-                               etMobileNo!!.text.toString(),
+                       etcode.selectedCountryCodeAsInt, etMobileNo!!.text.toString(),
                        etJobTitle.text.toString(),
                        etJobDescription.text.toString()
                        )) as Call<AddContactResponse>
@@ -111,14 +109,13 @@ class AddContact : AppCompatActivity() {
         var Em = etEmail!!.text.toString()
         var Jt =etJobTitle.text.toString()
         var Jd =etJobDescription!!.text.toString()
-        var cid = etcode!!.text.toString()
+        //var cid = etcode!!.selectedCountryCode as Int
         var mn =etMobileNo!!.text.toString()
 
         var flagname = false
         var flagEm = false
         var flagJt=false
         var flagJd=false
-        var flagcid=false
         var flagmn = false
 
 
@@ -150,12 +147,12 @@ class AddContact : AppCompatActivity() {
             flagJd= true
         }
 
-        if (cid.isEmpty() ||!Numberregex.matches(cid)||cid.length>2) {
-
-            etcode!!.setError("Enter a valid country name")
-        } else {
-            flagcid= true
-        }
+//        if (cid.isEmpty() ||!Numberregex.matches(cid)||cid.length>2) {
+//
+//           // etcode.setError("Enter a valid country name")
+//        } else {
+//            flagcid= true
+//        }
 
         if (mn.isEmpty() || mn.length > 10|| !Numberregex.matches(mn)) {
             etMobileNo!!.setError("Enter a valid MobileNo")
@@ -163,7 +160,7 @@ class AddContact : AppCompatActivity() {
             flagmn = true
         }
 
-        if(flagname && flagEm &&  flagJt && flagJd && flagcid &&  flagmn) {
+        if(flagname && flagEm &&  flagJt && flagJd  &&  flagmn) {
             valid = true
         }
         return valid

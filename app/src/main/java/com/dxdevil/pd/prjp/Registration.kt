@@ -12,6 +12,7 @@ import com.dxdevil.pd.prjp.Model.Request.VerifyUser
 import com.dxdevil.pd.prjp.Model.Response.SignUpModel
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse
 import kotlinx.android.synthetic.main.activity_registration.*
+import kotlinx.android.synthetic.main.activity_registration.view.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,6 +40,9 @@ class Registration : AppCompatActivity() {
 
 
 
+        btregister.isEnabled=true
+
+
         loginlink!!.setOnClickListener{                                //link to the login activity
             startActivity(Intent(this@Registration, LoginActivity::class.java))
         }
@@ -54,8 +58,8 @@ class Registration : AppCompatActivity() {
             val confirmPass =etConfirmPassword!!.text.toString()
             val jt = etJobTitle!!.text.toString()
             val cn =etCompanyName!!.text.toString()
-            val cID = etCountryId!!.text.toString()
-            val cIDInt:Int= etCountryId!!.text.toString().toInt()
+            val cID = ccp.selectedCountryCode
+            val cIDInt:Int= ccp.selectedCountryCodeAsInt
             val mo =etMobileNo!!.text.toString()
 
 
@@ -197,7 +201,7 @@ class Registration : AppCompatActivity() {
         val confirmPassword = etConfirmPassword!!.text.toString()
         val jt =etJobTitle.text.toString()
         val cn =etCompanyName!!.text.toString()
-        val cID = etCountryId!!.text.toString()
+
         val mo =etMobileNo!!.text.toString()
 
         var flagFirst = false
@@ -210,70 +214,68 @@ class Registration : AppCompatActivity() {
         var flagCID=false
         var flagMobile = false
 
-
         if (fname.isEmpty() || !Nameregex.matches(fname)) {
-            etFirstName!!.error = "Enter a valid First Name"
+            textInputLayout17.error="Enter a valid First Name"
         } else {
+            textInputLayout17.error= null
             flagFirst = true
         }
 
        if (lname.isEmpty() || !Nameregex.matches(lname)) {
-            etLastName!!.error = "Enter a valid Last name"
+            textInputLayout18!!.error = "Enter a valid Last name"
         } else {
+           textInputLayout18!!.error = null
             flagLast = true
         }
 
        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(em).matches()) {
-            etEmail!!.error = "Enter a valid Email Address"
+            textInputLayout19!!.error = "Enter a valid Email Address"
             valid = false
         } else {
-            flagEmail = true
+           textInputLayout19!!.error =null
         }
 
         if (password.isEmpty() || password.length < 8 || !Passwordregex.matches(password)) {
 
-            etPassword!!.error = "Enter a valid Password"
+            textInputLayout21.error = "Enter a valid Password"
         } else {
+            textInputLayout21.error = null
             flagPassword = true
         }
 
         if (confirmPassword.isEmpty() || confirmPassword.length < 8 || confirmPassword != password) {
-            etConfirmPassword!!.error = "Password Do not match"
+            textInputLayout22.error = "Password Do not match"
         } else {
-            etConfirmPassword!!.error=null
+            textInputLayout22.error = null
             flagConfirm = true
         }
 
        if (jt.isEmpty() ||!Nameregex.matches(jt)) {
 
-           etJobTitle!!.error = "Enter a valid job title"
+           textInputLayout24.error = "Enter a valid job title"
        } else {
+           textInputLayout24.error = null
            flagjt = true
        }
 
        if (cn.isEmpty() ||!Nameregex.matches(cn)) {
 
-           etCompanyName!!.error = "Enter a valid company name"
+           textInputLayout26.error = "Enter a valid company name"
        } else {
            flagcn= true
        }
 
-       if (cID.isEmpty() ||!Numberregex.matches(cID)||cID.length>3) {
-
-           etCountryId!!.error = "Enter a valid company name"
-       } else {
-           flagCID= true
-       }
 
        if (mo.isEmpty() || mo.length > 15 || !Numberregex.matches(mo)) {
-           etMobileNo!!.error = "Enter a valid MobileNo"
+           textInputLayout20.error = "Enter a valid MobileNo"
        } else {
            flagMobile = true
        }
 
-        if(flagFirst && flagLast && flagEmail && flagPassword && flagConfirm && flagjt && flagcn && flagCID &&  flagMobile) {
+        if(flagFirst && flagLast && flagEmail && flagPassword && flagConfirm && flagjt && flagcn &&  flagMobile) {
             valid = true
         }
+
         return valid
     }
 
