@@ -27,19 +27,10 @@
                 android:name=".VerifyActivity"
                 android:label="Verify Document">
         </activity>
-        <activity android:name=".BulkImport"/>
-        <activity android:name=".VerifyDocuments">
 
-
-        </activity>
-        <activity android:name=".BulkImport">
         <activity android:name=".Annotation2">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
+
         <activity android:name=".Annotation1">
         </activity>
         <activity android:name=".Annotation">
@@ -126,21 +117,10 @@
                 android:parentActivityName=".DocActivity">
 
         </activity>
-        <activity android:name=".DocActivity">
-        </activity>
-        </activity>
 
-        <activity android:name=".DocActivity"
-        android:parentActivityName=".Dashboard">
         <activity
                 android:name=".DocActivity"
                 android:parentActivityName=".Dashboard">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
                 android:name=".PreviewActivity"

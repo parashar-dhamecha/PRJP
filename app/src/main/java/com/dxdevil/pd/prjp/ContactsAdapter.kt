@@ -153,20 +153,12 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
 
             }
 
-            //builder.show()
             val dialog: AlertDialog = builder.create()
             dialog.show()
         }
 
 
-//
-//        holder.del.setOnClickListener {
-//
-//            Con.removeAt(position)
-//            notifyItemRemoved(position)
-//
-//
-//        }
+
 
 
     }

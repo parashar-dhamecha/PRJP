@@ -5,8 +5,8 @@
               android:layout_width="wrap_content"
               android:layout_height="match_parent">
 
-    <EditText android:layout_width="match_parent"
-              android:id="@+id/search"
+    <androidx.appcompat.widget.SearchView android:layout_width="match_parent"
+              android:id="@+id/search1"
               android:padding="10dp"
               android:layout_height="wrap_content"
               android:layout_marginTop="8dp"
@@ -16,7 +16,7 @@
               android:theme="@style/MyEditText"
               android:layout_marginEnd="8dp"
               android:layout_marginBottom="8dp" tools:ignore="Autofill,TextFields">
-    </EditText>
+    </androidx.appcompat.widget.SearchView>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="wrap_content"

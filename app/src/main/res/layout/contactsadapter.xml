@@ -42,7 +42,6 @@
                         android:layout_height="70dp"
                         android:background="@color/colorPrimaryDark"
                         app:srcCompat="@drawable/ic_mode_edit_24dp"
-                        app:srcCompat="@drawable/ic_mode_edit_black"
                         android:text="Edit"/>
 
             </LinearLayout>
@@ -93,7 +92,6 @@
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                               android:id="@+id/name"
-                              android:textColor="@color/textcolor"
                               android:gravity="center_vertical"
                               android:textColor="@color/textcolor2"
                               android:text="@string/contact_name_"
@@ -106,7 +104,6 @@
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
                               android:id="@+id/email"
-                              android:textColor="@color/slate_black"
                               android:textColor="@color/textcolor"
                               android:layout_below="@+id/name"
                               android:text="shubhyogyampandhare@gmail.com"
@@ -117,8 +114,6 @@
                               android:layout_marginStart="28dp"
                               android:layout_toEndOf="@+id/pro"/>
                     <TextView
-                            android:text="TextView00"
-                            android:textColor="@color/slate_black"
                             android:text="@string/contact_mobile_no"
                             android:layout_width="wrap_content"
                             android:textColor="@color/slate_black"
