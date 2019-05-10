@@ -35,19 +35,19 @@ public class CreateDocRequest {
     public Integer reminderBefore;
     @SerializedName("documentShapeModel")
     @Expose
-    public List<DocumentShapeModel> documentShapeModel = null;
+    public List<DocumentShapeModel> documentShapeModel ;
     @SerializedName("signingFlowType")
     @Expose
     public Integer signingFlowType;
     @SerializedName("signerIds")
     @Expose
-    public List<String> signerIds = null;
+    public List<String> signerIds ;
     @SerializedName("observerIds")
     @Expose
-    public List<String> observerIds = null;
+    public List<String> observerIds ;
     @SerializedName("signatures")
     @Expose
-    public List<Integer> signatures = null;
+    public List<Integer> signatures ;
     @SerializedName("documentLatitude")
     @Expose
     public Double documentLatitude;
@@ -62,7 +62,7 @@ public class CreateDocRequest {
     public String userIPAddress;
     @SerializedName("authenticationTypes")
     @Expose
-    public List<Integer> authenticationTypes = null;
+    public List<Integer> authenticationTypes ;
 
     /**
      * No args constructor for use in serialization

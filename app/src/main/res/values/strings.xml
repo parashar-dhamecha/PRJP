@@ -177,6 +177,17 @@
     <string name="contact_name_">contact name</string>
     <string name="upload_file">Upload </string>
     <string name="selectsigners">Select Signers</string>
-
-
+    <string name="prev"><![CDATA[<]]></string>
+    <string name="nextf"><![CDATA[>]]></string>
+    <string name="button_clearall">Clear All</string>
+    <string name="selectobservers">Select Observers</string>
+    <string name="time">Time</string>
+    <string name="expirey_end_date">Expirey End Date</string>
+    <string name="expirey_start_date">Expiery Start Date</string>
+    <string name="Signing_Due_date">Signing Due Date</string>
+    <string name="paralel">Paralel</string>
+    <string name="remindbefore">Remind Before</string>
+    <string name="days">Days</string>
+    <string name="Zero">0</string>
+    <string name="update_profile">Update Profile</string>
 </resources>

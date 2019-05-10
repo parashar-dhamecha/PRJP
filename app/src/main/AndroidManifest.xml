@@ -29,17 +29,17 @@
         </activity>
         <activity android:name=".BulkImport"/>
         <activity android:name=".Annotation2">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".Annotation1">
         </activity>
         <activity android:name=".Annotation">
         </activity>
-        <activity android:name=".uploadfile">
+        <activity android:name=".Uploadfile">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
         </activity>
         <activity
                 android:name=".Dashboarrd"
@@ -61,11 +61,11 @@
                 android:name=".MainActivity"
                 android:theme="@style/AppTheme.NoActionBar"
                 tools:ignore="ExtraText">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".UpdateContact">
         </activity>
@@ -74,13 +74,6 @@
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-
-
         </activity>
         <activity
                 android:name=".ProfileActivity"
@@ -125,12 +118,6 @@
         <activity
                 android:name=".DocActivity"
                 android:parentActivityName=".Dashboard">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
                 android:name=".PreviewActivity"

@@ -1,28 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:id="@+id/drawerlayoutid">
-    <FrameLayout android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:id="@+id/contentframe">
-    </FrameLayout>
 
-    <com.google.android.material.navigation.NavigationView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:id="@+id/navid"
-            app:headerLayout="@layout/navigationbar_header"
-            app:menu="@menu/nav_menu"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/constraintLayout">
 
         <androidx.constraintlayout.widget.Guideline
@@ -269,7 +253,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:fab_size="mini"
-                    app:fab_label="@string/addsigng"
+                    app:fab_label="@string/addsign"
                     app:fab_colorPressed="@color/colorPrimary"
                     app:menu_colorPressed="@color/colorPrimary"
                     app:fab_colorNormal="@color/colorSecondary"
@@ -291,11 +275,13 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+
+            >
 
 
                 <TextView
-                        android:text="@string/recent_documents"
+                        android:text="@string/recent"
                         android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
@@ -329,4 +315,3 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.drawerlayout.widget.DrawerLayout>
