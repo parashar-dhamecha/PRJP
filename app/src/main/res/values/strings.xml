@@ -1,7 +1,6 @@
 <resources >
     <string name="app_name">Cygnature</string>
     <string name="title_activity_login">Sign in</string>
-    <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -34,7 +33,6 @@
     <string name="signingdue">Due Soon</string>
     <string name="awsdata">0</string>
     <string name="addsign">Edit/Add Signature</string>
-    <string name="addsigng">Add Signature</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="edit_your_signature">Edit Your Signature</string>
     <string name="dashboard">Dashboard</string>
@@ -53,8 +51,6 @@
     <string name="Register">Register</string>
     <string name="get_started">Get Started</string>
     <string name="AlreadyRegister">Already Registered? Log In</string>
-
-    <!--Reg Page Hints-->
     <string name="fname">First Name*</string>
     <string name="lname">Last Name*</string>
     <string name="EmailId">Email Id*</string>
@@ -75,9 +71,6 @@
     <string name="devide">/</string>
     <string name="total">2</string>
     <string name="Declined">Declined</string>
-
-
-    <!-- Profile Page Strings-->
     <string name="prf_title">Profile</string>
     <string name="Username">Robert Downey</string>
     <string name="Signature">Signature</string>
@@ -90,25 +83,15 @@
     <string name="Company_value">Cygnet</string>
     <string name="Phone">Phone:</string>
     <string name="Phone_value">9865457825</string>
-
-    <!-- contacts strings-->
     <string name="contact_name">Juhi</string>
     <string name="SaveContact">Save Contact</string>
-
-
-
     <string-array name="names">
         <item>pooja</item>
         <item>juhi</item>
         <item>dhruv</item>
         <item>yogita</item>
     </string-array>
-
-    <!-- Notification -->
     <string name="notification_title">Notifications</string>
-    <!-- Contacts-->
-
-
     <string name="MobileNo">Mobile No</string>
     <string name="JobTitle">JobTitle</string>
     <string name="JobDescription">Job Description</string>
@@ -117,10 +100,7 @@
     <string name="CountryCode">Code</string>
     <string name="Contacts">Contacts</string>
     <string name="Add">Add</string>
-
-
     <string name="CreateGroup">Create Group</string>
-    <!-- Edit Profile Page Strings-->
     <string name="edit_title">Edit Profile</string>
     <string name="Image_des">User_image</string>
     <string name="First_Name">First Name</string>
@@ -135,20 +115,12 @@
     <string name="Male">Male</string>
     <string name="Female">Female</string>
     <string name="password">Password</string>
-
-    <!-- Settings Page Strings-->
     <string name="My_account">My Account</string>
     <string name="Change_Password">Change Password</string>
     <string name="Logout">Logout</string>
-
-    <!-- Change Password Page Strings-->
     <string name="Current">Current Password</string>
     <string name="Confirm">Confirm Password</string>
     <string name="New_password">New Password</string>
-
-
-    <!-- Add contact Strings-->
-
     <string name="Job_title">Job Title</string>
     <string name="Job_Description">Job Description</string>
     <string name="Name">Name</string>
@@ -178,7 +150,6 @@
     <string name="Getting">Getting pages</string>
     <string name="preview">Preview</string>
     <string name="signers">Signers</string>
-    <string name="sequential">Sequential Signature</string>
     <string name="observers">Observers</string>
     <string name="notarization">Notarization Details</string>
     <string name="notarized_on">Notarized On:</string>
@@ -193,7 +164,9 @@
     <string name="no_documents">No Documents</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="refresh_page">Try refreshing the page</string>
-    <string name="sequential">Sequential</string>
     <string name="Create">Create</string>
+    <string name="Zero">0</string>
+    <string name="Addc">Add Contacts</string>
+    <string name="recent">Recent Documents</string>
 
 </resources>

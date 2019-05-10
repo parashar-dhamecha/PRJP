@@ -19,11 +19,6 @@
     <color name="cyan">#03dac6</color>
     <color name="red">#ff0000</color>
     <color name="gray_button">#97afbb</color>
-
-
-    custom_color
-
-    <!--<color name="textcolor4">#E28FA0A0</color>-->
     <color name="deletebutton">#FF0000</color>
     <color name="textcolor4">#A2DAA4</color>
     <color name="AwaitingMySign">#192DB6</color>

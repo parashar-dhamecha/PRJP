@@ -132,7 +132,7 @@ class Dashboarrd : AppCompatActivity(){
 
 
         uploadcvFAB.setOnClickListener { view ->
-            startActivity(Intent(applicationContext,uploadfile::class.java))
+            startActivity(Intent(applicationContext,Uploadfile::class.java))
         }
 
         add.setOnClickListener {
