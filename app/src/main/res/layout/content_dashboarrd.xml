@@ -19,7 +19,6 @@
         android:id="@+id/dashid"
         android:layout_width="match_parent"
         android:background="@color/design_default_color_background"
-        android:layout_height="fill_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".Dashboarrd">

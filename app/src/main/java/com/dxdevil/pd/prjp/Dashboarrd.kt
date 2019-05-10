@@ -33,7 +33,7 @@ import retrofit2.Response
 import java.lang.Exception
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class Dashboarrd : AppCompatActivity() {
+class Dashboarrd : AppCompatActivity(){
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var ntoggle: ActionBarDrawerToggle
     @SuppressLint("SetTextI18n", "WrongViewCast")
@@ -42,34 +42,38 @@ class Dashboarrd : AppCompatActivity() {
         setContentView(R.layout.activity_dashboarrd)
 
 
+        var fab = findViewById<FloatingActionMenu>(R.id.fab)
+        var fab1: com.github.clans.fab.FloatingActionButton? =
+            findViewById<com.github.clans.fab.FloatingActionButton>(R.id.fab1)
+        var fab2: com.github.clans.fab.FloatingActionButton? =
+            findViewById<com.github.clans.fab.FloatingActionButton>(R.id.fab2)
+
+        var fab3: com.github.clans.fab.FloatingActionButton? =
+            findViewById<com.github.clans.fab.FloatingActionButton>(R.id.fab3)
+
+
 
         drawerLayout = findViewById(R.id.drawer_layout)
-        ntoggle =
-            ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+      //  ntoggle= ActionBarDrawerToggle(this,drawerLayout,R.string.navigation_drawer_open,R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(ntoggle)
         ntoggle.syncState()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val profilestring = getSharedPreferences("Token", 0).getString("profileimage", "")
-        val bytearray = Base64.decode(profilestring, Base64.DEFAULT)
-        var btmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray.size)
+        var profilestring = getSharedPreferences("Token",0).getString("profileimage","")
+        var bytearray = Base64.decode(profilestring,Base64.DEFAULT)
+        var btmap = BitmapFactory.decodeByteArray(bytearray,0,bytearray.size)
 
-        val navid = findViewById<NavigationView>(R.id.nav_view)
-        val h = navid.getHeaderView(0)
-        val inagev = h.findViewById<CircleImageView>(R.id.imageview_header)
+        var navid = findViewById<NavigationView>(R.id.nav_view)
+        var h = navid.getHeaderView(0)
+        var inagev = h.findViewById<CircleImageView>(R.id.imageview_header)
         inagev!!.setImageBitmap(btmap)
 
-        val htv = h.findViewById<TextView>(R.id.header_nametv)
-        val htvem = h.findViewById<TextView>(R.id.header_emailtv)
+        var htv = h.findViewById<TextView>(R.id.header_nametv)
+        var htvem = h.findViewById<TextView>(R.id.header_emailtv)
         htv!!.text =
-            getSharedPreferences("Token", 0).getString("fname", "").toString() + " " + getSharedPreferences(
-                "Token",
-                0
-            ).getString("lname", "").toString()
+            getSharedPreferences("Token",0).getString("fname","").toString()+getSharedPreferences("Token",0).getString("lname","").toString()
 
-        htvem!!.text = getSharedPreferences("Token", 0).getString("email", "")
-
-
+        htvem!!.text =getSharedPreferences("Token",0).getString("email","")
 
         nav_view.setNavigationItemSelectedListener { menuItem ->
             menuItem.isChecked = true
@@ -78,70 +82,77 @@ class Dashboarrd : AppCompatActivity() {
 
             when (menuItem.itemId) {
                 R.id.dashboard -> {
-                    drawer_layout.closeDrawer(GravityCompat.START)
-                }
+                    drawer_layout.closeDrawer(GravityCompat.START)                }
                 R.id.documents -> {
-                    startActivity(Intent(this@Dashboarrd, DocActivity::class.java))
+                    startActivity(Intent(this@Dashboarrd,DocActivity::class.java))
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
                 R.id.contacts -> {
-                    startActivity(Intent(this@Dashboarrd, Contacts::class.java))
+                    startActivity(Intent(this@Dashboarrd,Contacts::class.java))
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
                 R.id.settings -> {
-                    startActivity(Intent(this@Dashboarrd, Settings::class.java))
+                    startActivity(Intent(this@Dashboarrd,Settings::class.java))
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
                 R.id.logout -> {
                     var sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
                     sp.edit().remove("Token").apply()
                     sp.edit().remove("RefreshToken").apply()
-                    startActivity(Intent(this@Dashboarrd, LoginActivity::class.java))
+                    startActivity(Intent(this@Dashboarrd,LoginActivity::class.java))
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
             }
+
+
             true
         }
 
         var preference = getSharedPreferences("Token", Context.MODE_PRIVATE) as SharedPreferences
-        var tok = preference.getString("Token", "")!!.toString() as String?
+        var tok =preference.getString("Token","")!!.toString() as String?
 
         var dapi = RetrofitClient.getInstance().api as Api
-        var call = dapi.getDashboardCouts(tok) as Call<DashboardResponse>
-        call.enqueue(object : Callback<DashboardResponse> {
+        var call= dapi.getDashboardCouts(tok) as Call<DashboardResponse>
+        call?.enqueue(object : Callback<DashboardResponse> {
 
 
             override fun onFailure(call: Call<DashboardResponse>, t: Throwable) {
                 call.cancel()
-                Toast.makeText(this@Dashboarrd, "Check your connection", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@Dashboarrd,"Check your connection", Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<DashboardResponse>, response: Response<DashboardResponse>) {
-                if (response.isSuccessful) {
+                if(response.isSuccessful){
                     var ob = response.body() as DashboardResponse
-                    awatingsigntv?.text = ob!!.data[0]!!.awaitingMySign.toString()
+                    awatingsigntv?.text =ob!!.data[0]!!.awaitingMySign.toString()
                     awatingotherstv?.text = ob!!.data[0]!!.awaitingOthers.toString()
                     completedtv?.text = ob!!.data[0]!!.completed.toString()
                     duesoontv?.text = ob!!.data[0]!!.expireSoon.toString()
-                } else {
-                    Toast.makeText(this@Dashboarrd, response.message().toString(), Toast.LENGTH_LONG).show()
-
+                }
+                else{
+                    Toast.makeText(this@Dashboarrd,response.message().toString(), Toast.LENGTH_LONG).show()
                 }
             }
         })
 
-
-        uploadcvFAB.setOnClickListener { view ->
+        fab1!!.setOnClickListener { view ->
             startActivity(Intent(applicationContext,uploadfile::class.java))
         }
 
-        add.setOnClickListener {
+        fab3!!.setOnClickListener{
+
+
             startActivity(Intent(applicationContext,AddContact::class.java))
+
+
+
+
+
         }
 
-
         draw_signature?.setOnClickListener {
-            Toast.makeText(applicationContext, "hello", Toast.LENGTH_LONG).show()
+
+            Toast.makeText(applicationContext, "hello", Toast.LENGTH_LONG)
             startActivity(Intent(applicationContext, DrawSignature::class.java))
         }
         photobutton?.setOnClickListener {
@@ -151,7 +162,7 @@ class Dashboarrd : AppCompatActivity() {
             startActivity(Intent(applicationContext, Type::class.java))
         }
 
-        addsignature.setOnClickListener {
+        fab2!!.setOnClickListener {
             try {
                 var ft = supportFragmentManager.beginTransaction()
                 val cf: ChooseDF = ChooseDF()
@@ -162,35 +173,34 @@ class Dashboarrd : AppCompatActivity() {
             }
         }
 
-
-        }
-
-    override fun onBackPressed() {
-        this.finish()
     }
 
-//        override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//            // Inflate the menu; this adds items to the action bar if it is present.
-//            menuInflater.inflate(R.menu.dashboarrd, menu)
-//            return true
-//        }
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
 
-        override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (ntoggle.onOptionsItemSelected(item))
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.dashboarrd, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(ntoggle.onOptionsItemSelected(item))
             return true
 
         return super.onOptionsItemSelected(item)
     }
 
 
-        override fun onKeyDown(keycode: Int, event: KeyEvent): Boolean {
-            if (keycode == KeyEvent.KEYCODE_BACK) {
-                moveTaskToBack(true)
-            }
-            return super.onKeyDown(keycode, event)
-        }
+    override fun onKeyDown(keycode:Int, event: KeyEvent):Boolean {
+    if (keycode == KeyEvent.KEYCODE_BACK) {
+        moveTaskToBack(true)
     }
-
-
-
-
+    return super.onKeyDown(keycode, event)
+}
+}
