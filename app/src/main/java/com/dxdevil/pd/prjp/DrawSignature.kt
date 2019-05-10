@@ -74,7 +74,7 @@ class DrawSignature : AppCompatActivity() {
 
                     override fun onResponse(call: Call<ProfileModel>, response: Response<ProfileModel>) {
                         var ob = response.body()!!.data[0]
-                        if (ob.impressions[0].imageBytes.toString() == null){
+                        if (ob.impressions== null){
 
                             var ppref = getSharedPreferences("Token", Context.MODE_PRIVATE)
                             var token = ppref.getString("Token","") as String

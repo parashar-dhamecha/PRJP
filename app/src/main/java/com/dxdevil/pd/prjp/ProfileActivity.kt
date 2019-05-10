@@ -94,15 +94,13 @@ class ProfileActivity : AppCompatActivity() {
                         profilepicv!!.setImageBitmap(bitmapprofile)
                     }
                     //displaying sign
-                    if(profileob!!.data[0].impressions.size!=0){
+                    if(profileob.data[0].impressions!=null) {
                         var string = profileob!!.data[0].impressions[0].imageBytes
                         var by = Base64.decode(string, Base64.DEFAULT)
-                        var bitmap1 = BitmapFactory.decodeByteArray(by,0,by.size) as Bitmap?
+                        var bitmap1 = BitmapFactory.decodeByteArray(by, 0, by.size) as Bitmap?
                         signiv.setImageBitmap(bitmap1)
                     }
-
-
-                    if (profileob.data[0].gender == 1) {
+                    if (profileob!!.data[0].gender == 1) {
                         gendertv!!.text = "Male"
                     } else {
                         gendertv!!.text = "FeMale"

@@ -17,16 +17,13 @@ import retrofit2.Response
 import java.io.File
 import android.provider.MediaStore
 import android.content.Context
-import android.graphics.drawable.Drawable
-import android.os.Environment
+import android.content.SharedPreferences
 import android.webkit.MimeTypeMap
 import android.net.Uri as Uri1
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.Color.parseColor
 import android.net.ConnectivityManager
 import android.os.Build
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.DatePicker
 import android.widget.TimePicker
@@ -35,7 +32,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dxdevil.pd.prjp.Model.Response.ContactList
 import com.dxdevil.pd.prjp.Model.Response.Data
 import com.dxdevil.pd.prjp.com.dxdevil.pd.prjp.ObserverAdapter
-import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.signercv.*
 import java.io.IOException
 import java.util.*
@@ -43,9 +39,9 @@ import kotlin.collections.ArrayList
 
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS",
-    "DEPRECATION"
-)
-class uploadfile : AppCompatActivity(),View.OnClickListener {
+    "DEPRECATION", "UNCHECKED_CAST")
+ class Uploadfile : AppCompatActivity(),View.OnClickListener,CheckboxselectedListener {
+
     val READ_REQUEST_CODE =42
      var maxday:Int=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
      var maxmonth:Int=Calendar.getInstance().get(Calendar.MONTH)
@@ -53,16 +49,24 @@ class uploadfile : AppCompatActivity(),View.OnClickListener {
     var minday:Int=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
     var minmonth:Int=Calendar.getInstance().get(Calendar.MONTH)
     var minyear:Int=Calendar.getInstance().get(Calendar.YEAR)
+    lateinit var sp :SharedPreferences.Editor
+    lateinit var seqpara :String
+    lateinit var docid :String
 
+    var ssname :ArrayList<String> = ArrayList<String>()
+    var ssid :ArrayList<String> = ArrayList<String>()
 
     lateinit var contactList :List<Data>
-    lateinit var calander:Calendar
-    @SuppressLint("NewApi")
+
+    @SuppressLint("NewApi", "CommitPrefEdits")
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_uploadfile)
+         sp = getSharedPreferences("CreateDocDetails",0).edit()
+
 //picking file
+
             val mimeTypes = arrayOf(
                 "application/pdf",
                 "application/msword",
@@ -79,29 +83,36 @@ class uploadfile : AppCompatActivity(),View.OnClickListener {
             }
 
             startActivityForResult(Intent.createChooser(intent, "Select a file"), 111)
+
         //selecting signers and observers
+
             getSignersData()
+        // setting date and time
             eedatebutton.setOnClickListener(this)
         esdatebutton.setOnClickListener(this)
         signduedatebutton.setOnClickListener(this)
         timebutton.setOnClickListener(this)
+        // setting sharedpreference
+        if(sequentialrb.isSelected){
+            seqpara="1"
         }
+        else seqpara="2"
+    }
+
+
     override fun onClick(v: View?) {
         when(v!!.id){
             R.id.eedatebutton->{
                 var dpd :DatePickerDialog= DatePickerDialog(
                     this,
-                    object : DatePickerDialog.OnDateSetListener{
-                        @SuppressLint("SetTextI18n")
-                        override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-                            if (minday <= dayOfMonth && minmonth <= month && minyear <= year) {
-                                eedateet.setText("$year-$month-$dayOfMonth")
-                                maxday = dayOfMonth
-                                maxmonth = month
-                                maxyear = year
-                            }else{
-                                eedateet.error = "endDate must be greater than start date"
-                            }
+                    DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                        if (minday <= dayOfMonth && minmonth <= month && minyear <= year) {
+                            eedateet.setText("$year-$month-$dayOfMonth")
+                            maxday = dayOfMonth
+                            maxmonth = month
+                            maxyear = year
+                        }else{
+                            eedateet.error = "endDate must be greater than start date"
                         }
                     },Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DATE))
                 dpd.show()
@@ -109,17 +120,14 @@ class uploadfile : AppCompatActivity(),View.OnClickListener {
             R.id.esdatebutton->{
                 var dpd :DatePickerDialog= DatePickerDialog(
                     this,
-                    object : DatePickerDialog.OnDateSetListener{
-                        @SuppressLint("SetTextI18n")
-                        override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-                            if (maxday >= dayOfMonth && maxmonth >= month && maxyear >= year) {
-                                esdateet.setText("$year-$month-$dayOfMonth")
-                                minday = dayOfMonth
-                                minmonth = month
-                                minyear = year
-                            }else{
-                                esdateet.setError("endDate must be greater than start date")
-                            }
+                    DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                        if (maxday >= dayOfMonth && maxmonth >= month && maxyear >= year) {
+                            esdateet.setText("$year-$month-$dayOfMonth")
+                            minday = dayOfMonth
+                            minmonth = month
+                            minyear = year
+                        }else{
+                            esdateet.setError("endDate must be greater than start date")
                         }
                     },Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DATE))
                 dpd.show()
@@ -171,7 +179,7 @@ class uploadfile : AppCompatActivity(),View.OnClickListener {
 
         val file1 = File(getRealPathFromURI(this,uri))
 
-    Toast.makeText(this@uploadfile,file1.name,Toast.LENGTH_LONG).show()
+    Toast.makeText(this@Uploadfile,file1.name,Toast.LENGTH_LONG).show()
 
         var rb =RequestBody.create(MediaType.parse(MimeTypeMap.getFileExtensionFromUrl(uri.toString())),file1)
         var rb2 =RequestBody.create(MediaType.parse("multipart/form-data"),file1.path)
@@ -179,7 +187,7 @@ class uploadfile : AppCompatActivity(),View.OnClickListener {
         var token = getSharedPreferences("Token",0).getString("Token","").toString()
 
 
-        var pd = ProgressDialog(this@uploadfile)
+        var pd = ProgressDialog(this@Uploadfile)
         pd.setCancelable(false)
         pd.setTitle("Uploading...")
         pd.setMessage(file1.name)
@@ -211,21 +219,22 @@ class uploadfile : AppCompatActivity(),View.OnClickListener {
         ucall!!.enqueue(object : Callback<UploadfileModel>{
 
             override fun onFailure(call: Call<UploadfileModel>, t: Throwable) {
-                startActivity(Intent(this@uploadfile,Dashboarrd::class.java))
-                Toast.makeText(this@uploadfile,"Something went wrong please try again later" ,Toast.LENGTH_LONG).show()
+                startActivity(Intent(this@Uploadfile,Dashboarrd::class.java))
+                Toast.makeText(this@Uploadfile,"Something went wrong please try again later" ,Toast.LENGTH_LONG).show()
                 pd.dismiss()
             }
 
             override fun onResponse(call: Call<UploadfileModel>, response: Response<UploadfileModel>) {
             if(response.isSuccessful){
                 var obj =response.body() as UploadfileModel
+                docid= obj.data[0].id.toString()
 
-                Toast.makeText(this@uploadfile, response.body()!!.data[0].name.toString(),Toast.LENGTH_LONG).show()
+                Toast.makeText(this@Uploadfile, response.body()!!.data[0].name.toString(),Toast.LENGTH_LONG).show()
                 pd.dismiss()
             }
                 else{
-                Toast.makeText(this@uploadfile,response.message().toString(),Toast.LENGTH_LONG).show()
-                startActivity(Intent(this@uploadfile,Dashboarrd::class.java))
+                Toast.makeText(this@Uploadfile,response.message().toString(),Toast.LENGTH_LONG).show()
+                startActivity(Intent(this@Uploadfile,Dashboarrd::class.java))
                 pd.dismiss()
             }
             }
@@ -256,16 +265,16 @@ class uploadfile : AppCompatActivity(),View.OnClickListener {
         val layoutManager2 = LinearLayoutManager(applicationContext)
         signersrv.layoutManager = layoutManager
         observerrv.layoutManager= layoutManager2
-        signersrv!!.adapter = SignerAdapter(this, contactList as ArrayList<Data>)
+        var obj= SignerAdapter(this, contactList as ArrayList<Data>,this )
+        signersrv!!.adapter =obj
         observerrv!!.adapter = ObserverAdapter(this, contactList as ArrayList<Data>)
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        return super.onCreateOptionsMenu(menu)
-    }
+
 
     fun getSignersData() {
-        if (isNetworkAvailable(this@uploadfile)) {
+        if (isNetworkAvailable(this@Uploadfile)) {
 
             var token = getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token", "")
 
@@ -274,7 +283,7 @@ class uploadfile : AppCompatActivity(),View.OnClickListener {
 
             call1.enqueue(object : Callback<ContactList> {
                 override fun onFailure(call: Call<ContactList>, t: Throwable) {
-                    Toast.makeText(this@uploadfile, "Check your internet Connection", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@Uploadfile, "Check your internet Connection", Toast.LENGTH_LONG).show()
                 }
 
                 override fun onResponse(call: Call<ContactList>, response: Response<ContactList>) = try {
@@ -284,8 +293,8 @@ class uploadfile : AppCompatActivity(),View.OnClickListener {
                         setrv(contactList)
 
                     } else {
-                        startActivity(Intent(this@uploadfile,Dashboarrd::class.java))
-                        Toast.makeText(this@uploadfile, "error:" + response.errorBody(), Toast.LENGTH_LONG).show()
+                        startActivity(Intent(this@Uploadfile,Dashboarrd::class.java))
+                        Toast.makeText(this@Uploadfile, "error:" + response.errorBody(), Toast.LENGTH_LONG).show()
                     }
                 } catch (e: IOException) {
                     Toast.makeText(applicationContext, "Exception", Toast.LENGTH_SHORT).show()
@@ -295,6 +304,54 @@ class uploadfile : AppCompatActivity(),View.OnClickListener {
     }
 
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu to use in the action bar
+        val inflater = menuInflater
+        menuInflater.inflate(R.menu.next, menu)
+        return true
+    }
+
+    fun getActivityInstance():Uploadfile {
+        return this
+    }
+
+    override fun oncheckboxselected(data: Data?) {
+        ssname.add(data!!.name)
+        ssid.add(data!!.id)
+        Toast.makeText(this@Uploadfile,data!!.name,Toast.LENGTH_LONG).show()
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.next_icon ->{
+                sp.putString("filename", filenameet.text.toString())
+                sp.putString("description",filedescet!!.text.toString())
+                sp.putString("endstartdate",esdateet.text!!.toString()+" "+timeet.text.toString())
+                sp.putString("endexpdate",eedateet.text.toString()+" "+timeet.text.toString())
+                sp.putString("signingduedate",signduedateet.text.toString()+" "+timeet.text.toString())
+                sp.putString("seqpara",seqpara)
+                sp.putString("reminddays",reminddays.text.toString())
+                sp.putString("docid",docid)
+                sp.commit()
+                var intent= Intent(this@Uploadfile,Annotation2::class.java)
+                intent.putExtra("ssname",ssname)
+                intent.putExtra("ssid",ssid)
+                startActivity(intent)
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
 }
+
+
+
+
+
+
 
 
