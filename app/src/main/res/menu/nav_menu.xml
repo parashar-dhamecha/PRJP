@@ -15,6 +15,10 @@
             android:icon="@drawable/ic_contacts"
             android:title="@string/contacts"/>
     <item
+            android:id="@+id/verify"
+            android:icon="@drawable/ic_verification"
+            android:title="@string/verify"/>
+    <item
             android:id="@+id/settings"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/settings"/>
