@@ -35,7 +35,7 @@
         </activity>
         <activity android:name=".Annotation">
         </activity>
-        <activity android:name=".uploadfile">
+        <activity android:name=".Uploadfile">
         </activity>
         <activity
                 android:name=".Dashboarrd"
