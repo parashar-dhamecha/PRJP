@@ -136,7 +136,7 @@
     <string name="otp">Verify OTP</string>
     <string name="Resendotp">Resend Otp</string>
     <string name="Remembercb">Remember me</string>
-    <string name="Loginanther">have another account..?</string>
+    <string name="Loginanther">Have another account?</string>
     <string name="title_activity_dashboarrd">Dashboarrd</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
