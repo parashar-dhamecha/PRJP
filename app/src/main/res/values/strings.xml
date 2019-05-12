@@ -150,9 +150,9 @@
     <string name="hash">Document Hash</string>
     <string name="Details">Details</string>
     <string name="copy">Copy</string>
-    <string name="fetch">Fetching Details</string>
-    <string name="loading_preview">Loading Preview</string>
-    <string name="Getting">Getting pages</string>
+    <string name="fetch">Fetching details…</string>
+    <string name="loading_preview">Loading preview…</string>
+    <string name="Getting">Getting next pages…</string>
     <string name="preview">Preview</string>
     <string name="signers">Signers</string>
     <string name="sequential">Sequential Signature</string>
@@ -198,5 +198,6 @@
     <string name="time">time</string>
     <string name="update_profile">Updating profile</string>
     <string name="verify">Verify</string>
+    <string name="alldocs">All documents</string>
 
 </resources>
