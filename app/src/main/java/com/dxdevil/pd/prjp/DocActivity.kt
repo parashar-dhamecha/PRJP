@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document
 import com.dxdevil.pd.prjp.Model.Request.Document.ListOfDocument
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse
@@ -28,9 +30,13 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
 import kotlinx.android.synthetic.main.activity_doc.*
+import kotlinx.android.synthetic.main.activity_preview.*
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.activity_verify.*
 import kotlinx.android.synthetic.main.content_docactivity.*
+import kotlinx.android.synthetic.main.content_docactivity.button_next
+import kotlinx.android.synthetic.main.content_docactivity.button_previous
+import kotlinx.android.synthetic.main.content_docactivity.cpage_number
 import kotlinx.android.synthetic.main.row_doclist.*
 
 
@@ -42,6 +48,8 @@ import retrofit2.Response
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class DocActivity : AppCompatActivity() {
 
+
+
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var ntoggle: ActionBarDrawerToggle
 
@@ -50,7 +58,6 @@ class DocActivity : AppCompatActivity() {
 
     private var adapter: AllDocumentsAdapter? = null
     private lateinit var documentList: ArrayList<Document>
-
     lateinit var alldocs : List<Document>
     var token :String?= null
 
@@ -86,32 +93,52 @@ class DocActivity : AppCompatActivity() {
             val btmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray.size)
             inagev!!.setImageBitmap(btmap)
         }
+        val htv = h.findViewById<TextView>(R.id.header_nametv)
+        val htvem = h.findViewById<TextView>(R.id.header_emailtv)
+        htv!!.text =
+            getSharedPreferences("Token", 0).getString("fname", "").toString() + " " + getSharedPreferences(
+                "Token",
+                0
+            ).getString("lname", "").toString()
+        htvem!!.text = getSharedPreferences("Token", 0).getString("email", "")
 
         val mIntent=intent
         val source=intent.getStringExtra("Source")
         if(source=="DocActivity"){
             val docStatus=mIntent.getIntExtra("Doc_status",0)
+            if(docStatus==0)
+                title= getString(R.string.awaiting)
+            if(docStatus==3)
+                title= getString(R.string.awatingothers)
+            if(docStatus==2)
+                title= getString(R.string.completed)
+            if(docStatus==6)
+                title= getString(R.string.signingdue)
+
             apiCalling(docStatus,0, token)
         }else
         {
+            title = getString(R.string.alldocs)
             apiCalling(null,0, token)
+
         }
 
 
 
         button_next.setOnClickListener {
+            title= getString(R.string.alldocs)
             button_previous.isEnabled=true
                 currentPage +=1
                 apiCalling(null,currentPage,token)}
 
       button_previous.setOnClickListener {
+          title= getString(R.string.alldocs)
             currentPage -= 1
             apiCalling(null,currentPage,token)
         }
         nav_view_doc.setNavigationItemSelectedListener { menuItem ->
             menuItem.isChecked = true
             drawerLayout.closeDrawers()
-
 
             when (menuItem.itemId) {
                 R.id.dashboard -> {
@@ -159,6 +186,20 @@ class DocActivity : AppCompatActivity() {
 
             true
         }
+
+        swipeRefreshDocuments!!.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
+            override fun onRefresh() {
+                refreshItem()
+            }
+            private fun refreshItem() {
+                apiCalling(null,0, token)
+                title = getString(R.string.alldocs)
+                itemLoadComplete()
+            }
+            private fun itemLoadComplete() {
+                swipeRefreshDocuments!!.isRefreshing = false
+            }
+        })
        
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -174,33 +215,39 @@ class DocActivity : AppCompatActivity() {
 
             R.id.allDocuments -> {
                 apiCalling(null,currentPage,token)
+                title= getString(R.string.alldocs)
                 return true
             }
 
             R.id.menu_awaitingMySign -> {
                 apiCalling(0,currentPage,token)
+                title= getString(R.string.awatingsign)
                 return true
             }
 
             R.id.menu_awaitingOthers -> {
                 apiCalling(3,currentPage,token)
+                title= getString(R.string.awatingothers)
                 return true
             }
 
             R.id.menu_completed -> {
 
                 apiCalling(2,currentPage,token)
+                title= getString(R.string.completed)
                 return true
             }
 
 
             R.id.menu_duesoon -> {
                 apiCalling(6,currentPage,token)
+                title= getString(R.string.signingdue)
                 return  true
             }
 
             R.id.menu_Declined -> {
                 apiCalling(7,currentPage,token)
+                title= getString(R.string.Declined)
                 return  true
               }
             }
@@ -208,7 +255,7 @@ class DocActivity : AppCompatActivity() {
         }
 
     @SuppressLint("InflateParams")
-    private fun apiCalling(status:Int?, currentpage:Int, token:String? ){
+     fun apiCalling(status:Int?, currentpage:Int, token:String? ){
 
 
 
