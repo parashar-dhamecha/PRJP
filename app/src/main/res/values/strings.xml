@@ -1,5 +1,5 @@
 
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources >
     <string name="app_name">Cygnature</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
@@ -164,23 +164,13 @@
     <string name="uploader_name">Uploader_name</string>
     <string name="time_and_date">time and date</string>
     <string name="thash">hash</string>
-
-    <string name="selectsigners">Select Signers</string>
     <string name="selectobservers">Select Observers</string>
     <string name="pickDateandtime"><![CDATA[Expiry Date & Time]]></string>
     <string name="picktime">Time</string>
     <string name="ExpireyDate">Expiry Date</string>
-    <string name="time">Time</string>
     <string name="expirey_date">Expirey Date</string>
-    <string name="expirey_end_date" tools:ignore="ExtraTranslation">Expirey End Date</string>
-    <string name="expirey_start_date">Expirey Start Date</string>
-    <string name="Signing_Due_date">Signing Due Date</string>
-    <string name="paralel">Paralel</string>
+    <string name="paralel">Parallel</string>
     <string name="remindbefore">Remind Before</string>
-    <string name="days">days</string>
-    <string name="button_clearall">Clear All</string>
-    <string name="prev"><![CDATA[<]]></string>
-    <string name="nextf"><![CDATA[>]]></string>
     <string name="id">imageview</string>
     <string name="no_observers">There are no observers</string>
     <string name="not_notarized_message">This Document is yet not Notarized.</string>
@@ -188,14 +178,25 @@
     <string name="no_documents">No Documents</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="refresh_page">Try refreshing the page</string>
-    <string name="Create">Create</string>
-    <string name="Addc">Add Contacts</string>
     <string name="recent">Recent Documents</string>
-    <string name="contact_mobile_no">9427962585</string>
     <string name="contact_email">contactemail@gmail.com</string>
+    <string name="contact_mobile_no">9427946674</string>
     <string name="contact_name_">contact name</string>
-    <string name="upload_file">Upload </string>
+    <string name="upload_file">Upload file</string>
     <string name="selectsigners">Select Signers</string>
-
+    <string name="prev">prev</string>
+    <string name="nextf">next</string>
+    <string name="expirey_start_date">expiry start date  </string>
+    <string name="expirey_end_date">expiry end date  </string>
+    <string name="Signing_Due_date">Signing due date</string>
+    <string name="days">Days</string>
+    <string name="Zero">0</string>
+    <string name="Addc">Add Contact</string>
+    <string name="button_clearall">Clear all</string>
+    <string name="recent_documents">Recent documents</string>
+    <string name="Create">Create</string>
+    <string name="time">time</string>
+    <string name="update_profile">Updating profile</string>
+    <string name="verify">Verify</string>
 
 </resources>

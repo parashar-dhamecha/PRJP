@@ -17,6 +17,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.content_setting.*
@@ -40,22 +41,25 @@ class Settings : AppCompatActivity() {
         ntoggle.syncState()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val profilestring = getSharedPreferences("Token",0).getString("profileimage","")
-        val bytearray = Base64.decode(profilestring, Base64.DEFAULT)
-        val btmap = BitmapFactory.decodeByteArray(bytearray,0,bytearray.size)
-
+        val profilestring = getSharedPreferences("Token", 0).getString("profileimage", "")
         val navid = findViewById<NavigationView>(R.id.nav_view_settings)
         val h = navid.getHeaderView(0)
         val inagev = h.findViewById<CircleImageView>(R.id.imageview_header)
-        inagev!!.setImageBitmap(btmap)
-
+        if(profilestring=="")
+            inagev.setImageResource(R.drawable.user)
+        else{
+            val bytearray = Base64.decode(profilestring, Base64.DEFAULT)
+            val btmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray.size)
+            inagev!!.setImageBitmap(btmap)
+        }
         val htv = h.findViewById<TextView>(R.id.header_nametv)
         val htvem = h.findViewById<TextView>(R.id.header_emailtv)
         htv!!.text =
-            getSharedPreferences("Token",0).getString("fname","").toString()+getSharedPreferences("Token",0).getString("lname","").toString()
-
-        htvem!!.text =getSharedPreferences("Token",0).getString("email","")
-
+            getSharedPreferences("Token", 0).getString("fname", "").toString() + " " + getSharedPreferences(
+                "Token",
+                0
+            ).getString("lname", "").toString()
+        htvem!!.text = getSharedPreferences("Token", 0).getString("email", "")
 
         nav_view_settings.setNavigationItemSelectedListener { menuItem ->
             menuItem.isChecked = true
@@ -78,12 +82,30 @@ class Settings : AppCompatActivity() {
                 R.id.settings -> {
                     drawer_layout_setting.closeDrawer(GravityCompat.START)
                 }
-                R.id.logout -> {
-                    val sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
-                    sp.edit().remove("Token").apply()
-                    sp.edit().remove("RefreshToken").apply()
-                    startActivity(Intent(this@Settings,LoginActivity::class.java))
+                R.id.verify->{
+                    startActivity(Intent(this@Settings, VerifyActivity::class.java))
                     drawer_layout_setting.closeDrawer(GravityCompat.START)
+                }
+                R.id.logout -> {
+
+                    drawer_layout_setting.closeDrawer(GravityCompat.START)
+                    val builder= AlertDialog.Builder(this@Settings)
+                    builder.setTitle("Are you sure you want to Logout?")
+                    builder.setPositiveButton("Yes") { dialogInterface: DialogInterface?, i: Int ->
+
+
+                        val sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
+                        sp.edit().remove("Token").apply()
+                        sp.edit().remove("RefreshToken").apply()
+                        startActivity(Intent(this@Settings, LoginActivity::class.java))
+                        drawer_layout_setting.closeDrawer(GravityCompat.START)
+                    }
+
+                    builder.setNegativeButton("No") { dialogInterface:DialogInterface?, i:Int->
+                        drawer_layout_setting.closeDrawer(GravityCompat.START)
+                    }
+                    val dialog: AlertDialog= builder.create()
+                    dialog.show()
                 }
             }
 
@@ -113,7 +135,6 @@ class Settings : AppCompatActivity() {
             }
 
             builder.setNegativeButton("No") { dialogInterface:DialogInterface?, i:Int->
-
             }
             val dialog: AlertDialog= builder.create()
             dialog.show()
