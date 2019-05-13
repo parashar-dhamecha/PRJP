@@ -37,13 +37,6 @@ class AddContact : AppCompatActivity() {
         CreateContact!!.setOnClickListener{
 
 
-//            val name =etName!!.text.toString()
-//            val Em = etEmail!!.text.toString()
-//            val Jt =etJobTitle.text.toString()
-//            val Jd =etJobDescription!!.text.toString()
-//            val cid:Int = etcode!!.text as Int
-//            val mn =etMobileNo!!.text.toString()
-
             if(validation()) {
 
 
@@ -56,7 +49,8 @@ class AddContact : AppCompatActivity() {
                 val apiadd = RetrofitClient.getInstance()!!.api as Api
                 val calladd =apiadd.addcontact(token,
                    AddContactRequest(etName!!.text.toString(),etEmail!!.text.toString() ,
-                       etcode.selectedCountryCodeAsInt, etMobileNo!!.text.toString(),
+                       etcode.selectedCountryCodeAsInt,
+                       etMobileNo!!.text.toString(),
                        etJobTitle.text.toString(),
                        etJobDescription.text.toString()
                        )) as Call<AddContactResponse>
@@ -126,12 +120,14 @@ class AddContact : AppCompatActivity() {
         }
 
 
+
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(Em).matches()) {
             etEmail!!.error = "Enter a valid Email Address"
             valid = false
         } else {
             flagEm = true
         }
+
 
 
         if (Jt.isEmpty() ||!Nameregex.matches(Jt)) {
@@ -142,7 +138,7 @@ class AddContact : AppCompatActivity() {
         }
 
         if (Jd.isEmpty() ||!Nameregex.matches(Jd)) {
-            etJobDescription!!.setError("enter a valod job discription")
+            etJobDescription!!.setError("enter a valod job description")
         } else {
             flagJd= true
         }

@@ -68,7 +68,8 @@
                     android:id="@+id/doc_status"
                     android:layout_toEndOf="@+id/file_image"
                     android:layout_marginStart="10dp"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused" tools:ignore="HardcodedText"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    tools:ignore="HardcodedText"
                     android:layout_marginTop="3dp"
                     android:layout_below="@+id/txt_doc"
                     android:textSize="12sp"/>

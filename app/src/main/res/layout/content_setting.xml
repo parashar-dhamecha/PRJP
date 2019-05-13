@@ -18,8 +18,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cardView2"
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:focusable="true"
-    >
+            android:focusable="true">
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -53,6 +52,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:id="@+id/imageView12"
+                    android:src="@drawable/logout"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="14dp"
                     android:layout_alignParentStart="true"
@@ -80,11 +80,11 @@
             <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/right"
                     android:id="@+id/right2"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="24dp"
                     android:layout_marginTop="0dp"
+                    android:src="@drawable/right"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="0dp" tools:ignore="ContentDescription"/>
@@ -139,10 +139,10 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:id="@+id/right1"
+                    android:src="@drawable/right"
                     android:layout_marginTop="12dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentBottom="true"
-                    android:src="@drawable/right"
                     android:layout_marginBottom="12dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="24dp"
@@ -164,6 +164,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:id="@+id/imgprf"
+                    android:src="@drawable/profile"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="12dp"

@@ -22,6 +22,12 @@ public interface Api {
     @POST("account/register")
     Call<SignUpModel>register(@Body  SignUp signUp);
 
+    @POST("document/create")
+    Call<CreateDocResponse>create(
+            @Header("Authorization") String Authorization,
+            @Body CreateDocRequest createdocrequest
+    );
+
     @GET("account/check-user-exists/{id}")
     Call<UserExistResponse>isUserExist(@Path("id") String  id);
 
@@ -144,11 +150,9 @@ public interface Api {
             @Header("Authorization") String Authorization,
             @Part MultipartBody.Part file
     );
+   @GET("verify/document-detail/{documentID}")
+   Call<VerifyDocumentDetail>getVerificationDetails(@Header("Authorization") String Authorization,
+                                                  @Path("documentId") String documentId);
 
-    @POST("document/create")
-    Call<CreateResponse>create(
-            @Header("Authorization") String Authorization,
-            @Body CreateRequest createRequest
-    );
 }
 

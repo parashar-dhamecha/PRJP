@@ -27,9 +27,10 @@
                 android:name=".VerifyActivity"
                 android:label="Verify Document">
         </activity>
-        <activity android:name=".BulkImport"/>
+
         <activity android:name=".Annotation2">
         </activity>
+
         <activity android:name=".Annotation1">
         </activity>
         <activity android:name=".Annotation">
@@ -45,6 +46,12 @@
                 android:name=".Dashboarrd"
                 android:label="Dashboard"
                 android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
         </activity>
         <activity android:name=".PhotoActivity"/>
         <activity android:name=".AddContact">
@@ -55,13 +62,23 @@
         </activity>
         <activity
                 android:name=".LoginActivity"
-                android:label="Log In">
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
                 android:name=".MainActivity"
                 android:theme="@style/AppTheme.NoActionBar"
                 tools:ignore="ExtraText">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
+
+        <activity android:name=".ForgotPasswordActivity">
+
+        </activity>
+
         <activity android:name=".UpdateContact">
         </activity>
         <activity
@@ -69,6 +86,14 @@
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustPan">
+                android:screenOrientation="portrait">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+
+
         </activity>
         <activity
                 android:name=".ProfileActivity"
@@ -110,6 +135,7 @@
                 android:parentActivityName=".DocActivity">
 
         </activity>
+
         <activity
                 android:name=".DocActivity"
                 android:parentActivityName=".Dashboard">

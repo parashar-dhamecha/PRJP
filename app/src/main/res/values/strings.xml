@@ -172,10 +172,9 @@
     <string name="Create">Create</string>
     <string name="Addc">Add Contacts</string>
     <string name="recent">Recent Documents</string>
-    <string name="contact_mobile_no">9427962585</string>
     <string name="contact_email">contactemail@gmail.com</string>
     <string name="contact_name_">contact name</string>
-    <string name="upload_file">Upload </string>
+    <string name="upload_file">Upload file</string>
     <string name="selectsigners">Select Signers</string>
     <string name="prev"><![CDATA[<]]></string>
     <string name="nextf"><![CDATA[>]]></string>
@@ -189,5 +188,7 @@
     <string name="remindbefore">Remind Before</string>
     <string name="days">Days</string>
     <string name="Zero">0</string>
+    <string name="verify">Verify</string>
+    <string name="alldocs">All documents</string>
     <string name="update_profile">Update Profile</string>
 </resources>
