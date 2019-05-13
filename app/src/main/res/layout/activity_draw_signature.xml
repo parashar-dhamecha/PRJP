@@ -27,29 +27,22 @@
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.031"/>
     <Button
             android:text="@string/savebutton"
-            android:layout_width="@dimen/dp80"
-            android:layout_height="75dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:id="@+id/saveButtonid"
-            android:background="@drawable/custbutton"
+            android:background="@drawable/mybutton"
             android:textColor="@color/textcolor"
-            android:layout_marginTop="4dp"
-            app:layout_constraintTop_toTopOf="@+id/clearButtonid" android:layout_marginEnd="88dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_marginEnd="56dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="64dp"
+            app:layout_constraintTop_toBottomOf="@+id/paintviewid"/>
     <Button
             android:text="@string/button_clear"
-            android:layout_width="@dimen/dp80"
-            android:layout_height="@dimen/dp80"
-            android:background="@drawable/custbutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/mybutton"
             android:id="@+id/clearButtonid"
-            android:layout_marginTop="60dp"
-            app:layout_constraintTop_toBottomOf="@+id/paintviewid"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/saveButtonid"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.475"
-            app:layout_constraintVertical_bias="0.064"/>
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="64dp" app:layout_constraintTop_toBottomOf="@+id/paintviewid"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

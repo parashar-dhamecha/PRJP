@@ -63,7 +63,7 @@
     <string name="country_id">Country Id</string>
     <string name="aw_sign">Awaiting My Sign</string>
     <string name="button_clear">clear</string>
-    <string name="savebutton">Save</string>
+    <string name="savebutton">Save </string>
     <string name="choose">Select Photo</string>
     <string name="type">Type</string>
     <string name="name">Name</string>
@@ -199,5 +199,6 @@
     <string name="update_profile">Updating profile</string>
     <string name="verify">Verify</string>
     <string name="alldocs">All documents</string>
+    <string name="document_history">Document History</string>
 
 </resources>
