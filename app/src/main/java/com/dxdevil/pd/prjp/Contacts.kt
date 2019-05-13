@@ -1,6 +1,7 @@
 package com.dxdevil.pd.prjp
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -26,8 +27,6 @@ import com.dxdevil.pd.prjp.Model.Response.DeleteIdResponse
 import com.dxdevil.pd.prjp.Model.Response.GetContactIdResponse
 import com.github.clans.fab.FloatingActionMenu
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.activity_bulk_import.*
-import kotlinx.android.synthetic.main.activity_bulk_import.view.*
 import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
 import kotlinx.android.synthetic.main.contactsadapter.*
@@ -61,13 +60,9 @@ class Contacts : AppCompatActivity() {
          onbj = ContactsAdapter(this@Contacts,contactList)
 
 
-        var fab = findViewById<FloatingActionMenu>(R.id.floatingActionMenu)
-        var fab1: com.github.clans.fab.FloatingActionButton? =
-            findViewById<com.github.clans.fab.FloatingActionButton>(R.id.add)
+        var fab = findViewById<FloatingActionButton>(R.id.floatingActionButton)
 
 
-        var fab =findViewById<FloatingActionMenu>(R.id.floatingActionMenu)
-        //val fab1: com.github.clans.fab.FloatingActionButton? =findViewById<com.github.clans.fab.FloatingActionButton>(R.id.add)
 
 
         fab!!.setOnClickListener{
@@ -97,7 +92,7 @@ class Contacts : AppCompatActivity() {
 
 
                 onbj.filtereList1(p0)
-                onbj.notifyDataSetChanged()
+               // onbj.notifyDataSetChanged()
 
 
                 return false
@@ -137,6 +132,8 @@ class Contacts : AppCompatActivity() {
                     startActivity(Intent(this@Contacts, LoginActivity::class.java))
                     drawer_layout_contacts.closeDrawer(GravityCompat.START)
                 }
+
+
             }
 
 
@@ -204,6 +201,7 @@ class Contacts : AppCompatActivity() {
                 val api1 = RetrofitClient.getInstance()!!.api as Api
                 var call1 = api1.getcontactresponse(token) as Call<ContactList>
                 call1.enqueue(object : Callback<ContactList> {
+
                     override fun onFailure(call: Call<ContactList>, t: Throwable) {
                         //      progressbar.visibility = View.GONE
                         Toast.makeText(this@Contacts, "Check your internet Connection", Toast.LENGTH_LONG).show()

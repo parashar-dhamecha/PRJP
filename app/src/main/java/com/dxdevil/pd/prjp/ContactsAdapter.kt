@@ -122,7 +122,11 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
 
                             if (response.isSuccessful) {
 
+                                Con.removeAt(0)
+                                notifyItemRemoved(0)
+
                                 Toast.makeText(context, "Contact deleted successfully", Toast.LENGTH_LONG).show()
+
 
 
                             } else {
@@ -185,10 +189,12 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
         var filteredList :ArrayList<Data> = ArrayList<Data>()
         filteredList.addAll(Con)
 
-        Toast.makeText(context,filteredList.size.toString(),Toast.LENGTH_LONG).show()
+        //Toast.makeText(context,filteredList.size.toString(),Toast.LENGTH_LONG).show()
 
 
         val text=text!!.toLowerCase(Locale.getDefault())
+
+        Con.clear()
 
         if(text.length==0)
         {
@@ -205,11 +211,11 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
 
                 Toast.makeText(context,"wrong contextian "+filteredList.size,Toast.LENGTH_LONG).show()
 
-//                Con.clear()
+//
                 if(filteredList[i].name.toLowerCase(Locale.getDefault()).contains(text)){
 
-                    Con.clear()
-                    Toast.makeText(context,"hey yogita "+filteredList.size,Toast.LENGTH_LONG).show()
+                   // Con.clear()
+                  //  Toast.makeText(context,"hey yogita "+filteredList.size,Toast.LENGTH_LONG).show()
                     Con.add(filteredList[i])
 //                    filteredList.add((filteredList[i]))
 
@@ -217,7 +223,7 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
                 }
             }
 
-            Toast.makeText(context,"wrong contextianionnnnn ",Toast.LENGTH_LONG).show()
+            //Toast.makeText(context,"wrong contextianionnnnn ",Toast.LENGTH_LONG).show()
 
 
 

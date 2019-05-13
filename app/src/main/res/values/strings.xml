@@ -175,13 +175,14 @@
     <string name="expirey_end_date" tools:ignore="ExtraTranslation">Expirey End Date</string>
     <string name="expirey_start_date">Expirey Start Date</string>
     <string name="Signing_Due_date">Signing Due Date</string>
-    <string name="paralel">Paralel</string>
+    <string name="paralel">Parallel</string>
     <string name="remindbefore">Remind Before</string>
     <string name="days">days</string>
     <string name="button_clearall">Clear All</string>
     <string name="prev"><![CDATA[<]]></string>
     <string name="nextf"><![CDATA[>]]></string>
     <string name="id">imageview</string>
+
     <string name="no_observers">There are no observers</string>
     <string name="not_notarized_message">This Document is yet not Notarized.</string>
     <string name="view_doc">Preview the document</string>
@@ -195,7 +196,10 @@
     <string name="contact_email">contactemail@gmail.com</string>
     <string name="contact_name_">contact name</string>
     <string name="upload_file">Upload </string>
-    <string name="selectsigners">Select Signers</string>
+    <string name="Zero">0</string>
+    <string name="recent_documents">recent_documents</string>
+    <string name="recent_documenets">Recent_documents</string>
+    <string name="update_profile">update_profile</string>
 
 
 </resources>

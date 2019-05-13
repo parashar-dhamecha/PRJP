@@ -79,12 +79,15 @@ class Settings : AppCompatActivity() {
                     drawer_layout_setting.closeDrawer(GravityCompat.START)
                 }
                 R.id.logout -> {
+
                     val sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
                     sp.edit().remove("Token").apply()
                     sp.edit().remove("RefreshToken").apply()
                     startActivity(Intent(this@Settings,LoginActivity::class.java))
                     drawer_layout_setting.closeDrawer(GravityCompat.START)
                 }
+
+
             }
 
 

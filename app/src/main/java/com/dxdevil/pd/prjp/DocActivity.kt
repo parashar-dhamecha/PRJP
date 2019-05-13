@@ -2,6 +2,7 @@ package com.dxdevil.pd.prjp
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -110,6 +112,7 @@ class DocActivity : AppCompatActivity() {
                     drawer_layout_document.closeDrawer(GravityCompat.START)
                 }
                 R.id.logout -> {
+
                     val sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
                     sp.edit().remove("Token").apply()
                     sp.edit().remove("RefreshToken").apply()
@@ -117,6 +120,8 @@ class DocActivity : AppCompatActivity() {
                     drawer_layout_document.closeDrawer(GravityCompat.START)
 
                 }
+
+
             }
 
 

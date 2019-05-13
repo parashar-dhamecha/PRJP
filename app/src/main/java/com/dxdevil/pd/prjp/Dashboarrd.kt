@@ -3,6 +3,7 @@ package com.dxdevil.pd.prjp
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.BitmapFactory
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.drawerlayout.widget.DrawerLayout
 import com.dxdevil.pd.prjp.Model.Response.DashboardResponse
 import de.hdodenhof.circleimageview.CircleImageView
@@ -143,12 +145,15 @@ class Dashboarrd : AppCompatActivity() {
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
                 R.id.logout -> {
+
+
                     var sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
                     sp.edit().remove("Token").apply()
                     sp.edit().remove("RefreshToken").apply()
                     startActivity(Intent(this@Dashboarrd, LoginActivity::class.java))
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
+
             }
             true
         }
@@ -182,7 +187,7 @@ class Dashboarrd : AppCompatActivity() {
 
 
         uploadcvFAB.setOnClickListener { view ->
-            startActivity(Intent(applicationContext,uploadfile::class.java))
+            startActivity(Intent(applicationContext,Uploadfile::class.java))
         }
 
         add.setOnClickListener {
