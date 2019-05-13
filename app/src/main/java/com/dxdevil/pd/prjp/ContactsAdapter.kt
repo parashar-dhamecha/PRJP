@@ -82,7 +82,7 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
 
         // Log.d("ContactsAdapter", "email" + Con[position].email)
         holder.editbutton.setOnClickListener {
-            var s = Con[position].id
+           var s = Con[position].id
            ed.putString("userid",s)
            ed.commit()
 

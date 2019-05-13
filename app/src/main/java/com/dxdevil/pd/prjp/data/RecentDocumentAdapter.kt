@@ -2,13 +2,11 @@ package com.dxdevil.pd.prjp.data
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color.rgb
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.dxdevil.pd.prjp.DocumentDetailActivity
@@ -42,11 +40,12 @@ class RecentDocumentAdapter(
             holder.fileimage.setImageResource(R.drawable.icon_file_ppt)
 
         holder.parentLayout.setOnClickListener {
-
+            val s = list[position].id
+            val intent = Intent(context, DocumentDetailActivity::class.java)
+            intent.putExtra("Source" ,"Dashboard")
+            intent.putExtra("Docid",s)
+            context.startActivity(intent)
         }
-
-
-
     }
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
