@@ -190,32 +190,25 @@
             android:padding="@dimen/dp5"
             app:layout_constraintTop_toBottomOf="@+id/phonenotv" app:layout_constraintStart_toStartOf="@+id/phonenotv"
             app:layout_constraintBottom_toBottomOf="@+id/textView" app:layout_constraintVertical_bias="1.0"/>
-    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:orientation="horizontal"
-                  app:layout_constraintTop_toBottomOf="@+id/gendertv"
-                  app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="36dp"
-                  app:layout_constraintHorizontal_bias="0.498" android:layout_marginStart="16dp"
-                  android:layout_marginEnd="16dp">
-        <androidx.cardview.widget.CardView android:layout_width="wrap_content"
-                                           android:layout_height="wrap_content"
-        >
-            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
-                <ImageButton android:layout_width="@dimen/dp40"
-                             android:layout_height="@dimen/dp40"
-                             android:layout_marginStart="@dimen/dp360"
-                             android:id="@+id/editbuttomid"
-                             android:src="@drawable/ic_mode_edit_black"
-                             android:padding="@dimen/dp20"
-                             tools:ignore="ContentDescription"/>
-                <ImageView android:layout_width="match_parent"
-                           android:layout_height="wrap_content"
-                           android:id="@+id/signiv"
-                           android:layout_below="@+id/editbuttomid"
-                           tools:ignore="ContentDescription"/>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
+
+
+
+
+        <ImageButton android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/editbuttomid"
+                     android:src="@drawable/ic_mode_edit_black"
+                     android:padding="@dimen/dp20"
+                     tools:ignore="ContentDescription"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+                     app:layout_constraintBottom_toBottomOf="parent"/>
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/signiv"
+                   tools:ignore="ContentDescription"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

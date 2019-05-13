@@ -55,7 +55,7 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.pro.text=Con[position].shortName
+        holder.pro.text=Con[position].shortName.toUpperCase()
         holder.name.text = Con[position].name
         holder.email.text = Con[position].email
         holder.mobileno.text = Con[position].mobileNumber
@@ -82,7 +82,7 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
 
         // Log.d("ContactsAdapter", "email" + Con[position].email)
         holder.editbutton.setOnClickListener {
-            var s = Con[position].id
+           var s = Con[position].id
            ed.putString("userid",s)
            ed.commit()
 

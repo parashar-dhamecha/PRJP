@@ -41,7 +41,12 @@ class DocumentDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_document_detail)
 
         val intent = intent
-         docId = intent.getStringExtra("doc")
+        val src=intent.getStringExtra("Source")
+
+        docId = if(src=="Dashboard")
+            intent.getStringExtra("Docid")
+        else
+            intent.getStringExtra("doc")
 
         tvNo_observers.visibility=View.GONE
         tvNot_notarized.visibility=View.GONE

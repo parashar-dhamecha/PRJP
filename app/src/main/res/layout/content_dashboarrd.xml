@@ -6,269 +6,273 @@
         android:id="@+id/constraintLayout"
         android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.50"/>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/colorPrimary"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
-            android:id="@+id/constraintLayout2">
-
         <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline2"
+                android:id="@+id/guideline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.50"/>
 
-        <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline3"
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/guideline"
+                android:id="@+id/constraintLayout2">
+
+            <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.50"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.50"/>
+            <View
+                    android:id="@+id/divider1"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:background="#577cbe"
+                    android:layout_marginBottom="24dp"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    android:layout_marginEnd="8dp"/>
+            <View
+                    android:id="@+id/divider2"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:background="#577cbe"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="24dp"
+                    app:layout_constraintTop_toTopOf="@+id/guideline2"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    android:layout_marginTop="24dp"/>
+            <View
+                    android:id="@+id/divider3"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#577cbe"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    android:layout_marginEnd="24dp"
+                    app:layout_constraintTop_toTopOf="@+id/guideline2"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline2"/>
+            <View
+                    android:id="@+id/divider4"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#577cbe"
+                    android:layout_marginEnd="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="@+id/guideline2"/>
+
+
+            <TextView
+                    android:text="@string/Zero"
+                    android:gravity="center"
+                    android:textColor="@color/textcolor3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/awatingsigntv"
+                    android:textSize="56sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toTopOf="parent"
+            />
+            <TextView
+                    android:text="@string/awaiting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/textcolor3"
+                    android:id="@+id/AwatingSign21"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp" android:layout_marginBottom="24dp"
+                    app:layout_constraintBottom_toTopOf="@+id/divider3"/>
+
+            <TextView
+                    android:text="@string/Zero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/awatingotherstv"
+                    android:textColor="@color/textcolor3"
+                    android:textSize="56sp"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/divider1" android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                    android:text="@string/awatingothers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/AwatingSign222"
+                    android:textColor="@color/textcolor3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" android:layout_marginBottom="24dp"
+                    app:layout_constraintBottom_toTopOf="@+id/divider4"/>
+            <TextView
+                    android:text="@string/Zero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/textcolor3"
+                    android:id="@+id/completedtv"
+                    app:layout_constraintTop_toBottomOf="@+id/divider3"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/divider2"
+                    android:layout_marginEnd="8dp"
+                    android:textSize="56sp"
+            />
+            <TextView
+                    android:text="@string/completed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/textcolor3"
+                    android:id="@+id/AwatingSign"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            <TextView
+                    android:text="@string/Zero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/textcolor3"
+                    android:id="@+id/duesoontv"
+                    app:layout_constraintTop_toBottomOf="@+id/divider4"
+                    app:layout_constraintStart_toEndOf="@+id/divider2"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="24dp"
+                    android:textSize="56sp"
+            />
+            <TextView
+                    android:text="@string/signingdue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/textcolor3"
+                    android:id="@+id/AwatingSign2"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.github.clans.fab.FloatingActionMenu
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.50"/>
-        <View
-                android:id="@+id/divider1"
-                android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:background="#577cbe"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline2"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="24dp"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                android:layout_marginEnd="8dp"/>
-        <View
-                android:id="@+id/divider2"
-                android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:background="#577cbe"
+                android:elevation="@dimen/dp5"
+                android:id="@+id/floatingActionMenu"
+                android:layout_margin="16dp"
+                app:menu_colorRipple="#99d4d4d4"
+                app:menu_colorNormal="@color/colorSecondary"
+                app:menu_icon="@drawable/add_black"
+                android:layout_gravity="bottom|end"
+                app:menu_openDirection="up"
+                android:backgroundTint="@color/colorPrimary"
+                app:menu_fab_size="normal"
+                app:menu_colorPressed="@color/colorPrimary"
+                app:menu_buttonSpacing="@dimen/dp0"
+                app:menu_backgroundColor="#00000000"
+                app:pressedTranslationZ="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintTop_toTopOf="@+id/guideline2"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                android:layout_marginTop="24dp"/>
-        <View
-                android:id="@+id/divider3"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="#577cbe"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="24dp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                android:layout_marginEnd="24dp"
-                app:layout_constraintTop_toTopOf="@+id/guideline2"
-                app:layout_constraintBottom_toTopOf="@+id/guideline2"/>
-        <View
-                android:id="@+id/divider4"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="#577cbe"
-                android:layout_marginEnd="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                android:layout_marginStart="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline2"
-                app:layout_constraintTop_toTopOf="@+id/guideline2"/>
+                app:layout_constraintEnd_toEndOf="parent">
+
+            <com.github.clans.fab.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:fab_colorNormal="@color/colorSecondary"
+                    app:fab_size="mini"
+                    app:fab_label="@string/Addc"
+                    app:menu_colorPressed="@color/colorPrimary"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="@dimen/dp30"
+                    app:fab_colorPressed="@color/colorPrimary"
+                    android:layout_marginBottom="120dp"
+                    android:id="@+id/add"
+                    android:layout_marginStart="@dimen/dp20"
+                    android:src="@drawable/add_person"/>
 
 
-        <TextView
-                android:text="@string/Zero"
-                android:gravity="center"
-                android:textColor="@color/textcolor3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/awatingsigntv"
-                android:textSize="56sp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="24dp"
-                app:layout_constraintTop_toTopOf="parent"/>
-        <TextView
-                android:text="@string/awaiting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/textcolor3"
-                android:id="@+id/AwatingSign21"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/divider3"/>
+            <com.github.clans.fab.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:fab_size="mini"
+                    app:fab_label="@string/upload"
+                    app:menu_colorPressed="@color/colorPrimary"
+                    app:fab_colorNormal="@color/colorSecondary"
+                    android:layout_marginEnd="@dimen/dp30"
+                    android:layout_gravity="bottom|end"
+                    app:fab_colorPressed="@color/colorPrimary"
+                    android:layout_marginBottom="@dimen/dp180"
+                    android:id="@+id/uploadcvFAB"
+                    android:src="@drawable/upload_black"/>
 
-        <TextView
-                android:text="@string/Zero"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/awatingotherstv"
-                android:textColor="@color/textcolor3"
-                android:textSize="56sp"
-                android:layout_marginTop="24dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/divider1" android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"/>
-        <TextView
-                android:text="@string/awatingothers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/AwatingSign222"
-                android:textColor="@color/textcolor3"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/divider4"/>
-        <TextView
-                android:text="@string/Zero"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/textcolor3"
-                android:id="@+id/completedtv"
-                app:layout_constraintTop_toBottomOf="@+id/divider3"
-                android:layout_marginTop="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/divider2"
-                android:layout_marginEnd="8dp"
-                android:textSize="56sp"
-        />
-        <TextView
-                android:text="@string/completed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/textcolor3"
-                android:id="@+id/AwatingSign"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-        <TextView
-                android:text="@string/Zero"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/textcolor3"
-                android:id="@+id/duesoontv"
-                app:layout_constraintTop_toBottomOf="@+id/divider4"
-                app:layout_constraintStart_toEndOf="@+id/divider2"
-                android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="24dp"
-                android:textSize="56sp"
-        />
-        <TextView
-                android:text="@string/signingdue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/textcolor3"
-                android:id="@+id/AwatingSign2"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+            <com.github.clans.fab.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:fab_size="mini"
+                    app:fab_label="@string/addsigng"
+                    app:fab_colorPressed="@color/colorPrimary"
+                    app:menu_colorPressed="@color/colorPrimary"
+                    app:fab_colorNormal="@color/colorSecondary"
+                    android:layout_marginEnd="@dimen/dp30"
+                    android:layout_gravity="bottom|end"
+                    android:id="@+id/addsignature"
+                    android:layout_marginBottom="@dimen/dp180"
+                    android:src="@drawable/ic_add_sign_svg"/>
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.github.clans.fab.FloatingActionMenu
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:elevation="@dimen/dp5"
-            android:id="@+id/floatingActionMenu"
-            android:layout_margin="16dp"
-            app:menu_colorRipple="#99d4d4d4"
-            app:menu_colorNormal="@color/colorSecondary"
-            app:menu_icon="@drawable/add_black"
-            android:layout_gravity="bottom|end"
-            app:menu_openDirection="up"
-            android:backgroundTint="@color/colorPrimary"
-            app:menu_fab_size="normal"
-            app:menu_colorPressed="@color/colorPrimary"
-            app:menu_buttonSpacing="@dimen/dp0"
-            app:menu_backgroundColor="#00000000"
-            app:pressedTranslationZ="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent">
-
-        <com.github.clans.fab.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fab_colorNormal="@color/colorSecondary"
-                app:fab_size="mini"
-                app:fab_label="@string/Addc"
-                app:menu_colorPressed="@color/colorPrimary"
-                android:layout_gravity="bottom|end"
-                android:layout_marginEnd="@dimen/dp30"
-                app:fab_colorPressed="@color/colorPrimary"
-                android:layout_marginBottom="120dp"
-                android:id="@+id/add"
-                android:layout_marginStart="@dimen/dp20"
-                android:src="@drawable/add_person"/>
-
-
-        <com.github.clans.fab.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fab_size="mini"
-                app:fab_label="@string/upload"
-                app:menu_colorPressed="@color/colorPrimary"
-                app:fab_colorNormal="@color/colorSecondary"
-                android:layout_marginEnd="@dimen/dp30"
-                android:layout_gravity="bottom|end"
-                app:fab_colorPressed="@color/colorPrimary"
-                android:layout_marginBottom="@dimen/dp180"
-                android:id="@+id/uploadcvFAB"
-                android:src="@drawable/upload_black"/>
-
-        <com.github.clans.fab.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fab_size="mini"
-                app:fab_label="@string/addsigng"
-                app:fab_colorPressed="@color/colorPrimary"
-                app:menu_colorPressed="@color/colorPrimary"
-                app:fab_colorNormal="@color/colorSecondary"
-                android:layout_marginEnd="@dimen/dp30"
-                android:layout_gravity="bottom|end"
-                android:id="@+id/addsignature"
-                android:layout_marginBottom="@dimen/dp180"
-                android:src="@drawable/ic_add_sign_svg"/>
-
-    </com.github.clans.fab.FloatingActionMenu>
+        </com.github.clans.fab.FloatingActionMenu>
 
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/guideline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" android:layout_marginTop="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -276,7 +280,7 @@
 
 
             <TextView
-                    android:text="@string/recent_documenets"
+                    android:text="@string/recent_documents"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -285,7 +289,7 @@
                     android:layout_marginStart="16dp"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="8dp"
-                    android:textSize="14sp"/>
+                    android:textSize="18sp"/>
             <View
                     android:id="@+id/divider5"
                     android:layout_width="379dp"
@@ -296,12 +300,12 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
             <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="379dp"
-                    android:layout_height="148dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:overScrollMode="never"
+                    android:id="@+id/recentDoc_recyclerView"
                     app:layout_constraintTop_toBottomOf="@+id/divider5"
-                    android:layout_marginTop="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
             />
@@ -309,6 +313,6 @@
 
     </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 

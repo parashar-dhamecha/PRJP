@@ -150,5 +150,10 @@ public interface Api {
             @Header("Authorization") String Authorization,
             @Part MultipartBody.Part file
     );
+ //////////////////////////////////////////verify document///////////////////////////////////////////
+   @GET("verify/document-detail/{documentID}")
+   Call<VerifyDocumentDetail>getVerificationDetails(@Header("Authorization") String Authorization,
+                                                  @Path("documentId") String documentId);
+
 }
 

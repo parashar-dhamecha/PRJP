@@ -16,18 +16,28 @@ import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.dxdevil.pd.prjp.Model.Request.Document.ListOfDocument
 import com.dxdevil.pd.prjp.Model.Response.DashboardResponse
+import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document
+import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse
+import com.dxdevil.pd.prjp.data.AllDocumentsAdapter
+import com.dxdevil.pd.prjp.data.RecentDocumentAdapter
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_dashboard.awatingotherstv
 import kotlinx.android.synthetic.main.activity_dashboard.awatingsigntv
 import kotlinx.android.synthetic.main.activity_dashboard.completedtv
 import kotlinx.android.synthetic.main.activity_dashboard.duesoontv
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
+import kotlinx.android.synthetic.main.activity_doc.*
+import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.content_dashboarrd.*
+import kotlinx.android.synthetic.main.content_docactivity.*
 import kotlinx.android.synthetic.main.signpopup.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,6 +46,10 @@ import java.lang.Exception
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class Dashboarrd : AppCompatActivity() {
+
+    private var adapter: RecentDocumentAdapter? = null
+    private lateinit var documentList: ArrayList<Document>
+
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var ntoggle: ActionBarDrawerToggle
     @SuppressLint("SetTextI18n", "WrongViewCast")
@@ -53,14 +67,16 @@ class Dashboarrd : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val profilestring = getSharedPreferences("Token", 0).getString("profileimage", "")
-        val bytearray = Base64.decode(profilestring, Base64.DEFAULT)
-        var btmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray.size)
-
         val navid = findViewById<NavigationView>(R.id.nav_view)
         val h = navid.getHeaderView(0)
         val inagev = h.findViewById<CircleImageView>(R.id.imageview_header)
-        inagev!!.setImageBitmap(btmap)
-
+        if(profilestring=="")
+            inagev.setImageResource(R.drawable.user)
+        else{
+            val bytearray = Base64.decode(profilestring, Base64.DEFAULT)
+            val btmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray.size)
+            inagev!!.setImageBitmap(btmap)
+        }
         val htv = h.findViewById<TextView>(R.id.header_nametv)
         val htvem = h.findViewById<TextView>(R.id.header_emailtv)
         htv!!.text =
@@ -68,10 +84,13 @@ class Dashboarrd : AppCompatActivity() {
                 "Token",
                 0
             ).getString("lname", "").toString()
-
         htvem!!.text = getSharedPreferences("Token", 0).getString("email", "")
 
-        var intent = Intent(this@Dashboarrd, DocActivity::class.java)
+
+
+
+
+        val intent = Intent(this@Dashboarrd, DocActivity::class.java)
         intent.putExtra("Source","DocActivity")
         awatingsigntv.setOnClickListener{
 
@@ -137,7 +156,14 @@ class Dashboarrd : AppCompatActivity() {
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
                 R.id.contacts -> {
-                    startActivity(Intent(this@Dashboarrd, Contacts::class.java))
+                    try{ startActivity(Intent(this@Dashboarrd, Contacts::class.java))
+                        drawer_layout.closeDrawer(GravityCompat.START)}catch (e:Exception){
+                        Toast.makeText(this@Dashboarrd,e.message,Toast.LENGTH_LONG).show()
+                    }
+
+                }
+                R.id.verify->{
+                    startActivity(Intent(this@Dashboarrd, VerifyActivity::class.java))
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
                 R.id.settings -> {
@@ -145,24 +171,36 @@ class Dashboarrd : AppCompatActivity() {
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
                 R.id.logout -> {
-
-
-                    var sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
-                    sp.edit().remove("Token").apply()
-                    sp.edit().remove("RefreshToken").apply()
-                    startActivity(Intent(this@Dashboarrd, LoginActivity::class.java))
                     drawer_layout.closeDrawer(GravityCompat.START)
-                }
+                    val builder= AlertDialog.Builder(this@Dashboarrd)
+                    builder.setTitle("Are you sure you want to Logout?")
+                    builder.setPositiveButton("Yes") { dialogInterface: DialogInterface?, i: Int ->
 
+
+                        val sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
+                        sp.edit().remove("Token").apply()
+                        sp.edit().remove("RefreshToken").apply()
+                        startActivity(Intent(this@Dashboarrd, LoginActivity::class.java))
+                        drawer_layout.closeDrawer(GravityCompat.START)
+                    }
+
+                    builder.setNegativeButton("No") { dialogInterface: DialogInterface?, i:Int->
+                        drawer_layout.closeDrawer(GravityCompat.START)
+                    }
+                    val dialog: AlertDialog = builder.create()
+                    dialog.show()
+                }
             }
             true
         }
 
-        var preference = getSharedPreferences("Token", Context.MODE_PRIVATE) as SharedPreferences
-        var tok = preference.getString("Token", "")!!.toString() as String?
+        val preference = getSharedPreferences("Token", Context.MODE_PRIVATE) as SharedPreferences
+        val tok = preference.getString("Token", "")!!.toString() as String?
 
-        var dapi = RetrofitClient.getInstance().api as Api
-        var call = dapi.getDashboardCouts(tok) as Call<DashboardResponse>
+        apiRecentDocs(null,0,tok)
+
+        val dapi = RetrofitClient.getInstance().api as Api
+        val call = dapi.getDashboardCouts(tok) as Call<DashboardResponse>
         call.enqueue(object : Callback<DashboardResponse> {
 
 
@@ -179,7 +217,7 @@ class Dashboarrd : AppCompatActivity() {
                     completedtv?.text = ob.data[0]!!.completed.toString()
                     duesoontv?.text = ob.data[0]!!.expireSoon.toString()
                 } else {
-                    Toast.makeText(this@Dashboarrd, response!!.body()!!.message!!.toString(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@Dashboarrd, "Failure", Toast.LENGTH_LONG).show()
                 }
             }
         })
@@ -243,6 +281,60 @@ class Dashboarrd : AppCompatActivity() {
             moveTaskToBack(true)
         }
         return super.onKeyDown(keycode, event)
+    }
+
+    fun apiRecentDocs(status:Int?, currentpage:Int, token:String? ){
+
+        val api = RetrofitClient.getInstance().api as Api
+
+
+        val call = api.doclist(
+            token, ListOfDocument(
+               null,
+                0,
+                true,
+                null,
+                null,
+                null,
+                0,
+                null,
+                null,
+                null
+            )
+        ) as Call<ListOfDocumentResponse>
+
+        try {
+            call.enqueue(object : Callback<ListOfDocumentResponse> {
+                override fun onFailure(call: Call<ListOfDocumentResponse>, t: Throwable) {
+
+                    Toast.makeText(this@Dashboarrd, "Check your connection", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onResponse(call: Call<ListOfDocumentResponse>, response: Response<ListOfDocumentResponse>) {
+
+                    if (response.isSuccessful) {
+                        try {
+                            adapter = RecentDocumentAdapter(response.body()!!.data[0].documents, this@Dashboarrd )
+                            documentList = response.body()!!.data[0].documents as ArrayList<Document>
+
+                            recentDoc_recyclerView.layoutManager = LinearLayoutManager(this@Dashboarrd)
+                            recentDoc_recyclerView.adapter = RecentDocumentAdapter(response.body()!!.data[0].documents, this@Dashboarrd)
+
+                            adapter!!.notifyDataSetChanged()
+
+                        } catch (e: Exception) {
+
+                            Toast.makeText(this@Dashboarrd, e.message, Toast.LENGTH_LONG).show()
+                        }
+
+                    } else {
+                        Toast.makeText(this@Dashboarrd, "Something went wrong", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+        } catch (e: Exception) {
+            Toast.makeText(this@Dashboarrd, e.message, Toast.LENGTH_SHORT).show()
+        }
     }
 }
 

@@ -69,6 +69,7 @@ class AllDocumentsAdapter(
             intent.putExtra("doc", list[position].id)
             context.startActivity(intent)
         }
+
         }
     }
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
