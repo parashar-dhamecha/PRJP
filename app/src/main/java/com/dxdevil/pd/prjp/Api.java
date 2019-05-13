@@ -144,10 +144,11 @@ public interface Api {
             @Header("Authorization") String Authorization,
             @Part MultipartBody.Part file
     );
+
     @POST("document/create")
-    Call<CreateDocResponse>create(
+    Call<CreateResponse>create(
             @Header("Authorization") String Authorization,
-            @Body CreateDocRequest createDocRequest
+            @Body CreateRequest createRequest
     );
 }
 

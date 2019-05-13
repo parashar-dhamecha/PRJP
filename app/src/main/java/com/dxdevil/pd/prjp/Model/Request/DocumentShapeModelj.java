@@ -4,7 +4,7 @@ package com.dxdevil.pd.prjp.Model.Request;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DocumentShapeModel {
+public class DocumentShapeModelj {
 
     @SerializedName("x")
     @Expose
@@ -50,7 +50,7 @@ public class DocumentShapeModel {
      * No args constructor for use in serialization
      *
      */
-    public DocumentShapeModel() {
+    public DocumentShapeModelj() {
     }
 
     /**
@@ -69,7 +69,7 @@ public class DocumentShapeModel {
      * @param y
      * @param x
      */
-    public DocumentShapeModel(Integer x, Double xPercentage, Integer y, Double yPercentage, Integer w, Double wPercentage, Integer h, Double hPercentage, Integer p, String ratio, String userId, Boolean isAnnotation, String signatureType) {
+    public DocumentShapeModelj(Integer x, Double xPercentage, Integer y, Double yPercentage, Integer w, Double wPercentage, Integer h, Double hPercentage, Integer p, String ratio, String userId, Boolean isAnnotation, String signatureType) {
         super();
         this.x = x;
         this.xPercentage = xPercentage;
