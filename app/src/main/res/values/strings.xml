@@ -191,4 +191,6 @@
     <string name="verify">Verify</string>
     <string name="alldocs">All documents</string>
     <string name="update_profile">Update Profile</string>
+    <string name="contact_Mobno">Mobno</string>
+    <string name="recent_documents">Recent Documents</string>
 </resources>

@@ -55,7 +55,11 @@ class ChangePassword : AppCompatActivity() {
                             startActivity(Intent(this@ChangePassword,LoginActivity::class.java))
                         } else {
                             pd.dismiss()
-                            Toast.makeText(this@ChangePassword, "Invalid Current Password", Toast.LENGTH_LONG).show()
+                            if (response.message().toString() == "Unauthorized") {
+                                startActivity(Intent(this@ChangePassword, LoginActivity::class.java))
+                            } else {
+                                Toast.makeText(this@ChangePassword, "Invalid Current Password", Toast.LENGTH_LONG).show()
+                            }
                         }
                     }
 

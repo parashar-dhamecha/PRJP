@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:id="@+id/swipe"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:layout_gravity="center_vertical"
         app:dragFromEdge="left"
         android:layout_marginBottom="2dp"
@@ -27,8 +27,7 @@
                         android:id="@+id/delbutton"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-
-                        android:background="@color/edittext"
+                        android:background="@color/red"
                         android:layout_marginBottom="2dp"
                         app:srcCompat="@drawable/ic_delete_black_24dp"
                         android:theme="@style/MyEditText"
@@ -60,20 +59,18 @@
                     app:cardCornerRadius="15dp"
                     app:cardElevation="5dp"
                     android:visibility="visible"
-                    android:layout_marginTop="1dp"
-                    android:layout_margin="@dimen/dp5"
-                    android:layout_marginBottom="0dp"
                     android:id="@+id/cardv1">
 
                 <FrameLayout android:layout_width="4dp"
                              android:background="@color/colorPrimary"
+                             android:layout_marginBottom="@dimen/dp5"
             android:layout_height="match_parent">
 
                 </FrameLayout>
                 <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="10dp">
+                        android:padding="5dp">
 
                     <TextView
                             android:layout_width="wrap_content"
@@ -85,11 +82,7 @@
                             android:textColor="@color/textcolor3"
                             android:textAlignment="center"
                             android:id="@+id/pro"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="13dp"
-                            android:layout_marginTop="13dp"
+                            android:layout_centerVertical="true"
                             android:layout_marginStart="4dp"/>
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -113,7 +106,7 @@
                               android:layout_marginStart="29dp"
                               android:layout_toEndOf="@+id/pro"/>
                     <TextView
-                            android:text="@string/contact_mobile_no"
+                            android:text="@String/Contact_Mobno"
                             android:layout_width="wrap_content"
                             android:textColor="@color/slate_black"
                             android:layout_height="wrap_content"

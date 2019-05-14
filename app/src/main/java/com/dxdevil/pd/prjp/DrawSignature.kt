@@ -11,6 +11,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_draw_signature.*
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.util.Base64
 import com.dxdevil.pd.prjp.Model.Request.EnrollSignRequest
 import com.dxdevil.pd.prjp.Model.Request.UpdateSignature
@@ -78,6 +79,8 @@ class DrawSignature : AppCompatActivity() {
 
                             var ppref = getSharedPreferences("Token", Context.MODE_PRIVATE)
                             var token = ppref.getString("Token","") as String
+
+
                             var updateapi = RetrofitClient.getInstance()!!.api as Api
                             var updatecall1 = updateapi?.enrollsignature(token, EnrollSignRequest(2,signstring )) as Call<EnrollSignModel>
 
@@ -96,7 +99,11 @@ class DrawSignature : AppCompatActivity() {
                                             Toast.makeText(this@DrawSignature,"Saved successfully..",Toast.LENGTH_LONG).show()
                                         }else{
                                             pd.dismiss()
-                                            Snackbar.make(it,response.errorBody().toString(),Snackbar.LENGTH_LONG).show()
+                                            if (response.message().toString() == "Unauthorized") {
+                                                startActivity(Intent(this@DrawSignature, LoginActivity::class.java))
+                                            } else {
+                                                Toast.makeText(this@DrawSignature, "Something went wrong", Toast.LENGTH_SHORT).show()
+                                            }
                                         }
 
                                     }
@@ -125,8 +132,11 @@ class DrawSignature : AppCompatActivity() {
                                         Toast.makeText(this@DrawSignature,"Saved successfully..",Toast.LENGTH_LONG).show()
                                     }else{
                                         pd.dismiss()
-                                        Snackbar.make(it,response.errorBody().toString(),Snackbar.LENGTH_LONG).show()
-                                    }
+                                        if (response.message().toString() == "Unauthorized") {
+                                            startActivity(Intent(this@DrawSignature, LoginActivity::class.java))
+                                        } else {
+                                            Toast.makeText(this@DrawSignature, "Something went wrong", Toast.LENGTH_SHORT).show()
+                                        }                                    }
 
                                 }
                             })

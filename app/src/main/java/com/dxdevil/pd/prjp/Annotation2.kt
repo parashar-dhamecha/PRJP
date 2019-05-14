@@ -1,6 +1,7 @@
 package com.dxdevil.pd.prjp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
@@ -8,11 +9,14 @@ import android.os.Bundle
 import android.util.Base64
 import android.view.*
 import android.widget.*
-import com.dxdevil.pd.prjp.Model.Request.CreateRequest
+import com.dxdevil.pd.prjp.Model.Request.CreateDocRequest
+import com.dxdevil.pd.prjp.Model.Request.CreateRequest2
 import com.dxdevil.pd.prjp.Model.Request.Document.NextPage
 import com.dxdevil.pd.prjp.Model.Request.DocumentShapeModel
+import com.dxdevil.pd.prjp.Model.Request.DocumentShapeModelj
 import com.dxdevil.pd.prjp.Model.Response.CreateResponse
 import com.dxdevil.pd.prjp.Model.Response.Document.NextPage.NextPageResponse
+import com.dxdevil.pd.prjp.data.CreateDoc
 import kotlinx.android.synthetic.main.activity_annotation2.*
 import kotlinx.android.synthetic.main.activity_preview.*
 import retrofit2.Call
@@ -21,22 +25,20 @@ import retrofit2.Response
 
 
 @Suppress("ImplicitThis", "RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS",
-    "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "UNCHECKED_CAST"
-)
+    "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "UNCHECKED_CAST")
 class Annotation2 : AppCompatActivity(),View.OnTouchListener{
-
 
     lateinit var viewarr: ArrayList<ImageView>
     lateinit var view :ImageView
      var viewcount: Int = 0
+   lateinit var totpageannot :MutableList<Int>
     lateinit var root: ViewGroup
     private var _xDelta: Int = 0
     private var _yDelta: Int = 0
-     var selsigners : List<String>? = mutableListOf<String>(String())
-    var signersid : List<String>? = mutableListOf(String())
-    var documentshapemodel : List<DocumentShapeModel> = mutableListOf(DocumentShapeModel("ESignature",104,9.647495361781075,true
-    ,2,"0.612","9333F719-6C51-4067-B9AC-C9733A79A392",369,48.55263157894737,242,31.84210526357894,
-        663,61.50278293135436))
+     var selsigners : List<String> = mutableListOf<String>(String())
+    var signersid : MutableList<String> = mutableListOf()
+    var documentshapemodel : List<com.dxdevil.pd.prjp.data.DocumentShapeModel> = mutableListOf(com.dxdevil.pd.prjp.data.DocumentShapeModel(242,31.842105263157894,663,61.50278293135436,
+        369,48.55263157894737,104,9.647495361781075,1,"0.612903225806452","ed26c904-dca3-433d-87ab-a5ac2381de27",true,"ESignature"))
     var title:String?=null
     var pageCount:Int=0
     var token:String? =null
@@ -47,10 +49,11 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
     var currentpage:Int=0
     var pageNo:Int=0
     var length2:Int=0
+    var ispageannot:ArrayList<Boolean> = ArrayList()
     var page : ArrayList<String> = ArrayList()
     lateinit var by:ByteArray
     lateinit var bitmap: Bitmap
-
+    var pageindexstart :MutableList<Int> = mutableListOf()
 //    var xa :ArrayList<Int> = ArrayList()
 //    var ya :ArrayList<Int> = ArrayList()
 //    var wa :ArrayList<Int> = ArrayList()
@@ -67,12 +70,13 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_annotation2)
         root = findViewById(R.id.Relativelid)
-       selsigners=this.intent.getStringArrayListExtra("ssname")
-        signersid=this.intent.getStringArrayListExtra("ssid")
+//        selsigners=this.intent.getStringArrayListExtra("ssname")
+        signersid.add(0,"ed26c904-dca3-433d-87ab-a5ac2381de27")
         viewarr=ArrayList<ImageView>()
 
+
         var sp = this.getSharedPreferences("CreateDocDetails",0)
-       docId= sp.getString("docid","")as String
+        docId= sp.getString("docid","")as String
         token = this.getSharedPreferences("Token",0).getString("Token","").toString()
         prev_button.isEnabled=false
 
@@ -80,44 +84,75 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
 
 
         next_button!!.setOnClickListener {
+            synchronized(this) {
+                prev_button.isEnabled = true
+                var fv = viewcount
+                while (fv > pageindexstart[currentpage]) {
+                    root.removeView(findViewById(fv-1))
+                    fv -= 1
+                }
+                currentpage += 1
 
-            prev_button.isEnabled = true
+                if(totpageannot[currentpage]==0) {
+                    ispageannot.add(currentpage, false)
+                    pageindexstart.add(currentpage, viewcount)
+                }
+                if(ispageannot[currentpage]==true){
+                    var sp = pageindexstart[currentpage]
+                    while(sp<pageindexstart[currentpage]+totpageannot[currentpage]){
+                        root.addView(viewarr[sp])
+                        sp+=1
+                    }
+                }
+                if (pageNo % 6 == 0 && pageNo
+                    == page.size) {
+                    fromP = cpage + 1
+                    toP = cpage + 6
+                    apiNextPage(token, fromP.toString(), toP.toString())
 
-            currentpage+=1
-            if(pageNo%6==0&&pageNo==page.size){
 
-                fromP=cpage+1
-                toP=cpage+6
-                apiNextPage(token,fromP.toString(),toP.toString())
+                } else {
+                    by = Base64.decode(page[currentpage], Base64.DEFAULT)
+                    bitmap = BitmapFactory.decodeByteArray(by, 0, by.size)
+                    previewdocid.setImageBitmap(bitmap)
+                    pageNo = pageNo.inc()
 
-            } else{
-                by = Base64.decode(page[currentpage], Base64.DEFAULT)
-                bitmap = BitmapFactory.decodeByteArray(by, 0, by.size)
-                previewdocid.setImageBitmap(bitmap)
-                pageNo = pageNo.inc()
-
-            }
-            cpage=cpage.inc()
+                }
+                cpage = cpage.inc()
 //            cpage_number.text = pageNo.toString()
-            if(pageNo==pageCount)
-                next_button.isEnabled=false
+                if (pageNo == pageCount)
+                    next_button.isEnabled = false
+            }
         }
 
         prev_button.setOnClickListener {
+            synchronized(this) {
+                next_button.isEnabled = true
+                var fv = viewcount
+                while (fv > pageindexstart[currentpage]) {
+                    root.removeView(findViewById(fv-1))
+                    fv -= 1
+                }
 
-            next_button.isEnabled=true
-            currentpage-=1
+                currentpage -= 1
 
-            by = Base64.decode(page[currentpage], Base64.DEFAULT)
-            bitmap= BitmapFactory.decodeByteArray(by,0,by.size)
-            previewdocid.setImageBitmap(bitmap)
-            pageNo=pageNo.dec()
-            cpage=cpage.dec()
-
-            if(pageNo==1)
-                prev_button.isEnabled=false
+                by = Base64.decode(page[currentpage], Base64.DEFAULT)
+                bitmap = BitmapFactory.decodeByteArray(by, 0, by.size)
+                previewdocid.setImageBitmap(bitmap)
+                pageNo = pageNo.dec()
+                cpage = cpage.dec()
+                Toast.makeText(this@Annotation2, pageindexstart[currentpage].toString(), Toast.LENGTH_LONG).show()
+                if(ispageannot[currentpage]==true){
+                    var sp = pageindexstart[currentpage]
+                    while(sp<pageindexstart[currentpage]+totpageannot[currentpage]){
+                        root.addView(viewarr[sp])
+                        sp+=1
+                    }
+                }
+                if (pageNo == 1)
+                    prev_button.isEnabled = false
+            }
         }
-
 
 
         if(selsigners!=null) {
@@ -127,7 +162,6 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
             signerspinner.adapter = adapter!!
         }
 
-
          addantbutton.setOnClickListener {
              synchronized(this) {
                  viewarr.add( addannotatio() as ImageView)
@@ -135,6 +169,8 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
                  root.addView(viewarr[viewcount])
                  viewarr[viewcount].setOnTouchListener(this)
                  viewcount+=1
+                 totpageannot.add(currentpage,totpageannot.elementAt(currentpage)+1)
+                 ispageannot.add(currentpage,true)
              }
          }
         clearantbutton.setOnClickListener {
@@ -202,12 +238,19 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
                         previewdocid.setImageBitmap(bitmap)
                         pageNo=pageNo.inc()
 
+                        totpageannot=MutableList(page.size){0}
+                        pageindexstart.add(0,0)
+
                         dialog.dismiss()
                     }
                     else
                     {
                         dialog.dismiss()
-                        Toast.makeText(this@Annotation2, response.message().toString(), Toast.LENGTH_SHORT).show()
+                        if (response.message().toString() == "Unauthorized") {
+                            startActivity(Intent(this@Annotation2, LoginActivity::class.java))
+                        } else {
+                            Toast.makeText(this@Annotation2, response.message().toString(), Toast.LENGTH_LONG).show()
+                        }
                     }
                 }
             })}catch (e:Exception){
@@ -250,19 +293,7 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
                 val lParams = view.getLayoutParams() as RelativeLayout.LayoutParams
                 _xDelta = X - lParams.leftMargin
                 _yDelta = Y - lParams.topMargin
-                if(view.x<=1){
-                    view.x= 1F
-                }
-                if(view.y<=1){
-                    view.y= 1F
-                }
-                if(view.x>=505) {
-                    view.x = 505F
 
-                }
-                if(view.y>=965){
-                    view.y=965F
-                }
             }
 
 
@@ -297,18 +328,6 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
 //                    signersid?.get(selsigners!!.indexOf(signerspinner!!.selectedItem)),true,"ESignature"))
 
                  Toast.makeText(this@Annotation2,view.x.toString(),Toast.LENGTH_LONG).show()
-                if(view.x<=1){
-                    view.x= 1F
-                }
-                if(view.y<=1){
-                    view.y= 1F
-                }
-                if(view.x>=505){
-                    view.x= 505F
-                }
-                if(view.y>=965){
-                    view.y=965F
-                }
 
 //            view.setOnTouchListener(null)
 //                view.setOnClickListener {
@@ -329,18 +348,7 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
                 layoutParams.bottomMargin = -250
                 xycoordinates.text= "X:${view.x},Y:${view.y}"
                 view.setLayoutParams(layoutParams)
-                if(view.x<=1){
-                    view.x= 1F
-                }
-                if(view.y<=1){
-                    view.y= 1F
-                }
-                if(view.x>=505){
-                    view.x= 505F
-                }
-                if(view.y>=965){
-                    view.y=965F
-                }
+
             }
         }
         root.invalidate()
@@ -365,8 +373,10 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
             var seqpar=    sp.getString("seqpara","")as String
 //            var reminddays =   sp.getString("reminddays","")?.toInt()
               var docid =  sp.getString("docid","")as String
-                var totsign= mutableListOf<Int>(3)
-                var authtype= mutableListOf<Int>(1)
+                var totsign= mutableListOf<Int>()
+                totsign.add(3)
+                var authtype= mutableListOf<Int>()
+                authtype.add(1)
                 var token = this.getSharedPreferences("Token",0).getString("Token","").toString()
 
 
@@ -375,16 +385,16 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
 
            val createapi: Api = RetrofitClient.getInstance().api as Api
                 val createcall = createapi.create(
-                    token, CreateRequest(authtype,
-                        des,
+                    token, CreateDoc(docid, filename,filename,".pdf",
+                        "sample doc","2019-05-11 11:42",
+                        "2019-05-11 11:42","2019-05-11 11:42",3,
+                        documentshapemodel ,2, this!!.signersid as List<String>,
+                        null,totsign,
                         4.092356,
-                        -56.062161,documentshapemodel ,
-                        "2019-05-11 11:42",
-                        "2019-05-11 11:42",
-                        ".pdf",
-                        filename,filename,null,docid,3,totsign, this!!.signersid as List<String>,"2019-05-11 11:42"
-                    ,2,"Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36","61.12.66.6"))as Call<CreateResponse>
-
+                        -56.062161,
+                        "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36","61.12.66.6"
+                        ,authtype)
+                ) as Call<CreateResponse>
 
                 createcall!!.enqueue(object : Callback<CreateResponse>{
                     override fun onFailure(call: Call<CreateResponse>, t: Throwable) {
@@ -394,18 +404,16 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
                         if(response.isSuccessful){
                             Toast.makeText(this@Annotation2,"successfully created",Toast.LENGTH_LONG).show()
                         }else{
-                            Toast.makeText(this@Annotation2,response.errorBody().toString()+""+response.message().toString(),Toast.LENGTH_LONG).show()
-
+                            if (response.message().toString() == "Unauthorized") {
+                                startActivity(Intent(this@Annotation2, LoginActivity::class.java))
+                            } else {
+                                Toast.makeText(this@Annotation2, response.message().toString(), Toast.LENGTH_LONG).show()
+                            }
                         }
                     }
                 })
-
-
                 }
-
-
             }
-
         return super.onOptionsItemSelected(item)
     }
 

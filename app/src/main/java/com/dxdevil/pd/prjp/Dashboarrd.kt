@@ -29,10 +29,6 @@ import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocument
 import com.dxdevil.pd.prjp.data.AllDocumentsAdapter
 import com.dxdevil.pd.prjp.data.RecentDocumentAdapter
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.activity_dashboard.awatingotherstv
-import kotlinx.android.synthetic.main.activity_dashboard.awatingsigntv
-import kotlinx.android.synthetic.main.activity_dashboard.completedtv
-import kotlinx.android.synthetic.main.activity_dashboard.duesoontv
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
 import kotlinx.android.synthetic.main.activity_doc.*
 import kotlinx.android.synthetic.main.activity_settings.*
@@ -217,7 +213,11 @@ class Dashboarrd : AppCompatActivity() {
                     completedtv?.text = ob.data[0]!!.completed.toString()
                     duesoontv?.text = ob.data[0]!!.expireSoon.toString()
                 } else {
-                    Toast.makeText(this@Dashboarrd, "Failure", Toast.LENGTH_LONG).show()
+                    if (response.message().toString() == "Unauthorized") {
+                        startActivity(Intent(this@Dashboarrd, LoginActivity::class.java))
+                    } else {
+                        Toast.makeText(this@Dashboarrd, response.message().toString(), Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         })
@@ -328,7 +328,11 @@ class Dashboarrd : AppCompatActivity() {
                         }
 
                     } else {
-                        Toast.makeText(this@Dashboarrd, "Something went wrong", Toast.LENGTH_SHORT).show()
+                        if (response.message().toString() == "Unauthorized") {
+                            startActivity(Intent(this@Dashboarrd, LoginActivity::class.java))
+                        } else {
+                            Toast.makeText(this@Dashboarrd, response.message().toString(), Toast.LENGTH_LONG).show()
+                        }
                     }
                 }
             })

@@ -2,6 +2,7 @@ package com.dxdevil.pd.prjp
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Typeface
@@ -187,7 +188,11 @@ class Type : AppCompatActivity(), View.OnClickListener {
                                     Toast.makeText(this@Type,"Saved successfully..",Toast.LENGTH_LONG).show()
                                 }else{
                                     pd.dismiss()
-                                    Snackbar.make(it,response.errorBody().toString(),Snackbar.LENGTH_LONG).show()
+                                    if (response.message().toString() == "Unauthorized") {
+                                        startActivity(Intent(this@Type, LoginActivity::class.java))
+                                    } else {
+                                        Toast.makeText(this@Type, response.message().toString(), Toast.LENGTH_SHORT).show()
+                                    }
                                 }
 
                             }
@@ -216,8 +221,11 @@ class Type : AppCompatActivity(), View.OnClickListener {
                                     Toast.makeText(this@Type,"Saved successfully..",Toast.LENGTH_LONG).show()
                                 }else{
                                     pd.dismiss()
-                                    Snackbar.make(it,response.errorBody().toString(),Snackbar.LENGTH_LONG).show()
-                                }
+                                    if (response.message().toString() == "Unauthorized") {
+                                        startActivity(Intent(this@Type, LoginActivity::class.java))
+                                    } else {
+                                        Toast.makeText(this@Type, response.message().toString(), Toast.LENGTH_SHORT).show()
+                                    }                                         }
 
                             }
                         })

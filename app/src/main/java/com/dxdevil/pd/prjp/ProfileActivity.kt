@@ -107,46 +107,16 @@ class ProfileActivity : AppCompatActivity() {
                     }
                 } else {
                     pd.dismiss()
-                    Toast.makeText(this@ProfileActivity, "error", Toast.LENGTH_LONG).show()
-                    refreshtoken()
+                    if (response.message().toString() == "Unauthorized") {
+                        startActivity(Intent(this@ProfileActivity, LoginActivity::class.java))
+                    } else {
+                        Toast.makeText(this@ProfileActivity, response.message().toString(), Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         })
     }
-    fun refreshtoken(){
-        var prefer = getSharedPreferences("Token", Context.MODE_PRIVATE)
-        var ed = prefer.edit()
-        var refreshapi = RetrofitClient.getInstance().api as Api
-        var call = refreshapi.refreshtoken(
-            RefreshToken(
-                getSharedPreferences(
-                    "Token",
-                    Context.MODE_PRIVATE
-                ).getString("Token", "")?.toString(),
-                getSharedPreferences("Token", Context.MODE_PRIVATE).getString("RefreshToken", "")?.toString()
-            )
-        ) as Call<RefreshTokenModel>
-        call?.enqueue(object : Callback<RefreshTokenModel> {
-            override fun onFailure(call: Call<RefreshTokenModel>, t: Throwable) {
-                Toast.makeText(this@ProfileActivity, "check your connection", Toast.LENGTH_LONG).show()
-            }
 
-
-            override fun onResponse(call: Call<RefreshTokenModel>, response: Response<RefreshTokenModel>) {
-                if(response.isSuccessful){
-                    ed.putString("Token",response.body()!!.data[0].token.toString())
-                    ed.putString("RefreshToken",response.body()!!.data[0].refreshToken.toString())
-                    ed.commit()
-                    Toast.makeText(this@ProfileActivity, "token updated..", Toast.LENGTH_LONG).show()
-                    profileapi()
-                }else{
-                    Toast.makeText(this@ProfileActivity, "error while updating token", Toast.LENGTH_LONG).show()
-                }
-            }
-
-        })
-
-        }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu to use in the action bar
         val inflater = menuInflater

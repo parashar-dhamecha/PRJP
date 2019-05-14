@@ -1,10 +1,12 @@
 package com.dxdevil.pd.prjp.Model.Request;
 
 
+import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DocumentShapeModelj {
+public class DocumentShapeModelj implements Serializable
+{
 
     @SerializedName("x")
     @Expose
@@ -45,6 +47,7 @@ public class DocumentShapeModelj {
     @SerializedName("SignatureType")
     @Expose
     public String signatureType;
+    private final static long serialVersionUID = -8819970216368233544L;
 
     /**
      * No args constructor for use in serialization

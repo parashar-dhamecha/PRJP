@@ -233,9 +233,14 @@ import kotlin.collections.ArrayList
                 pd.dismiss()
             }
                 else{
-                Toast.makeText(this@Uploadfile,response.message().toString(),Toast.LENGTH_LONG).show()
-                startActivity(Intent(this@Uploadfile,Dashboarrd::class.java))
-                pd.dismiss()
+                if (response.message().toString() == "Unauthorized") {
+                    startActivity(Intent(this@Uploadfile, LoginActivity::class.java))
+                } else {
+                    Toast.makeText(this@Uploadfile, response.message().toString(), Toast.LENGTH_SHORT).show()
+
+                    startActivity(Intent(this@Uploadfile, Dashboarrd::class.java))
+                }
+                    pd.dismiss()
             }
             }
         })

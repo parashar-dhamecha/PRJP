@@ -120,8 +120,12 @@ lateinit var userid:String
                     }
                 } else {
                     pd.dismiss()
-                    Toast.makeText(this@EditProfile, "error", Toast.LENGTH_LONG).show()
+                    if (response.message().toString() == "Unauthorized") {
+                        startActivity(Intent(this@EditProfile, LoginActivity::class.java))
+                    } else {
 
+                    Toast.makeText(this@EditProfile, "error", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         })
@@ -190,7 +194,13 @@ lateinit var userid:String
                         }
                         else{
                             dialog.dismiss()
-                            Toast.makeText(this@EditProfile,"somethiing went wrong",Toast.LENGTH_LONG).show()
+                            if (response.message().toString() == "Unauthorized") {
+                                startActivity(Intent(this@EditProfile, LoginActivity::class.java))
+                            } else {
+
+                                Toast.makeText(this@EditProfile, "somethiing went wrong", Toast.LENGTH_LONG).show()
+                            }
+
                         }
                     }
                 })

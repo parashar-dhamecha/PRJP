@@ -153,7 +153,13 @@ class DocumentDetailActivity : AppCompatActivity() {
                 }
                 else {
                     dialog.dismiss()
-                    Toast.makeText(this@DocumentDetailActivity, "failure", Toast.LENGTH_SHORT).show()
+                    if (response.message().toString() == "Unauthorized") {
+                        startActivity(Intent(this@DocumentDetailActivity, LoginActivity::class.java))
+                    } else {
+
+                        Toast.makeText(this@DocumentDetailActivity, "failure", Toast.LENGTH_SHORT).show()
+
+                    }
                 }
 
                }

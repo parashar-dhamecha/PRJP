@@ -346,7 +346,11 @@ class DocActivity : AppCompatActivity() {
 
                     } else {
                         dialog.dismiss()
-                        Toast.makeText(this@DocActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                        if (response.message().toString() == "Unauthorized") {
+                            startActivity(Intent(this@DocActivity, LoginActivity::class.java))
+                        } else {
+                            Toast.makeText(this@DocActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             })
