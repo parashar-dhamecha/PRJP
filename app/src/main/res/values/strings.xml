@@ -62,7 +62,7 @@
     <string name="country_id">Country Id</string>
     <string name="aw_sign">Awaiting My Sign</string>
     <string name="button_clear">clear</string>
-    <string name="savebutton">Save</string>
+    <string name="savebutton">Save </string>
     <string name="choose">Select Photo</string>
     <string name="type">Type</string>
     <string name="name">Name</string>
@@ -114,7 +114,7 @@
     <string name="Job_Title">Job Title</string>
     <string name="Organization">Organization</string>
     <string name="Date_Of_Birth">Date Of Birth</string>
-    <string name="Gender">Gender</string>
+    <string name="Gender">Gender:</string>
     <string name="Description">Description</string>
     <string name="Male">Male</string>
     <string name="Female">Female</string>
@@ -199,6 +199,7 @@
     <string name="update_profile">Updating profile</string>
     <string name="verify">Verify</string>
     <string name="alldocs">All documents</string>
+    <string name="document_history">Document History</string>
 
     <string name="recent_documenets">Recent_documents</string>
 
