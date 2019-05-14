@@ -18,6 +18,7 @@ import com.google.android.material.navigation.NavigationView
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.activity_verify.*
+import kotlinx.android.synthetic.main.content_verify.*
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class VerifyActivity : AppCompatActivity() {
@@ -108,6 +109,20 @@ class VerifyActivity : AppCompatActivity() {
 
 
             true
+        }
+
+
+        button.setOnClickListener{
+            val intent = Intent(this@VerifyActivity, Verify_list::class.java)
+            startActivity(intent)
+
+        }
+
+        button2.setOnClickListener{
+
+            val intent = Intent(this@VerifyActivity, Verify_list::class.java)
+            startActivity(intent)
+
         }
 
 

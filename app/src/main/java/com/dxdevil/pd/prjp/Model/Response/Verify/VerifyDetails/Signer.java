@@ -1,5 +1,5 @@
 
-package com.dxdevil.pd.prjp.Model.Verify.VerifyDetails;
+package com.dxdevil.pd.prjp.Model.Response.Verify.VerifyDetails;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
