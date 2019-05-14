@@ -33,8 +33,6 @@ import com.github.clans.fab.FloatingActionMenu
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.activity_bulk_import.*
-import kotlinx.android.synthetic.main.activity_bulk_import.view.*
 import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
 import kotlinx.android.synthetic.main.activity_settings.*
@@ -91,7 +89,7 @@ class Contacts : AppCompatActivity() {
             ).getString("lname", "").toString()
         htvem!!.text = getSharedPreferences("Token", 0).getString("email", "")
 
-        var fab = findViewById<FloatingActionButton>(R.id.floatingActionButton)
+       // var fab = findViewById<FloatingActionButton>(R.id.floatingActionButton)
 
 
 
