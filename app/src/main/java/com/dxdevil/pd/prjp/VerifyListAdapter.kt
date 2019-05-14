@@ -10,9 +10,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.dxdevil.pd.prjp.Model.Response.Verify.List.DocumentList
 import com.dxdevil.pd.prjp.Model.Response.Verify.VerifyDetails.DocumentDetail
 
-class VerifyListAdapter(var list: List<DocumentDetail>,
+class VerifyListAdapter(var list: List<DocumentList>,
                         var context: Context): RecyclerView.Adapter<VerifyListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: VerifyListAdapter.ViewHolder, position: Int) {
