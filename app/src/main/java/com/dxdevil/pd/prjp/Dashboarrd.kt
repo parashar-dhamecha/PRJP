@@ -16,6 +16,7 @@ import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -53,6 +54,7 @@ class Dashboarrd : AppCompatActivity() {
         setContentView(R.layout.activity_dashboarrd)
 
 
+        RecentDocProgress.visibility=View.GONE
 
         drawerLayout = findViewById(R.id.drawer_layout)
         ntoggle =
@@ -283,6 +285,10 @@ class Dashboarrd : AppCompatActivity() {
         val api = RetrofitClient.getInstance().api as Api
 
 
+        RecentDocProgress.visibility=View.VISIBLE
+
+
+
         val call = api.doclist(
             token, ListOfDocument(
                null,
@@ -302,6 +308,9 @@ class Dashboarrd : AppCompatActivity() {
             call.enqueue(object : Callback<ListOfDocumentResponse> {
                 override fun onFailure(call: Call<ListOfDocumentResponse>, t: Throwable) {
 
+                    RecentDocProgress.visibility=View.GONE
+
+
                     Toast.makeText(this@Dashboarrd, "Check your connection", Toast.LENGTH_SHORT).show()
                 }
 
@@ -317,17 +326,21 @@ class Dashboarrd : AppCompatActivity() {
 
                             adapter!!.notifyDataSetChanged()
 
+                            RecentDocProgress.visibility=View.GONE
                         } catch (e: Exception) {
 
+                            RecentDocProgress.visibility=View.GONE
                             Toast.makeText(this@Dashboarrd, e.message, Toast.LENGTH_LONG).show()
                         }
 
                     } else {
+                        RecentDocProgress.visibility=View.GONE
                         Toast.makeText(this@Dashboarrd, "Something went wrong", Toast.LENGTH_SHORT).show()
                     }
                 }
             })
         } catch (e: Exception) {
+            RecentDocProgress.visibility=View.GONE
             Toast.makeText(this@Dashboarrd, e.message, Toast.LENGTH_SHORT).show()
         }
     }

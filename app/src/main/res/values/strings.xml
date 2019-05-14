@@ -107,9 +107,9 @@
     <string name="CreateGroup">Create Group</string>
     <string name="edit_title">Edit Profile</string>
     <string name="Image_des">User_image</string>
-    <string name="First_Name">First Name</string>
-    <string name="Last_Name">Last Name</string>
-    <string name="Email_Address">Email Address</string>
+    <string name="First_Name">First Name*</string>
+    <string name="Last_Name">Last Name*</string>
+    <string name="Email_Address">Email Address*</string>
     <string name="Mobile_No">Mobile No*</string>
     <string name="Job_Title">Job Title</string>
     <string name="Organization">Organization</string>

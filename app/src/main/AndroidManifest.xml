@@ -24,11 +24,7 @@
         <activity android:name=".Verify_list">
         </activity>
         <activity android:name=".VerifyDocumentDetail">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
                 android:name=".VerifyActivity"
@@ -62,6 +58,20 @@
                 android:name=".MainActivity"
                 android:theme="@style/AppTheme.NoActionBar"
                 tools:ignore="ExtraText">
+            <intent-filter>
+                 <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".ProfileActivity"
+                  android:parentActivityName=".Settings">
+
+        </activity>
+        <activity android:name=".EditProfile"
+        android:parentActivityName=".ProfileActivity"
+        android:label="Edit Profile">
+
         </activity>
         <activity android:name=".ForgotPasswordActivity">
         </activity>
