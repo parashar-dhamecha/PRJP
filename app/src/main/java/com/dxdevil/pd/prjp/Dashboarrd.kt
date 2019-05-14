@@ -16,7 +16,6 @@ import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
-import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -26,7 +25,6 @@ import com.dxdevil.pd.prjp.Model.Request.Document.ListOfDocument
 import com.dxdevil.pd.prjp.Model.Response.DashboardResponse
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse
-import com.dxdevil.pd.prjp.data.AllDocumentsAdapter
 import com.dxdevil.pd.prjp.data.RecentDocumentAdapter
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_dashboard.awatingotherstv
@@ -34,10 +32,7 @@ import kotlinx.android.synthetic.main.activity_dashboard.awatingsigntv
 import kotlinx.android.synthetic.main.activity_dashboard.completedtv
 import kotlinx.android.synthetic.main.activity_dashboard.duesoontv
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
-import kotlinx.android.synthetic.main.activity_doc.*
-import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.content_dashboarrd.*
-import kotlinx.android.synthetic.main.content_docactivity.*
 import kotlinx.android.synthetic.main.signpopup.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -246,7 +241,7 @@ class Dashboarrd : AppCompatActivity() {
 
         addsignature.setOnClickListener {
             try {
-                var ft = supportFragmentManager.beginTransaction()
+                val ft = supportFragmentManager.beginTransaction()
                 val cf: ChooseDF = ChooseDF()
                 cf.show(ft, "dialog")
 

@@ -289,7 +289,7 @@
                     android:layout_marginStart="16dp"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="8dp"
-                    android:textSize="18sp"/>
+                    android:textSize="16sp"/>
             <View
                     android:id="@+id/divider5"
                     android:layout_width="379dp"

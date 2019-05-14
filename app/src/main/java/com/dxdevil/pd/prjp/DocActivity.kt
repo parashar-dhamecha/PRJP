@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
@@ -59,7 +58,6 @@ class DocActivity : AppCompatActivity() {
         setContentView(R.layout.activity_doc)
         setTitle(R.string.documents)
 
-        val st = getSharedPreferences("Doc_status", 0) as SharedPreferences
 
         drawerLayout = findViewById(R.id.drawer_layout_document)
         ntoggle =
@@ -122,7 +120,7 @@ class DocActivity : AppCompatActivity() {
             button_previous.isEnabled=true
                 currentPage +=1
                 apiCalling(null,currentPage,token)
-        pageNo=pageNo.inc()
+                pageNo=pageNo.inc()
         }
 
       button_previous.setOnClickListener {
