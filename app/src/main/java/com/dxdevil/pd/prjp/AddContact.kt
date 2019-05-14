@@ -18,7 +18,7 @@ import java.io.IOException
 class AddContact : AppCompatActivity() {
 
 
-    val Nameregex="""^[A-Za-z]+${'$'}""".toRegex()
+    val Nameregex="""^[A-Za-z  ]+${'$'}""".toRegex()
     val Numberregex="""^[0-9]+$""".toRegex()
 
 

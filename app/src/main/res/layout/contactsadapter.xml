@@ -28,7 +28,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
 
-                        android:background="@color/edittext"
+                        android:background="@color/warm_grey"
                         android:layout_marginBottom="2dp"
                         app:srcCompat="@drawable/ic_delete_black_24dp"
                         android:theme="@style/MyEditText"
@@ -108,20 +108,22 @@
                               android:id="@+id/email"
                               android:textColor="@color/textcolor"
                               android:layout_below="@+id/name"
-                              android:text="@string/contact_email"
                               android:layout_marginTop="5dp"
-                              android:layout_marginStart="29dp"
-                              android:layout_toEndOf="@+id/pro"/>
-                    <TextView
+                               android:layout_toEndOf="@+id/pro"
+                              android:text="@string/contact_email"
+                                android:layout_marginStart="28dp"/>
+
+                             <TextView
                             android:text="@string/contact_mobile_no"
                             android:layout_width="wrap_content"
                             android:textColor="@color/slate_black"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="29dp"
+                            android:layout_marginStart="82dp"
                             android:layout_alignParentBottom="true"
                             android:id="@+id/mobileno"
                             android:layout_marginBottom="10dp"
                             android:layout_below="@+id/email"
+                            android:layout_marginTop="5dp"/>
                             android:layout_marginTop="5dp"
                             android:layout_toEndOf="@+id/pro"/>
 

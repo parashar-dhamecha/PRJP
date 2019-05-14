@@ -1,5 +1,4 @@
-
-<resources >
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Cygnature</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
@@ -169,9 +168,13 @@
     <string name="picktime">Time</string>
     <string name="ExpireyDate">Expiry Date</string>
     <string name="expirey_date">Expirey Date</string>
+    <string name="expirey_end_date" tools:ignore="ExtraTranslation">Expirey End Date</string>
+    <string name="expirey_start_date">Expirey Start Date</string>
+    <string name="Signing_Due_date">Signing Due Date</string>
     <string name="paralel">Parallel</string>
     <string name="remindbefore">Remind Before</string>
     <string name="id">imageview</string>
+
     <string name="no_observers">There are no observers</string>
     <string name="not_notarized_message">This Document is yet not Notarized.</string>
     <string name="view_doc">Preview the document</string>
@@ -186,9 +189,6 @@
     <string name="selectsigners">Select Signers</string>
     <string name="prev">prev</string>
     <string name="nextf">next</string>
-    <string name="expirey_start_date">expiry start date  </string>
-    <string name="expirey_end_date">expiry end date  </string>
-    <string name="Signing_Due_date">Signing due date</string>
     <string name="days">Days</string>
     <string name="Zero">0</string>
     <string name="Addc">Add Contact</string>
@@ -200,5 +200,10 @@
     <string name="verify">Verify</string>
     <string name="alldocs">All documents</string>
     <string name="document_history">Document History</string>
+
+    <string name="recent_documenets">Recent_documents</string>
+
+    <string name="notarization_details">Notarization Details</string>
+
 
 </resources>

@@ -33,8 +33,6 @@ import com.github.clans.fab.FloatingActionMenu
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.activity_bulk_import.*
-import kotlinx.android.synthetic.main.activity_bulk_import.view.*
 import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
 import kotlinx.android.synthetic.main.activity_settings.*
@@ -91,6 +89,10 @@ class Contacts : AppCompatActivity() {
             ).getString("lname", "").toString()
         htvem!!.text = getSharedPreferences("Token", 0).getString("email", "")
 
+       // var fab = findViewById<FloatingActionButton>(R.id.floatingActionButton)
+
+
+
        floatingActionButton.setOnClickListener{
            val intent = Intent(this@Contacts, AddContact::class.java)
            startActivity(intent)
@@ -111,6 +113,9 @@ class Contacts : AppCompatActivity() {
                 Toast.makeText(this@Contacts,"wrong ",Toast.LENGTH_LONG).show()
                 onbj.filtereList1(p0)
                 onbj.notifyDataSetChanged()
+               // onbj.notifyDataSetChanged()
+
+
                 return false
             }
         })
@@ -163,6 +168,8 @@ class Contacts : AppCompatActivity() {
                     val dialog: AlertDialog = builder.create()
                     dialog.show()
                 }
+
+
             }
 
 
@@ -228,6 +235,7 @@ class Contacts : AppCompatActivity() {
                 val api1 = RetrofitClient.getInstance()!!.api as Api
                 var call1 = api1.getcontactresponse(token) as Call<ContactList>
                 call1.enqueue(object : Callback<ContactList> {
+
                     override fun onFailure(call: Call<ContactList>, t: Throwable) {
                         //      progressbar.visibility = View.GONE
                         Toast.makeText(this@Contacts, "Check your internet Connection", Toast.LENGTH_LONG).show()
