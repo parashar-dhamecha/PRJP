@@ -2,6 +2,7 @@ package com.dxdevil.pd.prjp
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
@@ -164,6 +165,12 @@ class PreviewActivity : AppCompatActivity() {
                         bitmap= BitmapFactory.decodeByteArray(by,0,by.size)
                         img_fileBITMAP.setImageBitmap(bitmap)
 
+                    }else{
+                        if (response.message().toString() == "Unauthorized") {
+                            startActivity(Intent(this@PreviewActivity, LoginActivity::class.java))
+                        } else {
+                            Toast.makeText(this@PreviewActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }catch (e:Exception)
                 {
@@ -226,7 +233,11 @@ class PreviewActivity : AppCompatActivity() {
                 else
                {
                    dialog.dismiss()
-                   Toast.makeText(this@PreviewActivity, "else", Toast.LENGTH_SHORT).show()
+                   if (response.message().toString() == "Unauthorized") {
+                       startActivity(Intent(this@PreviewActivity, LoginActivity::class.java))
+                   } else {
+                       Toast.makeText(this@PreviewActivity, response.message().toString(), Toast.LENGTH_SHORT).show()
+                   }
                }
             }
         })}catch (e:Exception){

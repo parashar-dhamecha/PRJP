@@ -253,7 +253,11 @@ class Contacts : AppCompatActivity() {
                             setRecyclerView(contactList)
 
                         } else {
-                            Toast.makeText(this@Contacts, "error" + response.errorBody(), Toast.LENGTH_LONG).show()
+                            if (response.message().toString() == "Unauthorized") {
+                                startActivity(Intent(this@Contacts, LoginActivity::class.java))
+                            } else {
+                                Toast.makeText(this@Contacts, "error" + response.errorBody(), Toast.LENGTH_LONG).show()
+                            }
                         }
                     } catch (e: IOException) {
                         Toast.makeText(applicationContext, "Exception", Toast.LENGTH_SHORT).show()

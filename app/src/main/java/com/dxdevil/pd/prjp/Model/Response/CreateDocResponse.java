@@ -4,8 +4,7 @@ import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+
 
 public class CreateDocResponse {
 
@@ -14,10 +13,10 @@ public class CreateDocResponse {
     public String message;
     @SerializedName("data")
     @Expose
-    public List<Datum> data = null;
+    public List<CreateDatum> data;
     @SerializedName("license")
     @Expose
-    public Object license;
+    public String license;
 
     /**
      * No args constructor for use in serialization
@@ -32,7 +31,7 @@ public class CreateDocResponse {
      * @param data
      * @param license
      */
-    public CreateDocResponse(String message, List<Datum> data, Object license) {
+    public CreateDocResponse(String message, List<CreateDatum> data, String license) {
         super();
         this.message = message;
         this.data = data;
@@ -42,23 +41,3 @@ public class CreateDocResponse {
 }
 
 
-class Datum {
-
-    @SerializedName("documentId")
-    @Expose
-    public String documentId;
-
-    /**
-     * No args constructor for use in serialization
-     */
-    public Datum() {
-    }
-
-    /**
-     * @param documentId
-     */
-    public Datum(String documentId) {
-        super();
-        this.documentId = documentId;
-    }
-}

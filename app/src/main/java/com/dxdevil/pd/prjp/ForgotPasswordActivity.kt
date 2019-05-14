@@ -37,7 +37,11 @@ class ForgotPasswordActivity:AppCompatActivity(){
                        startActivity(Intent(applicationContext,LoginActivity::class.java))
                        Toast.makeText(this@ForgotPasswordActivity,response!!.body()!!.message!!.toString(),Toast.LENGTH_LONG).show()
                    }else{
-                       Toast.makeText(this@ForgotPasswordActivity,response!!.body()!!.message!!.toString(),Toast.LENGTH_LONG).show()
+                       if (response.message().toString() == "Unauthorized") {
+                           startActivity(Intent(this@ForgotPasswordActivity, LoginActivity::class.java))
+                       } else {
+                           Toast.makeText(this@ForgotPasswordActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                       }
                    }
                 }
             })
