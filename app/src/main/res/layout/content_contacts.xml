@@ -10,7 +10,7 @@
               android:layout_width="match_parent"
               android:id="@+id/search1"
               android:padding="10dp"
-              android:layout_height="wrap_content"
+              android:layout_height="50dp"
               android:layout_marginTop="8dp"
               android:layout_marginStart="8dp"
               android:background="@drawable/round_textbox"
@@ -45,6 +45,7 @@
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
+
         <com.github.clans.fab.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,6 +56,8 @@
                 android:src="@drawable/add_black"
                 android:layout_marginBottom="@dimen/dp10"
                 android:layout_gravity="bottom|end"
+                app:menu_fab_size="normal"
+                app:menu_buttonSpacing="@dimen/dp0"
                 android:layout_marginRight="@dimen/dp10"
                 android:layout_marginLeft="@dimen/dp10"
                 app:pressedTranslationZ="12dp"

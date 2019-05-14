@@ -27,15 +27,8 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
     RecyclerView.Adapter<ContactsAdapter.ViewHolder>(){
 
 
-
-    //var filteredList:ArrayList<Data>? = null
-
-
     var sp = context!!.getSharedPreferences("userid", 0) as SharedPreferences
     var ed = sp.edit()
-
-
-
 
 
 
@@ -76,13 +69,12 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
         // holder.swipe.open(true)
         //holder.swipe.close(false)
 
-        //itemMangr.bindView(holder.itemView,position)
 
 
 
         // Log.d("ContactsAdapter", "email" + Con[position].email)
         holder.editbutton.setOnClickListener {
-            var s = Con[position].id
+           var s = Con[position].id
            ed.putString("userid",s)
            ed.commit()
 
@@ -122,7 +114,11 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
 
                             if (response.isSuccessful) {
 
+                                Con.removeAt(0)
+                                notifyItemRemoved(0)
+
                                 Toast.makeText(context, "Contact deleted successfully", Toast.LENGTH_LONG).show()
+
 
 
                             } else {
@@ -170,10 +166,7 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
         var email: TextView = itemView.findViewById(R.id.email) as TextView
         var swipe: SwipeRevealLayout = itemView.findViewById(R.id.swipe) as SwipeRevealLayout
         var mobileno: TextView = itemView.findViewById(R.id.mobileno) as TextView
-        //        var del: Button = itemView.findViewById(R.id.del) as Button
-        // @SuppressLint("WrongViewCast")
         var delbutton: ImageButton = itemView.findViewById(R.id.delbutton) as ImageButton
-
         var editbutton: ImageButton = itemView.findViewById(R.id.editbutton) as ImageButton
 
 
@@ -185,10 +178,11 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
         var filteredList :ArrayList<Data> = ArrayList<Data>()
         filteredList.addAll(Con)
 
-        Toast.makeText(context,filteredList.size.toString(),Toast.LENGTH_LONG).show()
 
 
         val text=text!!.toLowerCase(Locale.getDefault())
+
+        Con.clear()
 
         if(text.length==0)
         {
@@ -197,34 +191,25 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
 
         else
         {
-           // Toast.makeText(context,Con.size.toString(),Toast.LENGTH_LONG).show()
 
 
             for(i in 0..filteredList.size-1)
             {
 
-                Toast.makeText(context,"wrong contextian "+filteredList.size,Toast.LENGTH_LONG).show()
 
-//                Con.clear()
+
                 if(filteredList[i].name.toLowerCase(Locale.getDefault()).contains(text)){
 
-                    Con.clear()
-                    Toast.makeText(context,"hey yogita "+filteredList.size,Toast.LENGTH_LONG).show()
                     Con.add(filteredList[i])
-//                    filteredList.add((filteredList[i]))
 
 
                 }
             }
 
-            Toast.makeText(context,"wrong contextianionnnnn ",Toast.LENGTH_LONG).show()
 
 
 
         }
-
-        Toast.makeText(context,"hey error",Toast.LENGTH_LONG).show()
-
 
         notifyDataSetChanged()
 

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
@@ -19,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document
 import com.dxdevil.pd.prjp.Model.Request.Document.ListOfDocument
@@ -28,18 +26,11 @@ import com.dxdevil.pd.prjp.data.*
 import com.google.android.material.navigation.NavigationView
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_contacts.*
-import kotlinx.android.synthetic.main.activity_dashboarrd.*
 import kotlinx.android.synthetic.main.activity_doc.*
-import kotlinx.android.synthetic.main.activity_preview.*
-import kotlinx.android.synthetic.main.activity_settings.*
-import kotlinx.android.synthetic.main.activity_verify.*
 import kotlinx.android.synthetic.main.content_docactivity.*
 import kotlinx.android.synthetic.main.content_docactivity.button_next
 import kotlinx.android.synthetic.main.content_docactivity.button_previous
 import kotlinx.android.synthetic.main.content_docactivity.cpage_number
-import kotlinx.android.synthetic.main.row_doclist.*
-
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,8 +45,8 @@ class DocActivity : AppCompatActivity() {
     private lateinit var ntoggle: ActionBarDrawerToggle
 
    private var currentPage=0
+    private var pageNo=1
     var totalPages:Int=0
-
     private var adapter: AllDocumentsAdapter? = null
     private lateinit var documentList: ArrayList<Document>
     lateinit var alldocs : List<Document>
@@ -67,7 +58,6 @@ class DocActivity : AppCompatActivity() {
         setContentView(R.layout.activity_doc)
         setTitle(R.string.documents)
 
-        val st = getSharedPreferences("Doc_status", 0) as SharedPreferences
 
         drawerLayout = findViewById(R.id.drawer_layout_document)
         ntoggle =
@@ -129,12 +119,15 @@ class DocActivity : AppCompatActivity() {
             title= getString(R.string.alldocs)
             button_previous.isEnabled=true
                 currentPage +=1
-                apiCalling(null,currentPage,token)}
+                apiCalling(null,currentPage,token)
+                pageNo=pageNo.inc()
+        }
 
       button_previous.setOnClickListener {
           title= getString(R.string.alldocs)
             currentPage -= 1
             apiCalling(null,currentPage,token)
+          pageNo=pageNo.dec()
         }
         nav_view_doc.setNavigationItemSelectedListener { menuItem ->
             menuItem.isChecked = true
@@ -220,12 +213,14 @@ class DocActivity : AppCompatActivity() {
             }
 
             R.id.menu_awaitingMySign -> {
+
                 apiCalling(0,currentPage,token)
                 title= getString(R.string.awatingsign)
                 return true
             }
 
             R.id.menu_awaitingOthers -> {
+
                 apiCalling(3,currentPage,token)
                 title= getString(R.string.awatingothers)
                 return true
@@ -240,12 +235,14 @@ class DocActivity : AppCompatActivity() {
 
 
             R.id.menu_duesoon -> {
+
                 apiCalling(6,currentPage,token)
                 title= getString(R.string.signingdue)
                 return  true
             }
 
             R.id.menu_Declined -> {
+
                 apiCalling(7,currentPage,token)
                 title= getString(R.string.Declined)
                 return  true

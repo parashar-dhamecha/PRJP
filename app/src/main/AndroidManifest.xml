@@ -20,7 +20,14 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".Verify_list">
+        </activity>
         <activity android:name=".VerifyDocumentDetail">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
                 android:name=".VerifyActivity"
@@ -116,7 +123,6 @@
         <activity
                 android:name=".DocumentDetailActivity"
                 android:parentActivityName=".DocActivity">
-
         </activity>
         <activity
                 android:name=".DocActivity"

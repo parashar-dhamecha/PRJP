@@ -64,8 +64,7 @@
             android:id="@+id/mRelativelayout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-    >
+            app:layout_constraintStart_toStartOf="parent">
         <Button
                 android:text="@string/previous"
                 android:layout_width="60dp"

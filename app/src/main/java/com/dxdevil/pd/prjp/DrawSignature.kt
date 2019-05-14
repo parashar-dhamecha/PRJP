@@ -96,6 +96,9 @@ class DrawSignature : AppCompatActivity() {
                                             var by = Base64.decode(st,Base64.DEFAULT)
                                             var bitmap1 =BitmapFactory.decodeByteArray(by,0,by.size) as Bitmap?
                                             pd.dismiss()
+
+                                            startActivity(Intent(this@DrawSignature, Dashboarrd::class.java))
+
                                             Toast.makeText(this@DrawSignature,"Saved successfully..",Toast.LENGTH_LONG).show()
                                         }else{
                                             pd.dismiss()
@@ -129,6 +132,8 @@ class DrawSignature : AppCompatActivity() {
                                         var by = Base64.decode(st,Base64.DEFAULT)
                                         var bitmap1 =BitmapFactory.decodeByteArray(by,0,by.size) as Bitmap?
                                         pd.dismiss()
+                                        startActivity(Intent(this@DrawSignature, Dashboarrd::class.java))
+
                                         Toast.makeText(this@DrawSignature,"Saved successfully..",Toast.LENGTH_LONG).show()
                                     }else{
                                         pd.dismiss()
