@@ -233,6 +233,7 @@ class Registration : AppCompatActivity() {
             valid = false
         } else {
            textInputLayout19!!.error =null
+           flagEmail=true
         }
 
         if (password.isEmpty() || password.length < 8 || !Passwordregex.matches(password)) {

@@ -50,13 +50,14 @@ class ForgotPasswordActivity:AppCompatActivity(){
     }
     fun validateemail(): Boolean {
         var email = edforgotemail.text.toString()
-        if (email == "") {
-            edEmail.setError("Email address cant be empty")
+        if (email.isEmpty()) {
+            textInputLayout11.error = "Email address cant be empty"
             return false
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            edEmail.setError("Enter a valid email address")
+            textInputLayout11.error = "Enter a valid email address"
             return false
         } else {
+            textInputLayout11.error=null
             return true
         }
 

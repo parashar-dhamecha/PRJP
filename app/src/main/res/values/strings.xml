@@ -20,7 +20,7 @@
     <string name="SignUpButton">Signup</string>
     <string name="LOgintv">Login In to your Account</string>
     <string name="action_settings">Action Settings</string>
-    <string name="forgot">Forgot Password</string>
+    <string name="forgot">Forgot Password?</string>
     <string name="Email">Enter email</string>
     <string name="reset">Reset Password</string>
     <string name="img_description">logo_of_cygnature</string>

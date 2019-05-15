@@ -72,7 +72,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ForgotPasswordActivity">
+        <activity android:name=".ForgotPasswordActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity android:name=".UpdateContact">
@@ -119,7 +120,16 @@
                 android:name=".PhotoActivity"
                 tools:ignore="DuplicateActivity"
                 android:parentActivityName=".Dashboarrd"/>
-        <activity android:name=".ResetPasswordActivity">
+
+        <activity android:name=".ResetPasswordActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="cygnature.stagingapplications.com"
+                      android:scheme="https"/>
+            </intent-filter>
         </activity>
         <activity
                 android:name=".DocumentDetailActivity"
