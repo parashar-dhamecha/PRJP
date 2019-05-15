@@ -71,16 +71,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ProfileActivity"
-                  android:parentActivityName=".Settings"
-                  android:label="Profile">
-
-        </activity>
-        <activity android:name=".EditProfile"
-        android:parentActivityName=".ProfileActivity"
-        android:label="Edit Profile">
-
-        </activity>
 
         <activity android:name=".ForgotPasswordActivity">
         </activity>

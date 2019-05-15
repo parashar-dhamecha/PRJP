@@ -205,6 +205,8 @@
 
     <string name="notarization_details">Notarization Details</string>
     <string name="e_signature">E-Signature</string>
+    <string name="button_clearall">Clear All</string>
+    <string name="contact_mobile_no">8888888888</string>
 
 
 </resources>
