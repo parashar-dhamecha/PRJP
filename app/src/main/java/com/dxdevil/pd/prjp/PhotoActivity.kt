@@ -155,7 +155,11 @@ class PhotoActivity : AppCompatActivity() {
                                             Toast.makeText(this@PhotoActivity,"Saved successfully..", Toast.LENGTH_LONG).show()
                                         }else{
                                             pd.dismiss()
-                                            Snackbar.make(it,response.errorBody().toString(),Snackbar.LENGTH_LONG).show()
+                                            if (response.message().toString() == "Unauthorized") {
+                                                startActivity(Intent(this@PhotoActivity, LoginActivity::class.java))
+                                            } else {
+                                                Toast.makeText(this@PhotoActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                                            }
                                         }
 
                                     }
@@ -185,7 +189,11 @@ class PhotoActivity : AppCompatActivity() {
                                             Toast.makeText(this@PhotoActivity,"Saved successfully..", Toast.LENGTH_LONG).show()
                                         }else{
                                             pd.dismiss()
-                                            Snackbar.make(it,response.errorBody().toString(),Snackbar.LENGTH_LONG).show()
+                                            if (response.message().toString() == "Unauthorized") {
+                                                startActivity(Intent(this@PhotoActivity, LoginActivity::class.java))
+                                            } else {
+                                                Toast.makeText(this@PhotoActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                                            }
                                         }
 
                                     }

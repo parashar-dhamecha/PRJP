@@ -16,6 +16,7 @@ import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -27,10 +28,6 @@ import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse
 import com.dxdevil.pd.prjp.data.RecentDocumentAdapter
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.activity_dashboard.awatingotherstv
-import kotlinx.android.synthetic.main.activity_dashboard.awatingsigntv
-import kotlinx.android.synthetic.main.activity_dashboard.completedtv
-import kotlinx.android.synthetic.main.activity_dashboard.duesoontv
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
 import kotlinx.android.synthetic.main.content_dashboarrd.*
 import kotlinx.android.synthetic.main.signpopup.*
@@ -53,6 +50,7 @@ class Dashboarrd : AppCompatActivity() {
         setContentView(R.layout.activity_dashboarrd)
 
 
+        RecentDocProgress.visibility=View.GONE
 
         drawerLayout = findViewById(R.id.drawer_layout)
         ntoggle =
@@ -212,7 +210,11 @@ class Dashboarrd : AppCompatActivity() {
                     completedtv?.text = ob.data[0]!!.completed.toString()
                     duesoontv?.text = ob.data[0]!!.expireSoon.toString()
                 } else {
-                    Toast.makeText(this@Dashboarrd, "Failure", Toast.LENGTH_LONG).show()
+                    if (response.message().toString() == "Unauthorized") {
+                        startActivity(Intent(this@Dashboarrd, LoginActivity::class.java))
+                    } else {
+                        Toast.makeText(this@Dashboarrd, response.message().toString(), Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         })
@@ -283,6 +285,10 @@ class Dashboarrd : AppCompatActivity() {
         val api = RetrofitClient.getInstance().api as Api
 
 
+        RecentDocProgress.visibility=View.VISIBLE
+
+
+
         val call = api.doclist(
             token, ListOfDocument(
                null,
@@ -302,6 +308,9 @@ class Dashboarrd : AppCompatActivity() {
             call.enqueue(object : Callback<ListOfDocumentResponse> {
                 override fun onFailure(call: Call<ListOfDocumentResponse>, t: Throwable) {
 
+                    RecentDocProgress.visibility=View.GONE
+
+
                     Toast.makeText(this@Dashboarrd, "Check your connection", Toast.LENGTH_SHORT).show()
                 }
 
@@ -317,17 +326,26 @@ class Dashboarrd : AppCompatActivity() {
 
                             adapter!!.notifyDataSetChanged()
 
+                            RecentDocProgress.visibility=View.GONE
                         } catch (e: Exception) {
 
+                            RecentDocProgress.visibility=View.GONE
                             Toast.makeText(this@Dashboarrd, e.message, Toast.LENGTH_LONG).show()
                         }
 
                     } else {
+                        if (response.message().toString() == "Unauthorized") {
+                            startActivity(Intent(this@Dashboarrd, LoginActivity::class.java))
+                        } else {
+                            Toast.makeText(this@Dashboarrd, response.message().toString(), Toast.LENGTH_LONG).show()
+                        }
+                        RecentDocProgress.visibility=View.GONE
                         Toast.makeText(this@Dashboarrd, "Something went wrong", Toast.LENGTH_SHORT).show()
                     }
                 }
             })
         } catch (e: Exception) {
+            RecentDocProgress.visibility=View.GONE
             Toast.makeText(this@Dashboarrd, e.message, Toast.LENGTH_SHORT).show()
         }
     }

@@ -13,6 +13,7 @@ import com.dxdevil.pd.prjp.Model.Response.SignUpModel;
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse;
 import com.dxdevil.pd.prjp.Model.Response.Verify.List.VerifyListResponse;
 import com.dxdevil.pd.prjp.Model.Response.Verify.VerifyDetails.VerifyDetailsResponse;
+import com.dxdevil.pd.prjp.data.CreateDoc;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -25,9 +26,9 @@ public interface Api {
     Call<SignUpModel>register(@Body  SignUp signUp);
 
     @POST("document/create")
-    Call<CreateDocResponse>create(
+    Call<CreateResponse>create(
             @Header("Authorization") String Authorization,
-            @Body CreateDocRequest createdocrequest
+            @Body CreateDoc body
     );
 
     @GET("account/check-user-exists/{id}")
@@ -152,6 +153,9 @@ public interface Api {
             @Header("Authorization") String Authorization,
             @Part MultipartBody.Part file
     );
+   @GET("verify/document-detail/{documentID}")
+   Call<VerifyDocumentDetail>getVerificationDetails(@Header("Authorization") String Authorization,
+                                                  @Path("documentId") String documentId);
  //////////////////////////////////////////verify document///////////////////////////////////////////
    @GET("verify/document-detail/{documentId}")
    Call<VerifyDetailsResponse>getVerificationDetails(@Header("Authorization") String Authorization,

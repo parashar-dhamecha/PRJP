@@ -72,7 +72,11 @@ class UpdateContact : AppCompatActivity() {
 
 
                     } else {
-                        Toast.makeText(this@UpdateContact, response.message().toString() + response.errorBody(), Toast.LENGTH_LONG).show()
+                        if (response.message().toString() == "Unauthorized") {
+                            startActivity(Intent(this@UpdateContact, LoginActivity::class.java))
+                        } else {
+                            Toast.makeText(this@UpdateContact, response.message().toString(), Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
@@ -133,6 +137,22 @@ class UpdateContact : AppCompatActivity() {
                 } catch (e: Exception) {
                     Toast.makeText(this@UpdateContact, "error", Toast.LENGTH_LONG).show()
                 }
+                        if (response.isSuccessful) {
+                            Toast.makeText(this@UpdateContact, "Contact updated successfully", Toast.LENGTH_LONG).show()
+                            val intent = Intent(this@UpdateContact, Contacts::class.java)
+                            startActivity(intent)
+                        } else {
+                            if (response.message().toString() == "Unauthorized") {
+                                startActivity(Intent(this@UpdateContact, LoginActivity::class.java))
+                            } else {
+                                Toast.makeText(this@UpdateContact, response.message().toString(), Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                })
+            } catch (e: Exception) {
+                Toast.makeText(this@UpdateContact, "error", Toast.LENGTH_LONG).show()
+            }
 
             }
         }

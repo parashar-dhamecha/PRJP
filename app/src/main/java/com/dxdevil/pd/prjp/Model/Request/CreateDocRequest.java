@@ -1,10 +1,12 @@
 package com.dxdevil.pd.prjp.Model.Request;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CreateDocRequest {
+public class CreateDocRequest implements Serializable
+{
 
     @SerializedName("processDocumentId")
     @Expose
@@ -35,7 +37,7 @@ public class CreateDocRequest {
     public Integer reminderBefore;
     @SerializedName("documentShapeModel")
     @Expose
-    public List<DocumentShapeModel> documentShapeModel = null;
+    public List<DocumentShapeModelj> documentShapeModel = null;
     @SerializedName("signingFlowType")
     @Expose
     public Integer signingFlowType;
@@ -44,7 +46,7 @@ public class CreateDocRequest {
     public List<String> signerIds = null;
     @SerializedName("observerIds")
     @Expose
-    public List<String> observerIds = null;
+    public List<Object> observerIds = null;
     @SerializedName("signatures")
     @Expose
     public List<Integer> signatures = null;
@@ -63,6 +65,7 @@ public class CreateDocRequest {
     @SerializedName("authenticationTypes")
     @Expose
     public List<Integer> authenticationTypes = null;
+    private final static long serialVersionUID = 1451998794135227070L;
 
     /**
      * No args constructor for use in serialization
@@ -93,7 +96,7 @@ public class CreateDocRequest {
      * @param documentLatitude
      * @param expiryStartDate
      */
-    public CreateDocRequest(String processDocumentId, String name, String fileName, String extension, String description, String expiryStartDate, String expiryEndDate, String signingDueDate, Integer reminderBefore, List<DocumentShapeModel> documentShapeModel, Integer signingFlowType, List<String> signerIds, List<String> observerIds, List<Integer> signatures, Double documentLatitude, Double documentLongitude, String userAgent, String userIPAddress, List<Integer> authenticationTypes) {
+    public CreateDocRequest(String processDocumentId, String name, String fileName, String extension, String description, String expiryStartDate, String expiryEndDate, String signingDueDate, Integer reminderBefore, List<DocumentShapeModelj> documentShapeModel, Integer signingFlowType, List<String> signerIds, List<Object> observerIds, List<Integer> signatures, Double documentLatitude, Double documentLongitude, String userAgent, String userIPAddress, List<Integer> authenticationTypes) {
         super();
         this.processDocumentId = processDocumentId;
         this.name = name;
