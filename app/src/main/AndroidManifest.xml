@@ -29,7 +29,6 @@
         <activity android:name=".VerifyDocumentDetail">
             </activity>
 
-        </activity>
         <activity
                 android:name=".VerifyActivity"
                 android:label="Verify Document">
@@ -49,12 +48,7 @@
                 android:name=".Dashboarrd"
                 android:label="Dashboard"
                 android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+             </activity>
         <activity android:name=".PhotoActivity"
                   android:parentActivityName=".Dashboarrd"/>
         <activity android:name=".AddContact">
@@ -157,6 +151,6 @@
         <activity android:name=".Type"
                   android:parentActivityName=".Dashboard"/>
 
-    </application>
+</application>
 
 </manifest>

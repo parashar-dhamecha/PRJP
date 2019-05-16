@@ -24,7 +24,6 @@ import retrofit2.Response
 class UpdateContact : AppCompatActivity() {
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_contact)
@@ -55,7 +54,6 @@ class UpdateContact : AppCompatActivity() {
                 ) {
 
                     if (response.isSuccessful) {
-
 
 
                         var obj = response.body()!!.data?.get(0) as GetContactIdResponse.GetContactIdDatum
@@ -130,51 +128,47 @@ class UpdateContact : AppCompatActivity() {
                                 startActivity(intent)
                             } else {
                                 pd.dismiss()
-                                Toast.makeText(this@UpdateContact, response.message().toString(), Toast.LENGTH_LONG).show()
+
+                                if (response.message().toString() == "Unauthorized") {
+                                    startActivity(Intent(this@UpdateContact, LoginActivity::class.java))
+                                } else {
+                                    Toast.makeText(
+                                        this@UpdateContact,
+                                        response.message().toString(),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
                         }
                     })
                 } catch (e: Exception) {
                     Toast.makeText(this@UpdateContact, "error", Toast.LENGTH_LONG).show()
                 }
-                        if (response.isSuccessful) {
-                            Toast.makeText(this@UpdateContact, "Contact updated successfully", Toast.LENGTH_LONG).show()
-                            val intent = Intent(this@UpdateContact, Contacts::class.java)
-                            startActivity(intent)
-                        } else {
-                            if (response.message().toString() == "Unauthorized") {
-                                startActivity(Intent(this@UpdateContact, LoginActivity::class.java))
-                            } else {
-                                Toast.makeText(this@UpdateContact, response.message().toString(), Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-                })
-            } catch (e: Exception) {
-                Toast.makeText(this@UpdateContact, "error", Toast.LENGTH_LONG).show()
-            }
+
 
             }
         }
+
     }
 
-     fun validation() : Boolean{
+
+    fun validation(): Boolean {
 
 
         var valid = false
 
 
-        var name =etName!!.text.toString()
+        var name = etName!!.text.toString()
         var Em = etEmail!!.text.toString()
-        var Jt =etJobTitle.text.toString()
-        var Jd =etJobDescription!!.text.toString()
+        var Jt = etJobTitle.text.toString()
+        var Jd = etJobDescription!!.text.toString()
         //var cid = etcode!!.selectedCountryCode as Int
-        var mn =etMobileNo!!.text.toString()
+        var mn = etMobileNo!!.text.toString()
 
         var flagname = false
         var flagEm = false
-        var flagJt=false
-        var flagJd=false
+        var flagJt = false
+        var flagJd = false
         var flagmn = false
 
 
@@ -195,26 +189,26 @@ class UpdateContact : AppCompatActivity() {
 
 
 
-        if (Jt.isEmpty() ||!Nameregex.matches(Jt)) {
+        if (Jt.isEmpty() || !Nameregex.matches(Jt)) {
 
             etJobTitle!!.setError("Enter a valid job title")
         } else {
             flagJt = true
         }
 
-        if (Jd.isEmpty() ||!Nameregex.matches(Jd)) {
+        if (Jd.isEmpty() || !Nameregex.matches(Jd)) {
             etJobDescription!!.setError("enter a valod job description")
         } else {
-            flagJd= true
+            flagJd = true
         }
 
-        if (mn.isEmpty() || mn.length > 10|| !Numberregex.matches(mn)) {
+        if (mn.isEmpty() || mn.length > 10 || !Numberregex.matches(mn)) {
             etMobileNo!!.setError("Enter a valid MobileNo")
         } else {
             flagmn = true
         }
 
-        if(flagname && flagEm &&  flagJt && flagJd  &&  flagmn) {
+        if (flagname && flagEm && flagJt && flagJd && flagmn) {
             valid = true
         }
         return valid
@@ -224,4 +218,5 @@ class UpdateContact : AppCompatActivity() {
         onBackPressed()
         return true
     }
+
 }
