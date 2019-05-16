@@ -10,6 +10,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
 
     <uses-feature android:name="android.hardware.camera2"/>
 
@@ -24,12 +27,7 @@
         <activity android:name=".Verify_list">
         </activity>
         <activity android:name=".VerifyDocumentDetail">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+            </activity>
         <activity
                 android:name=".VerifyActivity"
                 android:label="Verify Document">
@@ -62,6 +60,12 @@
                 android:name=".MainActivity"
                 android:theme="@style/AppTheme.NoActionBar"
                 tools:ignore="ExtraText">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
         </activity>
         <activity android:name=".ForgotPasswordActivity">
         </activity>

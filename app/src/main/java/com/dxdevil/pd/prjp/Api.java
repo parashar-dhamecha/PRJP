@@ -12,6 +12,7 @@ import com.dxdevil.pd.prjp.Model.Response.Document.Preview.PreviewDocResponse;
 import com.dxdevil.pd.prjp.Model.Response.SignUpModel;
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse;
 import com.dxdevil.pd.prjp.Model.Response.Verify.List.VerifyListResponse;
+import com.dxdevil.pd.prjp.Model.Response.Verify.VerifyDetails.VerifyDetailsResponse;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -152,14 +153,14 @@ public interface Api {
             @Part MultipartBody.Part file
     );
  //////////////////////////////////////////verify document///////////////////////////////////////////
-   @GET("verify/document-detail/{documentID}")
-   Call<VerifyDocumentDetail>getVerificationDetails(@Header("Authorization") String Authorization,
-                                                  @Path("documentId") String documentId);
+   @GET("verify/document-detail/{documentId}")
+   Call<VerifyDetailsResponse>getVerificationDetails(@Header("Authorization") String Authorization,
+                                                     @Path("documentId") String documentId);
 
    @POST("verify/document-list")
    Call<VerifyListResponse>verifylist(
            @Header("Authorization") String Authorization,
-           @Body ListOfDocument list
+           @Body VerifyDocList list
    );
 
 

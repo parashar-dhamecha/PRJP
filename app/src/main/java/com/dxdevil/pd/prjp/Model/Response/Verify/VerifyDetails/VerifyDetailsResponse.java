@@ -2,6 +2,8 @@
 package com.dxdevil.pd.prjp.Model.Response.Verify.VerifyDetails;
 
 import java.util.List;
+
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

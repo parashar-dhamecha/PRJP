@@ -114,13 +114,18 @@ class VerifyActivity : AppCompatActivity() {
 
         button.setOnClickListener{
             val intent = Intent(this@VerifyActivity, Verify_list::class.java)
+            intent.putExtra("filehash",edFilehash.text.toString())
+
             startActivity(intent)
+
 
         }
 
         button2.setOnClickListener{
 
             val intent = Intent(this@VerifyActivity, Verify_list::class.java)
+            intent.putExtra("Transhash",edTransHash.text.toString())
+
             startActivity(intent)
 
         }

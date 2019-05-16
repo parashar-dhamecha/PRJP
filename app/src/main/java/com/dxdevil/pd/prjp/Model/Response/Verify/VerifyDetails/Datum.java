@@ -2,6 +2,7 @@
 package com.dxdevil.pd.prjp.Model.Response.Verify.VerifyDetails;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -27,16 +28,16 @@ public class Datum {
     private Integer signingFlowType;
     @SerializedName("liveSignatureStartDate")
     @Expose
-    private Object liveSignatureStartDate;
+    private String liveSignatureStartDate;
     @SerializedName("liveSignatureEndDate")
     @Expose
-    private Object liveSignatureEndDate;
+    private String liveSignatureEndDate;
     @SerializedName("signers")
     @Expose
     private List<Signer> signers = null;
     @SerializedName("observers")
     @Expose
-    private List<Object> observers = null;
+    private List<Observer> observers = null;
     @SerializedName("rejectedByCurrentUser")
     @Expose
     private Boolean rejectedByCurrentUser;
@@ -119,19 +120,19 @@ public class Datum {
         this.signingFlowType = signingFlowType;
     }
 
-    public Object getLiveSignatureStartDate() {
+    public String getLiveSignatureStartDate() {
         return liveSignatureStartDate;
     }
 
-    public void setLiveSignatureStartDate(Object liveSignatureStartDate) {
+    public void setLiveSignatureStartDate(String liveSignatureStartDate) {
         this.liveSignatureStartDate = liveSignatureStartDate;
     }
 
-    public Object getLiveSignatureEndDate() {
+    public String getLiveSignatureEndDate() {
         return liveSignatureEndDate;
     }
 
-    public void setLiveSignatureEndDate(Object liveSignatureEndDate) {
+    public void setLiveSignatureEndDate(String liveSignatureEndDate) {
         this.liveSignatureEndDate = liveSignatureEndDate;
     }
 
@@ -143,11 +144,11 @@ public class Datum {
         this.signers = signers;
     }
 
-    public List<Object> getObservers() {
+    public List<Observer> getObservers() {
         return observers;
     }
 
-    public void setObservers(List<Object> observers) {
+    public void setObservers(List<Observer> observers) {
         this.observers = observers;
     }
 
