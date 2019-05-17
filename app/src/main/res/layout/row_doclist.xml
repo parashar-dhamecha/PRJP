@@ -10,7 +10,6 @@
 
     <androidx.cardview.widget.CardView
             android:id="@+id/card_view_file"
-            android:elevation="@dimen/dp5"
             android:background="@drawable/edit_round"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp70"
@@ -61,18 +60,29 @@
                     android:layout_marginStart="@dimen/dp10"
             />
             <TextView
+                    android:text="@string/uploaded_by"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/doc_status"
+                    android:textColor="@color/textcolor"
+                    android:layout_toEndOf="@+id/file_image"
+                    android:layout_marginStart="10dp"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/txt_doc"
+                    android:textSize="12sp"/>
+            <TextView
                     android:text="TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="@dimen/dp200"
-                    android:id="@+id/doc_status"
-                    android:layout_toEndOf="@+id/file_image"
-                    android:layout_marginStart="10dp"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textColor="@color/textcolor"
+                    android:id="@+id/uploader_name"
+                    android:textSize="12sp"
+                    android:layout_toEndOf="@+id/doc_status"
+                    android:layout_marginStart="2dp"
                     tools:ignore="HardcodedText"
-                    android:layout_marginTop="3dp"
-                    android:layout_below="@+id/txt_doc"
-                    android:textSize="12sp"/>
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/txt_doc"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

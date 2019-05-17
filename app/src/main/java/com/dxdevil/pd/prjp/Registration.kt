@@ -37,9 +37,6 @@ class Registration : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
-
-
-
         btregister.isEnabled=true
 
 
@@ -47,9 +44,7 @@ class Registration : AppCompatActivity() {
             startActivity(Intent(this@Registration, LoginActivity::class.java))
         }
 
-
         btregister!!.setOnClickListener {
-
 
             val fname=etFirstName!!.text.toString()
             val lname=etLastName!!.text.toString()
@@ -116,6 +111,8 @@ class Registration : AppCompatActivity() {
                                                 if (response.isSuccessful) {
                                                     pd.dismiss()
                                                     Toast.makeText(this@Registration, response.body()!!.message, Toast.LENGTH_SHORT).show()
+
+                                                    startActivity(Intent(this@Registration, LoginActivity::class.java))
 
                                                     val call3=api.verify_user(VerifyUser(fname,
                                                         lname,

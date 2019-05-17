@@ -325,7 +325,14 @@ class DocActivity : AppCompatActivity() {
                                 img_No_doc.visibility=View.VISIBLE
                                 tvNo_doc.visibility=View.VISIBLE
                                 mrecyclerView.visibility=View.GONE
-                            }
+                                btnsConstraintLayout.visibility=View.GONE
+                            }else
+                                btnsConstraintLayout.visibility=View.VISIBLE
+
+
+
+
+
 
                             if(response.body()!!.data[0].totalRows!=0)
                             {

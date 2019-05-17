@@ -42,26 +42,27 @@ class AllDocumentsAdapter(
         if(list[position].extension==".pptx"|| list[position].extension==".ppt")
             holder.fileimage.setImageResource(R.drawable.ppt2)
 
-        if(list[position].documentStatusForUser==0) {
-            holder.docstatus.text=context.getString(R.string.awaiting)
-            holder.docstatus.setTextColor(rgb(128,0,0))
-        }
-        if(list[position].documentStatusForUser==3) {
-            holder.docstatus.text=context.getString(R.string.awatingothers)
-            holder.docstatus.setTextColor(rgb(255,174,66))
-        }
-        if(list[position].documentStatusForUser==2) {
-            holder.docstatus.text=context.getString(R.string.completed)
-            holder.docstatus.setTextColor(rgb(53,117,55))
-        }
-        if(list[position].documentStatusForUser==6) {
-            holder.docstatus.text=context.getString(R.string.signingdue)
-            holder.docstatus.setTextColor(rgb(105,105,105))
-        }
-        if(list[position].documentStatusForUser==7) {
-            holder.docstatus.text=context.getString(R.string.Declined)
-            holder.docstatus.setTextColor(rgb(255,51,51))
-        }
+//        if(list[position].documentStatusForUser==0) {
+//            holder.docstatus.text=context.getString(R.string.awaiting)
+//            holder.docstatus.setTextColor(rgb(128,0,0))
+//        }
+//        if(list[position].documentStatusForUser==3) {
+//            holder.docstatus.text=context.getString(R.string.awatingothers)
+//            holder.docstatus.setTextColor(rgb(255,174,66))
+//        }
+//        if(list[position].documentStatusForUser==2) {
+//            holder.docstatus.text=context.getString(R.string.completed)
+//            holder.docstatus.setTextColor(rgb(53,117,55))
+//        }
+//        if(list[position].documentStatusForUser==6) {
+//            holder.docstatus.text=context.getString(R.string.signingdue)
+//            holder.docstatus.setTextColor(rgb(105,105,105))
+//        }
+//        if(list[position].documentStatusForUser==7) {
+//            holder.docstatus.text=context.getString(R.string.Declined)
+//            holder.docstatus.setTextColor(rgb(255,51,51))
+//        }
+        holder.uploaderName.text=list[position].uploadedBy.toString()
 
         holder.run { cardfile.setOnClickListener{
 
@@ -75,7 +76,7 @@ class AllDocumentsAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             var docname:TextView = itemView.findViewById(R.id.txt_doc) as TextView
-            var docstatus:TextView=itemView.findViewById(R.id.doc_status) as TextView
+            var uploaderName:TextView=itemView.findViewById(R.id.uploader_name) as TextView
             var fileimage:ImageView = itemView.findViewById(R.id.file_image) as ImageView
             var cardfile:CardView=itemView.findViewById(R.id.card_view_file) as CardView
     }

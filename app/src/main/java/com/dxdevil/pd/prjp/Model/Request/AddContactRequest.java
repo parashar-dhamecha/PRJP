@@ -15,13 +15,7 @@ public class AddContactRequest {
         this.mobileNumber=mn;
         this.jobTitle=Jt;
         this.jobDescription=Jd;
-
-
-
     }
-
-
-
 
     @SerializedName("name")
     @Expose
