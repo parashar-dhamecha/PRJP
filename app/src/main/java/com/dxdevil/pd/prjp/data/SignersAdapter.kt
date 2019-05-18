@@ -24,6 +24,9 @@ class SignersAdapter(
         holder.shortname.text=list[position].profileShortName
         holder.signername.text=list[position].firstName
         holder.btnSigner.text=list[position].signButtonText
+
+        if(list[position].isSigned==true)
+            holder.btnSigner.visibility=View.GONE
     }
 
     override fun getItemCount(): Int {

@@ -139,9 +139,11 @@ class DocumentDetailActivity : AppCompatActivity() {
                                 tvNo_observers.visibility=View.VISIBLE}
 
                             if(response.body()!!.data[0].notarization.txHash==null)
-                                transaction_hash.text=response.body()!!.data[0].notarization.notarizeMessage
+                                transaction_hash_value.text=response.body()!!.data[0].notarization.notarizeMessage
                             else
-                            transaction_hash.text = response.body()!!.data[0].notarization.txHash.toString()
+                            transaction_hash_value.text = response.body()!!.data[0].notarization.txHash.toString()
+
+
 
                           if(response.body()!!.data[0].notarization.isNotarized==false){
                                 notarized_on.visibility=View.GONE

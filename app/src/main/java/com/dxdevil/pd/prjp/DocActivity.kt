@@ -152,7 +152,7 @@ class DocActivity : AppCompatActivity() {
                 }
                 R.id.verify->{
                     startActivity(Intent(this@DocActivity, VerifyActivity::class.java))
-                    drawer_layout_contacts.closeDrawer(GravityCompat.START)
+                    drawer_layout_document.closeDrawer(GravityCompat.START)
                 }
                 R.id.logout -> {
                     drawer_layout_document.closeDrawer(GravityCompat.START)
