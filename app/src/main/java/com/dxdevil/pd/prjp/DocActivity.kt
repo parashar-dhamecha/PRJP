@@ -31,6 +31,9 @@ import kotlinx.android.synthetic.main.content_docactivity.*
 import kotlinx.android.synthetic.main.content_docactivity.button_next
 import kotlinx.android.synthetic.main.content_docactivity.button_previous
 import kotlinx.android.synthetic.main.content_docactivity.cpage_number
+import kotlinx.android.synthetic.main.row_doclilst2.*
+import kotlinx.android.synthetic.main.row_doclist.*
+import kotlinx.android.synthetic.main.row_doclist.doc_status
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -222,6 +225,7 @@ class DocActivity : AppCompatActivity() {
             R.id.menu_awaitingOthers -> {
 
                 apiCalling(3,currentPage,token)
+
                 title= getString(R.string.awatingothers)
                 return true
             }
@@ -252,9 +256,10 @@ class DocActivity : AppCompatActivity() {
         }
 
     @SuppressLint("InflateParams")
+
+
+
      fun apiCalling(status:Int?, currentpage:Int, token:String? ){
-
-
 
         val builder = android.app.AlertDialog.Builder(this)
         val dialogView = layoutInflater.inflate(R.layout.progress_dialog, null)
@@ -268,7 +273,6 @@ class DocActivity : AppCompatActivity() {
 
         mrecyclerView.layoutManager = LinearLayoutManager(this@DocActivity)
         mrecyclerView.adapter = this.adapter
-
 
         val api = RetrofitClient.getInstance().api as Api
 
@@ -306,6 +310,9 @@ class DocActivity : AppCompatActivity() {
                             mrecyclerView.adapter = AllDocumentsAdapter(response.body()!!.data[0].documents, this@DocActivity)
 
                             alldocs=response.body()!!.data[0].documents
+
+
+
                             totalPages=response.body()!!.data[0].totalPages
 
                             adapter!!.notifyDataSetChanged()

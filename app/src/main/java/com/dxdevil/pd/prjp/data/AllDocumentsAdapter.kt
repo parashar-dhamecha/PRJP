@@ -1,5 +1,6 @@
 package com.dxdevil.pd.prjp.data
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color.rgb
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.dxdevil.pd.prjp.DocumentDetailActivity
 import com.dxdevil.pd.prjp.R
@@ -25,10 +27,11 @@ class AllDocumentsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.row_doclist, parent, false))
+        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.row_doclilst2, parent, false))
     }
 
 
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.docname.text=list[position].name
@@ -42,28 +45,26 @@ class AllDocumentsAdapter(
         if(list[position].extension==".pptx"|| list[position].extension==".ppt")
             holder.fileimage.setImageResource(R.drawable.ppt2)
 
-//        if(list[position].documentStatusForUser==0) {
-//            holder.docstatus.text=context.getString(R.string.awaiting)
-//            holder.docstatus.setTextColor(rgb(128,0,0))
-//        }
-//        if(list[position].documentStatusForUser==3) {
-//            holder.docstatus.text=context.getString(R.string.awatingothers)
-//            holder.docstatus.setTextColor(rgb(255,174,66))
-//        }
-//        if(list[position].documentStatusForUser==2) {
-//            holder.docstatus.text=context.getString(R.string.completed)
-//            holder.docstatus.setTextColor(rgb(53,117,55))
-//        }
-//        if(list[position].documentStatusForUser==6) {
-//            holder.docstatus.text=context.getString(R.string.signingdue)
-//            holder.docstatus.setTextColor(rgb(105,105,105))
-//        }
-//        if(list[position].documentStatusForUser==7) {
-//            holder.docstatus.text=context.getString(R.string.Declined)
-//            holder.docstatus.setTextColor(rgb(255,51,51))
-//        }
-        holder.uploaderName.text=list[position].uploadedBy.toString()
-
+        if(list[position].documentStatusForUser==0) {
+            holder.docstatus.text=context.getString(R.string.awaiting)
+            holder.docstatus.setTextColor(rgb(0,0,0))
+        }
+        if(list[position].documentStatusForUser==3) {
+            holder.docstatus.text=context.getString(R.string.awatingothers)
+            holder.docstatus.setTextColor(rgb(0,0,0))
+        }
+        if(list[position].documentStatusForUser==2) {
+            holder.docstatus.text=context.getString(R.string.completed)
+            holder.docstatus.setTextColor(rgb(53,117,55))
+        }
+        if(list[position].documentStatusForUser==6) {
+            holder.docstatus.text=context.getString(R.string.signingdue)
+            holder.docstatus.setTextColor(rgb(105,105,105))
+        }
+        if(list[position].documentStatusForUser==7) {
+            holder.docstatus.text=context.getString(R.string.Declined)
+            holder.docstatus.setTextColor(rgb(255,51,51))
+        }
         holder.run { cardfile.setOnClickListener{
 
             val intent = Intent(context, DocumentDetailActivity::class.java)
@@ -76,9 +77,9 @@ class AllDocumentsAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             var docname:TextView = itemView.findViewById(R.id.txt_doc) as TextView
-            var uploaderName:TextView=itemView.findViewById(R.id.uploader_name) as TextView
             var fileimage:ImageView = itemView.findViewById(R.id.file_image) as ImageView
-            var cardfile:CardView=itemView.findViewById(R.id.card_view_file) as CardView
+            var docstatus=itemView.findViewById(R.id.doc_status) as TextView
+            var cardfile=itemView.findViewById(R.id.card_view_xml) as ConstraintLayout
     }
 
 }
