@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document
 import com.dxdevil.pd.prjp.Model.Request.Document.ListOfDocument
@@ -47,13 +48,14 @@ class DocActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var ntoggle: ActionBarDrawerToggle
 
-   private var currentPage=0
+    private var currentPage=0
     private var pageNo=1
     var totalPages:Int=0
     private var adapter: AllDocumentsAdapter? = null
     private lateinit var documentList: ArrayList<Document>
     lateinit var alldocs : List<Document>
     var token :String?= null
+    var docStatus:Int? = 0
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,7 +100,7 @@ class DocActivity : AppCompatActivity() {
         val mIntent=intent
         val source=intent.getStringExtra("Source")
         if(source=="DocActivity"){
-            val docStatus=mIntent.getIntExtra("Doc_status",0)
+            docStatus=mIntent.getIntExtra("Doc_status",0)
             if(docStatus==0)
                 title= getString(R.string.awaiting)
             if(docStatus==3)
@@ -112,26 +114,29 @@ class DocActivity : AppCompatActivity() {
         }else
         {
             title = getString(R.string.alldocs)
-            apiCalling(null,0, token)
+            docStatus=null
+            apiCalling(docStatus,0, token)
 
         }
 
 
 
         button_next.setOnClickListener {
-            title= getString(R.string.alldocs)
+
             button_previous.isEnabled=true
-                currentPage +=1
-                apiCalling(null,currentPage,token)
-                pageNo=pageNo.inc()
+            currentPage +=1
+            apiCalling(docStatus,currentPage,token)
+            pageNo=pageNo.inc()
         }
 
-      button_previous.setOnClickListener {
-          title= getString(R.string.alldocs)
+        button_previous.setOnClickListener {
+
             currentPage -= 1
-            apiCalling(null,currentPage,token)
-          pageNo=pageNo.dec()
+            apiCalling(docStatus,currentPage,token)
+            pageNo=pageNo.dec()
         }
+
+
         nav_view_doc.setNavigationItemSelectedListener { menuItem ->
             menuItem.isChecked = true
             drawerLayout.closeDrawers()
@@ -188,7 +193,9 @@ class DocActivity : AppCompatActivity() {
                 refreshItem()
             }
             private fun refreshItem() {
-                apiCalling(null,0, token)
+                docStatus=null
+                currentPage=0
+                apiCalling(docStatus,currentPage, token)
                 title = getString(R.string.alldocs)
                 itemLoadComplete()
             }
@@ -196,7 +203,7 @@ class DocActivity : AppCompatActivity() {
                 swipeRefreshDocuments!!.isRefreshing = false
             }
         })
-       
+
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
@@ -210,56 +217,61 @@ class DocActivity : AppCompatActivity() {
         when (item!!.itemId) {
 
             R.id.allDocuments -> {
+                currentPage=0
                 apiCalling(null,currentPage,token)
                 title= getString(R.string.alldocs)
                 return true
             }
 
             R.id.menu_awaitingMySign -> {
-
-                apiCalling(0,currentPage,token)
+                currentPage=0
+                docStatus=0
+                apiCalling(docStatus,currentPage,token)
                 title= getString(R.string.awatingsign)
                 return true
             }
 
             R.id.menu_awaitingOthers -> {
-
-                apiCalling(3,currentPage,token)
-
+                currentPage=0
+                docStatus=3
+                apiCalling(docStatus,currentPage,token)
                 title= getString(R.string.awatingothers)
                 return true
             }
 
             R.id.menu_completed -> {
-
-                apiCalling(2,currentPage,token)
+                currentPage=0
+                docStatus=2
+                apiCalling(docStatus,currentPage,token)
                 title= getString(R.string.completed)
                 return true
             }
 
 
             R.id.menu_duesoon -> {
-
-                apiCalling(6,currentPage,token)
+                currentPage=0
+                docStatus=6
+                apiCalling(docStatus,currentPage,token)
                 title= getString(R.string.signingdue)
                 return  true
             }
 
             R.id.menu_Declined -> {
-
-                apiCalling(7,currentPage,token)
+                currentPage=0
+                docStatus=7
+                apiCalling(docStatus,currentPage,token)
                 title= getString(R.string.Declined)
                 return  true
-              }
             }
-        return super.onOptionsItemSelected(item)
         }
+        return super.onOptionsItemSelected(item)
+    }
 
     @SuppressLint("InflateParams")
 
 
 
-     fun apiCalling(status:Int?, currentpage:Int, token:String? ){
+    fun apiCalling(status:Int?, currentpage:Int, token:String? ){
 
         val builder = android.app.AlertDialog.Builder(this)
         val dialogView = layoutInflater.inflate(R.layout.progress_dialog, null)
@@ -320,7 +332,7 @@ class DocActivity : AppCompatActivity() {
                             cpage_number.text=response.body()!!.data[0].currentPage.toString()
                             total_pages.text=response.body()!!.data[0].totalPages.toString()
 
-                           if(response.body()!!.data[0].currentPage==1)
+                            if(response.body()!!.data[0].currentPage==1)
                                 button_previous.isEnabled=false
                             if(cpage_number.text==total_pages.text)
                                 button_next.isEnabled=false
