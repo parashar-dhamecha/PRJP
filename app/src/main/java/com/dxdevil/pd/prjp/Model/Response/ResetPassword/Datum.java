@@ -1,55 +1,21 @@
 
 package com.dxdevil.pd.prjp.Model.Response.ResetPassword;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Datum {
 
-    @SerializedName("currentPage")
+    @SerializedName("redirectToLogin")
     @Expose
-    private Integer currentPage;
-    @SerializedName("totalPage")
-    @Expose
-    private Integer totalPage;
-    @SerializedName("totalRows")
-    @Expose
-    private Integer totalRows;
-    @SerializedName("documentList")
-    @Expose
-    private List<DocumentList> documentList = null;
+    private Boolean redirectToLogin;
 
-    public Integer getCurrentPage() {
-        return currentPage;
+    public Boolean getRedirectToLogin() {
+        return redirectToLogin;
     }
 
-    public void setCurrentPage(Integer currentPage) {
-        this.currentPage = currentPage;
-    }
-
-    public Integer getTotalPage() {
-        return totalPage;
-    }
-
-    public void setTotalPage(Integer totalPage) {
-        this.totalPage = totalPage;
-    }
-
-    public Integer getTotalRows() {
-        return totalRows;
-    }
-
-    public void setTotalRows(Integer totalRows) {
-        this.totalRows = totalRows;
-    }
-
-    public List<DocumentList> getDocumentList() {
-        return documentList;
-    }
-
-    public void setDocumentList(List<DocumentList> documentList) {
-        this.documentList = documentList;
+    public void setRedirectToLogin(Boolean redirectToLogin) {
+        this.redirectToLogin = redirectToLogin;
     }
 
 }

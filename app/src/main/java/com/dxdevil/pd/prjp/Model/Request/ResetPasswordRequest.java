@@ -5,6 +5,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class ResetPasswordRequest {
 
+    public ResetPasswordRequest(String email, String password, String confirmPassword, String securityToken)
+    {
+        this.email=email;
+        this.password=password;
+        this.confirmPassword=confirmPassword;
+        this.securityToken=securityToken;
+    }
     @SerializedName("email")
     @Expose
     private String email;

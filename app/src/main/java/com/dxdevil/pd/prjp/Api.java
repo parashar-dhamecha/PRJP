@@ -9,6 +9,7 @@ import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.DocDetailsResponse
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse;
 import com.dxdevil.pd.prjp.Model.Response.Document.NextPage.NextPageResponse;
 import com.dxdevil.pd.prjp.Model.Response.Document.Preview.PreviewDocResponse;
+import com.dxdevil.pd.prjp.Model.Response.ResetPassword.ResetPasswordResponse;
 import com.dxdevil.pd.prjp.Model.Response.SignUpModel;
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse;
 import com.dxdevil.pd.prjp.Model.Response.Verify.List.VerifyListResponse;
@@ -57,6 +58,11 @@ public interface Api {
     Call<ForgotResponse>forgotpass(
             @Body ForgotRequest forgotRequest
             );
+    @POST("account/reset-password")
+    Call<ResetPasswordResponse>resetPassword(
+            @Body ResetPasswordRequest resetPassword
+    );
+
 
     @GET("dashboard/document-counts")
     Call<DashboardResponse>getDashboardCouts(
