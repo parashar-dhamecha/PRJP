@@ -11,7 +11,6 @@ import com.dxdevil.pd.prjp.Model.Request.VerifyDocList
 import com.dxdevil.pd.prjp.Model.Response.Verify.List.DocumentList
 import com.dxdevil.pd.prjp.Model.Response.Verify.List.VerifyListResponse
 import kotlinx.android.synthetic.main.activity_verify_list.*
-import kotlinx.android.synthetic.main.content_contacts.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
