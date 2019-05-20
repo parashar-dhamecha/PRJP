@@ -61,7 +61,7 @@
                     android:layout_marginStart="@dimen/dp10"
             />
             <TextView
-                    android:text="TextView"
+                    android:text="Creation Time:"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxWidth="@dimen/dp200"
@@ -73,6 +73,20 @@
                     android:layout_marginTop="3dp"
                     android:layout_below="@+id/txt_doc"
                     android:textSize="12sp"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="time"
+                      android:ellipsize="end"
+                      android:id="@+id/TVtime"
+                      android:textColor="@color/textcolor"
+                      android:layout_toEndOf="@id/doc_status"
+                      android:layout_marginStart="6dp"
+                      android:layout_marginTop="3dp"
+                      android:textSize="12sp"
+                      android:layout_below="@id/txt_doc"
+
+            />
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

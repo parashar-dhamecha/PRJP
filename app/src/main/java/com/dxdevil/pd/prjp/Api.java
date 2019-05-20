@@ -9,8 +9,11 @@ import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.DocDetailsResponse
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse;
 import com.dxdevil.pd.prjp.Model.Response.Document.NextPage.NextPageResponse;
 import com.dxdevil.pd.prjp.Model.Response.Document.Preview.PreviewDocResponse;
+import com.dxdevil.pd.prjp.Model.Response.ResetPassword.ResetPasswordResponse;
 import com.dxdevil.pd.prjp.Model.Response.SignUpModel;
 import com.dxdevil.pd.prjp.Model.Response.UserExistResponse;
+import com.dxdevil.pd.prjp.Model.Response.Verify.List.VerifyListResponse;
+import com.dxdevil.pd.prjp.Model.Response.Verify.VerifyDetails.VerifyDetailsResponse;
 import com.dxdevil.pd.prjp.data.CreateDoc;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -55,6 +58,11 @@ public interface Api {
     Call<ForgotResponse>forgotpass(
             @Body ForgotRequest forgotRequest
             );
+    @POST("account/reset-password")
+    Call<ResetPasswordResponse>resetPassword(
+            @Body ResetPasswordRequest resetPassword
+    );
+
 
     @GET("dashboard/document-counts")
     Call<DashboardResponse>getDashboardCouts(
@@ -151,9 +159,18 @@ public interface Api {
             @Header("Authorization") String Authorization,
             @Part MultipartBody.Part file
     );
-   @GET("verify/document-detail/{documentID}")
-   Call<VerifyDocumentDetail>getVerificationDetails(@Header("Authorization") String Authorization,
-                                                  @Path("documentId") String documentId);
+
+ //////////////////////////////////////////verify document///////////////////////////////////////////
+   @GET("verify/document-detail/{documentId}")
+   Call<VerifyDetailsResponse>getVerificationDetails(@Header("Authorization") String Authorization,
+                                                     @Path("documentId") String documentId);
+
+   @POST("verify/document-list")
+   Call<VerifyListResponse>verifylist(
+           @Header("Authorization") String Authorization,
+           @Body VerifyDocList list
+   );
+
 
 }
 

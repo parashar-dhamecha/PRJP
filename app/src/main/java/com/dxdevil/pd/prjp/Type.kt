@@ -219,6 +219,7 @@ class Type : AppCompatActivity(), View.OnClickListener {
                                     var bitmap1 =BitmapFactory.decodeByteArray(by,0,by.size) as Bitmap?
                                     startActivity(Intent(this@Type,Dashboarrd::class.java))
                                     pd.dismiss()
+                                    startActivity(Intent(this@Type, Dashboarrd::class.java))
                                     Toast.makeText(this@Type,"Saved successfully..",Toast.LENGTH_LONG).show()
                                 }else{
                                     pd.dismiss()
@@ -253,6 +254,7 @@ class Type : AppCompatActivity(), View.OnClickListener {
                                     var bitmap1 =BitmapFactory.decodeByteArray(by,0,by.size) as Bitmap?
                                     startActivity(Intent(this@Type,Dashboarrd::class.java))
                                     pd.dismiss()
+                                    startActivity(Intent(this@Type, Dashboarrd::class.java))
                                     Toast.makeText(this@Type,"Saved successfully..",Toast.LENGTH_LONG).show()
                                 }else{
                                     pd.dismiss()

@@ -13,6 +13,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
@@ -112,15 +113,15 @@ class Settings : AppCompatActivity() {
 
             true
         }
-        myaccountcv.setOnClickListener {
+        constraint_Account.setOnClickListener {
             startActivity(Intent(applicationContext,ProfileActivity::class.java))
         }
 
-        cardView2.setOnClickListener {
+       constraint_changeP.setOnClickListener {
             startActivity(Intent(applicationContext,ChangePassword::class.java))
         }
 
-        card_logout.setOnClickListener {
+        constraint_Logout.setOnClickListener {
 
             val builder= AlertDialog.Builder(this@Settings)
             builder.setTitle("Are you sure you want to Logout?")

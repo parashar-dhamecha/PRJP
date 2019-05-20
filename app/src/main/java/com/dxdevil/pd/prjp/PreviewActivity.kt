@@ -141,7 +141,7 @@ class PreviewActivity : AppCompatActivity() {
             override fun onResponse(call: Call<PreviewDocResponse>, response: Response<PreviewDocResponse>) {
                 try{
                     if (response.isSuccessful){
-                        Toast.makeText(applicationContext,"Success",Toast.LENGTH_SHORT).show()
+
                         dialog.dismiss()
                         swipeRefreshImage.isEnabled=false
 
@@ -169,7 +169,11 @@ class PreviewActivity : AppCompatActivity() {
                         if (response.message().toString() == "Unauthorized") {
                             startActivity(Intent(this@PreviewActivity, LoginActivity::class.java))
                         } else {
-                            Toast.makeText(this@PreviewActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                            tvSomethingWrong.visibility=View.VISIBLE
+                            tvRefresh.visibility=View.VISIBLE
+                            swipeRefreshImage.isEnabled=true
+                            button_next.isEnabled=false
+
                         }
                     }
                 }catch (e:Exception)

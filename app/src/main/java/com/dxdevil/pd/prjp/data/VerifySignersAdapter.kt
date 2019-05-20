@@ -11,11 +11,11 @@ import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.Signer
 import com.dxdevil.pd.prjp.R
 
 
-class SignersAdapter(
-    var list: List<Signer>, var context:Context): RecyclerView.Adapter<SignersAdapter.ViewHolder>() {
+class VerifySignersAdapter(
+    var list: List<com.dxdevil.pd.prjp.Model.Response.Verify.VerifyDetails.Signer>, var context:Context): RecyclerView.Adapter<VerifySignersAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.signers, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.verify_signers, parent, false)
         return ViewHolder(view)
     }
 
@@ -23,11 +23,7 @@ class SignersAdapter(
 
         holder.shortname.text=list[position].profileShortName
         holder.signername.text=list[position].firstName
-        holder.btnSigner.text=list[position].signButtonText
-
-        if(list[position].isSigned==true)
-            holder.btnSigner.visibility=View.GONE
-    }
+         }
 
     override fun getItemCount(): Int {
         return list.size
@@ -37,7 +33,6 @@ class SignersAdapter(
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         var shortname: TextView = itemView.findViewById(R.id.tvshort_name) as TextView
         var signername: TextView = itemView.findViewById(R.id.tvSigner_name) as TextView
-        var btnSigner: Button = itemView.findViewById(R.id.btnSigner) as Button
 
     }
 

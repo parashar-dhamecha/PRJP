@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Cygnature</string>
+    <string name="app_name">Cygnature1</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -20,7 +20,7 @@
     <string name="SignUpButton">Signup</string>
     <string name="LOgintv">Login In to your Account</string>
     <string name="action_settings">Action Settings</string>
-    <string name="forgot">Forgot Password</string>
+    <string name="forgot">Forgot Password?</string>
     <string name="Email">Enter email</string>
     <string name="reset">Reset Password</string>
     <string name="img_description">logo_of_cygnature</string>
@@ -47,7 +47,6 @@
     <string name="OTP">Enter OTP</string>
     <string name="enter_password">Enter Password</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="clearall">Clear All</string>
     <string name="drawsig">Draw Signature</string>
     <string name="takepic">Take Photo</string>
     <string name="Register">Register</string>
@@ -73,7 +72,7 @@
     <string name="devide">/</string>
     <string name="total">2</string>
     <string name="Declined">Declined</string>
-    <string name="contact_mobile_no">8888888888</string>
+
 
     <!-- Profile Page Strings-->
     <string name="prf_title">Profile</string>
@@ -108,9 +107,9 @@
     <string name="CreateGroup">Create Group</string>
     <string name="edit_title">Edit Profile</string>
     <string name="Image_des">User_image</string>
-    <string name="First_Name">First Name</string>
-    <string name="Last_Name">Last Name</string>
-    <string name="Email_Address">Email Address</string>
+    <string name="First_Name">First Name*</string>
+    <string name="Last_Name">Last Name*</string>
+    <string name="Email_Address">Email Address*</string>
     <string name="Mobile_No">Mobile No*</string>
     <string name="Job_Title">Job Title</string>
     <string name="Organization">Organization</string>
@@ -211,6 +210,9 @@
     <string name="title_activity_add_edit_signature">AddEditSignature</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="e_signature">E-Signature</string>
+    <string name="button_clearall">Clear All</string>
+    <string name="contact_mobile_no">8888888888</string>
 
 
 </resources>

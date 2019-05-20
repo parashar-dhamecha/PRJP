@@ -41,7 +41,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/swipeRefreshDocuments"
-            app:layout_constraintBottom_toTopOf="@id/mRelativelayout"
+            app:layout_constraintBottom_toTopOf="@id/btnsConstraintLayout"
             android:layout_marginBottom="8dp">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -61,7 +61,7 @@
             android:layout_width="0dp"
 
             android:layout_height="wrap_content"
-            android:id="@+id/mRelativelayout"
+            android:id="@+id/btnsConstraintLayout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -100,7 +100,7 @@
         <TextView
                 android:text="@string/CurrentPage"
                 android:gravity="center"
-                android:textColor="@color/slate_black"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/cpage_number"
@@ -121,7 +121,7 @@
                 android:id="@+id/devide"
                 tools:text="/"
                 android:textSize="18sp"
-                android:textColor="@color/slate_black"
+                android:textColor="@color/black"
                 android:layout_toEndOf="@id/cpage_number"
                 tools:layout_conversion_wrapWidth="18"
                 tools:layout_conversion_wrapHeight="85"
@@ -140,7 +140,7 @@
                 android:id="@+id/total_pages"
                 android:textSize="18sp"
                 android:layout_toEndOf="@id/devide"
-                android:textColor="@color/slate_black"
+                android:textColor="@color/black"
                 tools:layout_conversion_wrapWidth="18"
                 tools:layout_conversion_wrapHeight="85"
                 app:layout_constraintStart_toEndOf="@+id/devide"

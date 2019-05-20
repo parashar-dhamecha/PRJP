@@ -78,7 +78,7 @@ class ProfileActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     pd.dismiss()
                     var profileob = response.body()
-                    Toast.makeText(this@ProfileActivity, "success", Toast.LENGTH_LONG).show()
+
                     fullnametextview!!.text =
                         profileob!!.data[0].firstName.toString() +" " + profileob!!.data[0].lastName.toString()
                     emailtv!!.text = profileob!!.data[0].email.toString()

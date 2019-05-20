@@ -31,13 +31,9 @@ import com.dxdevil.pd.prjp.Model.Response.DashboardResponse
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse
 import com.dxdevil.pd.prjp.data.RecentDocumentAdapter
-import com.google.android.material.internal.ContextUtils.getActivity
-import com.google.android.material.snackbar.Snackbar
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
-import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.content_dashboarrd.*
-import kotlinx.android.synthetic.main.content_docactivity.*
 import kotlinx.android.synthetic.main.signpopup.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -63,6 +59,8 @@ class Dashboarrd : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboarrd)
 
+
+        RecentDocProgress.visibility=View.GONE
 
         drawerLayout = findViewById(R.id.drawer_layout)
         ntoggle =
@@ -287,25 +285,15 @@ class Dashboarrd : AppCompatActivity() {
 
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            100 -> {
-
-                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-
-                    Snackbar.make(constraintLayoutdash,"Permission's Denied",Snackbar.LENGTH_LONG).show()
-                } else {
-                    Snackbar.make(constraintLayoutdash,"Permission's Granted",Snackbar.LENGTH_LONG).show()
-                }
-            }
-        }
-    }
-
     override fun onBackPressed() {
         this.finish()
     }
 
+//        override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//            // Inflate the menu; this adds items to the action bar if it is present.
+//            menuInflater.inflate(R.menu.dashboarrd, menu)
+//            return true
+//        }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (ntoggle.onOptionsItemSelected(item))
@@ -346,6 +334,9 @@ class Dashboarrd : AppCompatActivity() {
             call.enqueue(object : Callback<ListOfDocumentResponse> {
                 override fun onFailure(call: Call<ListOfDocumentResponse>, t: Throwable) {
 
+                    RecentDocProgress.visibility=View.GONE
+
+
                     Toast.makeText(this@Dashboarrd, "Check your connection", Toast.LENGTH_SHORT).show()
                 }
 
@@ -361,8 +352,10 @@ class Dashboarrd : AppCompatActivity() {
 
                             adapter!!.notifyDataSetChanged()
 
+                            RecentDocProgress.visibility=View.GONE
                         } catch (e: Exception) {
 
+                            RecentDocProgress.visibility=View.GONE
                             Toast.makeText(this@Dashboarrd, e.message, Toast.LENGTH_LONG).show()
                         }
 

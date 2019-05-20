@@ -10,6 +10,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+
 
     <uses-feature android:name="android.hardware.camera2"/>
 
@@ -30,12 +34,16 @@
         </activity>
         <activity android:name=".VerifyDocumentDetail">
         </activity>
+
+
         <activity
                 android:name=".VerifyActivity"
                 android:label="Verify Document">
         </activity>
+
         <activity android:name=".Annotation2">
         </activity>
+
         <activity android:name=".Annotation1">
         </activity>
         <activity android:name=".Annotation">
@@ -47,7 +55,6 @@
         <activity
                 android:name=".Dashboarrd"
                 android:label="Dashboard"
-                android:screenOrientation="portrait"
                 android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -55,14 +62,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-                android:name=".PhotoActivity"
-                android:parentActivityName=".Dashboarrd"/>
+        <activity android:name=".PhotoActivity"
+                  android:parentActivityName=".Dashboarrd"/>
         <activity android:name=".AddContact">
         </activity>
-        <activity
-                android:name=".Otpactivity"
-                android:screenOrientation="portrait">
+        <activity android:name=".Otpactivity" android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".LoginActivity"
@@ -72,9 +76,22 @@
                 android:name=".MainActivity"
                 android:theme="@style/AppTheme.NoActionBar"
                 tools:ignore="ExtraText">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+            <intent-filter>
+                 <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
-        <activity android:name=".ForgotPasswordActivity">
-        </activity>
+
+        <activity android:name=".ForgotPasswordActivity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".UpdateContact">
         </activity>
         <activity
@@ -101,8 +118,11 @@
                 android:name=".ChangePassword"
                 android:parentActivityName=".Settings">
         </activity>
-        <activity android:name=".Registration">
+        <activity android:name=".Registration"
+        android:parentActivityName=".LoginActivity">
         </activity>
+
+
         <activity android:name=".Dashboard">
         </activity>
         <activity
@@ -113,9 +133,18 @@
                 android:parentActivityName=".Dashboarrd"/>
         <activity
                 android:name=".PhotoActivity"
-                android:parentActivityName=".Dashboarrd"
-                tools:ignore="DuplicateActivity"/>
-        <activity android:name=".ResetPasswordActivity">
+                tools:ignore="DuplicateActivity"
+                android:parentActivityName=".Dashboarrd"/>
+
+        <activity android:name=".ResetPasswordActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="cygnature.stagingapplications.com"
+                      android:scheme="https"/>
+            </intent-filter>
         </activity>
         <activity
                 android:name=".DocumentDetailActivity"
@@ -132,6 +161,8 @@
         <activity
                 android:name=".Type"
                 android:parentActivityName=".Dashboard"/>
-    </application>
+
+
+</application>
 
 </manifest>

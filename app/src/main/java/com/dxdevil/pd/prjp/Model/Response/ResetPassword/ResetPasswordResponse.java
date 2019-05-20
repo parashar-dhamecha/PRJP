@@ -1,13 +1,11 @@
 
-package com.dxdevil.pd.prjp.Model.Response.Verify.VerifyDetails;
+package com.dxdevil.pd.prjp.Model.Response.ResetPassword;
 
 import java.util.List;
-
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VerifyDetailsResponse {
+public class ResetPasswordResponse {
 
     @SerializedName("message")
     @Expose

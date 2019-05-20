@@ -5,6 +5,18 @@ import com.google.gson.annotations.SerializedName;
 
 public class VerifyDocList {
 
+    public VerifyDocList(String filehash,
+                          Integer currentPage,
+                          Object transactionHash,
+                         String searchText)
+    {
+        this.fileHash=filehash;
+        this.transactionHash=transactionHash;
+        this.currentPage=currentPage;
+        this.searchText=searchText;
+    }
+
+
     @SerializedName("fileHash")
     @Expose
     private String fileHash;
