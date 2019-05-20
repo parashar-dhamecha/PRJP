@@ -60,7 +60,7 @@ class Dashboarrd : AppCompatActivity() {
         setContentView(R.layout.activity_dashboarrd)
 
 
-        RecentDocProgress.visibility=View.GONE
+        RecentDocProgress.visibility=View.VISIBLE
 
         drawerLayout = findViewById(R.id.drawer_layout)
         ntoggle =

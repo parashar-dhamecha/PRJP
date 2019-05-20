@@ -12,19 +12,17 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
-
-
     <uses-feature android:name="android.hardware.camera2"/>
 
     <application
             android:allowBackup="true"
-            android:icon="@drawable/cygicon"
+            android:icon="@drawable/cgicon"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
         <activity
                 android:name=".AddEditSignature"
                 android:label="@string/title_activity_add_edit_signature"
@@ -56,11 +54,7 @@
                 android:name=".Dashboarrd"
                 android:label="Dashboard"
                 android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".PhotoActivity"
                   android:parentActivityName=".Dashboarrd"/>
@@ -82,15 +76,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
-            <intent-filter>
-                 <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
 
         <activity android:name=".ForgotPasswordActivity"
-                  android:theme="@style/AppTheme.NoActionBar"/>
+                  android:theme="@style/AppTheme.NoActionBar">
+        </activity>
 
         <activity android:name=".UpdateContact">
         </activity>
@@ -133,17 +123,20 @@
                 android:parentActivityName=".Dashboarrd"/>
         <activity
                 android:name=".PhotoActivity"
-                tools:ignore="DuplicateActivity"
-                android:parentActivityName=".Dashboarrd"/>
+                android:parentActivityName=".Dashboarrd"
+                tools:ignore="DuplicateActivity"/>
+        <activity
+                android:name=".ResetPasswordActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
 
-        <activity android:name=".ResetPasswordActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter >
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="cygnature.stagingapplications.com"
-                      android:scheme="https"/>
+                <data
+                        android:host="cygnature.stagingapplications.com"
+                        android:scheme="https"/>
+
             </intent-filter>
         </activity>
         <activity

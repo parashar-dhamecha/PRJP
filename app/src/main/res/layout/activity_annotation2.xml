@@ -91,7 +91,7 @@
             app:layout_constraintTop_toTopOf="@+id/addantbutton" app:layout_constraintHorizontal_bias="0.549"/>
     <Button android:layout_width="70dp"
             android:layout_height="60dp"
-            android:text="@string/clearall"
+            android:text="@string/button_clearall"
             android:background="@drawable/edit_round2"
             android:id="@+id/clearallantbutton"
             android:textAlignment="center"
