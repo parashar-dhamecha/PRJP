@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
@@ -19,6 +21,7 @@ import com.dxdevil.pd.prjp.Model.Response.Document.NextPage.NextPageResponse
 import com.dxdevil.pd.prjp.data.CreateDoc
 import kotlinx.android.synthetic.main.activity_annotation2.*
 import kotlinx.android.synthetic.main.activity_preview.*
+import kotlinx.android.synthetic.main.content_dashboarrd.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,10 +31,10 @@ import retrofit2.Response
     "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "UNCHECKED_CAST")
 class Annotation2 : AppCompatActivity(),View.OnTouchListener{
 
-    lateinit var viewarr: ArrayList<ImageView>
-    lateinit var view :ImageView
-     var viewcount: Int = 0
-   lateinit var totpageannot :MutableList<Int>
+    var viewarr: ArrayList<TextView> = arrayListOf()
+     lateinit var viewpagearr : HashMap<Int,ArrayList<TextView>>
+    lateinit var view :TextView
+     lateinit var viewcount:MutableList<Int>
     lateinit var root: ViewGroup
     private var _xDelta: Int = 0
     private var _yDelta: Int = 0
@@ -47,38 +50,30 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
     var toP:Int?=6
     var cpage:Int=1
     var currentpage:Int=0
+    var currentpage1:Int=0
     var pageNo:Int=0
     var length2:Int=0
-    var ispageannot:ArrayList<Boolean> = ArrayList()
+     var ispageannot:Array<Boolean> = arrayOf()
     var page : ArrayList<String> = ArrayList()
     lateinit var by:ByteArray
     lateinit var bitmap: Bitmap
-    var pageindexstart :MutableList<Int> = mutableListOf()
-//    var xa :ArrayList<Int> = ArrayList()
-//    var ya :ArrayList<Int> = ArrayList()
-//    var wa :ArrayList<Int> = ArrayList()
-//    var ha :ArrayList<Int> = ArrayList()
-//    var xp :ArrayList<Double> = ArrayList()
-//    var yp :ArrayList<Double> = ArrayList()
-//    var wp :ArrayList<Double> = ArrayList()
-//    var hp :ArrayList<Double> = ArrayList()
-
-
 
     @SuppressLint("ClickableViewAccessibility", "ResourceAsColor", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_annotation2)
         root = findViewById(R.id.Relativelid)
-//        selsigners=this.intent.getStringArrayListExtra("ssname")
+        selsigners=this.intent.getStringArrayListExtra("ssname")
         signersid.add(0,"ed26c904-dca3-433d-87ab-a5ac2381de27")
-        viewarr=ArrayList<ImageView>()
+
 
 
         var sp = this.getSharedPreferences("CreateDocDetails",0)
         docId= sp.getString("docid","")as String
         token = this.getSharedPreferences("Token",0).getString("Token","").toString()
+
         prev_button.isEnabled=false
+
 
         apiNextPage(token,fromP.toString(),toP.toString())
 
@@ -86,24 +81,33 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
         next_button!!.setOnClickListener {
             synchronized(this) {
                 prev_button.isEnabled = true
-                var fv = viewcount
-                while (fv > pageindexstart[currentpage]) {
-                    root.removeView(findViewById(fv-1))
-                    fv -= 1
-                }
-                currentpage += 1
-
-                if(totpageannot[currentpage]==0) {
-                    ispageannot.add(currentpage, false)
-                    pageindexstart.add(currentpage, viewcount)
-                }
-                if(ispageannot[currentpage]==true){
-                    var sp = pageindexstart[currentpage]
-                    while(sp<pageindexstart[currentpage]+totpageannot[currentpage]){
-                        root.addView(viewarr[sp])
-                        sp+=1
+                if(ispageannot[currentpage]) {
+                    viewpagearr[currentpage] = arrayListOf()
+                    viewpagearr[currentpage] = viewarr
+                    viewarr = arrayListOf()
+                    var fv =  viewcount[currentpage]
+                    while (fv > 0) {
+                        root.removeView(findViewById((currentpage*100)+fv-1))
+                        fv -= 1
                     }
                 }
+
+                currentpage += 1
+                currentpage1 += 1
+
+                if(ispageannot[currentpage]){
+                    var vc=0
+
+                    viewarr = ArrayList()
+                   viewarr = viewpagearr[currentpage]!!
+                    Toast.makeText(this@Annotation2,viewarr.size.toString(),Toast.LENGTH_LONG).show()
+                    var sp = viewcount[currentpage]
+                    while(sp>0){
+                        root.addView(viewpagearr[currentpage]!!?.get(sp-1))
+                        sp-=1
+                    }
+                }
+
                 if (pageNo % 6 == 0 && pageNo
                     == page.size) {
                     fromP = cpage + 1
@@ -119,7 +123,6 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
 
                 }
                 cpage = cpage.inc()
-//            cpage_number.text = pageNo.toString()
                 if (pageNo == pageCount)
                     next_button.isEnabled = false
             }
@@ -128,29 +131,42 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
         prev_button.setOnClickListener {
             synchronized(this) {
                 next_button.isEnabled = true
-                var fv = viewcount
-                while (fv > pageindexstart[currentpage]) {
-                    root.removeView(findViewById(fv-1))
-                    fv -= 1
+                if(ispageannot[currentpage]) {
+                    viewpagearr[currentpage] = arrayListOf()
+                    viewpagearr[currentpage] = viewarr
+                    viewarr = arrayListOf()
+
+                    var fv =  viewcount[currentpage]
+
+                    while (fv > 0) {
+                        root.removeView(findViewById((currentpage*100)+fv-1))
+                        fv -= 1
+                    }
                 }
 
                 currentpage -= 1
+                currentpage1 -= 1
+
+                if(ispageannot[currentpage]){
+
+                    viewarr = viewpagearr[currentpage]!!
+                    Toast.makeText(this@Annotation2,viewarr.size.toString(),Toast.LENGTH_LONG).show()
+                    var sp = viewcount[currentpage]
+                    while(sp > 0){
+                        root.addView(viewarr[sp-1])
+                        sp-=1
+                    }
+                }
 
                 by = Base64.decode(page[currentpage], Base64.DEFAULT)
                 bitmap = BitmapFactory.decodeByteArray(by, 0, by.size)
                 previewdocid.setImageBitmap(bitmap)
                 pageNo = pageNo.dec()
                 cpage = cpage.dec()
-                Toast.makeText(this@Annotation2, pageindexstart[currentpage].toString(), Toast.LENGTH_LONG).show()
-                if(ispageannot[currentpage]==true){
-                    var sp = pageindexstart[currentpage]
-                    while(sp<pageindexstart[currentpage]+totpageannot[currentpage]){
-                        root.addView(viewarr[sp])
-                        sp+=1
-                    }
-                }
                 if (pageNo == 1)
                     prev_button.isEnabled = false
+
+
             }
         }
 
@@ -163,30 +179,28 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
         }
 
          addantbutton.setOnClickListener {
-             synchronized(this) {
-                 viewarr.add( addannotatio() as ImageView)
-                 viewarr[viewcount].id= viewcount
-                 root.addView(viewarr[viewcount])
-                 viewarr[viewcount].setOnTouchListener(this)
-                 viewcount+=1
-                 totpageannot.add(currentpage,totpageannot.elementAt(currentpage)+1)
-                 ispageannot.add(currentpage,true)
+             viewarr.add(viewcount[currentpage], addannotatio())
+             viewarr[viewcount[currentpage]]!!.id = (currentpage * 100) + viewcount[currentpage]
+             root.addView(viewarr[viewcount[currentpage]])
+             viewarr[viewcount[currentpage]]!!.setOnTouchListener(this)
+             viewcount.set(currentpage,(viewcount.elementAt(currentpage) + 1))
+             if (!ispageannot[currentpage]) {
+                 ispageannot[currentpage] = true
              }
          }
         clearantbutton.setOnClickListener {
             synchronized(this) {
-                if (viewcount > 0) {
-                    root.removeView(findViewById(viewcount - 1))
-                    viewcount -= 1
+                if (viewcount[currentpage] > 0) {
+                    root.removeView(findViewById((currentpage*100)+viewcount[currentpage] - 1))
+                    viewcount[currentpage] -= 1
                 }
             }
         }
       clearallantbutton.setOnClickListener {
          synchronized(this) {
-             while (viewcount > 0) {
-                 root.removeView(findViewById(viewcount-1))
-                 viewarr.removeAt(viewcount-1)
-                 viewcount -= 1
+             while (viewcount[currentpage] > 0) {
+                 root.removeView(findViewById((currentpage*100)+viewcount[currentpage]-1))
+                 viewcount[currentpage] -= 1
              }
          }
       }
@@ -215,8 +229,8 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
             call.enqueue(object :Callback<NextPageResponse>{
                 override fun onFailure(call: Call<NextPageResponse>, t: Throwable) {
                     dialog.dismiss()
-                    tvSomethingWrong.visibility=View.VISIBLE
-                    tvRefresh.visibility=View.VISIBLE
+                    tvSomethingWrong?.visibility=View.VISIBLE
+                    tvRefresh!!.visibility=View.VISIBLE
                 }
 
                 override fun onResponse(call: Call<NextPageResponse>, response: Response<NextPageResponse>) {
@@ -238,9 +252,9 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
                         previewdocid.setImageBitmap(bitmap)
                         pageNo=pageNo.inc()
 
-                        totpageannot=MutableList(page.size){0}
-                        pageindexstart.add(0,0)
-
+                        viewcount= MutableList(pageCount){0}
+                        ispageannot = Array(pageCount){false}
+                        viewpagearr = HashMap()
                         dialog.dismiss()
                     }
                     else
@@ -263,10 +277,11 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
 
 
     @SuppressLint("ResourceType")
-   @Synchronized private fun addannotatio():View {
-        view = ImageView(this)
-        view.setImageDrawable(getDrawable(R.drawable.logo))
-        setLayoutsize(250,110)
+   @Synchronized private fun addannotatio():TextView {
+        view = TextView(this)
+        view.text = signerspinner.selectedItem.toString()
+        view.setTextColor(Color.parseColor("#F5E1C1"))
+        setLayoutsize(220,100)
         return view
     }
 
@@ -327,12 +342,24 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
 //                    ,15.22,1,"0.612",
 //                    signersid?.get(selsigners!!.indexOf(signerspinner!!.selectedItem)),true,"ESignature"))
 
-                 Toast.makeText(this@Annotation2,view.x.toString(),Toast.LENGTH_LONG).show()
 
 //            view.setOnTouchListener(null)
 //                view.setOnClickListener {
 //                }
 //                view.setOnTouchListener(this)
+
+                if (view.x<0){
+                    view.x = 1f
+                }
+                if (view.y<0){
+                    view.y = 1f
+                }
+                if (view.y>970){
+                    view.y = 970f
+                }
+                if (view.x>535){
+                    view.x = 535f
+                }
             }
             MotionEvent.ACTION_POINTER_DOWN -> {
 
@@ -348,6 +375,7 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
                 layoutParams.bottomMargin = -250
                 xycoordinates.text= "X:${view.x},Y:${view.y}"
                 view.setLayoutParams(layoutParams)
+
 
             }
         }
@@ -385,7 +413,7 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
 
            val createapi: Api = RetrofitClient.getInstance().api as Api
                 val createcall = createapi.create(
-                    token, CreateDoc(docid, filename,filename,".pdf",
+                     CreateDoc(docid, filename,filename,".pdf",
                         "sample doc","2019-05-11 11:42",
                         "2019-05-11 11:42","2019-05-11 11:42",3,
                         documentshapemodel ,2, this!!.signersid as List<String>,
@@ -393,8 +421,8 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
                         4.092356,
                         -56.062161,
                         "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36","61.12.66.6"
-                        ,authtype)
-                ) as Call<CreateResponse>
+                        ,authtype),token)
+                 as Call<CreateResponse>
 
                 createcall!!.enqueue(object : Callback<CreateResponse>{
                     override fun onFailure(call: Call<CreateResponse>, t: Throwable) {

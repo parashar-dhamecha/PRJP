@@ -11,7 +11,7 @@
     <color name="textcolor2">#19001F</color>
     <color name="cardbg">#4D9E53</color>
     <color name="digitbg">#1a4a9f</color>
-    <color name="textcolor3">#FAF9F9</color>
+    <color name="textcolor3">#F5E1C1</color>
     <color name="bg_gray">#ECEDEF</color>
     <color name="black">#000000</color>
     <color name="custom_color">#1a4a9f</color>
@@ -29,6 +29,6 @@
     <color name="edit">#a8a8a8</color>
     <color name="delete">#1DC9B7</color>
     <color name="gray">#ECEDEF</color>
-
+    <color name="signBackground">#8A999684</color>
 
 </resources>

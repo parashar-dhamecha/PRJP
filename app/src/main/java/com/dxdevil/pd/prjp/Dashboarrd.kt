@@ -1,11 +1,13 @@
 package com.dxdevil.pd.prjp
 
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
@@ -16,9 +18,12 @@ import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dxdevil.pd.prjp.Model.Request.Document.ListOfDocument
@@ -26,9 +31,13 @@ import com.dxdevil.pd.prjp.Model.Response.DashboardResponse
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse
 import com.dxdevil.pd.prjp.data.RecentDocumentAdapter
+import com.google.android.material.internal.ContextUtils.getActivity
+import com.google.android.material.snackbar.Snackbar
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.content_dashboarrd.*
+import kotlinx.android.synthetic.main.content_docactivity.*
 import kotlinx.android.synthetic.main.signpopup.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,17 +46,22 @@ import java.lang.Exception
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class Dashboarrd : AppCompatActivity() {
-
+   lateinit var v: View
     private var adapter: RecentDocumentAdapter? = null
     private lateinit var documentList: ArrayList<Document>
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var ntoggle: ActionBarDrawerToggle
     @SuppressLint("SetTextI18n", "WrongViewCast")
+
+    fun hasPermissions(context: Context, vararg permissions: String): Boolean = permissions.all {
+        ActivityCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboarrd)
-
 
 
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -56,6 +70,26 @@ class Dashboarrd : AppCompatActivity() {
         drawerLayout.addDrawerListener(ntoggle)
         ntoggle.syncState()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        var  permissions= arrayListOf<String>(
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE)
+
+
+        var listPermissionsNeeded:MutableList<String> = mutableListOf()
+        for (p in permissions) {
+           var result = ContextCompat.checkSelfPermission(this,p)
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(p)
+            }
+        }
+        if (listPermissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(),100 )
+        }
+
+
+
 
         val profilestring = getSharedPreferences("Token", 0).getString("profileimage", "")
         val navid = findViewById<NavigationView>(R.id.nav_view)
@@ -253,15 +287,25 @@ class Dashboarrd : AppCompatActivity() {
 
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            100 -> {
+
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+
+                    Snackbar.make(constraintLayoutdash,"Permission's Denied",Snackbar.LENGTH_LONG).show()
+                } else {
+                    Snackbar.make(constraintLayoutdash,"Permission's Granted",Snackbar.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
     override fun onBackPressed() {
         this.finish()
     }
 
-//        override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//            // Inflate the menu; this adds items to the action bar if it is present.
-//            menuInflater.inflate(R.menu.dashboarrd, menu)
-//            return true
-//        }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (ntoggle.onOptionsItemSelected(item))

@@ -47,6 +47,7 @@
     <string name="OTP">Enter OTP</string>
     <string name="enter_password">Enter Password</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="clearall">Clear All</string>
     <string name="drawsig">Draw Signature</string>
     <string name="takepic">Take Photo</string>
     <string name="Register">Register</string>
@@ -72,7 +73,7 @@
     <string name="devide">/</string>
     <string name="total">2</string>
     <string name="Declined">Declined</string>
-
+    <string name="contact_mobile_no">8888888888</string>
 
     <!-- Profile Page Strings-->
     <string name="prf_title">Profile</string>
@@ -204,6 +205,12 @@
     <string name="recent_documenets">Recent_documents</string>
 
     <string name="notarization_details">Notarization Details</string>
+    <string name="prevd"><![CDATA[<]]></string>
+    <string name="nextd"><![CDATA[>]]></string>
+    <string name="Retake">Retake</string>
+    <string name="title_activity_add_edit_signature">AddEditSignature</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 
 
 </resources>

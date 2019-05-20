@@ -14,5 +14,4 @@ data class DocumentShapeModel(
     var userId: String,
     var isAnnotation: Boolean,
     var SignatureType: String
-
 )

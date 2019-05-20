@@ -1,5 +1,6 @@
 package com.dxdevil.pd.prjp
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.ProgressDialog
@@ -18,20 +19,27 @@ import java.io.File
 import android.provider.MediaStore
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.webkit.MimeTypeMap
 import android.net.Uri as Uri1
 import android.net.ConnectivityManager
 import android.os.Build
+import android.os.Environment
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dxdevil.pd.prjp.Model.Response.ContactList
 import com.dxdevil.pd.prjp.Model.Response.Data
 import com.dxdevil.pd.prjp.com.dxdevil.pd.prjp.ObserverAdapter
+import com.google.android.material.internal.ContextUtils.getActivity
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.signercv.*
 import java.io.IOException
 import java.util.*
@@ -63,8 +71,29 @@ import kotlin.collections.ArrayList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_uploadfile)
-         sp = getSharedPreferences("CreateDocDetails",0).edit()
 
+
+        var  permissions= arrayListOf<String>(
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE)
+
+
+        var listPermissionsNeeded:MutableList<String> = mutableListOf()
+        for (p in permissions) {
+            var result = ContextCompat.checkSelfPermission(this,p)
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(p)
+            }
+        }
+        if (listPermissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(),100 )
+        }
+
+
+
+
+         sp = getSharedPreferences("CreateDocDetails",0).edit()
+var u : android.net.Uri = android.net.Uri.parse(Environment.getExternalStorageDirectory().toString() + "/Download/")
 //picking file
 
             val mimeTypes = arrayOf(
@@ -75,14 +104,16 @@ import kotlin.collections.ArrayList
                 "application/x-excel"
                 )
 
-            val intent = Intent()
-               .setAction(Intent.ACTION_GET_CONTENT).addCategory(Intent.CATEGORY_OPENABLE)
+
+
+        val intent = Intent()
+               .setAction(Intent.ACTION_GET_CONTENT).addCategory(Intent.CATEGORY_OPENABLE).setType("file/*")
             intent.type = if (mimeTypes.size === 1) mimeTypes[0] else "*/*"
             if (mimeTypes.size > 0) {
                 intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
             }
 
-            startActivityForResult(Intent.createChooser(intent, "Select a file"), 111)
+            startActivityForResult(Intent.createChooser(intent, "File"), 111)
 
         //selecting signers and observers
 
@@ -98,6 +129,8 @@ import kotlin.collections.ArrayList
         }
         else seqpara="2"
     }
+
+
 
 
     override fun onClick(v: View?) {
@@ -177,84 +210,94 @@ import kotlin.collections.ArrayList
 
     private fun callapi(uri : android.net.Uri) {
 
-        val file1 = File(getRealPathFromURI(this,uri))
-
-    Toast.makeText(this@Uploadfile,file1.name,Toast.LENGTH_LONG).show()
-
-        var rb =RequestBody.create(MediaType.parse(MimeTypeMap.getFileExtensionFromUrl(uri.toString())),file1)
-        var rb2 =RequestBody.create(MediaType.parse("multipart/form-data"),file1.path)
-        var mpb :MultipartBody.Part = MultipartBody.Part.createFormData("file",file1.name,rb)
-        var token = getSharedPreferences("Token",0).getString("Token","").toString()
+            val file1 = File(getRealPathFromURI(this@Uploadfile, uri))
 
 
-        var pd = ProgressDialog(this@Uploadfile)
-        pd.setCancelable(false)
-        pd.setTitle("Uploading...")
-        pd.setMessage(file1.name)
-        pd.cardv1
-        pd.isIndeterminate = true
-        pd.show()
-        var type=MimeTypeMap.getFileExtensionFromUrl(uri.toString())
-
-        if(type=="pdf") {
-            pd.setIcon(R.drawable.pdf3)
-            filetypeiv!!.setImageResource(R.drawable.pdf3)
-        }else if(type=="docx"|| type== "doc"){
-            pd.setIcon(R.drawable.doc4)
-            filetypeiv!!.setImageResource(R.drawable.doc4)
-        }
-        else if(type=="application/x-excel") {
-            pd.setIcon(R.drawable.excel)
-            filetypeiv!!.setImageResource(R.drawable.excel)
-        }else if(type=="application/vnd.ms-powerpoint") {
-            pd.setIcon(R.drawable.ppt2)
-            filetypeiv!!.setImageResource(R.drawable.ppt2)
-        }
-
-        filenameet.setText(file1.name)
+            var rb = RequestBody.create(MediaType.parse(MimeTypeMap.getFileExtensionFromUrl(uri.toString())), file1)
+            var mpb: MultipartBody.Part = MultipartBody.Part.createFormData("file", file1.name, rb)
+            var token = getSharedPreferences("Token", 0).getString("Token", "").toString()
 
 
-        var uapi = RetrofitClient.getInstance().api as Api
-        var ucall = uapi.upload(token,mpb) as Call<UploadfileModel>
-        ucall!!.enqueue(object : Callback<UploadfileModel>{
+            var pd = ProgressDialog(this@Uploadfile)
+            pd.setCancelable(false)
+            pd.setTitle("Uploading...")
+            pd.setMessage(file1.name)
+            pd.cardv1
+            pd.isIndeterminate = true
+            pd.show()
+            var type = MimeTypeMap.getFileExtensionFromUrl(uri.toString())
 
-            override fun onFailure(call: Call<UploadfileModel>, t: Throwable) {
-                startActivity(Intent(this@Uploadfile,Dashboarrd::class.java))
-                Toast.makeText(this@Uploadfile,"Something went wrong please try again later" ,Toast.LENGTH_LONG).show()
-                pd.dismiss()
+            if (type == "pdf") {
+                pd.setIcon(R.drawable.pdf3)
+                filetypeiv!!.setImageResource(R.drawable.pdf3)
+            } else if (type == "docx" || type == "doc") {
+                pd.setIcon(R.drawable.doc4)
+                filetypeiv!!.setImageResource(R.drawable.doc4)
+            } else if (type == "application/x-excel") {
+                pd.setIcon(R.drawable.excel)
+                filetypeiv!!.setImageResource(R.drawable.excel)
+            } else if (type == "application/vnd.ms-powerpoint") {
+                pd.setIcon(R.drawable.ppt2)
+                filetypeiv!!.setImageResource(R.drawable.ppt2)
             }
 
-            override fun onResponse(call: Call<UploadfileModel>, response: Response<UploadfileModel>) {
-            if(response.isSuccessful){
-                var obj =response.body() as UploadfileModel
-                docid= obj.data[0].id.toString()
+            filenameet.setText(file1.name)
 
-                Toast.makeText(this@Uploadfile, response.body()!!.data[0].name.toString(),Toast.LENGTH_LONG).show()
-                pd.dismiss()
-            }
-                else{
-                if (response.message().toString() == "Unauthorized") {
-                    startActivity(Intent(this@Uploadfile, LoginActivity::class.java))
-                } else {
-                    Toast.makeText(this@Uploadfile, response.message().toString(), Toast.LENGTH_SHORT).show()
 
+            var uapi = RetrofitClient.getInstance().api as Api
+            var ucall = uapi.upload(token, mpb) as Call<UploadfileModel>
+            ucall!!.enqueue(object : Callback<UploadfileModel> {
+
+                override fun onFailure(call: Call<UploadfileModel>, t: Throwable) {
                     startActivity(Intent(this@Uploadfile, Dashboarrd::class.java))
-                }
+                    Toast.makeText(this@Uploadfile, "Something went wrong please try again later", Toast.LENGTH_LONG)
+                        .show()
                     pd.dismiss()
-            }
-            }
-        })
+                }
 
+                override fun onResponse(call: Call<UploadfileModel>, response: Response<UploadfileModel>) {
+                    if (response.isSuccessful) {
+                        var obj = response.body() as UploadfileModel
+                        docid = obj.data[0].id.toString()
+
+                        Toast.makeText(this@Uploadfile, response.body()!!.data[0].name.toString(), Toast.LENGTH_LONG)
+                            .show()
+                        pd.dismiss()
+                    } else {
+                        if (response.message().toString() == "Unauthorized") {
+                            startActivity(Intent(this@Uploadfile, LoginActivity::class.java))
+                        } else {
+                            Toast.makeText(this@Uploadfile, response.message().toString(), Toast.LENGTH_SHORT).show()
+
+                            startActivity(Intent(this@Uploadfile, Dashboarrd::class.java))
+                        }
+                        pd.dismiss()
+                    }
+                }
+            })
+    }
+
+    @SuppressLint("RestrictedApi")
+    fun getpath(uri: android.net.Uri): String? {
+        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = getActivity(this)!!.getContentResolver().query(uri, filePathColumn, null, null, null)
+        cursor.moveToFirst()
+        val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+        val filePath = cursor.getString(columnIndex)
+        cursor.close()
+        return filePath
     }
 
     private fun getRealPathFromURI(context: Context, uri: android.net.Uri): String {
+
+
         val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
         val cursor = this.getContentResolver().query(uri, filePathColumn, null, null, null)
         cursor.moveToFirst()
         val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-        val filePath = cursor.getString(columnIndex) as String
+        val filePath = cursor.getString(columnIndex) as String?
         cursor.close()
-        return filePath
+        return filePath.toString()
     }
 
 
@@ -348,6 +391,20 @@ import kotlin.collections.ArrayList
 
         }
         return super.onOptionsItemSelected(item)
+    }
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            100 -> {
+
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+
+                    Snackbar.make(scrollView2,"Storage Permission Denied", Snackbar.LENGTH_LONG).show()
+                } else {
+                    Snackbar.make(scrollView2,"Storage Permission Granted", Snackbar.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
 

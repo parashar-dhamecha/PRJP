@@ -2,12 +2,8 @@ package com.dxdevil.pd.prjp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.Observer
 import com.dxdevil.pd.prjp.Model.Response.Document.DocDetails.Signer
-import com.dxdevil.pd.prjp.data.ObserversAdapter
-import com.dxdevil.pd.prjp.data.SignersAdapter
-import kotlinx.android.synthetic.main.activity_verify_document_detail.*
 
 class VerifyDocumentDetail : AppCompatActivity() {
 

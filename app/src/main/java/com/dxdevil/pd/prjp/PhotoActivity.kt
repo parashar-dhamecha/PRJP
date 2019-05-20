@@ -1,7 +1,9 @@
 package com.dxdevil.pd.prjp
+import android.Manifest
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +12,8 @@ import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.dxdevil.pd.prjp.Model.Request.EnrollSignRequest
 import com.dxdevil.pd.prjp.Model.Request.UpdateSignature
 import com.dxdevil.pd.prjp.Model.Response.EnrollSignModel
@@ -32,78 +36,28 @@ class PhotoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo)
 
+
+        if (ContextCompat.checkSelfPermission(this@PhotoActivity, Manifest.permission.CAMERA)
+            == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.CAMERA),
+                100)
+        }
             CropImage.activity()
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .start(this)
 
-    }
-//method 2
-    /* fun showPictureDialog() {
-        var ad: AlertDialog.Builder = AlertDialog.Builder(this)
-        ad.setTitle("choose from")
-        var list = arrayOf("Galary","Camera")
-        ad.setItems(list) { dialog, which ->
-            when(which){
-                0->{
-                    chooseFromGalary()
-                }
-                1->{
-                    captureFromcamera()
-                }
-            }
-
+        retakephotoid.setOnClickListener {
+            CropImage.activity()
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .start(this)
         }
-
-
-        ad.setNegativeButton("close") { dialog, which ->
-            dialog.dismiss()
-        }
-        ad.show()
 
     }
 
-    private fun captureFromcamera() {
-
-        try{
-            val cani:Intent =Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(cani, 1)
-
-        }
-    catch (e:Exception){
-        Toast.makeText(this,"exception thrown $e",Toast.LENGTH_LONG).show()
-        Log.d("5","exception $e")
-
-    }
-    }
-        fun chooseFromGalary() {
-            var galaryintent: Intent =
-                Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(Intent.createChooser(galaryintent,"select item from galery"), 0)
-        }
-*/
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        /*   if (requestCode == 1) {
-            try {
-                picUri = data!!.data
-                CropImage.activity(picUri)
-                    .start(this)
-
-            } catch (e: Exception) {
-                Log.d("1", "error $e")
-
-            }
-        }
-        else if(requestCode==0){
-
-            try{
-                picUri = data!!.getData()
-                performcrop()
-        }catch (e:Exception){
-                Log.d("2","Exception thrown $e")
-            }
-        }*/
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             try {
 
@@ -119,6 +73,7 @@ class PhotoActivity : AppCompatActivity() {
                     //Api caling
                     var pd = ProgressDialog(this)
                     pd.setMessage("Saving..")
+                    pd.setCancelable(false)
                     pd.isIndeterminate = true
                     pd.show()
                     var token1 = getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token","").toString()
@@ -212,26 +167,18 @@ class PhotoActivity : AppCompatActivity() {
             }
         }
     }
-}
-   /* private fun performcrop() {
-        try {
-            val cropIntent:Intent= Intent("com.android.camera.action.CROP")
-            cropIntent.setDataAndType(picUri, "image/*")
-            //set ntentcrop properties
-            cropI.putExtra("crop", "true")
-            //indicate aspect of desired crop
-            cropIntent.putExtra("aspectX", 3)
-            cropIntent.putExtra("aspectY", 4)
-            //indicate output X and Y
-            cropIntent.putExtra("outputX", 256)
-            cropIntent.putExtra("outputY", 256)
-            cropIntent.putExtra("scaleUpIfNeeded", true)
-            //retrieve data on return
-            cropIntent.putExtra("return-data", true)
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            100 -> {
 
-            startActivityForResult(cropIntent,2)
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
 
-        }catch (e:Exception){
-            Log.d("3","exception thrown $e")
+                    Snackbar.make(this.view,"Camera Permission Denied",Snackbar.LENGTH_LONG).show()
+                } else {
+                    Snackbar.make(this.view,"Camera Permission Granted",Snackbar.LENGTH_LONG).show()
+                }
+            }
         }
-    }*/
+    }
+}
