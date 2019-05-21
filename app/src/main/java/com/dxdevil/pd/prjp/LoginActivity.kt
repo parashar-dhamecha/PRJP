@@ -80,13 +80,18 @@ public class LoginActivity : AppCompatActivity() {
                             try {
 
                                 var lm = response.body()
+                                lm!!.data[0].isProfileImage
                                var t = "Bearer "+ lm!!.data[0]?.token?.toString()
                                 var rt = lm!!.data[0]?.refreshToken?.toString()
                                 var userid = lm!!.data[0]?.userId?.toString()
                                 edpref1.putString("userid",userid)
                                 edpref1.putString("Token", t)
                                 edpref1.putString("RefreshToken", rt)
+                                edpref1.putBoolean("isprofile",lm!!.data[0].isProfileImage)
+                                if(lm!!.data[0].isProfileImage)
                                 edpref1.putString("profieimage",lm!!.data[0]!!.profileByte.toString())
+                                else
+                                    edpref1.putString("profieimage",null)
                                 edpref1.putString("fname",lm.data[0].firstName.toString())
                                 edpref1.putString("lname",lm.data[0].lastName.toString())
                                 edpref1.putString("email",lm.data[0].email.toString())
@@ -105,6 +110,7 @@ public class LoginActivity : AppCompatActivity() {
                                     var detpref = getSharedPreferences("Login Details",0) as SharedPreferences
                                     var ed = detpref.edit()
                                     ed.putString("rememberflag","0")
+                                    ed.apply()
                                 }
 
                                 // Sending otp
@@ -128,6 +134,7 @@ public class LoginActivity : AppCompatActivity() {
                                             var i=Intent(this@LoginActivity, Otpactivity::class.java)
                                             i.putExtra("loginemail",edEmail.text.toString())
                                             startActivity(i)
+                                            this@LoginActivity.finish()
                                             Toast.makeText(this@LoginActivity, response.body()!!.message.toString(), Toast.LENGTH_LONG).show()
                                         } else {
                                             pd.dismiss()

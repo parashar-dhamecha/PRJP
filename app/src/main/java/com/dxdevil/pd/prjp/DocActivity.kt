@@ -76,6 +76,7 @@ class DocActivity : AppCompatActivity() {
 
         img_No_doc.visibility=View.GONE
         tvNo_doc.visibility=View.GONE
+        btnsConstraintLayout.visibility=View.GONE
 
         val profilestring = getSharedPreferences("Token", 0).getString("profileimage", "")
         val navid = findViewById<NavigationView>(R.id.nav_view_doc)
@@ -323,7 +324,7 @@ class DocActivity : AppCompatActivity() {
 
                             alldocs=response.body()!!.data[0].documents
 
-
+                            btnsConstraintLayout.visibility=View.VISIBLE
 
                             totalPages=response.body()!!.data[0].totalPages
 

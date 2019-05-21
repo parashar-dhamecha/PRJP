@@ -29,6 +29,6 @@
     <color name="edit">#a8a8a8</color>
     <color name="delete">#1DC9B7</color>
     <color name="gray">#ECEDEF</color>
-
+    <color name="signBackground">#EC4141</color>
 
 </resources>

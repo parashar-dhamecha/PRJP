@@ -44,7 +44,6 @@
                 android:id="@+id/img_fileBITMAP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 tools:ignore="ContentDescription"
@@ -65,7 +64,7 @@
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:gravity="center"
-                android:background="@drawable/mybutton"
+                android:background="@drawable/edit_round2"
                 android:id="@+id/button_previous"
                 android:textSize="14sp"
                 android:layout_marginStart="16dp"
@@ -78,7 +77,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
         <Button
                 android:text="@string/next"
-                android:background="@drawable/mybutton"
+                android:background="@drawable/edit_round2"
                 android:gravity="center"
                 android:layout_width="60dp"
                 android:layout_height="30dp"

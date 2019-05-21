@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Cygnature1</string>
+    <string name="app_name">Cygnature</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -57,7 +57,6 @@
     <string name="EmailId">Email Id*</string>
     <string name="phone">Mobile No*</string>
     <string name="passwd">Password*</string>
-    <string name="Npasswd">New Password*</string>
     <string name="cpasswd">Confirm Password*</string>
     <string name="company_name">Company Name</string>
     <string name="country_id">Country Id</string>
@@ -205,6 +204,12 @@
     <string name="recent_documenets">Recent_documents</string>
 
     <string name="notarization_details">Notarization Details</string>
+    <string name="prevd"><![CDATA[<]]></string>
+    <string name="nextd"><![CDATA[>]]></string>
+    <string name="Retake">Retake</string>
+    <string name="title_activity_add_edit_signature">AddEditSignature</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
     <string name="e_signature">E-Signature</string>
     <string name="button_clearall">Clear All</string>
     <string name="contact_mobile_no">8888888888</string>

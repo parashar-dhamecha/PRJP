@@ -28,8 +28,8 @@ public interface Api {
 
     @POST("document/create")
     Call<CreateResponse>create(
-            @Header("Authorization") String Authorization,
-            @Body CreateDoc body
+            @Body CreateDoc body,
+            @Header("Authorization") String Authorization
     );
 
     @GET("account/check-user-exists/{id}")

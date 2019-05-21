@@ -1,24 +1,20 @@
 package com.dxdevil.pd.prjp
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.app.ProgressDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.dxdevil.pd.prjp.Model.Response.UploadfileModel
 import kotlinx.android.synthetic.main.activity_uploadfile.*
-import okhttp3.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
-import android.provider.MediaStore
 import android.content.Context
 import android.content.SharedPreferences
-import android.webkit.MimeTypeMap
+import android.content.pm.PackageManager
 import android.net.Uri as Uri1
 import android.net.ConnectivityManager
 import android.os.Build
@@ -28,11 +24,13 @@ import android.view.View
 import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dxdevil.pd.prjp.Model.Response.ContactList
 import com.dxdevil.pd.prjp.Model.Response.Data
 import com.dxdevil.pd.prjp.com.dxdevil.pd.prjp.ObserverAdapter
-import kotlinx.android.synthetic.main.signercv.*
+import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
 import java.util.*
 import kotlin.collections.ArrayList
@@ -63,30 +61,64 @@ import kotlin.collections.ArrayList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_uploadfile)
-         sp = getSharedPreferences("CreateDocDetails",0).edit()
 
-//picking file
 
-            val mimeTypes = arrayOf(
-                "application/pdf",
-                "application/msword",
-                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                "application/vnd.ms-powerpoint",
-                "application/x-excel"
-                )
+        var  permissions= arrayListOf<String>(
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE)
 
-            val intent = Intent()
-               .setAction(Intent.ACTION_GET_CONTENT).addCategory(Intent.CATEGORY_OPENABLE)
-            intent.type = if (mimeTypes.size === 1) mimeTypes[0] else "*/*"
-            if (mimeTypes.size > 0) {
-                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+
+        var listPermissionsNeeded:MutableList<String> = mutableListOf()
+        for (p in permissions) {
+            var result = ContextCompat.checkSelfPermission(this,p)
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(p)
             }
+        }
+        if (listPermissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(),100 )
+        }
 
-            startActivityForResult(Intent.createChooser(intent, "Select a file"), 111)
+
+         sp = getSharedPreferences("CreateDocDetails",0).edit()
+//var u : android.net.Uri = android.net.Uri.parse(Environment.getExternalStorageDirectory().toString() + "/Download/")
+////picking file
+//
+//            val mimeTypes = arrayOf(
+//                "application/pdf",
+//                "application/msword",
+//                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+//                "application/vnd.ms-powerpoint",
+//                "application/x-excel"
+//                )
+//
+//
+//
+//        val intent = Intent()
+//               .setAction(Intent.ACTION_GET_CONTENT).addCategory(Intent.CATEGORY_OPENABLE).setType("file/*")
+//            intent.type = if (mimeTypes.size === 1) mimeTypes[0] else "*/*"
+//            if (mimeTypes.size > 0) {
+//                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+//            }
+//
+//            startActivityForResult(Intent.createChooser(intent, "File"), 111)
 
         //selecting signers and observers
 
-            getSignersData()
+
+        filenameet.setText(getSharedPreferences("CreateDocDetails",0).getString("filename","").toString())
+var type = getSharedPreferences("CreateDocDetails",0).getString("type","").toString()
+        if (type == "pdf") {
+            filetypeiv!!.setImageResource(R.drawable.pdf3)
+        } else if (type == "docx" || type == "doc") {
+            filetypeiv!!.setImageResource(R.drawable.doc4)
+        } else if (type == "application/x-excel") {
+            filetypeiv!!.setImageResource(R.drawable.excel)
+        } else if (type == "application/vnd.ms-powerpoint") {
+            filetypeiv!!.setImageResource(R.drawable.ppt2)
+        }
+
+        getSignersData()
         // setting date and time
             eedatebutton.setOnClickListener(this)
         esdatebutton.setOnClickListener(this)
@@ -100,6 +132,8 @@ import kotlin.collections.ArrayList
     }
 
 
+
+
     override fun onClick(v: View?) {
         when(v!!.id){
             R.id.eedatebutton->{
@@ -111,6 +145,7 @@ import kotlin.collections.ArrayList
                             maxday = dayOfMonth
                             maxmonth = month
                             maxyear = year
+                            eedateet.error=null
                         }else{
                             eedateet.error = "endDate must be greater than start date"
                         }
@@ -126,6 +161,7 @@ import kotlin.collections.ArrayList
                             minday = dayOfMonth
                             minmonth = month
                             minyear = year
+                            esdateet.error=null
                         }else{
                             esdateet.setError("endDate must be greater than start date")
                         }
@@ -140,6 +176,7 @@ import kotlin.collections.ArrayList
                         override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
                             if(maxday>=dayOfMonth && maxmonth>=month && maxyear>=year) {
                                 signduedateet.setText("$year-$month-$dayOfMonth")
+                                signduedateet.error=null
                             }else if(minday <= dayOfMonth && minmonth <= month && minyear <= year){
                                 signduedateet.setError("signing date must be greater than  expiry start date")
                             }
@@ -163,99 +200,109 @@ import kotlin.collections.ArrayList
         }
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == 111 && resultCode == RESULT_OK) {
-            val selectedFile = data?.data
-            if (selectedFile != null) {
-                callapi(uri = selectedFile)
-            }
-        }
-    }
-
-    private fun callapi(uri : android.net.Uri) {
-
-        val file1 = File(getRealPathFromURI(this,uri))
-
-    Toast.makeText(this@Uploadfile,file1.name,Toast.LENGTH_LONG).show()
-
-        var rb =RequestBody.create(MediaType.parse(MimeTypeMap.getFileExtensionFromUrl(uri.toString())),file1)
-        var rb2 =RequestBody.create(MediaType.parse("multipart/form-data"),file1.path)
-        var mpb :MultipartBody.Part = MultipartBody.Part.createFormData("file",file1.name,rb)
-        var token = getSharedPreferences("Token",0).getString("Token","").toString()
-
-
-        var pd = ProgressDialog(this@Uploadfile)
-        pd.setCancelable(false)
-        pd.setTitle("Uploading...")
-        pd.setMessage(file1.name)
-        pd.cardv1
-        pd.isIndeterminate = true
-        pd.show()
-        var type=MimeTypeMap.getFileExtensionFromUrl(uri.toString())
-
-        if(type=="pdf") {
-            pd.setIcon(R.drawable.pdf3)
-            filetypeiv!!.setImageResource(R.drawable.pdf3)
-        }else if(type=="docx"|| type== "doc"){
-            pd.setIcon(R.drawable.doc4)
-            filetypeiv!!.setImageResource(R.drawable.doc4)
-        }
-        else if(type=="application/x-excel") {
-            pd.setIcon(R.drawable.excel)
-            filetypeiv!!.setImageResource(R.drawable.excel)
-        }else if(type=="application/vnd.ms-powerpoint") {
-            pd.setIcon(R.drawable.ppt2)
-            filetypeiv!!.setImageResource(R.drawable.ppt2)
-        }
-
-        filenameet.setText(file1.name)
-
-
-        var uapi = RetrofitClient.getInstance().api as Api
-        var ucall = uapi.upload(token,mpb) as Call<UploadfileModel>
-        ucall!!.enqueue(object : Callback<UploadfileModel>{
-
-            override fun onFailure(call: Call<UploadfileModel>, t: Throwable) {
-                startActivity(Intent(this@Uploadfile,Dashboarrd::class.java))
-                Toast.makeText(this@Uploadfile,"Something went wrong please try again later" ,Toast.LENGTH_LONG).show()
-                pd.dismiss()
-            }
-
-            override fun onResponse(call: Call<UploadfileModel>, response: Response<UploadfileModel>) {
-            if(response.isSuccessful){
-                var obj =response.body() as UploadfileModel
-                docid= obj.data[0].id.toString()
-
-                Toast.makeText(this@Uploadfile, response.body()!!.data[0].name.toString(),Toast.LENGTH_LONG).show()
-                pd.dismiss()
-            }
-                else{
-                if (response.message().toString() == "Unauthorized") {
-                    startActivity(Intent(this@Uploadfile, LoginActivity::class.java))
-                } else {
-                    Toast.makeText(this@Uploadfile, response.message().toString(), Toast.LENGTH_SHORT).show()
-
-                    startActivity(Intent(this@Uploadfile, Dashboarrd::class.java))
-                }
-                    pd.dismiss()
-            }
-            }
-        })
-
-    }
-
-    private fun getRealPathFromURI(context: Context, uri: android.net.Uri): String {
-        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = this.getContentResolver().query(uri, filePathColumn, null, null, null)
-        cursor.moveToFirst()
-        val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-        val filePath = cursor.getString(columnIndex) as String
-        cursor.close()
-        return filePath
-    }
+//
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (requestCode == 111 && resultCode == RESULT_OK) {
+//            val selectedFile = data?.data
+//            if (selectedFile != null) {
+//                callapi(uri = selectedFile)
+//            }
+//        }
+//    }
+//
+//    private fun callapi(uri : android.net.Uri) {
+//
+//            val file1 = File(getRealPathFromURI(this@Uploadfile, uri))
+//
+//
+//            var rb = RequestBody.create(MediaType.parse(MimeTypeMap.getFileExtensionFromUrl(uri.toString())), file1)
+//            var mpb: MultipartBody.Part = MultipartBody.Part.createFormData("file", file1.name, rb)
+//            var token = getSharedPreferences("Token", 0).getString("Token", "").toString()
+//
+//
+//            var pd = ProgressDialog(this@Uploadfile)
+//            pd.setCancelable(false)
+//            pd.setTitle("Uploading...")
+//            pd.setMessage(file1.name)
+//            pd.cardv1
+//            pd.isIndeterminate = true
+//            pd.show()
+//            var type = MimeTypeMap.getFileExtensionFromUrl(uri.toString())
+//
+//            if (type == "pdf") {
+//                pd.setIcon(R.drawable.pdf3)
+//                filetypeiv!!.setImageResource(R.drawable.pdf3)
+//            } else if (type == "docx" || type == "doc") {
+//                pd.setIcon(R.drawable.doc4)
+//                filetypeiv!!.setImageResource(R.drawable.doc4)
+//            } else if (type == "application/x-excel") {
+//                pd.setIcon(R.drawable.excel)
+//                filetypeiv!!.setImageResource(R.drawable.excel)
+//            } else if (type == "application/vnd.ms-powerpoint") {
+//                pd.setIcon(R.drawable.ppt2)
+//                filetypeiv!!.setImageResource(R.drawable.ppt2)
+//            }
+//
+//            filenameet.setText(file1.name)
+//
+//
+//            var uapi = RetrofitClient.getInstance().api as Api
+//            var ucall = uapi.upload(token, mpb) as Call<UploadfileModel>
+//            ucall!!.enqueue(object : Callback<UploadfileModel> {
+//
+//                override fun onFailure(call: Call<UploadfileModel>, t: Throwable) {
+//                    startActivity(Intent(this@Uploadfile, Dashboarrd::class.java))
+//                    Toast.makeText(this@Uploadfile, "Something went wrong please try again later", Toast.LENGTH_LONG)
+//                        .show()
+//                    pd.dismiss()
+//                }
+//
+//                override fun onResponse(call: Call<UploadfileModel>, response: Response<UploadfileModel>) {
+//                    if (response.isSuccessful) {
+//                        var obj = response.body() as UploadfileModel
+//                        docid = obj.data[0].id.toString()
+//
+//                        Toast.makeText(this@Uploadfile, response.body()!!.data[0].name.toString(), Toast.LENGTH_LONG)
+//                            .show()
+//                        pd.dismiss()
+//                    } else {
+//                        if (response.message().toString() == "Unauthorized") {
+//                            startActivity(Intent(this@Uploadfile, LoginActivity::class.java))
+//                        } else {
+//                            Toast.makeText(this@Uploadfile, response.message().toString(), Toast.LENGTH_SHORT).show()
+//
+//                            startActivity(Intent(this@Uploadfile, Dashboarrd::class.java))
+//                        }
+//                        pd.dismiss()
+//                    }
+//                }
+//            })
+//    }
+//
+//    @SuppressLint("RestrictedApi")
+//    fun getpath(uri: android.net.Uri): String? {
+//        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+//        val cursor = getActivity(this)!!.getContentResolver().query(uri, filePathColumn, null, null, null)
+//        cursor.moveToFirst()
+//        val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+//        val filePath = cursor.getString(columnIndex)
+//        cursor.close()
+//        return filePath
+//    }
+//
+//    private fun getRealPathFromURI(context: Context, uri: android.net.Uri): String {
+//
+//
+//        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+//        val cursor = this.getContentResolver().query(uri, filePathColumn, null, null, null)
+//        cursor.moveToFirst()
+//        val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+//        val filePath = cursor.getString(columnIndex) as String?
+//        cursor.close()
+//        return filePath.toString()
+//    }
 
 
 
@@ -331,14 +378,12 @@ import kotlin.collections.ArrayList
 
         when (item.itemId) {
             R.id.next_icon ->{
-                sp.putString("filename", filenameet.text.toString())
                 sp.putString("description",filedescet!!.text.toString())
                 sp.putString("endstartdate",esdateet.text!!.toString()+" "+timeet.text.toString())
                 sp.putString("endexpdate",eedateet.text.toString()+" "+timeet.text.toString())
                 sp.putString("signingduedate",signduedateet.text.toString()+" "+timeet.text.toString())
                 sp.putString("seqpara",seqpara)
                 sp.putString("reminddays",reminddays.text.toString())
-                sp.putString("docid",docid)
                 sp.commit()
                 var intent= Intent(this@Uploadfile,Annotation2::class.java)
                 intent.putExtra("ssname",ssname)
@@ -348,6 +393,20 @@ import kotlin.collections.ArrayList
 
         }
         return super.onOptionsItemSelected(item)
+    }
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            100 -> {
+
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+
+                    Snackbar.make(scrollView2,"Storage Permission Denied", Snackbar.LENGTH_LONG).show()
+                } else {
+                    Snackbar.make(scrollView2,"Storage Permission Granted", Snackbar.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
 

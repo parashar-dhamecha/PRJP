@@ -138,8 +138,5 @@ class ProfileActivity : AppCompatActivity() {
         startActivity(intent)
         super.onBackPressed()
     }
-
-
-
 }
 

@@ -35,9 +35,6 @@
     </style>
 
 
-
-
-
     <style name="WelcomeErrorAppearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/red</item>
         <item name="android:textSize">10sp</item>

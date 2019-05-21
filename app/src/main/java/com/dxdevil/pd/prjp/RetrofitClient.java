@@ -20,7 +20,7 @@ public class RetrofitClient {
     HttpLoggingInterceptor logging = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
 
     OkHttpClient.Builder httpClient = new OkHttpClient.Builder().addInterceptor(logging)
-            .connectTimeout(2, TimeUnit.MINUTES);
+            .connectTimeout(2, TimeUnit.MINUTES).readTimeout(2, TimeUnit.MINUTES).writeTimeout(2, TimeUnit.MINUTES);
     Gson gson = new GsonBuilder()
             .setLenient()
             .create();

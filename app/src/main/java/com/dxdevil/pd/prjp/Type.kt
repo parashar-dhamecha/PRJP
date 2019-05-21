@@ -28,6 +28,7 @@ import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.lang.Exception
 
+@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class Type : AppCompatActivity(), View.OnClickListener {
 
     var tf:Typeface? = null
@@ -35,7 +36,38 @@ class Type : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_type)
-        var ed: TextInputEditText = findViewById<TextInputEditText>(R.id.edfonts)
+        var ed: TextInputEditText = findViewById(R.id.edfonts)
+
+        var fname =  getSharedPreferences("Token", 0).getString("fname", "").toString()
+        edfonts.setText( fname)
+        scrolltv1.text = fname
+
+        //tv2
+        scrolltv2.text = fname
+        tf = Typeface.createFromAsset(assets, "fonts/2.ttf")
+        scrolltv2.setTypeface(tf)
+        //tv3
+        scrolltv3.text = fname
+        tf = Typeface.createFromAsset(assets, "fonts/3.ttf")
+        scrolltv3.setTypeface(tf)
+        //tv4
+        scrolltv4.text = fname
+        tf = Typeface.createFromAsset(assets, "fonts/4.ttf")
+        scrolltv4.setTypeface(tf)
+        //tv5
+        scrolltv5.text = fname
+        tf = Typeface.createFromAsset(assets, "fonts/5.ttf")
+        scrolltv5.setTypeface(tf)
+        //tv6
+        scrolltv6.text = fname
+        tf = Typeface.createFromAsset(assets, "fonts/6.ttf")
+        scrolltv6.setTypeface(tf)
+        //tv7
+        scrolltv7.text = fname
+        tf = Typeface.createFromAsset(assets, "fonts/7.ttf")
+        scrolltv7.setTypeface(tf)
+
+
         ed.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
 
@@ -153,6 +185,7 @@ class Type : AppCompatActivity(), View.OnClickListener {
             //token
             var pd = ProgressDialog(this)
             pd.setMessage("Saving..")
+            pd.setCancelable(false)
             pd.isIndeterminate = true
             pd.show()
             var token1 = getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token","").toString()
@@ -184,6 +217,7 @@ class Type : AppCompatActivity(), View.OnClickListener {
                                     var st =  response.body()!!.data.toString()
                                     var by = Base64.decode(st,Base64.DEFAULT)
                                     var bitmap1 =BitmapFactory.decodeByteArray(by,0,by.size) as Bitmap?
+                                    startActivity(Intent(this@Type,Dashboarrd::class.java))
                                     pd.dismiss()
                                     startActivity(Intent(this@Type, Dashboarrd::class.java))
                                     Toast.makeText(this@Type,"Saved successfully..",Toast.LENGTH_LONG).show()
@@ -218,6 +252,7 @@ class Type : AppCompatActivity(), View.OnClickListener {
                                     var st =  response.body()!!.data.toString()
                                     var by = Base64.decode(st,Base64.DEFAULT)
                                     var bitmap1 =BitmapFactory.decodeByteArray(by,0,by.size) as Bitmap?
+                                    startActivity(Intent(this@Type,Dashboarrd::class.java))
                                     pd.dismiss()
                                     startActivity(Intent(this@Type, Dashboarrd::class.java))
                                     Toast.makeText(this@Type,"Saved successfully..",Toast.LENGTH_LONG).show()
