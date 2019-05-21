@@ -8,23 +8,34 @@ android:layout_margin="@dimen/dp5">
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="15dp"
             app:cardElevation="5dp"
-            app:cardBackgroundColor="@color/bg_gray"
+            android:background="@drawable/edit_round2"
             android:visibility="visible"
             android:id="@+id/cardv1"
             >
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dp5" android:layout_alignTop="@+id/cardv1"
+                android:background="@drawable/edit_round2"
+                android:padding="@dimen/dp2" android:layout_alignTop="@+id/cardv1"
                 android:layout_alignStart="@+id/cardv1">
-
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/snametv"
+                    android:textColor="@color/white"
+                    android:paddingTop="@dimen/dp10"
+                    android:text="PG"
+                    android:textAlignment="center"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/round"
+                    android:layout_marginStart="10dp"/>
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                       android:id="@+id/shortnametv"
                       android:text="RM"
                       android:layout_marginStart="@dimen/dp10"
                       android:background="@drawable/edit_round2"
+                      android:layout_toRightOf="@+id/snametv"
                       android:layout_toLeftOf="@id/signername" android:layout_marginRight="-16dp"/>
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                       android:id="@+id/signername"
@@ -32,6 +43,7 @@ android:layout_margin="@dimen/dp5">
                       android:text="abc"
                       android:textColor="@color/common_google_signin_btn_text_dark_focused"
                       android:textSize="20sp"
+                      android:layout_toRightOf="@+id/snametv"
                       android:textStyle="bold"
                       android:padding="@dimen/dp1"
                       android:layout_marginStart="@dimen/dp15"
@@ -43,15 +55,15 @@ android:layout_margin="@dimen/dp5">
                       android:textSize="@dimen/sp13"
                       android:layout_below="@+id/signername"
                       android:padding="@dimen/dp1"
-                      android:layout_marginTop="@dimen/dp5"
-                      android:layout_marginStart="@dimen/dp15"
-                      android:layout_toEndOf="@+id/pro"
-                      tools:ignore="UnknownIdInLayout"/>
+                      android:layout_marginTop="5dp"
+                      tools:ignore="UnknownIdInLayout"
+                      android:layout_toRightOf="@+id/snametv"
+                      android:layout_alignStart="@+id/signername"/>
             <CheckBox
                     android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp15"
+                    android:layout_marginTop="@dimen/dp12"
                     android:layout_marginEnd="@dimen/dp25"
                     android:id="@+id/selectcb"
                     android:layout_alignParentEnd="true"/>

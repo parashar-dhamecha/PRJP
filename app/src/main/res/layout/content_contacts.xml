@@ -49,7 +49,7 @@
         <com.github.clans.fab.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fab_colorNormal="@color/colorSecondary"
+                app:fab_colorNormal="@color/textcolor3"
                 android:id="@+id/floatingActionButton"
                 android:layout_margin="16dp"
                 app:fab_colorPressed="@color/colorPrimary"
@@ -57,11 +57,12 @@
                 android:layout_marginBottom="@dimen/dp10"
                 android:layout_gravity="bottom|end"
                 app:menu_fab_size="normal"
+                android:background="@drawable/edit_round3"
                 app:menu_buttonSpacing="@dimen/dp0"
                 android:layout_marginRight="@dimen/dp10"
                 android:layout_marginLeft="@dimen/dp10"
                 app:pressedTranslationZ="12dp"
-                android:elevation="@dimen/dp5"/>
+                android:elevation="@dimen/dp20"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

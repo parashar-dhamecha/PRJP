@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
 
             android:id="@+id/savephotobutton"
-            android:background="@drawable/mybutton"
+            android:background="@drawable/edit_round2"
             android:textColor="@color/textcolor"
             android:text="@string/savebutton"
             android:layout_marginBottom="@dimen/dp120"
@@ -27,7 +27,7 @@
             android:layout_width="@dimen/dp60"
             android:layout_height="wrap_content"
             android:id="@+id/retakephotoid"
-            android:background="@drawable/mybutton"
+            android:background="@drawable/edit_round2"
             android:textColor="@color/textcolor"
             android:text="@string/Retake"
             android:layout_marginBottom="@dimen/dp120"

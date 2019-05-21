@@ -53,7 +53,11 @@ lateinit var userid:String
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .start(this)
         }
-
+        removeimage.setOnClickListener {
+            isprofile=false
+            profilebytes=null
+            editprofileiv.setImageDrawable(null)
+        }
 
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

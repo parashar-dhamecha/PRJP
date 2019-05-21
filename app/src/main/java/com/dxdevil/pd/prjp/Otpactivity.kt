@@ -32,7 +32,7 @@ class Otpactivity : AppCompatActivity() {
             otpemail!!.text = dpref.getString("email", "")
         }
         else{
-            otpemail.text=this.intent.getStringExtra("loginemail")
+            otpemail.text=prefe.getString("email","")
         }
         loginanother!!.setOnClickListener {
             startActivity(Intent(this@Otpactivity,LoginActivity::class.java))
@@ -66,7 +66,7 @@ class Otpactivity : AppCompatActivity() {
                        else{
                            pd.dismiss()
                            startActivity(Intent(applicationContext,Dashboarrd::class.java))
-                          // Toast.makeText(this@Otpactivity, "Successfully logged in ", Toast.LENGTH_LONG).show()
+                            this@Otpactivity.finish()
                        }
 
                    }else{

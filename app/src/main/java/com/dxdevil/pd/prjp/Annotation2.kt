@@ -38,7 +38,7 @@ class Annotation2 : AppCompatActivity(),View.OnTouchListener{
     lateinit var root: ViewGroup
     private var _xDelta: Int = 0
     private var _yDelta: Int = 0
-     var selsigners : List<String> = mutableListOf<String>(String())
+     var selsigners : List<String> = mutableListOf(String())
     var signersid : MutableList<String> = mutableListOf()
     var documentshapemodel : List<com.dxdevil.pd.prjp.data.DocumentShapeModel> = mutableListOf(com.dxdevil.pd.prjp.data.DocumentShapeModel(242,31.842105263157894,663,61.50278293135436,
         369,48.55263157894737,104,9.647495361781075,1,"0.612903225806452","ed26c904-dca3-433d-87ab-a5ac2381de27",true,"ESignature"))

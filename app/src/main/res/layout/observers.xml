@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tvObserver_name"
             app:layout_constraintStart_toEndOf="@+id/tvshort_name_observe"
-            android:layout_marginStart="60dp" android:textSize="18sp"
+            android:layout_marginStart="16dp" android:textSize="18sp"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"
     />
     <View

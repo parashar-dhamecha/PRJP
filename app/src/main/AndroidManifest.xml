@@ -56,11 +56,6 @@
                 android:name=".Dashboarrd"
                 android:label="Dashboard"
                 android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".PhotoActivity"
                   android:parentActivityName=".Dashboarrd"/>
@@ -78,12 +73,6 @@
                 tools:ignore="ExtraText">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-
-            <intent-filter>
-                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>

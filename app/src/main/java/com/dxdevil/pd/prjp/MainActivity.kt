@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             var detpreference = getSharedPreferences("Login Details",0)
             var flag = detpreference.getString("rememberflag","0")
 
-            if(flag=="1"){
+            if(flag == "1"){
                 var email = detpreference.getString("email","")
                 var pass = detpreference.getString("password","")
 
@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                                 edpref.putString("userid",lm.data[0]?.userId?.toString())
                                 edpref.putString("Token", t)
                                 edpref.putString("RefreshToken", rt)
+                                edpref.putBoolean("isprofile",lm!!.data[0].isProfileImage)
                                 edpref.putString("profileimage",lm!!.data[0]!!.profileByte)
                                 edpref.putString("fname",lm!!.data[0].firstName.toString())
                                 edpref.putString("lname",lm!!.data[0].lastName.toString())
@@ -122,7 +123,6 @@ class MainActivity : AppCompatActivity() {
 
                     }
                 })
-
             }
             else{
                 startActivity(Intent(applicationContext,LoginActivity::class.java))

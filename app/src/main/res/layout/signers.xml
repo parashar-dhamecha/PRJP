@@ -34,7 +34,7 @@
             android:textAllCaps="false"
             android:textColor="@color/slate_black"
             android:textAlignment="center"
-            android:background="@drawable/mybutton"
+            android:background="@drawable/edit_round2"
             android:id="@+id/btnSigner"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
