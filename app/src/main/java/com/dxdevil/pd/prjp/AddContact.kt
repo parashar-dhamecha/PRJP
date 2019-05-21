@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.dxdevil.pd.prjp.Model.Request.AddContactRequest
 import com.dxdevil.pd.prjp.Model.Response.AddContactDatum
 import com.dxdevil.pd.prjp.Model.Response.AddContactResponse
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_add_contact.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -57,7 +58,8 @@ class AddContact : AppCompatActivity() {
                 calladd?.enqueue(object : Callback<AddContactResponse>{
                     override fun onFailure(call: Call<AddContactResponse>, t: Throwable) {
                         pd.dismiss()
-                        Toast.makeText(this@AddContact,"Check your Internet Connection", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(this@AddContact,"Check your Internet Connection", Toast.LENGTH_LONG).show()
+                        Snackbar.make(it,"Check your internet connection",Snackbar.LENGTH_LONG).show()
                     }
 
                     override fun onResponse(call: Call<AddContactResponse>, response: Response<AddContactResponse>) {
@@ -71,8 +73,7 @@ class AddContact : AppCompatActivity() {
                                 println("contact list size" + contactList.size)
 
 
-                                Toast.makeText(this@AddContact, "Success", Toast.LENGTH_SHORT).show()
-                               val intent = Intent(this@AddContact, Contacts::class.java)
+                                val intent = Intent(this@AddContact, Contacts::class.java)
                                 startActivity(intent)
 
                             } else {

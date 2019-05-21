@@ -32,9 +32,11 @@ import com.dxdevil.pd.prjp.Model.Response.GetContactIdResponse
 import com.github.clans.fab.FloatingActionMenu
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.activity_verify.*
 import kotlinx.android.synthetic.main.contactsadapter.*
@@ -113,7 +115,6 @@ class Contacts : AppCompatActivity() {
                 Toast.makeText(this@Contacts,"wrong ",Toast.LENGTH_LONG).show()
                 onbj.filtereList1(p0)
                 onbj.notifyDataSetChanged()
-               // onbj.notifyDataSetChanged()
 
 
                 return false
@@ -238,8 +239,7 @@ class Contacts : AppCompatActivity() {
 
                     override fun onFailure(call: Call<ContactList>, t: Throwable) {
                         //      progressbar.visibility = View.GONE
-                        Toast.makeText(this@Contacts, "Check your internet Connection", Toast.LENGTH_LONG).show()
-                    }
+                        Snackbar.make(findViewById(R.id.linear),"Error", Snackbar.LENGTH_LONG).show() }
 
                     override fun onResponse(call: Call<ContactList>, response: Response<ContactList>) = try {
 
@@ -256,8 +256,7 @@ class Contacts : AppCompatActivity() {
                             if (response.message().toString() == "Unauthorized") {
                                 startActivity(Intent(this@Contacts, LoginActivity::class.java))
                             } else {
-                                Toast.makeText(this@Contacts, "error" + response.errorBody(), Toast.LENGTH_LONG).show()
-                            }
+                                  Snackbar.make(findViewById(R.id.linear),"Error"+ response.errorBody(), Snackbar.LENGTH_LONG).show() }
                         }
                     } catch (e: IOException) {
                         Toast.makeText(applicationContext, "Exception", Toast.LENGTH_SHORT).show()

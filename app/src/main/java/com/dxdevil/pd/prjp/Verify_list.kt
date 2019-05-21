@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dxdevil.pd.prjp.Model.Request.VerifyDocList
 import com.dxdevil.pd.prjp.Model.Response.Verify.List.DocumentList
 import com.dxdevil.pd.prjp.Model.Response.Verify.List.VerifyListResponse
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_verify_list.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -56,7 +57,7 @@ class Verify_list : AppCompatActivity() {
                 tvNo_doc.visibility = View.VISIBLE
 
 
-                Toast.makeText(this@Verify_list, "Check your connection", Toast.LENGTH_SHORT).show()
+                Snackbar.make(findViewById(R.id.coordinatorLayout),"Check your internet connection", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<VerifyListResponse>, response: Response<VerifyListResponse>) {
@@ -71,8 +72,6 @@ class Verify_list : AppCompatActivity() {
 
                     dialog.dismiss()
 
-                    Toast.makeText(this@Verify_list, "Success", Toast.LENGTH_SHORT).show()
-
 
                     print("response" + response.body().toString())
                     var documentList = response.body()!!.data[0].documentList as List<DocumentList>
@@ -82,7 +81,7 @@ class Verify_list : AppCompatActivity() {
                     mrecyclerView!!.layoutManager = LinearLayoutManager(this@Verify_list)
                     mrecyclerView!!.adapter = adapter
                 } else {
-                    Toast.makeText(this@Verify_list, response.body()!!.message, Toast.LENGTH_SHORT).show()
+                    Snackbar.make(findViewById(R.id.coordinatorLayout),  response.message().toString(), Snackbar.LENGTH_LONG).show()
 
                 }
 
@@ -103,7 +102,7 @@ class Verify_list : AppCompatActivity() {
                 dialog.dismiss()
                 swipeRefreshDocuments!!.isRefreshing = false
 
-                Toast.makeText(this@Verify_list, "Check your connection", Toast.LENGTH_SHORT).show()
+                Snackbar.make(findViewById(R.id.coordinatorLayout),"Check your internet connection", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<VerifyListResponse>, response: Response<VerifyListResponse>) {
@@ -119,7 +118,6 @@ class Verify_list : AppCompatActivity() {
                     dialog.dismiss()
 
 
-                    Toast.makeText(this@Verify_list, "Success", Toast.LENGTH_SHORT).show()
 
 
                     print("response" + response.body().toString())
@@ -131,7 +129,7 @@ class Verify_list : AppCompatActivity() {
                     mrecyclerView!!.adapter = adapter
                 } else {
                     dialog.dismiss()
-                   // Toast.makeText(this@Verify_list, response.body()!!.message, Toast.LENGTH_SHORT).show()
+                    Snackbar.make(findViewById(R.id.coordinatorLayout),  response.message().toString(), Snackbar.LENGTH_LONG).show()
 
                 }
 

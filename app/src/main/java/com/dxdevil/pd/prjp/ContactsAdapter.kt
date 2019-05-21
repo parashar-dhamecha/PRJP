@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dxdevil.pd.prjp.Model.Response.Data
 import com.dxdevil.pd.prjp.Model.Response.DeleteIdResponse
 import com.dxdevil.pd.prjp.Model.Response.GetContactIdResponse
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -66,9 +67,6 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
         }
 
 
-        // holder.swipe.open(true)
-        //holder.swipe.close(false)
-
 
 
 
@@ -106,7 +104,7 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
                     call1.enqueue(object : Callback<DeleteIdResponse> {
                         override fun onFailure(call: Call<DeleteIdResponse>, t: Throwable) {
 
-                            Toast.makeText(context, "Check your internet Connection", Toast.LENGTH_LONG).show()
+                            Snackbar.make(it,"Check your internet connection", Snackbar.LENGTH_LONG).show()
 
                         }
 
@@ -117,13 +115,13 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
                                 Con.removeAt(0)
                                 notifyItemRemoved(0)
 
-                                Toast.makeText(context, "Contact deleted successfully", Toast.LENGTH_LONG).show()
+                                Snackbar.make(it,"Contacts deleted successfully",Snackbar.LENGTH_LONG).show()
 
 
 
                             } else {
 
-                                Toast.makeText(context, "Something went wrong", Toast.LENGTH_LONG).show()
+                                Snackbar.make(it,"Something went wrong",Snackbar.LENGTH_LONG).show()
 
 
                             }
@@ -135,8 +133,6 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
                     })
 
 
-                    // Con.removeAt(position)
-                    //notifyItemRemoved(position)
 
                 } catch (e: Exception) {
 
@@ -177,8 +173,6 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
 
         var filteredList :ArrayList<Data> = ArrayList<Data>()
         filteredList.addAll(Con)
-
-
 
         val text=text!!.toLowerCase(Locale.getDefault())
 

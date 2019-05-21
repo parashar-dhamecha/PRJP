@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.dxdevil.pd.prjp.Model.Request.UpdateIdRequest
 import com.dxdevil.pd.prjp.Model.Response.*
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_add_contact.*
 import kotlinx.android.synthetic.main.activity_update_contact.*
 import kotlinx.android.synthetic.main.activity_update_contact.etEmail
@@ -45,7 +46,7 @@ class UpdateContact : AppCompatActivity() {
 
                 override fun onFailure(call: Call<GetContactIdResponse>, t: Throwable) {
 
-                    Toast.makeText(this@UpdateContact, "Check your internet Connection", Toast.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.cons),"Check your internet connection", Snackbar.LENGTH_LONG).show()
 
                 }
 
@@ -66,14 +67,15 @@ class UpdateContact : AppCompatActivity() {
                         etJobDescription.setText(obj.jobDescription)
 
 
-                        Toast.makeText(this@UpdateContact, "success", Toast.LENGTH_SHORT).show()
 
 
                     } else {
                         if (response.message().toString() == "Unauthorized") {
                             startActivity(Intent(this@UpdateContact, LoginActivity::class.java))
                         } else {
-                            Toast.makeText(this@UpdateContact, response.message().toString(), Toast.LENGTH_SHORT).show()
+                            Snackbar.make(findViewById(R.id.cons),response.message().toString(), Snackbar.LENGTH_LONG).show()
+
+
                         }
                     }
                 }
@@ -115,15 +117,18 @@ class UpdateContact : AppCompatActivity() {
                     callupdateid.enqueue(object : Callback<UpdateIdResponse> {
                         override fun onFailure(call: Call<UpdateIdResponse>, t: Throwable) {
                             pd.dismiss()
-                            Toast.makeText(this@UpdateContact, "check your connection", Toast.LENGTH_LONG).show()
+                            Snackbar.make(findViewById(R.id.cons),"Check your internet connection", Snackbar.LENGTH_LONG).show()
                         }
+
 
                         override fun onResponse(call: Call<UpdateIdResponse>, response: Response<UpdateIdResponse>) {
                             pd.dismiss()
 
                             if (response.isSuccessful) {
-                                Toast.makeText(this@UpdateContact, "Contact updated successfully", Toast.LENGTH_LONG)
+                                Snackbar.make(findViewById(R.id.cons), "Contact updated successfully", Snackbar.LENGTH_LONG)
                                     .show()
+
+
                                 val intent = Intent(this@UpdateContact, Contacts::class.java)
                                 startActivity(intent)
                             } else {
@@ -132,11 +137,9 @@ class UpdateContact : AppCompatActivity() {
                                 if (response.message().toString() == "Unauthorized") {
                                     startActivity(Intent(this@UpdateContact, LoginActivity::class.java))
                                 } else {
-                                    Toast.makeText(
-                                        this@UpdateContact,
-                                        response.message().toString(),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    Snackbar.make(findViewById(R.id.cons),  response.message().toString(), Snackbar.LENGTH_LONG).show()
+
+
                                 }
                             }
                         }
