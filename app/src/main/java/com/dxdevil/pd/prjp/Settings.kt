@@ -46,13 +46,13 @@ class Settings : AppCompatActivity() {
         val navid = findViewById<NavigationView>(R.id.nav_view_settings)
         val h = navid.getHeaderView(0)
         val inagev = h.findViewById<CircleImageView>(R.id.imageview_header)
-        if(profilestring=="")
+        //if(profilestring=="")
             inagev.setImageResource(R.drawable.user)
-        else{
-            val bytearray = Base64.decode(profilestring, Base64.DEFAULT)
-            val btmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray.size)
-            inagev!!.setImageBitmap(btmap)
-        }
+//        else{
+//            val bytearray = Base64.decode(profilestring, Base64.DEFAULT)
+//            val btmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray.size)
+//            inagev!!.setImageBitmap(btmap)
+//        }
         val htv = h.findViewById<TextView>(R.id.header_nametv)
         val htvem = h.findViewById<TextView>(R.id.header_emailtv)
         htv!!.text =

@@ -48,6 +48,16 @@ class DocActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var ntoggle: ActionBarDrawerToggle
 
+    var countsAwaitigMy=1
+    var countsAwaitOthers=1
+    var countsCompleted=1
+    var countsDuesoon=1
+
+    var totalPageAwatMY=0
+    var totalPageAwatOthers=0
+    var totalPageCompleted=0
+    var totalPagesDuesoon=0
+
     private var currentPage=0
     private var pageNo=1
     var totalPages:Int=0
@@ -82,13 +92,13 @@ class DocActivity : AppCompatActivity() {
         val navid = findViewById<NavigationView>(R.id.nav_view_doc)
         val h = navid.getHeaderView(0)
         val inagev = h.findViewById<CircleImageView>(R.id.imageview_header)
-        if(profilestring=="")
+      //  if(profilestring=="")
             inagev.setImageResource(R.drawable.user)
-        else{
-            val bytearray = Base64.decode(profilestring, Base64.DEFAULT)
-            val btmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray.size)
-            inagev!!.setImageBitmap(btmap)
-        }
+//        else{
+//            val bytearray = Base64.decode(profilestring, Base64.DEFAULT)
+//            val btmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray.size)
+//            inagev!!.setImageBitmap(btmap)
+//        }
         val htv = h.findViewById<TextView>(R.id.header_nametv)
         val htvem = h.findViewById<TextView>(R.id.header_emailtv)
         htv!!.text =
@@ -102,14 +112,49 @@ class DocActivity : AppCompatActivity() {
         val source=intent.getStringExtra("Source")
         if(source=="DocActivity"){
             docStatus=mIntent.getIntExtra("Doc_status",0)
-            if(docStatus==0)
+
+            countsAwaitigMy = intent.getIntExtra("countsAwaitigMy",0)
+            countsAwaitOthers = intent.getIntExtra("countsAwaitOthers",0)
+            countsCompleted=intent.getIntExtra("countsCompleted",0)
+            countsDuesoon = intent.getIntExtra("countsDuesoon",0)
+
+
+            if(docStatus==0){
                 title= getString(R.string.awaiting)
-            if(docStatus==3)
+                totalPageAwatMY = if(countsAwaitigMy%10==0)
+                    countsAwaitigMy/10
+                else
+                    (countsAwaitigMy/10)+1
+                total_pages.text=totalPageAwatMY.toString()
+            }
+
+            if(docStatus==3){
                 title= getString(R.string.awatingothers)
-            if(docStatus==2)
+                totalPageAwatOthers=if(countsAwaitOthers%10==0)
+                    countsAwaitOthers/10
+                else
+                    (countsAwaitOthers/10)+1
+                total_pages.text=totalPageAwatOthers.toString()
+            }
+
+            if(docStatus==2){
                 title= getString(R.string.completed)
-            if(docStatus==6)
+                totalPageCompleted=if(countsCompleted%10==0)
+                    countsCompleted/10
+                else
+                    (countsCompleted/10)+1
+                total_pages.text=totalPageCompleted.toString()
+            }
+
+            if(docStatus==6){
                 title= getString(R.string.signingdue)
+                totalPagesDuesoon=if(countsDuesoon%10==0)
+                    countsDuesoon/10
+                else
+                    (countsDuesoon/10)+1
+                total_pages.text=totalPagesDuesoon.toString()
+            }
+
 
             apiCalling(docStatus,0, token)
         }else
@@ -117,9 +162,14 @@ class DocActivity : AppCompatActivity() {
             title = getString(R.string.alldocs)
             docStatus=null
             apiCalling(docStatus,0, token)
+            total_pages.text=totalPages.toString()
 
         }
 
+//
+//
+//        totalPageAwatOthers=(countsAwaitOthers/10)+1
+//        total_pages.text=totalPageAwatOthers.toString()
 
 
         button_next.setOnClickListener {
@@ -227,14 +277,26 @@ class DocActivity : AppCompatActivity() {
             R.id.menu_awaitingMySign -> {
                 currentPage=0
                 docStatus=0
+                totalPageAwatMY = if(countsAwaitigMy%10==0)
+                    countsAwaitigMy/10
+                else
+                    (countsAwaitigMy/10)+1
+                total_pages.text=totalPageAwatMY.toString()
+
                 apiCalling(docStatus,currentPage,token)
                 title= getString(R.string.awatingsign)
+
                 return true
             }
 
             R.id.menu_awaitingOthers -> {
                 currentPage=0
                 docStatus=3
+                totalPageAwatOthers=if(countsAwaitOthers%10==0)
+                    countsAwaitOthers/10
+                else
+                    (countsAwaitOthers/10)+1
+                total_pages.text=totalPageAwatOthers.toString()
                 apiCalling(docStatus,currentPage,token)
                 title= getString(R.string.awatingothers)
                 return true
@@ -243,6 +305,11 @@ class DocActivity : AppCompatActivity() {
             R.id.menu_completed -> {
                 currentPage=0
                 docStatus=2
+                totalPageCompleted=if(countsCompleted%10==0)
+                    countsCompleted/10
+                else
+                    (countsCompleted/10)+1
+                total_pages.text=totalPageCompleted.toString()
                 apiCalling(docStatus,currentPage,token)
                 title= getString(R.string.completed)
                 return true
@@ -252,6 +319,11 @@ class DocActivity : AppCompatActivity() {
             R.id.menu_duesoon -> {
                 currentPage=0
                 docStatus=6
+                totalPagesDuesoon=if(countsDuesoon%10==0)
+                    countsDuesoon/10
+                else
+                    (countsDuesoon/10)+1
+                total_pages.text=totalPagesDuesoon.toString()
                 apiCalling(docStatus,currentPage,token)
                 title= getString(R.string.signingdue)
                 return  true
@@ -331,7 +403,9 @@ class DocActivity : AppCompatActivity() {
                             adapter!!.notifyDataSetChanged()
 
                             cpage_number.text=response.body()!!.data[0].currentPage.toString()
-                            total_pages.text=response.body()!!.data[0].totalPages.toString()
+
+                            if(status==null)
+                                total_pages.text=response.body()!!.data[0].totalPages.toString()
 
                             if(response.body()!!.data[0].currentPage==1)
                                 button_previous.isEnabled=false
@@ -348,9 +422,6 @@ class DocActivity : AppCompatActivity() {
                                 btnsConstraintLayout.visibility=View.GONE
                             }else
                                 btnsConstraintLayout.visibility=View.VISIBLE
-
-
-
 
 
 
