@@ -175,36 +175,4 @@ class DocumentDetailActivity : AppCompatActivity() {
               }
     }
 
-//    fun copyText(view: View) {
-//
-//    }
-
-    // on click paste button
-//    fun pasteText(view: View) {
-//        val abc = myClipboard?.getPrimaryClip()
-//        val item = abc?.getItemAt(0)
-//
-//        .text = item?.text.toString()
-//
-//        Toast.makeText(applicationContext, "Text Pasted", Toast.LENGTH_SHORT).show()
-//    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.docdetails_menu, menu)
-        return true
-    }
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-
-        when (item!!.itemId) {
-
-            R.id.preview -> {
-                val intent = Intent(this@DocumentDetailActivity, PreviewActivity::class.java)
-                intent.putExtra("doc", docId)
-                this.startActivity(intent)
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }
