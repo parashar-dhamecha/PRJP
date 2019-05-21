@@ -54,7 +54,6 @@ import java.lang.Exception
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class Dashboarrd : AppCompatActivity() {
-   lateinit var v: View
     private var adapter: RecentDocumentAdapter? = null
     private lateinit var documentList: ArrayList<Document>
 
