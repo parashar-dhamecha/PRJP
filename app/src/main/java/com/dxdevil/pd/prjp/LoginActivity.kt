@@ -138,12 +138,8 @@ public class LoginActivity : AppCompatActivity() {
                                         } else {
                                             pd.dismiss()
                                             Toast.makeText(this@LoginActivity, response.body()!!.message.toString(), Toast.LENGTH_LONG).show()
-
                                         }
-
-
                                     }
-
                                 })
 
                             } catch (e: Exception) {
