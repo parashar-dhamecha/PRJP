@@ -61,12 +61,6 @@ class Dashboarrd : AppCompatActivity() {
     private lateinit var ntoggle: ActionBarDrawerToggle
     @SuppressLint("SetTextI18n", "WrongViewCast")
 
-    var countsAwaitigMy = 0
-    var countsAwaitOthers = 0
-    var countsCompleted = 0
-    var countsDuesoon = 0
-
-
     fun hasPermissions(context: Context, vararg permissions: String): Boolean = permissions.all {
         ActivityCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
     }
@@ -140,7 +134,6 @@ class Dashboarrd : AppCompatActivity() {
         awatingsigntv.setOnClickListener {
 
             intent.putExtra("Doc_status", 0)
-            intent.putExtra("countsAwaitigMy", countsAwaitigMy)
             startActivity(intent)
         }
 
@@ -148,7 +141,6 @@ class Dashboarrd : AppCompatActivity() {
 
 
             intent.putExtra("Doc_status", 0)
-            intent.putExtra("countsAwaitigMy", countsAwaitigMy)
             startActivity(intent)
         }
 
@@ -156,21 +148,18 @@ class Dashboarrd : AppCompatActivity() {
         awatingotherstv.setOnClickListener {
 
             intent.putExtra("Doc_status", 3)
-            intent.putExtra("countsAwaitOthers", countsAwaitOthers)
             startActivity(intent)
         }
 
         AwatingSign222.setOnClickListener {
 
             intent.putExtra("Doc_status", 3)
-            intent.putExtra("countsAwaitOthers", countsAwaitOthers)
             startActivity(intent)
         }
         completedtv.setOnClickListener {
 
 
             intent.putExtra("Doc_status", 2)
-            intent.putExtra("countsCompleted", countsCompleted)
             startActivity(intent)
         }
 
@@ -178,19 +167,16 @@ class Dashboarrd : AppCompatActivity() {
 
 
             intent.putExtra("Doc_status", 2)
-            intent.putExtra("countsCompleted", countsCompleted)
             startActivity(intent)
         }
 
         duesoontv.setOnClickListener {
             intent.putExtra("Doc_status", 6)
-            intent.putExtra("countsDuesoon", countsDuesoon)
             startActivity(intent)
         }
 
         AwatingSign2.setOnClickListener {
             intent.putExtra("Doc_status", 6)
-            intent.putExtra("countsDuesoon", countsDuesoon)
             startActivity(intent)
         }
 
@@ -205,6 +191,7 @@ class Dashboarrd : AppCompatActivity() {
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
                 R.id.documents -> {
+
                     startActivity(Intent(this@Dashboarrd, DocActivity::class.java))
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
@@ -272,11 +259,14 @@ class Dashboarrd : AppCompatActivity() {
                     completedtv?.text = ob.data[0]!!.completed.toString()
                     duesoontv?.text = ob.data[0]!!.expireSoon.toString()
 
-                    countsAwaitigMy = ob.data[0]!!.awaitingMySign
-                    countsAwaitOthers = ob.data[0]!!.awaitingOthers
-                    countsCompleted = ob.data[0]!!.completed
-                    countsDuesoon = ob.data[0]!!.expireSoon
+                  val DashCounts = getSharedPreferences("Counts",0) as SharedPreferences
+                  val DashPref= DashCounts.edit()
 
+                    DashPref.putInt("countsAwaitigMy",ob.data[0]!!.awaitingMySign)
+                    DashPref.putInt("countsAwaitOthers",ob.data[0]!!.awaitingOthers)
+                    DashPref.putInt("countsCompleted",ob.data[0]!!.completed)
+                    DashPref.putInt("countsDuesoon",ob.data[0]!!.expireSoon)
+                    DashPref.apply()
 
                 } else {
                     if (response.message().toString() == "Unauthorized") {

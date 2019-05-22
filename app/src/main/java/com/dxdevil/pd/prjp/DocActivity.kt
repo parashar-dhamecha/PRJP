@@ -109,15 +109,17 @@ class DocActivity : AppCompatActivity() {
         htvem!!.text = getSharedPreferences("Token", 0).getString("email", "")
 
         val mIntent=intent
+
+
+        countsAwaitigMy = getSharedPreferences("Counts",0).getInt("countsAwaitigMy",0)
+        countsAwaitOthers = getSharedPreferences("Counts",0).getInt("countsAwaitOthers",0)
+        countsCompleted=getSharedPreferences("Counts",0).getInt("countsCompleted",0)
+        countsDuesoon =getSharedPreferences("Counts",0).getInt("countsDuesoon",0)
+
+
         val source=intent.getStringExtra("Source")
         if(source=="DocActivity"){
             docStatus=mIntent.getIntExtra("Doc_status",0)
-
-            countsAwaitigMy = intent.getIntExtra("countsAwaitigMy",0)
-            countsAwaitOthers = intent.getIntExtra("countsAwaitOthers",0)
-            countsCompleted=intent.getIntExtra("countsCompleted",0)
-            countsDuesoon = intent.getIntExtra("countsDuesoon",0)
-
 
             if(docStatus==0){
                 title= getString(R.string.awaiting)
@@ -165,11 +167,6 @@ class DocActivity : AppCompatActivity() {
             total_pages.text=totalPages.toString()
 
         }
-
-//
-//
-//        totalPageAwatOthers=(countsAwaitOthers/10)+1
-//        total_pages.text=totalPageAwatOthers.toString()
 
 
         button_next.setOnClickListener {
@@ -361,6 +358,7 @@ class DocActivity : AppCompatActivity() {
 
         val api = RetrofitClient.getInstance().api as Api
 
+        btnsConstraintLayout.visibility=View.GONE
 
         val call = api.doclist(
             token, ListOfDocument(
