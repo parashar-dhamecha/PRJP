@@ -3,6 +3,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
+            android:id="@+id/anotviewid"
             xmlns:android="http://schemas.android.com/apk/res/android">
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,6 +32,7 @@
             android:textSize="@dimen/sp20"
             android:padding="@dimen/dp0"
             android:layout_centerVertical="true"
+            android:text="@string/prevpage"
             android:background="@drawable/edit_round2"
             android:id="@+id/prev_button"
             android:layout_marginRight="@dimen/dp20"
@@ -40,7 +42,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginEnd="@dimen/dp20"
             app:layout_constraintEnd_toStartOf="@+id/signerspinner"
-            app:layout_constraintHorizontal_bias="1.0" tools:text="@string/prevd"/>
+            app:layout_constraintHorizontal_bias="1.0"/>
     <Button android:layout_width="@dimen/dp30"
             android:layout_height="@dimen/dp40"
             android:text="@string/nextd"

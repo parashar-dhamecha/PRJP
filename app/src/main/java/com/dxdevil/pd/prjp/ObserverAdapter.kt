@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.dxdevil.pd.prjp.Model.Response.Data
+import com.dxdevil.pd.prjp.ObserverListener
 
 
-class ObserverAdapter(private var context: Context, var Con: ArrayList<Data>) :
+class ObserverAdapter(private var context: Context, var Con: ArrayList<Data>, var obs: ObserverListener) :
     RecyclerView.Adapter<ObserverAdapter.ViewHolder>() {
 
     lateinit var selobservers:ArrayList<Data>
@@ -21,10 +22,14 @@ class ObserverAdapter(private var context: Context, var Con: ArrayList<Data>) :
     }
 
     override fun onBindViewHolder(h: ViewHolder, position: Int) {
-        h.name.text= Con[position].name.toString()
-        h.email.text= Con[position].email.toString()
-        if(h.cb.isSelected){
-            selobservers.add(Con[position])
+        h.name.text = Con[position].name.toString()
+        h.email.text = Con[position].email.toString()
+        h.cb.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                obs.onobserverselected(Con[position])
+            } else {
+                obs.onobserverunselected(Con[position])
+            }
         }
     }
 

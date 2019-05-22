@@ -154,7 +154,7 @@
     <string name="Getting">Getting next pages…</string>
     <string name="preview">Preview</string>
     <string name="signers">Signers</string>
-    <string name="sequential">Sequential Signature</string>
+    <string name="sequential">Sequential</string>
     <string name="observers">Observers</string>
     <string name="notarization">Notarization Details</string>
     <string name="notarized_on">Notarized On:</string>
@@ -186,8 +186,8 @@
     <string name="prev">prev</string>
     <string name="nextf">next</string>
 
-    <string name="expirey_end_date">Expirey End Date</string>
-    <string name="expirey_start_date">Expiery Start Date</string>
+    <string name="expirey_end_date">Expiry End Date</string>
+    <string name="expirey_start_date">Expiry Start Date</string>
     <string name="Signing_Due_date">Signing Due Date</string>
     <string name="days">Days</string>
     <string name="Zero">0</string>
@@ -213,6 +213,7 @@
     <string name="e_signature">E-Signature</string>
     <string name="button_clearall">Clear All</string>
     <string name="contact_mobile_no">8888888888</string>
+    <string name="prevpage"><![CDATA[<]]></string>
 
 
 </resources>

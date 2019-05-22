@@ -38,7 +38,7 @@ import kotlin.collections.ArrayList
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS",
     "DEPRECATION", "UNCHECKED_CAST")
- class Uploadfile : AppCompatActivity(),View.OnClickListener,CheckboxselectedListener {
+class Uploadfile : AppCompatActivity(), View.OnClickListener, CheckboxselectedListener, ObserverListener {
 
     val READ_REQUEST_CODE =42
      var maxday:Int=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
@@ -48,13 +48,15 @@ import kotlin.collections.ArrayList
     var minmonth:Int=Calendar.getInstance().get(Calendar.MONTH)
     var minyear:Int=Calendar.getInstance().get(Calendar.YEAR)
     lateinit var sp :SharedPreferences.Editor
-    lateinit var seqpara :String
+    var seqpara: Int = 1
     lateinit var docid :String
 
     var ssname :ArrayList<String> = ArrayList<String>()
     var ssid :ArrayList<String> = ArrayList<String>()
+    var obname: ArrayList<String> = ArrayList<String>()
+    var obid: ArrayList<String> = ArrayList()
 
-    lateinit var contactList :List<Data>
+    lateinit var contactList: MutableList<Data>
 
     @SuppressLint("NewApi", "CommitPrefEdits")
     @RequiresApi(Build.VERSION_CODES.N)
@@ -81,30 +83,6 @@ import kotlin.collections.ArrayList
 
 
          sp = getSharedPreferences("CreateDocDetails",0).edit()
-//var u : android.net.Uri = android.net.Uri.parse(Environment.getExternalStorageDirectory().toString() + "/Download/")
-////picking file
-//
-//            val mimeTypes = arrayOf(
-//                "application/pdf",
-//                "application/msword",
-//                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-//                "application/vnd.ms-powerpoint",
-//                "application/x-excel"
-//                )
-//
-//
-//
-//        val intent = Intent()
-//               .setAction(Intent.ACTION_GET_CONTENT).addCategory(Intent.CATEGORY_OPENABLE).setType("file/*")
-//            intent.type = if (mimeTypes.size === 1) mimeTypes[0] else "*/*"
-//            if (mimeTypes.size > 0) {
-//                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-//            }
-//
-//            startActivityForResult(Intent.createChooser(intent, "File"), 111)
-
-        //selecting signers and observers
-
 
         filenameet.setText(getSharedPreferences("CreateDocDetails",0).getString("filename","").toString())
 var type = getSharedPreferences("CreateDocDetails",0).getString("type","").toString()
@@ -124,11 +102,11 @@ var type = getSharedPreferences("CreateDocDetails",0).getString("type","").toStr
         esdatebutton.setOnClickListener(this)
         signduedatebutton.setOnClickListener(this)
         timebutton.setOnClickListener(this)
+
         // setting sharedpreference
         if(sequentialrb.isSelected){
-            seqpara="1"
-        }
-        else seqpara="2"
+            seqpara = 1
+        } else seqpara = 2
     }
 
 
@@ -200,129 +178,10 @@ var type = getSharedPreferences("CreateDocDetails",0).getString("type","").toStr
         }
     }
 
-//
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        if (requestCode == 111 && resultCode == RESULT_OK) {
-//            val selectedFile = data?.data
-//            if (selectedFile != null) {
-//                callapi(uri = selectedFile)
-//            }
-//        }
-//    }
-//
-//    private fun callapi(uri : android.net.Uri) {
-//
-//            val file1 = File(getRealPathFromURI(this@Uploadfile, uri))
-//
-//
-//            var rb = RequestBody.create(MediaType.parse(MimeTypeMap.getFileExtensionFromUrl(uri.toString())), file1)
-//            var mpb: MultipartBody.Part = MultipartBody.Part.createFormData("file", file1.name, rb)
-//            var token = getSharedPreferences("Token", 0).getString("Token", "").toString()
-//
-//
-//            var pd = ProgressDialog(this@Uploadfile)
-//            pd.setCancelable(false)
-//            pd.setTitle("Uploading...")
-//            pd.setMessage(file1.name)
-//            pd.cardv1
-//            pd.isIndeterminate = true
-//            pd.show()
-//            var type = MimeTypeMap.getFileExtensionFromUrl(uri.toString())
-//
-//            if (type == "pdf") {
-//                pd.setIcon(R.drawable.pdf3)
-//                filetypeiv!!.setImageResource(R.drawable.pdf3)
-//            } else if (type == "docx" || type == "doc") {
-//                pd.setIcon(R.drawable.doc4)
-//                filetypeiv!!.setImageResource(R.drawable.doc4)
-//            } else if (type == "application/x-excel") {
-//                pd.setIcon(R.drawable.excel)
-//                filetypeiv!!.setImageResource(R.drawable.excel)
-//            } else if (type == "application/vnd.ms-powerpoint") {
-//                pd.setIcon(R.drawable.ppt2)
-//                filetypeiv!!.setImageResource(R.drawable.ppt2)
-//            }
-//
-//            filenameet.setText(file1.name)
-//
-//
-//            var uapi = RetrofitClient.getInstance().api as Api
-//            var ucall = uapi.upload(token, mpb) as Call<UploadfileModel>
-//            ucall!!.enqueue(object : Callback<UploadfileModel> {
-//
-//                override fun onFailure(call: Call<UploadfileModel>, t: Throwable) {
-//                    startActivity(Intent(this@Uploadfile, Dashboarrd::class.java))
-//                    Toast.makeText(this@Uploadfile, "Something went wrong please try again later", Toast.LENGTH_LONG)
-//                        .show()
-//                    pd.dismiss()
-//                }
-//
-//                override fun onResponse(call: Call<UploadfileModel>, response: Response<UploadfileModel>) {
-//                    if (response.isSuccessful) {
-//                        var obj = response.body() as UploadfileModel
-//                        docid = obj.data[0].id.toString()
-//
-//                        Toast.makeText(this@Uploadfile, response.body()!!.data[0].name.toString(), Toast.LENGTH_LONG)
-//                            .show()
-//                        pd.dismiss()
-//                    } else {
-//                        if (response.message().toString() == "Unauthorized") {
-//                            startActivity(Intent(this@Uploadfile, LoginActivity::class.java))
-//                        } else {
-//                            Toast.makeText(this@Uploadfile, response.message().toString(), Toast.LENGTH_SHORT).show()
-//
-//                            startActivity(Intent(this@Uploadfile, Dashboarrd::class.java))
-//                        }
-//                        pd.dismiss()
-//                    }
-//                }
-//            })
-//    }
-//
-//    @SuppressLint("RestrictedApi")
-//    fun getpath(uri: android.net.Uri): String? {
-//        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-//        val cursor = getActivity(this)!!.getContentResolver().query(uri, filePathColumn, null, null, null)
-//        cursor.moveToFirst()
-//        val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-//        val filePath = cursor.getString(columnIndex)
-//        cursor.close()
-//        return filePath
-//    }
-//
-//    private fun getRealPathFromURI(context: Context, uri: android.net.Uri): String {
-//
-//
-//        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-//        val cursor = this.getContentResolver().query(uri, filePathColumn, null, null, null)
-//        cursor.moveToFirst()
-//        val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-//        val filePath = cursor.getString(columnIndex) as String?
-//        cursor.close()
-//        return filePath.toString()
-//    }
-
-
 
     fun isNetworkAvailable(context: Context): Boolean {
         return (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo != null
     }
-
-
-    private fun setrv(contactList: List<Data>?) {
-
-        val layoutManager = LinearLayoutManager(applicationContext)
-        val layoutManager2 = LinearLayoutManager(applicationContext)
-        signersrv.layoutManager = layoutManager
-        observerrv.layoutManager= layoutManager2
-        var obj= SignerAdapter(this, contactList as ArrayList<Data>,this )
-        signersrv!!.adapter =obj
-        observerrv!!.adapter = ObserverAdapter(this, contactList as ArrayList<Data>)
-
-    }
-
 
 
     fun getSignersData() {
@@ -341,8 +200,8 @@ var type = getSharedPreferences("CreateDocDetails",0).getString("type","").toStr
                 override fun onResponse(call: Call<ContactList>, response: Response<ContactList>) = try {
 
                     if (response.isSuccessful) {
-                        contactList = response.body()?.data as List<Data>
-                        setrv(contactList)
+                        contactList = response.body()?.data as MutableList<Data>
+                        setsig(contactList)
 
                     } else {
                         startActivity(Intent(this@Uploadfile,Dashboarrd::class.java))
@@ -363,31 +222,64 @@ var type = getSharedPreferences("CreateDocDetails",0).getString("type","").toStr
         return true
     }
 
-    fun getActivityInstance():Uploadfile {
-        return this
+    private fun setsig(contactList: List<Data>?) {
+
+        val layoutManager = LinearLayoutManager(applicationContext)
+        val layoutManager2 = LinearLayoutManager(applicationContext)
+        signersrv.layoutManager = layoutManager
+        observerrv.layoutManager = layoutManager2
+        var obj = SignerAdapter(this, contactList as ArrayList<Data>, this)
+        signersrv!!.adapter = obj
+        observerrv!!.adapter = ObserverAdapter(this, contactList, this)
     }
 
     override fun oncheckboxselected(data: Data?) {
-        ssname.add(data!!.name)
-        ssid.add(data!!.id)
-        Toast.makeText(this@Uploadfile,data!!.name,Toast.LENGTH_LONG).show()
+        if (!obname.contains(data!!.name)) {
+            ssname.add(data!!.name)
+            ssid.add(data!!.userId)
+        } else {
+            Toast.makeText(this@Uploadfile, "user cant be both signer and observer", Toast.LENGTH_LONG).show()
+        }
     }
+
+    override fun onobserverselected(v: Data?) {
+        if (!ssname.contains(v!!.name)) {
+            obname.add(v!!.name)
+            obid.add(v!!.userId)
+        } else {
+            Toast.makeText(this@Uploadfile, "user cant be both signer and observer", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun oncheckboxunselected(data: Data?) {
+        ssname.remove(data!!.name)
+        ssid.remove(data!!.userId)
+    }
+
+    override fun onobserverunselected(v: Data?) {
+        obname.remove(v!!.name)
+        obid.remove(v!!.userId)
+    }
+
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
             R.id.next_icon ->{
+                sp.putString("filename", filenameet.text.toString())
                 sp.putString("description",filedescet!!.text.toString())
                 sp.putString("endstartdate",esdateet.text!!.toString()+" "+timeet.text.toString())
                 sp.putString("endexpdate",eedateet.text.toString()+" "+timeet.text.toString())
                 sp.putString("signingduedate",signduedateet.text.toString()+" "+timeet.text.toString())
-                sp.putString("seqpara",seqpara)
+                sp.putInt("seqpara", seqpara)
                 sp.putString("reminddays",reminddays.text.toString())
                 sp.commit()
                 var intent= Intent(this@Uploadfile,Annotation2::class.java)
                 intent.putExtra("ssname",ssname)
                 intent.putExtra("ssid",ssid)
+                intent.putExtra("obname", obname)
+                intent.putExtra("obid", obid)
                 startActivity(intent)
             }
 

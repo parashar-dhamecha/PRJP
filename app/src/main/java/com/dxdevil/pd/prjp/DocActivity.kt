@@ -174,6 +174,12 @@ class DocActivity : AppCompatActivity() {
                         sp.edit().remove("Token").apply()
                         sp.edit().remove("RefreshToken").apply()
                         startActivity(Intent(this@DocActivity, LoginActivity::class.java))
+
+                        var sp2 = getSharedPreferences("Login Details", 0).edit()
+                        sp2.putString("email", "")
+                        sp2.putString("password", "")
+                        sp2.putString("rememberflag", "0")
+                        sp2.apply()
                         drawer_layout_document.closeDrawer(GravityCompat.START)
                     }
 

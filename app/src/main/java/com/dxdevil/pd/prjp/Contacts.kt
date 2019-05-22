@@ -158,6 +158,13 @@ class Contacts : AppCompatActivity() {
                         val sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
                         sp.edit().remove("Token").apply()
                         sp.edit().remove("RefreshToken").apply()
+
+                        var sp2 = getSharedPreferences("Login Details", 0).edit()
+                        sp2.putString("email", "")
+                        sp2.putString("password", "")
+                        sp2.putString("rememberflag", "0")
+                        sp2.apply()
+
                         startActivity(Intent(this@Contacts, LoginActivity::class.java))
                         drawer_layout_contacts.closeDrawer(GravityCompat.START)
                     }

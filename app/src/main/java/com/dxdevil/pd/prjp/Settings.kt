@@ -98,6 +98,14 @@ class Settings : AppCompatActivity() {
                         val sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
                         sp.edit().remove("Token").apply()
                         sp.edit().remove("RefreshToken").apply()
+
+
+                        var sp2 = getSharedPreferences("Login Details", 0).edit()
+                        sp2.putString("email", "")
+                        sp2.putString("password", "")
+                        sp2.putString("rememberflag", "0")
+                        sp2.apply()
+
                         startActivity(Intent(this@Settings, LoginActivity::class.java))
                         drawer_layout_setting.closeDrawer(GravityCompat.START)
                     }
