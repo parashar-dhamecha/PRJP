@@ -44,6 +44,7 @@ class RecentDocumentAdapter(
             val intent = Intent(context, DocumentDetailActivity::class.java)
             intent.putExtra("Source" ,"Dashboard")
             intent.putExtra("Docid",s)
+            intent.putExtra("SignButton",list[position].displaySignButton)
             context.startActivity(intent)
         }
     }

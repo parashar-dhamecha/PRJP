@@ -69,6 +69,7 @@ class AllDocumentsAdapter(
 
             val intent = Intent(context, DocumentDetailActivity::class.java)
             intent.putExtra("doc", list[position].id)
+            intent.putExtra("SignButton",list[position].displaySignButton)
             context.startActivity(intent)
         }
 

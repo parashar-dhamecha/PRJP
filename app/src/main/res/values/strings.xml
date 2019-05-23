@@ -213,6 +213,10 @@
     <string name="e_signature">E-Signature</string>
     <string name="button_clearall">Clear All</string>
     <string name="contact_mobile_no">8888888888</string>
+    <string name="sign">Sign</string>
+    <string name="decline">Decline</string>
+    <string name="Previous">Previous</string>
+    <string name="sign">Sign</string>
 
 
 </resources>

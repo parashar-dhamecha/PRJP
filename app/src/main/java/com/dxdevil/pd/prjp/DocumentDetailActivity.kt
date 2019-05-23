@@ -51,6 +51,11 @@ class DocumentDetailActivity : AppCompatActivity() {
         tvNo_observers.visibility=View.GONE
         tvNot_notarized.visibility=View.GONE
 
+        btnSign.visibility=View.GONE
+        btnDecline.visibility=View.GONE
+        divider17.visibility=View.GONE
+
+
         val builder = android.app.AlertDialog.Builder(this)
         val dialogView = layoutInflater.inflate(R.layout.progress_dialog, null)
         val message = dialogView.findViewById<TextView>(R.id.progress_message)
@@ -143,6 +148,13 @@ class DocumentDetailActivity : AppCompatActivity() {
                             else
                             transaction_hash_value.text = response.body()!!.data[0].notarization.txHash.toString()
 
+
+                            if(response.body()!!.data[0].documentDetail.documentStatus==0||response.body()!!.data[0].signedByCurrentUser==false)
+                            {
+                                btnSign.visibility=View.VISIBLE
+                                btnDecline.visibility=View.VISIBLE
+
+                            }
 
 
                           if(response.body()!!.data[0].notarization.isNotarized==false){
