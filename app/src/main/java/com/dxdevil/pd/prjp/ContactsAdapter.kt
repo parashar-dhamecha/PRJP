@@ -114,8 +114,7 @@ class ContactsAdapter( var context: Context, var Con: ArrayList<Data>) :
 
                                 Con.removeAt(0)
                                 notifyItemRemoved(0)
-
-                                Snackbar.make(it,"Contacts deleted successfully",Snackbar.LENGTH_LONG).show()
+                                    Toast.makeText(context,"Contacts deleted successfully",Toast.LENGTH_LONG).show()
 
 
 

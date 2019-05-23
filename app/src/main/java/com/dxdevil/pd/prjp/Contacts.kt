@@ -112,8 +112,7 @@ class Contacts : AppCompatActivity() {
 
             override fun onQueryTextChange(p0: String): Boolean {
 
-                Toast.makeText(this@Contacts,"wrong ",Toast.LENGTH_LONG).show()
-                onbj.filtereList1(p0)
+                 onbj.filtereList1(p0)
                 onbj.notifyDataSetChanged()
 
 

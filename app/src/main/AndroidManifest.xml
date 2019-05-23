@@ -73,8 +73,6 @@
                 android:theme="@style/AppTheme.NoActionBar"
                 tools:ignore="ExtraText">
 
-            <intent-filter>
-                 <action android:name="android.intent.action.MAIN"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
