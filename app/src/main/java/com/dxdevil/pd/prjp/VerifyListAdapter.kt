@@ -69,9 +69,6 @@ class VerifyListAdapter(var list: ArrayList<DocumentList>,
         var time=itemView.findViewById(R.id.TVtime) as TextView
        var cardfile: CardView =itemView.findViewById(R.id.card_view_file) as CardView
 
-
-
-
     }
 }
 

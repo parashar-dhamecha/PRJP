@@ -13,11 +13,13 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
+
+
     <uses-feature android:name="android.hardware.camera2"/>
 
     <application
             android:allowBackup="true"
-            android:icon="@drawable/cgicon"
+            android:icon="@drawable/cygicon"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
@@ -28,35 +30,49 @@
         <activity
                 android:name=".AddEditSignature"
                 android:label="@string/title_activity_add_edit_signature"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:theme="@style/AppTheme.NoActionBar"
+                android:screenOrientation="portrait">
         </activity>
         <activity android:name=".Verify_list">
         </activity>
         <activity android:name=".VerifyDocumentDetail">
         </activity>
+
+
         <activity
                 android:name=".VerifyActivity"
                 android:label="Verify Document">
         </activity>
+
         <activity android:name=".Annotation2">
         </activity>
+
         <activity android:name=".Annotation1">
         </activity>
-        <activity android:name=".Annotation">
+        <activity android:name=".Annotation"
+                  android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".Uploadfile"
-                android:parentActivityName=".Dashboarrd">
+                android:parentActivityName=".Dashboarrd"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".Dashboarrd"
                 android:label="Dashboard"
-                android:theme="@style/AppTheme">
+                android:theme="@style/AppTheme"
+                android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
-        <activity
-                android:name=".PhotoActivity"
-                android:parentActivityName=".Dashboarrd"/>
-        <activity android:name=".AddContact">
+        <activity android:name=".PhotoActivity"
+                  android:parentActivityName=".Dashboarrd"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".AddContact"
+                  android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".Otpactivity"
@@ -64,48 +80,59 @@
         </activity>
         <activity
                 android:name=".LoginActivity"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:theme="@style/AppTheme.NoActionBar"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".MainActivity"
                 android:theme="@style/AppTheme.NoActionBar"
-                tools:ignore="ExtraText">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+                tools:ignore="ExtraText"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".ForgotPasswordActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".UpdateContact">
+
+        <activity android:name=".ForgotPasswordActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".UpdateContact"
+                  android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".Contacts"
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustPan">
+                android:windowSoftInputMode="adjustPan"
+        >
         </activity>
         <activity
                 android:name=".ProfileActivity"
                 android:label="@string/prf_title"
-                android:parentActivityName=".Settings">
+                android:parentActivityName=".Settings"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".EditProfile"
                 android:label="@string/edit_title"
-                android:parentActivityName=".ProfileActivity">
+                android:parentActivityName=".ProfileActivity"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".Settings"
-                android:label="Settings"
-                android:parentActivityName=".Dashboarrd">
+                android:parentActivityName=".Dashboarrd"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".ChangePassword"
-                android:parentActivityName=".Settings">
+                android:parentActivityName=".Settings"
+                android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".Registration"
+                  android:parentActivityName=".LoginActivity"
+                  android:screenOrientation="portrait">
         <activity
                 android:name=".Registration"
                 android:parentActivityName=".LoginActivity">
@@ -120,6 +147,14 @@
                 android:parentActivityName=".Dashboarrd"/>
         <activity
                 android:name=".PhotoActivity"
+                tools:ignore="DuplicateActivity"
+                android:parentActivityName=".Dashboarrd"
+                android:screenOrientation="portrait"/>
+
+        <activity android:name=".ResetPasswordActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
+                  android:screenOrientation="portrait">
+            <intent-filter >
                 android:parentActivityName=".Dashboarrd"
                 tools:ignore="DuplicateActivity"/>
         <activity
@@ -138,19 +173,24 @@
         </activity>
         <activity
                 android:name=".DocumentDetailActivity"
-                android:parentActivityName=".DocActivity">
+                android:parentActivityName=".DocActivity"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".DocActivity"
-                android:parentActivityName=".Dashboard">
+                android:parentActivityName=".Dashboard" android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".PreviewActivity"
-                android:parentActivityName=".DocumentDetailActivity">
+                android:parentActivityName=".DocumentDetailActivity"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".Type"
-                android:parentActivityName=".Dashboard"/>
-    </application>
+                android:parentActivityName=".Dashboard"
+                android:screenOrientation="portrait"/>
+
+
+</application>
 
 </manifest>

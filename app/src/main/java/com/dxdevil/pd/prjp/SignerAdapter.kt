@@ -24,6 +24,8 @@ class SignerAdapter(private var context: Context, var Con: ArrayList<Data>,var c
        h.cb.setOnCheckedChangeListener { buttonView, isChecked ->
            if(isChecked){
             cbl.oncheckboxselected(Con[position])
+           } else {
+               cbl.oncheckboxunselected(Con[position])
            }
        }
     }

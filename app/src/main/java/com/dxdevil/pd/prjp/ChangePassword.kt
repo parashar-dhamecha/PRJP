@@ -30,6 +30,7 @@ class ChangePassword : AppCompatActivity() {
                 val pd = ProgressDialog(this)
                 pd.setMessage("Signing Up...")
                 pd.isIndeterminate = true
+                pd.setCancelable(false)
                 pd.show()
 
 

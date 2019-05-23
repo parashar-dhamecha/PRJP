@@ -27,17 +27,19 @@ public interface Api {
     Call<SignUpModel>register(@Body  SignUp signUp);
 
     @POST("document/create")
-    Call<CreateResponse>create(
-            @Body CreateDoc body,
-            @Header("Authorization") String Authorization
+    Call<CreateResp> create(
+            @Header("Authorization") String Authorization,
+            @Body CreateReq createdoc
     );
 
     @GET("account/check-user-exists/{id}")
     Call<UserExistResponse>isUserExist(@Path("id") String  id);
 
     @GET("document/preview/{documentId}")
-    Call<PreviewDocResponse>getdocpreview(@Header("Authorization") String Authorization,
-                                          @Path("documentId") String documentId);
+    Call<PreviewDocResponse> getdocpreview(
+            @Header("Authorization") String Authorization,
+            @Path("documentId") String documentId
+    );
 
     @POST("document/next-pages")
     Call<NextPageResponse>nextPages(

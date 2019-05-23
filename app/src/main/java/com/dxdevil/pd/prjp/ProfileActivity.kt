@@ -58,6 +58,7 @@ class ProfileActivity : AppCompatActivity() {
     }
     fun profileapi(){
         var pd = ProgressDialog(this)
+        pd.setCancelable(false)
         pd.setMessage("Getting Details..")
         pd.isIndeterminate = true
         pd.show()

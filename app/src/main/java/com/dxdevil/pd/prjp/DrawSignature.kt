@@ -62,6 +62,7 @@ class DrawSignature : AppCompatActivity() {
 
                 var pd = ProgressDialog(this)
                 pd.setMessage("Saving..")
+                pd.setCancelable(false)
                 pd.isIndeterminate = true
                 pd.show()
                 var token1 = getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token","").toString()

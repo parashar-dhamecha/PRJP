@@ -34,12 +34,13 @@ import com.dxdevil.pd.prjp.Model.Request.Document.ListOfDocument
 import com.dxdevil.pd.prjp.Model.Response.DashboardResponse
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.Document
 import com.dxdevil.pd.prjp.Model.Response.Document.ListOfDocument.ListOfDocumentResponse
+import com.dxdevil.pd.prjp.Model.Response.UploadfileModel
 import com.dxdevil.pd.prjp.data.RecentDocumentAdapter
-import com.google.android.material.internal.ContextUtils.getActivity
+import com.google.android.material.internal.ContextUtils
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_dashboarrd.*
+import kotlinx.android.synthetic.main.activity_uploadfile.*
 import kotlinx.android.synthetic.main.content_dashboarrd.*
-import kotlinx.android.synthetic.main.navigationbar_header.*
 import kotlinx.android.synthetic.main.signercv.*
 import kotlinx.android.synthetic.main.signpopup.*
 import okhttp3.MediaType
@@ -53,17 +54,11 @@ import java.lang.Exception
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class Dashboarrd : AppCompatActivity() {
-    lateinit var v: View
     private var adapter: RecentDocumentAdapter? = null
     private lateinit var documentList: ArrayList<Document>
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var ntoggle: ActionBarDrawerToggle
-    @SuppressLint("SetTextI18n", "WrongViewCast")
-
-    fun hasPermissions(context: Context, vararg permissions: String): Boolean = permissions.all {
-        ActivityCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
-    }
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +66,7 @@ class Dashboarrd : AppCompatActivity() {
         setContentView(R.layout.activity_dashboarrd)
 
 
-        RecentDocProgress.visibility = View.VISIBLE
+        RecentDocProgress.visibility=View.VISIBLE
 
         drawerLayout = findViewById(R.id.drawer_layout)
         ntoggle =
@@ -80,23 +75,23 @@ class Dashboarrd : AppCompatActivity() {
         ntoggle.syncState()
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        var permissions = arrayListOf<String>(
+        var  permissions= arrayListOf<String>(
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        )
+            Manifest.permission.READ_EXTERNAL_STORAGE)
 
 
-        var listPermissionsNeeded: MutableList<String> = mutableListOf()
+        var listPermissionsNeeded:MutableList<String> = mutableListOf()
         for (p in permissions) {
-            var result = ContextCompat.checkSelfPermission(this, p)
+           var result = ContextCompat.checkSelfPermission(this,p)
             if (result != PackageManager.PERMISSION_GRANTED) {
                 listPermissionsNeeded.add(p)
             }
         }
         if (listPermissionsNeeded.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(), 100)
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(),100 )
         }
+
 
 
         val isprofileimage = getSharedPreferences("Token", 0).getBoolean("isprofile", false)
@@ -104,20 +99,12 @@ class Dashboarrd : AppCompatActivity() {
         val navid = findViewById<NavigationView>(R.id.nav_view)
         val h = navid.getHeaderView(0)
         val imageev = h.findViewById<CircleImageView>(R.id.imageview_header)
-        if (!isprofileimage) imageev.setImageResource(R.drawable.user)
-        else {
+        if(!isprofileimage)imageev.setImageResource(R.drawable.user)
+        else{
             val bytearray = Base64.decode(profilestring, Base64.DEFAULT)
             val btmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray.size)
             imageev!!.setImageBitmap(btmap)
         }
-        val inagev = h.findViewById<CircleImageView>(R.id.imageview_header)
-        //  if(profilestring=="")
-        inagev.setImageResource(R.drawable.user)
-//        else{
-//            val bytearray = Base64.decode(profilestring, Base64.DEFAULT)
-//            val btmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray.size)
-//            inagev!!.setImageBitmap(btmap)
-//        }
         val htv = h.findViewById<TextView>(R.id.header_nametv)
         val htvem = h.findViewById<TextView>(R.id.header_emailtv)
         htv!!.text =
@@ -129,58 +116,59 @@ class Dashboarrd : AppCompatActivity() {
 
 
 
+
         val intent = Intent(this@Dashboarrd, DocActivity::class.java)
-        intent.putExtra("Source", "DocActivity")
-        awatingsigntv.setOnClickListener {
+        intent.putExtra("Source","DocActivity")
+        awatingsigntv.setOnClickListener{
 
-            intent.putExtra("Doc_status", 0)
+            intent.putExtra("Doc_status",0)
             startActivity(intent)
         }
 
-        AwatingSign21.setOnClickListener {
+        AwatingSign21.setOnClickListener{
 
 
-            intent.putExtra("Doc_status", 0)
+            intent.putExtra("Doc_status",0)
             startActivity(intent)
         }
 
 
-        awatingotherstv.setOnClickListener {
+        awatingotherstv.setOnClickListener{
 
-            intent.putExtra("Doc_status", 3)
+            intent.putExtra("Doc_status",3)
             startActivity(intent)
         }
 
-        AwatingSign222.setOnClickListener {
+        AwatingSign222.setOnClickListener{
 
-            intent.putExtra("Doc_status", 3)
+            intent.putExtra("Doc_status",3)
             startActivity(intent)
         }
         completedtv.setOnClickListener {
 
 
-            intent.putExtra("Doc_status", 2)
+            intent.putExtra("Doc_status",2)
             startActivity(intent)
         }
 
         AwatingSign.setOnClickListener {
 
 
-            intent.putExtra("Doc_status", 2)
+            intent.putExtra("Doc_status",2)
             startActivity(intent)
         }
 
         duesoontv.setOnClickListener {
-            intent.putExtra("Doc_status", 6)
+            intent.putExtra("Doc_status",6)
             startActivity(intent)
         }
 
         AwatingSign2.setOnClickListener {
-            intent.putExtra("Doc_status", 6)
+            intent.putExtra("Doc_status",6)
             startActivity(intent)
         }
 
-
+// DRAWER ACTIONS
         nav_view.setNavigationItemSelectedListener { menuItem ->
             menuItem.isChecked = true
             drawerLayout.closeDrawers()
@@ -191,20 +179,17 @@ class Dashboarrd : AppCompatActivity() {
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
                 R.id.documents -> {
-
                     startActivity(Intent(this@Dashboarrd, DocActivity::class.java))
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
                 R.id.contacts -> {
-                    try {
-                        startActivity(Intent(this@Dashboarrd, Contacts::class.java))
-                        drawer_layout.closeDrawer(GravityCompat.START)
-                    } catch (e: Exception) {
-                        Toast.makeText(this@Dashboarrd, e.message, Toast.LENGTH_LONG).show()
+                    try{ startActivity(Intent(this@Dashboarrd, Contacts::class.java))
+                        drawer_layout.closeDrawer(GravityCompat.START)}catch (e:Exception){
+                        Toast.makeText(this@Dashboarrd,e.message,Toast.LENGTH_LONG).show()
                     }
 
                 }
-                R.id.verify -> {
+                R.id.verify->{
                     startActivity(Intent(this@Dashboarrd, VerifyActivity::class.java))
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
@@ -214,7 +199,7 @@ class Dashboarrd : AppCompatActivity() {
                 }
                 R.id.logout -> {
                     drawer_layout.closeDrawer(GravityCompat.START)
-                    val builder = AlertDialog.Builder(this@Dashboarrd)
+                    val builder= AlertDialog.Builder(this@Dashboarrd)
                     builder.setTitle("Are you sure you want to Logout?")
                     builder.setPositiveButton("Yes") { dialogInterface: DialogInterface?, i: Int ->
 
@@ -222,11 +207,17 @@ class Dashboarrd : AppCompatActivity() {
                         val sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
                         sp.edit().remove("Token").apply()
                         sp.edit().remove("RefreshToken").apply()
+
+                        var sp2 = getSharedPreferences("Login Details", 0).edit()
+                        sp2.putString("email", "")
+                        sp2.putString("password", "")
+                        sp2.putString("rememberflag", "0")
+                        sp2.apply()
                         startActivity(Intent(this@Dashboarrd, LoginActivity::class.java))
                         drawer_layout.closeDrawer(GravityCompat.START)
                     }
 
-                    builder.setNegativeButton("No") { dialogInterface: DialogInterface?, i: Int ->
+                    builder.setNegativeButton("No") { dialogInterface: DialogInterface?, i:Int->
                         drawer_layout.closeDrawer(GravityCompat.START)
                     }
                     val dialog: AlertDialog = builder.create()
@@ -239,7 +230,7 @@ class Dashboarrd : AppCompatActivity() {
         val preference = getSharedPreferences("Token", Context.MODE_PRIVATE) as SharedPreferences
         val tok = preference.getString("Token", "")!!.toString() as String?
 
-        apiRecentDocs(null, 0, tok)
+        apiRecentDocs(null,0,tok)
 
         val dapi = RetrofitClient.getInstance().api as Api
         val call = dapi.getDashboardCouts(tok) as Call<DashboardResponse>
@@ -258,16 +249,6 @@ class Dashboarrd : AppCompatActivity() {
                     awatingotherstv?.text = ob.data[0]!!.awaitingOthers.toString()
                     completedtv?.text = ob.data[0]!!.completed.toString()
                     duesoontv?.text = ob.data[0]!!.expireSoon.toString()
-
-                  val DashCounts = getSharedPreferences("Counts",0) as SharedPreferences
-                  val DashPref= DashCounts.edit()
-
-                    DashPref.putInt("countsAwaitigMy",ob.data[0]!!.awaitingMySign)
-                    DashPref.putInt("countsAwaitOthers",ob.data[0]!!.awaitingOthers)
-                    DashPref.putInt("countsCompleted",ob.data[0]!!.completed)
-                    DashPref.putInt("countsDuesoon",ob.data[0]!!.expireSoon)
-                    DashPref.apply()
-
                 } else {
                     if (response.message().toString() == "Unauthorized") {
                         startActivity(Intent(this@Dashboarrd, LoginActivity::class.java))
@@ -281,8 +262,7 @@ class Dashboarrd : AppCompatActivity() {
 
 
         uploadcvFAB.setOnClickListener { view ->
-            var u: android.net.Uri =
-                android.net.Uri.parse(Environment.getExternalStorageDirectory().toString() + "/Download/")
+            var u : android.net.Uri = android.net.Uri.parse(Environment.getExternalStorageDirectory().toString() + "/Download/")
 //picking file
             floatingActionMenu.close(true)
             val mimeTypes = arrayOf(
@@ -292,6 +272,7 @@ class Dashboarrd : AppCompatActivity() {
                 "application/vnd.ms-powerpoint",
                 "application/x-excel"
             )
+
 
 
             val intent = Intent()
@@ -307,7 +288,7 @@ class Dashboarrd : AppCompatActivity() {
 
         add.setOnClickListener {
             floatingActionMenu.close(true)
-            startActivity(Intent(applicationContext, AddContact::class.java))
+            startActivity(Intent(applicationContext,AddContact::class.java))
         }
 
 
@@ -338,15 +319,15 @@ class Dashboarrd : AppCompatActivity() {
     }
 
 
-    // API TO GET RECENT DOCUMENS
-    fun apiRecentDocs(status: Int?, currentpage: Int, token: String?) {
+// API TO GET RECENT DOCUMENS
+    fun apiRecentDocs(status:Int?, currentpage:Int, token:String? ){
 
         val api = RetrofitClient.getInstance().api as Api
 
 
         val call = api.doclist(
             token, ListOfDocument(
-                null,
+               null,
                 0,
                 true,
                 null,
@@ -363,31 +344,28 @@ class Dashboarrd : AppCompatActivity() {
             call.enqueue(object : Callback<ListOfDocumentResponse> {
                 override fun onFailure(call: Call<ListOfDocumentResponse>, t: Throwable) {
 
-                    RecentDocProgress.visibility = View.GONE
+                    RecentDocProgress.visibility=View.GONE
 
 
+                    Toast.makeText(this@Dashboarrd, "Check your connection", Toast.LENGTH_SHORT).show()
                 }
 
-                override fun onResponse(
-                    call: Call<ListOfDocumentResponse>,
-                    response: Response<ListOfDocumentResponse>
-                ) {
+                override fun onResponse(call: Call<ListOfDocumentResponse>, response: Response<ListOfDocumentResponse>) {
 
                     if (response.isSuccessful) {
                         try {
-                            adapter = RecentDocumentAdapter(response.body()!!.data[0].documents, this@Dashboarrd)
+                            adapter = RecentDocumentAdapter(response.body()!!.data[0].documents, this@Dashboarrd )
                             documentList = response.body()!!.data[0].documents as ArrayList<Document>
 
                             recentDoc_recyclerView.layoutManager = LinearLayoutManager(this@Dashboarrd)
-                            recentDoc_recyclerView.adapter =
-                                RecentDocumentAdapter(response.body()!!.data[0].documents, this@Dashboarrd)
+                            recentDoc_recyclerView.adapter = RecentDocumentAdapter(response.body()!!.data[0].documents, this@Dashboarrd)
 
                             adapter!!.notifyDataSetChanged()
 
-                            RecentDocProgress.visibility = View.GONE
+                            RecentDocProgress.visibility=View.GONE
                         } catch (e: Exception) {
 
-                            RecentDocProgress.visibility = View.GONE
+                            RecentDocProgress.visibility=View.GONE
                             Toast.makeText(this@Dashboarrd, e.message, Toast.LENGTH_LONG).show()
                         }
 
@@ -418,8 +396,8 @@ class Dashboarrd : AppCompatActivity() {
     }
 
 
-    //API TO UPLOAD FILE
-    private fun callapi(uri: android.net.Uri) {
+//API TO UPLOAD FILE
+    private fun callapi(uri : android.net.Uri) {
 
         val file1 = File(getRealPathFromURI(this@Dashboarrd, uri))
 
@@ -447,18 +425,58 @@ class Dashboarrd : AppCompatActivity() {
         } else if (type == "application/vnd.ms-powerpoint") {
             pd.setIcon(R.drawable.ppt2)
         }
+
+
+        var uapi = RetrofitClient.getInstance().api as Api
+        var ucall = uapi.upload(token, mpb) as Call<UploadfileModel>
+        ucall!!.enqueue(object : Callback<UploadfileModel> {
+
+            override fun onFailure(call: Call<UploadfileModel>, t: Throwable) {
+                startActivity(Intent(this@Dashboarrd, Dashboarrd::class.java))
+                Toast.makeText(this@Dashboarrd, "Something went wrong please try again later", Toast.LENGTH_LONG)
+                    .show()
+                pd.dismiss()
+            }
+
+            override fun onResponse(call: Call<UploadfileModel>, response: Response<UploadfileModel>) {
+                if (response.isSuccessful) {
+                    var obj = response.body() as UploadfileModel
+                    var docid = obj.data[0].id.toString()
+
+                  var  sp = getSharedPreferences("CreateDocDetails",0).edit()
+                    sp.putString("originalfilename", file1.nameWithoutExtension)
+                        sp.putString("docid",docid)
+                    sp.putString("extension",file1.extension)
+                    sp.putString("type",type)
+                    sp.commit()
+                    startActivity(Intent(this@Dashboarrd,Uploadfile::class.java))
+                    pd.dismiss()
+                } else {
+                    if (response.message().toString() == "Unauthorized") {
+                        startActivity(Intent(this@Dashboarrd, LoginActivity::class.java))
+                    } else {
+                        Toast.makeText(this@Dashboarrd, response.message().toString(), Toast.LENGTH_SHORT).show()
+
+                        startActivity(Intent(this@Dashboarrd, Dashboarrd::class.java))
+                    }
+                    pd.dismiss()
+                }
+            }
+        })
     }
+
+//TO GET PATH OF FILE
     @SuppressLint("RestrictedApi")
     fun getpath(uri: android.net.Uri): String? {
-       val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = getActivity(this)!!.getContentResolver().query(uri, filePathColumn, null, null, null)
+        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = ContextUtils.getActivity(this)!!.getContentResolver().query(uri, filePathColumn, null, null, null)
         cursor.moveToFirst()
         val columnIndex = cursor.getColumnIndex(filePathColumn[0])
         val filePath = cursor.getString(columnIndex)
         cursor.close()
         return filePath
     }
-
+// ANOTHER METHOD TO GET PATH OF FILE
     private fun getRealPathFromURI(context: Context, uri: android.net.Uri): String {
 
 
