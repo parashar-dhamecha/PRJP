@@ -98,10 +98,6 @@
                 tools:ignore="ExtraText"
                 android:screenOrientation="portrait">
         </activity>
-        <activity
-                android:name=".ForgotPasswordActivity"
-                android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".UpdateContact">
 
         <activity android:name=".ForgotPasswordActivity"
                   android:theme="@style/AppTheme.NoActionBar"
@@ -142,9 +138,6 @@
         <activity android:name=".Registration"
                   android:parentActivityName=".LoginActivity"
                   android:screenOrientation="portrait">
-        <activity
-                android:name=".Registration"
-                android:parentActivityName=".LoginActivity">
         </activity>
         <activity android:name=".Dashboard">
         </activity>
@@ -160,12 +153,6 @@
                 android:parentActivityName=".Dashboarrd"
                 android:screenOrientation="portrait"/>
 
-        <activity android:name=".ResetPasswordActivity"
-                  android:theme="@style/AppTheme.NoActionBar"
-                  android:screenOrientation="portrait">
-            <intent-filter >
-                android:parentActivityName=".Dashboarrd"
-                tools:ignore="DuplicateActivity"/>
         <activity
                 android:name=".ResetPasswordActivity"
                 android:theme="@style/AppTheme.NoActionBar">
