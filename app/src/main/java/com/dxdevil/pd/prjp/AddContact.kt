@@ -43,6 +43,7 @@ class AddContact : AppCompatActivity() {
 
                 var pd = ProgressDialog(this)
                 pd.setMessage("Adding Contact")
+                pd.setCancelable(false)
                 pd.isIndeterminate = true
                 pd.show()
                 var token = getSharedPreferences("Token", Context.MODE_PRIVATE).getString("Token","")

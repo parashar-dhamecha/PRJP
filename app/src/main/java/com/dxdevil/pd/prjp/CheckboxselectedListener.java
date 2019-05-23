@@ -4,4 +4,7 @@ import com.dxdevil.pd.prjp.Model.Response.Data;
 
 public interface CheckboxselectedListener {
     void oncheckboxselected(Data data);
+
+    void oncheckboxunselected(Data data);
 }
+

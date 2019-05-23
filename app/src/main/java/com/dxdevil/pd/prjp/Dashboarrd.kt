@@ -54,7 +54,6 @@ import java.lang.Exception
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class Dashboarrd : AppCompatActivity() {
-   lateinit var v: View
     private var adapter: RecentDocumentAdapter? = null
     private lateinit var documentList: ArrayList<Document>
 
@@ -208,6 +207,12 @@ class Dashboarrd : AppCompatActivity() {
                         val sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
                         sp.edit().remove("Token").apply()
                         sp.edit().remove("RefreshToken").apply()
+
+                        var sp2 = getSharedPreferences("Login Details", 0).edit()
+                        sp2.putString("email", "")
+                        sp2.putString("password", "")
+                        sp2.putString("rememberflag", "0")
+                        sp2.apply()
                         startActivity(Intent(this@Dashboarrd, LoginActivity::class.java))
                         drawer_layout.closeDrawer(GravityCompat.START)
                     }
@@ -439,7 +444,7 @@ class Dashboarrd : AppCompatActivity() {
                     var docid = obj.data[0].id.toString()
 
                   var  sp = getSharedPreferences("CreateDocDetails",0).edit()
-                        sp.putString("filename",file1.nameWithoutExtension)
+                    sp.putString("originalfilename", file1.nameWithoutExtension)
                         sp.putString("docid",docid)
                     sp.putString("extension",file1.extension)
                     sp.putString("type",type)

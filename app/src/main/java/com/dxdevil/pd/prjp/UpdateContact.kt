@@ -94,6 +94,7 @@ class UpdateContact : AppCompatActivity() {
 
                     var pd = ProgressDialog(this)
                     pd.setMessage("Saving Contact")
+                    pd.setCancelable(false)
                     pd.isIndeterminate = true
                     pd.show()
 

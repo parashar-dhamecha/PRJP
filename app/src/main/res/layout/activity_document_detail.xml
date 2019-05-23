@@ -9,12 +9,47 @@
     <ScrollView android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="none"
-                android:id="@+id/scrollView2">
+                android:overScrollMode="never"
+                android:id="@+id/scrollView2"
+                >
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+            <View
+                    android:id="@+id/divider17"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/cardview_signers" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_Preview"/>
+            <Button
+                    android:text="@string/decline"
+                    android:layout_width="0dp"
+                    android:background="@drawable/edit_round2"
+                    android:layout_height="30dp" android:id="@+id/btnDecline"
+                    android:textSize="12sp" tools:text="Decline"
+                    app:layout_constraintStart_toEndOf="@+id/divider17"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_Preview"
+            />
+            <Button
+                    android:text="@string/sign"
+                    android:layout_width="0dp"
+                    android:background="@drawable/edit_round2"
+                    android:id="@+id/btnSign"
+                    android:textSize="12sp" tools:text="Sign"
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toStartOf="@+id/divider17" android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_Preview"
+                    app:layout_constraintHorizontal_bias="0.6" android:layout_height="@dimen/dp30"/>
             <Button
                     android:id="@+id/btn_Preview"
                     android:text="@string/view_doc"
@@ -125,7 +160,7 @@
                     <Button
                             android:text="@string/copy"
                             android:layout_width="wrap_content"
-                            android:layout_height="0dp"
+                            android:layout_height="22dp"
                             android:textAllCaps="false"
                             app:layout_goneMarginStart="@dimen/dp200"
                             android:background="@drawable/edit_round2"
@@ -138,7 +173,6 @@
                             android:layout_alignParentEnd="true"
                             android:layout_marginBottom="8dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginTop="111dp" app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/tvDocument_Hash_value"
                     />
 
@@ -151,7 +185,7 @@
             <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_Preview"
+                    app:layout_constraintTop_toBottomOf="@+id/btnDecline"
                     android:id="@+id/cardview_signers" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" android:layout_marginTop="16dp">
@@ -195,7 +229,8 @@
                             android:id="@+id/signer_recyclerview"
                             android:nestedScrollingEnabled="false"
                             android:layout_height="wrap_content"
-                            android:layout_alignTop="@id/divider"/>
+                            android:layout_alignTop="@id/divider" android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="1dp"/>
 
                 </RelativeLayout>
 
@@ -341,9 +376,9 @@
                     <Button
                             android:text="@string/copy"
                             android:layout_width="wrap_content"
-                            android:layout_height="0dp"
+                            android:layout_height="22dp"
                             android:textAllCaps="false"
-                            android:background="@drawable/mybutton"
+                            android:background="@drawable/edit_round2"
                             android:id="@+id/btnCopyTH"
                             android:textSize="12sp"
                             android:layout_marginEnd="8dp"

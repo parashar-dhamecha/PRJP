@@ -25,7 +25,8 @@ class SignersAdapter(
         holder.signername.text=list[position].firstName
         holder.btnSigner.text=list[position].signButtonText
 
-        if(list[position].isSigned==true)
+
+        if(list[position].signButtonText=="Sign"||list[position].isSigned==true)
             holder.btnSigner.visibility=View.GONE
     }
 

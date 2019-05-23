@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
                 var pd = ProgressDialog(this)
                 pd.setTitle("Logging you in...")
+                pd.setCancelable(false)
                 pd.setMessage(email.toString())
                 pd.isIndeterminate = true
                 pd.setButton(DialogInterface.BUTTON_NEGATIVE,"cancel", DialogInterface.OnClickListener { dialog, which ->
@@ -95,10 +96,12 @@ class MainActivity : AppCompatActivity() {
                                         if (response.isSuccessful) {
                                             pd.dismiss()
                                             startActivity(Intent(this@MainActivity, Otpactivity::class.java))
+                                            this@MainActivity.finish()
                                             Toast.makeText(this@MainActivity, response.body()!!.message.toString(), Toast.LENGTH_LONG).show()
                                         } else {
                                             pd.dismiss()
                                             startActivity(Intent(this@MainActivity,LoginActivity::class.java))
+                                            this@MainActivity.finish()
                                             Toast.makeText(this@MainActivity, response.body()!!.message.toString(), Toast.LENGTH_LONG).show()
                                         }
 

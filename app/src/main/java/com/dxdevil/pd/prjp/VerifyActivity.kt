@@ -78,13 +78,13 @@ class VerifyActivity : AppCompatActivity() {
         val navid = findViewById<NavigationView>(R.id.nav_view_verify)
         val h = navid.getHeaderView(0)
         val inagev = h.findViewById<CircleImageView>(R.id.imageview_header)
-        if (profilestring == "")
+        //if (profilestring == "")
             inagev.setImageResource(R.drawable.user)
-        else {
-            val bytearray = Base64.decode(profilestring, Base64.DEFAULT)
-            val btmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray.size)
-            inagev!!.setImageBitmap(btmap)
-        }
+//        else {
+//            val bytearray = Base64.decode(profilestring, Base64.DEFAULT)
+//            val btmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray.size)
+//            inagev!!.setImageBitmap(btmap)
+//        }
         val htv = h.findViewById<TextView>(R.id.header_nametv)
         val htvem = h.findViewById<TextView>(R.id.header_emailtv)
         htv!!.text =
@@ -130,6 +130,13 @@ class VerifyActivity : AppCompatActivity() {
                         val sp = getSharedPreferences("Token", Context.MODE_PRIVATE)
                         sp.edit().remove("Token").apply()
                         sp.edit().remove("RefreshToken").apply()
+
+                        var sp2 = getSharedPreferences("Login Details", 0).edit()
+                        sp2.putString("email", "")
+                        sp2.putString("password", "")
+                        sp2.putString("rememberflag", "0")
+                        sp2.apply()
+
                         startActivity(Intent(this@VerifyActivity, LoginActivity::class.java))
                         drawer_layout_verify.closeDrawer(GravityCompat.START)
                     }

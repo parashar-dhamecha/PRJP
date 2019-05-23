@@ -43,8 +43,6 @@ public class LoginActivity : AppCompatActivity() {
         var UsernameEmail = findViewById<EditText>(R.id.edEmail)
         var edPassword = findViewById<EditText>(R.id.edPassword)
 
-        var uname = UsernameEmail.text.toString()
-        var pass: String = edPassword.text.toString()
 
         textViewforgotpass!!.setOnClickListener {
             startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
@@ -56,6 +54,7 @@ public class LoginActivity : AppCompatActivity() {
             if (validateemail() && validatepass()) {
 
                 var pd = ProgressDialog(this)
+                pd.setCancelable(false)
                 pd.setMessage("Sending Otp..")
                 pd.isIndeterminate = true
                 pd.show()
@@ -139,12 +138,8 @@ public class LoginActivity : AppCompatActivity() {
                                         } else {
                                             pd.dismiss()
                                             Toast.makeText(this@LoginActivity, response.body()!!.message.toString(), Toast.LENGTH_LONG).show()
-
                                         }
-
-
                                     }
-
                                 })
 
                             } catch (e: Exception) {
